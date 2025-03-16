@@ -32,8 +32,6 @@ function getPINs(observed) {
     return combos;
 }
 
-gg
-
 
 // function getPINs(observed) {
 //     if (!observed) return [];
