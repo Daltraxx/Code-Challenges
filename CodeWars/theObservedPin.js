@@ -12,22 +12,43 @@ const adjacentDigits = new Map();
 
 
 function getPINs(observed) {
-    if (!observed) return [];
-
-    const combos = [];
-    const digit = observed[0];
-    const remainingDigits = observed.slice(1);
-    const combosToAdd = getPINs(remainingDigits);
-
-    if (!combosToAdd.length) return adjacentDigits.get(digit);
-
-    for (let adjacentDigit of adjacentDigits.get(digit)) {
-        for (let combo of combosToAdd) {
-            combos.push(adjacentDigit + combo);
+    let combos = [];
+    for (let i = observed.length - 1; i >= 0; i--) {
+        let prependedCombos = [];
+        const digit = observed[i];
+        if (!combos.length) {
+            prependedCombos = adjacentDigits.get(digit);
         }
+        
+        for (let combo of combos) {
+            for (let possibleDigit of adjacentDigits.get(digit)) {
+                prependedCombos.push(possibleDigit + combo);
+            }
+        }
+        
+        combos = prependedCombos;
     }
 
     return combos;
 }
 
-console.log(getPINs('12')); 
+
+// function getPINs(observed) {
+//     if (!observed) return [];
+
+//     const combosToPrepend = getPINs(observed.slice(1));
+
+//     if (!combosToPrepend.length) return adjacentDigits.get(observed);
+
+//     const prependedCombos = [];
+
+//     for (let comboSegment of combosToPrepend) {
+//         for (let possibleDigit of adjacentDigits.get(observed[0])) {
+//             prependedCombos.push(possibleDigit + comboSegment);
+//         }
+//     }
+
+//     return prependedCombos;
+// }
+
+console.log(getPINs('1357')); 
