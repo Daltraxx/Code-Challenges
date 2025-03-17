@@ -30,7 +30,7 @@ function getPINs(observed) {
     }
 
     return combos;
-}
+} 
 
 
 // function getPINs(observed) {

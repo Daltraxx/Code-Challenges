@@ -1,38 +1,51 @@
-/*Given an integer array nums sorted in non-decreasing order, 
-remove some duplicates in-place such that each unique element appears at most twice. 
-The relative order of the elements should be kept the same.
-
-If there are k elements after removing the duplicates, 
-then the first k elements of nums should hold the final result. 
-It does not matter what you leave beyond the first k elements.
-
-Return k after placing the final result in the first k slots of nums.
-
-Do not allocate extra space for another array. 
-You must do this by modifying the input array in-place with O(1) extra memory.*/
-
-const removeDuplicates = (nums) => {
-    if (nums.length === 0) return 0;
-    
-    let count = 1;
-    let writePointer = 1;
-
-    for (let i = 1; i < nums.length; i++) {
-        if (nums[i] === nums [i - 1]) {
-            count++;
-        } else {
-            count = 1;
+function openTheLock(deadends, target) {
+    const getNeighbors = (combo) => {
+        const neighbors = [];
+        for (let i = 0; i < combo.length; i++) {
+            let digit = Number(combo[i]);
+            for (let change of [-1, 1]) {
+                let newDigit = digit + change;
+                if (newDigit < 0) newDigit = 9;
+                if (newDigit > 9) newDigit = 0;
+                
+                let newCombo = combo.slice(0, i) + `${newDigit}` + combo.slice(i + 1);
+                neighbors.push(newCombo);
+            }
         }
 
-        if (count <= 2) {
-            nums[writePointer] = nums[i];
-            writePointer++;
-        }
+        return neighbors;
     }
 
-     return writePointer;
+    deadends = new Set(deadends);
+
+    if (deadends.has(target)) return -1;
+
+    const seen = new Set(['0000', ...deadends]);
+
+    let queue = ['0000'];
+    let turns = 0;
+
+    while (queue.length) {
+        const nextQueue = [];
+
+        for (let combo of queue) {
+            if (combo === target) return turns;
+
+            const neighbors = getNeighbors(combo);
+            for (let adjacentCombo of neighbors) {
+                if (!seen.has(adjacentCombo)) {
+                    seen.add(adjacentCombo);
+                    nextQueue.push(adjacentCombo);
+                }
+            }
+        }
+
+        turns++;
+        queue = nextQueue;
+    }
+
+    return -1;
 }
 
-const nums = [1,1,1,2,2,3];
-console.log(removeDuplicates(nums));
-console.log(nums);
+const deadends = ["8887","8889","8878","8898","8788","8988","7888","9888"], target = '8888';
+console.log(openTheLock(deadends, target));
