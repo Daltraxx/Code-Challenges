@@ -36,6 +36,24 @@ function sudoku(puzzle) {
             if (!numSet.has(num)) return num;
         }
     }
+    const attemptCellSolve = (row, col, possibleNums, mapSets) => {
+        if (possibleNums.size === 1) {
+            const [num] = possibleNums;
+            puzzle[row][col] = num;
+            addNumToMapSets(num, mapSets);
+            return true;
+        }
+
+        for (let numSet of mapSets) {
+            if (numSet.size === 8) {
+                const num = getMissingNum(numSet);
+                addNumToMapSets(num, mapSets);
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     const n = puzzle.length;
     let remainingCells = 81;
@@ -70,36 +88,10 @@ function sudoku(puzzle) {
                 }
             }
     
-            //replace below with attemptSolve() function
-            if (possibleNums.size === 1) {
+            let cellSolved = attemptCellSolve(row, col, possibleNums, mapSets);
+            if (cellSolved) {
                 remainingCells--;
-                const [num] = possibleNums;
-                puzzle[row][col] = num;
-                addNumToMapSets(num, mapSets);
                 filledCells.push(emptyCell);
-                continue;
-            }
-    
-            if (sectionNums.size === 8) {
-                remainingCells--;
-                const num = getMissingNum(sectionNums);
-                addNumToMapSets(num, mapSets);
-                filledCells.push(emptyCell);
-                continue;
-            }
-            if (rowNums.size === 8) {
-                remainingCells--;
-                const num = getMissingNum(rowNums);
-                addNumToMapSets(num, mapSets);
-                filledCells.push(emptyCell);
-                continue;
-            }
-            if (colNums.size === 8) {
-                remainingCells--;
-                const num = getMissingNum(colNums);
-                addNumToMapSets(num, mapSets);
-                filledCells.push(emptyCell);
-                continue;
             }
         }
     
