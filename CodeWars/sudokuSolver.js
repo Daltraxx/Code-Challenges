@@ -1,16 +1,4 @@
 function getNumsMaps() {
-    // const numsRequired = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-
-    // const sectionNumsMissingMap = new Map();
-    // const rowNumsMissingMap = new Map();
-    // const colNumsMissingMap = new Map();
-    // for (let i = 0; i < 9; i++) {
-    //     sectionNumsMissingMap.set(i, new Set(numsRequired));
-    //     rowNumsMissingMap.set(i, new Set(numsRequired));
-    //     colNumsMissingMap.set(i, new Set(numsRequired));
-    // }
-
-    // return { sectionNumsMissingMap, rowNumsMissingMap, colNumsMissingMap };
     const sectionNumsMap = new Map();
     const rowNumsMap = new Map();
     const colNumsMap = new Map();
@@ -40,6 +28,9 @@ function getSection(row, col) {
 }
 
 function sudoku(puzzle) {
+    const addNumToMapSets = (num, sets) => {
+        sets.forEach((set) => set.add(num));
+    }
     const getMissingNum = (numSet) => {
         for (let num = 1; num < 10; num++) {
             if (!numSet.has(num)) return num;
@@ -47,7 +38,7 @@ function sudoku(puzzle) {
     }
 
     const n = puzzle.length;
-    let remainingCells = n * n;
+    let remainingCells = 81;
     const { sectionNumsMap, rowNumsMap, colNumsMap } = getNumsMaps();
     let emptyCells = new Set();
 
@@ -57,22 +48,21 @@ function sudoku(puzzle) {
             let num = puzzle[row][col];
             if (num !== 0) {
                 remainingCells--;
-                sectionNumsMap.get(section).add(num);
-                rowNumsMap.get(row).add(num);
-                colNumsMap.get(col).add(num);
+                addNumToMapSets(num, [sectionNumsMap.get(section), rowNumsMap.get(row), colNumsMap.get(col)]);
             } else {
                 emptyCells.add({ section, row, col, possibleNums: new Set([1, 2, 3, 4, 5, 6, 7, 8, 9])})
             }
         }
     }
 
-    let toDelete = [];
+    let filledCells = [];
     while (remainingCells !== 0) {
         for (let emptyCell of emptyCells) {
             const { section, row, col, possibleNums } = emptyCell;
             const sectionNums = sectionNumsMap.get(section);
             const rowNums = rowNumsMap.get(row);
             const colNums = colNumsMap.get(col);
+            const mapSets = [sectionNums, rowNums, colNums];
     
             for (let num = 1; num < 10; num++) {
                 if (sectionNums.has(num) || rowNums.has(num) || colNums.has(num)) {
@@ -80,52 +70,41 @@ function sudoku(puzzle) {
                 }
             }
     
+            //replace below with attemptSolve() function
             if (possibleNums.size === 1) {
                 remainingCells--;
                 const [num] = possibleNums;
-                console.log(row, col, num);
                 puzzle[row][col] = num;
-                sectionNums.add(num);
-                rowNums.add(num);
-                colNums.add(num);
-                toDelete.push(emptyCell);
+                addNumToMapSets(num, mapSets);
+                filledCells.push(emptyCell);
                 continue;
             }
     
             if (sectionNums.size === 8) {
                 remainingCells--;
                 const num = getMissingNum(sectionNums);
-                console.log(row, col, num);
-                sectionNums.add(num);
-                rowNums.add(num);
-                colNums.add(num);
-                toDelete.push(emptyCell);
+                addNumToMapSets(num, mapSets);
+                filledCells.push(emptyCell);
                 continue;
             }
             if (rowNums.size === 8) {
                 remainingCells--;
                 const num = getMissingNum(rowNums);
-                console.log(row, col, num);
-                sectionNums.add(num);
-                rowNums.add(num);
-                colNums.add(num);
-                toDelete.push(emptyCell);
+                addNumToMapSets(num, mapSets);
+                filledCells.push(emptyCell);
                 continue;
             }
             if (colNums.size === 8) {
                 remainingCells--;
                 const num = getMissingNum(colNums);
-                console.log(row, col, num);
-                sectionNums.add(num);
-                rowNums.add(num);
-                colNums.add(num);
-                toDelete.push(emptyCell);
+                addNumToMapSets(num, mapSets);
+                filledCells.push(emptyCell);
                 continue;
             }
         }
     
-        for (let emptyCell of toDelete) emptyCells.delete(emptyCell);
-        toDelete = [];
+        for (let filledCell of filledCells) emptyCells.delete(filledCell);
+        filledCells = [];
     }
 
     return puzzle;
@@ -169,31 +148,3 @@ function printPuzzle(puzzle) {
     }
     console.log('\n');
 }
-
-// function getSection(row, col) {
-//     //consider only having to build sections object array once
-//     const sections = Array.from({ length: 9}, () => ({}));
-
-//     sections.forEach((section, i) => {
-//         section.index = i;
-//         if (i < 3) section.rowRange = [0, 2];
-//         if (i >= 3 && i < 6) section.rowRange = [3, 5];
-//         if (i >= 6) section.rowRange = [6, 8];
-//         if (i % 3 === 0) section.colRange = [0, 2];
-//         if (i % 3 === 1) section.colRange = [3, 5];
-//         if (i % 3 === 2) section.colRange = [6, 8];
-//     })
-
-
-
-//     const sectionIndex = sections.findIndex(section => {
-//         const { rowRange, colRange } = section;
-        
-//         const correctRow = row >= rowRange[0] && row <= rowRange[1];
-//         const correctCol = col >= colRange[0] && col <= colRange[1];
-        
-//         return correctRow && correctCol;
-//     })
-
-//     return sectionIndex;
-// }
