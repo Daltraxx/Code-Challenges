@@ -1,18 +1,20 @@
 function add(a, b) {
-    let carry = 0;
     const result = [];
-    const maxLength = Math.max(a.length, b.length);
-    let i = maxLength;
+    let aPointer = a.length - 1, bPointer = b.length - 1;
+    let carry = 0;
 
-    while (i--) {
-        let sum = (Number(a[i - maxLength + a.length]) || 0) + (Number(b[i - maxLength + b.length]) || 0) + carry;
+    while (aPointer >= 0 || bPointer >= 0) {
+        let sum = (Number(a[aPointer]) || 0) + (Number(b[bPointer]) || 0) + carry;
         carry = parseInt(sum / 10);
-        result.unshift(sum % 10);
+        result.push(sum % 10);
+        aPointer--;
+        bPointer--;
     }
 
-    if (carry) result.unshift(carry);
-    return result.join('');
+    if (carry) result.push(carry);
+    return result.reverse().join('');
 }
 
 const a = '63829983432984289347293874', b = '90938498237058927340892374089';
 console.log(add(a, b));
+console.log(parseInt(9/10))
