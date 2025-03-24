@@ -1,18 +1,31 @@
 function circleSlash(n) {
-    const people = new Array(n);
-    for (let person = 1; person <= n; person++) {
-        people[person - 1] = person;
+    let people = [];
+    for (let person = 1; person <= n; person += 2) {
+        people.push(person);
     }
 
-    let i = 0;
-    while (people[i + 1]) {
-        people.push(people[i]);
-        i += 2;    
+    //if people in round not even, last person is front of next round
+    if (n % 2 !== 0) {
+        people.unshift(people.pop());
+    }
+    
+    while (people.length > 1) {
+        const remainingPeople = [];
+        for (let i = 0; i < people.length; i += 2) {
+            remainingPeople.push(people[i]);
+        }
+
+        //if people in round not even, last person is front of next round
+        if (people.length % 2 !== 0) {
+            remainingPeople.unshift(remainingPeople.pop());
+        }
+
+        people = remainingPeople;
     }
 
-    return people;
+    return people[0];
 }
 
 
-const n = 5;
+const n = 31;
 console.log(circleSlash(n));
