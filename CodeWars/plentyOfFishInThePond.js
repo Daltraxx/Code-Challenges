@@ -1,38 +1,35 @@
 function fish(shoal) {
-    const shoalFish = new Map();
-    let maxFish = -Infinity;
+    const foodPerLevel = new Map();
+    let maxFishLevel = -Infinity;
     for (let fish of shoal) {
-        const fishInt = Number(fish);
-        shoalFish.set(fishInt, shoalFish.get(fishInt) + 1 || 1);
-        maxFish = Math.max(fishInt, maxFish);
+        const fishLevel = Number(fish);
+        foodPerLevel.set(fishLevel, foodPerLevel.get(fishLevel) + fishLevel || fishLevel);
+        maxFishLevel = Math.max(fishLevel, maxFishLevel);
     }
 
-    let myFish = 1;
+    let myFishLevel = 1;
     let foodRequired = 4;
 
-    for (let fishLevel = 1; fishLevel <= maxFish; fishLevel++) {
-        if (myFish < fishLevel) return myFish;
+    for (let fishLevel = 1; fishLevel <= maxFishLevel; fishLevel++) {
+        if (myFishLevel < fishLevel) return myFishLevel;
 
-        while (shoalFish.get(fishLevel) > 0) {
-            let foodAvailable = shoalFish.get(fishLevel) * fishLevel;
+        while (foodPerLevel.get(fishLevel) > 0) {
+            let foodAvailable = foodPerLevel.get(fishLevel);
             
             if (foodAvailable >= foodRequired) {
-                const fishNeededToGrow = Math.ceil(foodRequired / fishLevel);
-                const leftOver = (fishNeededToGrow * fishLevel) %  foodRequired;
-                shoalFish.set(fishLevel, shoalFish.get(fishLevel) - fishNeededToGrow);
-                myFish++;
-                foodRequired = myFish * 4;
-                foodRequired -= leftOver;
+                foodPerLevel.set(fishLevel, foodAvailable - foodRequired);
+                myFishLevel++;
+                foodRequired = myFishLevel * 4;
             } else {
                 foodRequired -= foodAvailable;
-                shoalFish.set(fishLevel, 0);
+                foodPerLevel.set(fishLevel, 0);
             }
 
         }
     }
 
-    return myFish;
+    return myFishLevel;
 }
 
-const shoal = "1111";
+const shoal = "2160048593509304605970888551134391344111366160998873452751873849493108305380511918943247090852341333618162525203136534748828391304206105002";
 console.log(fish(shoal));
