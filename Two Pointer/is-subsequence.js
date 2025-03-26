@@ -3,6 +3,7 @@ A subsequence of a string is a new string that is formed from the original strin
 of the characters without disturbing the relative positions of the remaining characters. 
 (i.e., "ace" is a subsequence of "abcde" while "aec" is not).*/
 
+//don't like
 const isSubsequence = (s, t) => {
     let checklist = [];
     for (let i = 0; i < s.length; i++) {
@@ -20,6 +21,7 @@ const isSubsequence = (s, t) => {
 
 //O(n)
 
+//don't like
 const isSubsequenceDivideConquer = (s, t) => {
     let leftBound = s.length;
     let rightBound = t.length;
@@ -54,24 +56,19 @@ In the worst case scenario,
 the function will iterate through all characters in the target string 't' before determining if 's' is a subsequence, 
 resulting in a linear time complexity.*/
 
-const isSubsequencePointers = (s, t) => {
-    let sPointer = 0,
-    tPointer = 0;
-
-    //if source pointer === target pointer, advance both pointers. Else, just advance target pointer.
-    //iteration terminates when either pointer exceeds its boundary
-    while (sPointer < s.length && tPointer < t.length) {
-        if (s[sPointer] === t[tPointer]) {
-            sPointer++;
-        }
-
-        tPointer++;
+const isSubsequenceTwoPointer = (s, t) => {
+    if (s.length === 0) return true;
+    
+    let sPointer = 0;
+    for (let tPointer = 0; tPointer < t.length; tPointer++) {
+        if (s[sPointer] === t[tPointer]) sPointer++;
+        if (sPointer === s.length) return true;
     }
 
-    //return true if all characters in source string have been consumed
-    return sPointer === s.length;
+    return false;
 }
 
+//probably overcomplicated, but worth knowing
 const isSubsequenceHashMap = (s, t) => {
     const binarySearch = (prev, start, end, arr) => {
         while (start <= end) {
