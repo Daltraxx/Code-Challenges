@@ -1,20 +1,27 @@
-class Animal {
-    constructor(name) {
-        this.name = name;
+let spaceship = {
+    crew: {
+      captain: { 
+        name: 'Lily', 
+        degree: 'Computer Engineering', 
+        cheerTeam() { console.log('You got this!') } 
+      },
+      'chief officer': { 
+        name: 'Dan', 
+        degree: 'Aerospace Engineering', 
+        agree() { console.log('I agree, captain!') } 
+      },
+      medic: { 
+        name: 'Clementine', 
+        degree: 'Physics', 
+        announce() { console.log(`Jets on!`) } },
+      translator: {
+        name: 'Shauna', 
+        degree: 'Conservation Science', 
+        powerFuel() { console.log('The tank is full!') } 
+      }
     }
+  }; 
 
-    speak() {
-        console.log(`${this.name} makes a sound.`);
-    }
-}
-
-class Dog extends Animal {
-    constructor(name, breed) {
-        super(name);
-        this.breed = breed;
-    }
-}
-
-let dash = new Dog('Dash', 'Border Collie');
-dash.speak();
-
+  for (let member in spaceship.crew) {
+    console.log(spaceship.crew[member].name);
+  }
