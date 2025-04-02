@@ -6,7 +6,8 @@ function duplicateCount(text) {
     }
 
     let duplicateChars = 0;
-    for (let [char, count] of charCounts) {
+    let charCountsValues = charCounts.values();
+    for (let count of charCountsValues) {
         if (count > 1) duplicateChars++;
     }
 
