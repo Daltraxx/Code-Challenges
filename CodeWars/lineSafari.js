@@ -96,7 +96,7 @@ function line(grid) {
 
     function isValidPosition(currentPathChar, newPosition, direction) {
         const [newRow, newCol] = newPosition;
-        if (!isWithinBounds(newRow, newCol)) return false;
+        if (isOutOfBounds(newRow, newCol)) return false;
         if (seen.has(([newRow, newCol]).toString())) return false;
         
         const newPathChar = grid[newRow][newCol];
@@ -112,8 +112,8 @@ function line(grid) {
         }
     }
 
-    function isWithinBounds(row, col) {
-        return row >= 0 && row < height && col >= 0 && col < width;
+    function isOutOfBounds(row, col) {
+        return row < 0 || row >= height || col < 0 || col >= width;
     }
 
     function getDirection(currentPosition, newPosition) {
