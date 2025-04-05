@@ -5,12 +5,6 @@ class PaginationHelper {
         this.pageIndices = new Map();
     }
 
-    setPageIndices() {
-        for (let i = 0; i < this.itemCount(); i++) {
-            this.pageIndices.set(i, Math.floor(i / this.itemsPerPage));
-        }
-    }
-
     itemCount() {
         return this.collection.length;
     }
