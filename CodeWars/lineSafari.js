@@ -23,6 +23,7 @@ function line(grid) {
     const origins = [];
     let pathCharCount = 0;
 
+    // add starting positions to origins array and get count of characters which must be included in a valid line
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
             const positionChar = grid[row][col];
@@ -31,6 +32,7 @@ function line(grid) {
         }
     }
 
+    // iterate over origins and search for valid line
     let seen;
     for (let origin of origins) {
         seen = new Set([origin.toString()]);
@@ -42,7 +44,7 @@ function line(grid) {
     // ---------------helper functions
 
     function findPath(origin) {
-        let last;
+        let lastDirection;
         let currentRow, currentCol;
         let stepCount = 0;
 
@@ -52,7 +54,7 @@ function line(grid) {
                 [currentRow, currentCol] = origin;
             }
             const currentPathChar = grid[currentRow][currentCol];
-            const validDirections = getValidDirections(currentPathChar, last);
+            const validDirections = getValidDirections(currentPathChar, lastDirection);
             const currentPosition = [currentRow, currentCol];
             let newPosition;
 
@@ -60,9 +62,9 @@ function line(grid) {
                 const newRow = currentRow + y;
                 const newCol = currentCol + x;
                 const potentialNewPosition = [newRow, newCol];
-                const direction = getDirection(currentPosition, potentialNewPosition);
-                if (isValidPosition(currentPathChar, potentialNewPosition, direction)) {
-                    if (newPosition) return false;
+                const potentialDirection = getInboundDirection(currentPosition, potentialNewPosition);
+                if (isValidPosition(potentialNewPosition, potentialDirection, currentPathChar)) {
+                    if (newPosition) return false; // can be no ambiguity (only allowed one possible direction)
                     newPosition = potentialNewPosition;
                 }
             }
@@ -74,19 +76,19 @@ function line(grid) {
                 return stepCount === pathCharCount ? true : false;
             }
             
-            last = getDirection(currentPosition, newPosition);
+            lastDirection = getInboundDirection(currentPosition, newPosition);
             
             [currentRow, currentCol] = newPosition;
             seen.add(newPosition.toString());
         }
     }
 
-    function getValidDirections(currentPathChar, last) {
+    function getValidDirections(currentPathChar, lastDirection) {
         switch (currentPathChar) {
             case X:
                 return [directions.left, directions.right, directions.up, directions.down];
             case CORNER:
-                return last === HORIZONTAL ? [directions.up, directions.down] : [directions.left, directions.right];
+                return lastDirection === HORIZONTAL ? [directions.up, directions.down] : [directions.left, directions.right];
             case HORIZONTAL:
                 return [directions.left, directions.right];
             case VERTICAL:
@@ -94,10 +96,18 @@ function line(grid) {
         }
     }
 
-    function isValidPosition(currentPathChar, newPosition, direction) {
+    function getInboundDirection(currentPosition, newPosition) {
+        if (newPosition[0] - 1 === currentPosition[0] || newPosition[0] + 1 === currentPosition[0]) {
+            return VERTICAL;
+        } else {
+            return HORIZONTAL;
+        }
+    }
+
+    function isValidPosition(newPosition, direction, currentPathChar) {
         const [newRow, newCol] = newPosition;
         if (isOutOfBounds(newRow, newCol)) return false;
-        if (seen.has(([newRow, newCol]).toString())) return false;
+        if (seen.has((newPosition).toString())) return false;
         
         const newPathChar = grid[newRow][newCol];
 
@@ -114,14 +124,6 @@ function line(grid) {
 
     function isOutOfBounds(row, col) {
         return row < 0 || row >= height || col < 0 || col >= width;
-    }
-
-    function getDirection(currentPosition, newPosition) {
-        if (newPosition[0] - 1 === currentPosition[0] || newPosition[0] + 1 === currentPosition[0]) {
-            return VERTICAL;
-        } else {
-            return HORIZONTAL;
-        }
     }
 }
 
