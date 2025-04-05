@@ -1,14 +1,14 @@
-const grid = [  [ ' ', ' ', ' ', ' ', '+', '-', '-', '-', '-', '+', ' ', ' ' ],
-                [ ' ', ' ', ' ', ' ', '|', '+', '-', '-', '+', '|', ' ', ' ' ],
-                [ ' ', ' ', ' ', ' ', '|', '|', 'X', '+', '|', '|', ' ', ' ' ],
-                [ ' ', ' ', ' ', ' ', '|', '+', '-', '+', '|', '|', ' ', ' ' ],
-                [ ' ', ' ', ' ', ' ', '+', '-', '-', '-', '+', '|', ' ', ' ' ],
-                [ 'X', '-', '-', '-', '-', '-', '-', '-', '-', '+', ' ', ' ' ] ] // true
+const grid = [
+    "                      ",    
+    "   +-------+          ",
+    "   |      +++---+     ",
+    "X--+      +-+   X     "
+    ] // true
 
 console.log(line(grid));
 
 function line(grid) {
-    const X = 'X',  CORNER = '+', HORIZONTAL = '-', VERTICAL = '|';
+    const X = 'X',  CORNER = '+', HORIZONTAL = '-', VERTICAL = '|', EMPTY = ' ';
 
     const height = grid.length;
     const width = grid[0].length;
@@ -20,12 +20,34 @@ function line(grid) {
         down: [0, 1]
     }
 
-    // helper functions
+    const origins = [];
+    let pathCharCount = 0;
+
+    for (let row = 0; row < height; row++) {
+        for (let col = 0; col < width; col++) {
+            const positionChar = grid[row][col];
+            if (positionChar !== EMPTY) pathCharCount++; 
+            if (grid[row][col] === X) origins.push([row, col]);
+        }
+    }
+
+    let seen;
+    for (let origin of origins) {
+        seen = new Set([origin.toString()]);
+        if (findPath(origin)) return true;
+    }
+
+    return false;
+
+    // ---------------helper functions
 
     function findPath(origin) {
         let last;
         let currentRow, currentCol;
+        let stepCount = 0;
+
         while (true) {
+            stepCount++;
             if (currentRow === undefined) {
                 [currentRow, currentCol] = origin;
             }
@@ -39,7 +61,7 @@ function line(grid) {
                 const newCol = currentCol + x;
                 const potentialNewPosition = [newRow, newCol];
                 const direction = getDirection(currentPosition, potentialNewPosition);
-                if (isValid(currentPathChar, potentialNewPosition, direction)) {
+                if (isValidPosition(currentPathChar, potentialNewPosition, direction)) {
                     if (newPosition) return false;
                     newPosition = potentialNewPosition;
                 }
@@ -47,7 +69,10 @@ function line(grid) {
 
             
             if (!newPosition) return false;
-            if (grid[newPosition[0]][newPosition[1]] === X) return true;
+            if (grid[newPosition[0]][newPosition[1]] === X) {
+                stepCount++;
+                return stepCount === pathCharCount ? true : false;
+            }
             
             last = getDirection(currentPosition, newPosition);
             
@@ -56,7 +81,7 @@ function line(grid) {
         }
     }
 
-    const getValidDirections = (currentPathChar, last) => {
+    function getValidDirections(currentPathChar, last) {
         switch (currentPathChar) {
             case X:
                 return [directions.left, directions.right, directions.up, directions.down];
@@ -69,7 +94,7 @@ function line(grid) {
         }
     }
 
-    function isValid(currentPathChar, newPosition, direction) {
+    function isValidPosition(currentPathChar, newPosition, direction) {
         const [newRow, newCol] = newPosition;
         if (!isWithinBounds(newRow, newCol)) return false;
         if (seen.has(([newRow, newCol]).toString())) return false;
@@ -98,23 +123,5 @@ function line(grid) {
             return HORIZONTAL;
         }
     }
-
-    // helper functions end
-
-    const origins = [];
-
-    for (let row = 0; row < height; row++) {
-        for (let col = 0; col < width; col++) {
-            if (grid[row][col] === X) origins.push([row, col]);
-        }
-    }
-
-    let seen;
-    for (let origin of origins) {
-        seen = new Set([origin.toString()]);
-        if (findPath(origin)) return true;
-    }
-
-    return false;
 }
 
