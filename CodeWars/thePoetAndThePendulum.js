@@ -15,7 +15,7 @@ function pendulum(values) {
             pendulumArr[middleRight] = sortedValues[i];
             middleRight++;
         } else {
-            pendulumArr[middleLeft] = sortedValues[i];
+            pendulumArr[middleLeft] = sortedValues[i]; 
             middleLeft--;
         }
         directionRight = !directionRight;
