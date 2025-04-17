@@ -17,3 +17,5 @@ class LastStoneWeight {
         return heap.isEmpty() ? 0 : heap.peek();
     }
 }
+
+//Time O(nlogn) and space of O(n)
