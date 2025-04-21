@@ -27,7 +27,7 @@ public class MedianFinder {
 
 
 // This algorithm allows us to have an O(1) time complexity for findMedian 
-// and an O(logn) time complexity for addNum, which makes it an incredibly fast algorithm,
+// and an  O(logn) time complexity for addNum, which makes it an incredibly fast algorithm,
 // where n is the number of times addNum has been called so far. The space complexity is 
 // O(n) to store the heaps.
 
