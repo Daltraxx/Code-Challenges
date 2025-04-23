@@ -2,7 +2,7 @@ package Heaps;
 
 import java.util.PriorityQueue;
 
-public class minCostToConnectSticks {
+public class MinCostToConnectSticks {
     public int connectSticks(int[] sticks) {
         int totalCost = 0;
 

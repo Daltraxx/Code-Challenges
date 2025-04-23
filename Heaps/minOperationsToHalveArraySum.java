@@ -3,7 +3,7 @@ package Heaps;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public class minOperationsToHalveArraySum {
+public class MinOperationsToHalveArraySum {
     public int halveArray(int[] nums) {
         PriorityQueue<Double> heap = new PriorityQueue<>(Comparator.reverseOrder());
         double total = 0;
