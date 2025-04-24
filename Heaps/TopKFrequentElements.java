@@ -6,6 +6,8 @@ import java.util.PriorityQueue;
 
 public class TopKFrequentElements {
     public int[] topKFrequent(int[] nums, int k) {
+        if (k == nums.length) return nums;
+        
         Map<Integer, Integer> counts = new HashMap<>();
 
         for (int num : nums) {
