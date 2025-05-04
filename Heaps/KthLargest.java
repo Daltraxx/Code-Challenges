@@ -8,22 +8,14 @@ public class KthLargest {
 
     public KthLargest(int k, int[] nums) {
         this.k = k;
-        this.minHeap = createHeap(nums);
+        this.minHeap = new PriorityQueue<>();
+
+        for (int num : nums) this.add(num);
     }
 
     public int add(int val) {
         this.minHeap.add(val);
         if (this.minHeap.size() > k) this.minHeap.remove();
         return this.minHeap.peek();
-    }
-
-    private PriorityQueue<Integer> createHeap(int[] nums) {
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-        for (int num : nums) {
-            minHeap.add(num);
-            if (minHeap.size() > this.k) minHeap.remove();
-        }
-
-        return minHeap;
     }
 }
