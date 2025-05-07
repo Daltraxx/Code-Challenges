@@ -12,3 +12,5 @@ const partitionArray = (nums, k) => {
 
     return minSubsequences;
 }
+
+// linear time and constant space
