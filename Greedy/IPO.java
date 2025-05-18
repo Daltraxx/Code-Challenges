@@ -11,20 +11,20 @@ public class IPO {
         }
         
         Arrays.sort(projects, (a, b) -> Integer.compare(a[0], b[0]));
-        PriorityQueue<Integer> heap = new PriorityQueue<>(Comparator.reverseOrder());
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
         int i = 0;
         
         for (int j = 0; j < k; j++) {
             while (i < n && projects[i][0] <= w) {
-                heap.add(projects[i][1]);
+                maxHeap.add(projects[i][1]);
                 i++;
             }
             
-            if (heap.isEmpty()) {
+            if (maxHeap.isEmpty()) {
                 return w;
             }
             
-            w += heap.remove();
+            w += maxHeap.remove();
         }
         
         return w;
