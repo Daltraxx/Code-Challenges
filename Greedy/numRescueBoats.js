@@ -1,4 +1,4 @@
-const numUniqueBoats = (people, limit) => {
+const numRescueBoats = (people, limit) => {
   const peopleSorted = people.toSorted((a, b) => a - b);
   let peopleRequired = people.length;
   let boatsNeeded = 0;
@@ -20,6 +20,9 @@ const numUniqueBoats = (people, limit) => {
 
   return boatsNeeded;
 }
+
+// time complexity O(nlogn)
+// space O(n) for sorted array, constant if sort in place
 
 const people = [3, 2, 2, 1],
   limit = 3;
