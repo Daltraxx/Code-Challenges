@@ -24,6 +24,9 @@ const findLeastNumOfUniqueInts = function (arr, k) {
   return uniqueInts;
 }
 
+// time complexity of O(nlogn)
+// space O(n)
+
 const arr = [1, 1, 2, 3, 3];
 const k = 2;
 console.log(findLeastNumOfUniqueInts(arr, 2));
