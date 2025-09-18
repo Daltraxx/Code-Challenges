@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class NumRescueBoats {
   public int numRescueBoats(int[] people, int limit) {
-        int ans = 0;
+        int boatsNeeded = 0;
         int i = 0;
         int j = people.length - 1;
         Arrays.sort(people);
@@ -13,9 +13,9 @@ public class NumRescueBoats {
             }
             
             j--;
-            ans++;
+            boatsNeeded++;
         }
         
-        return ans;
+        return boatsNeeded;
     }
 }
