@@ -2,12 +2,10 @@ const maximumUnits = (boxTypes, truckSize) => {
   boxTypes = boxTypes.sort((a, b) => b[1] - a[1]);
   let unitsLoaded = 0;
   for (let [boxes, unitsPerBox] of boxTypes) {
-    if (truckSize === 0) return unitsLoaded;
-    while (truckSize > 0 && boxes > 0) {
-      unitsLoaded += unitsPerBox;
-      boxes--;
-      truckSize--;
-    }
+    const loadableBoxes = Math.min(truckSize, boxes);
+    unitsLoaded += loadableBoxes * unitsPerBox;
+    truckSize -= loadableBoxes;
+    if (truckSize === 0) break;
   }
 
   return unitsLoaded;
