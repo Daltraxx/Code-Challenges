@@ -9,4 +9,6 @@ const maximum69Number = (num) => {
   return Number(num);
 };
 
+// linear time and constant space
+
 console.log(maximum69Number(9969));
