@@ -11,6 +11,9 @@ const maximumUnits = (boxTypes, truckSize) => {
   return unitsLoaded;
 }
 
+// Time complexity O(nlogn)
+// Space O(1) since sorted in place
+
 const boxTypes = [
     [1, 3],
     [2, 2],
