@@ -1,6 +1,6 @@
 const maxNumberOfApples = (weight) => {
   const WEIGHT_LIMIT = 5000;
-  const sortedAppleWeights = weight.sort((a, b) => a - b);
+  const sortedAppleWeights = weight.toSorted((a, b) => a - b);
   let appleCount = 0;
   let currentWeight = 0;
   for (let appleWeight of sortedAppleWeights) {
