@@ -11,3 +11,7 @@ const maxNumberOfApples = (weight) => {
 
   return appleCount;
 }
+
+
+// time complexity of O(nlogn)
+// linear space, constant if sorted in place
