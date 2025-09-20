@@ -10,7 +10,7 @@ public class MinSetSize {
     for (int num : arr) {
       frequencies.merge(num, 1, Integer::sum);
     }
-    
+
     List<Integer> sortedFrequencies = new ArrayList<>(frequencies.values());
     Collections.sort(sortedFrequencies, Collections.reverseOrder());
 
@@ -24,5 +24,10 @@ public class MinSetSize {
     }
 
     return setSize;
+  }
+
+  public static void main(String[] args) {
+    MinSetSize func = new MinSetSize();
+      System.out.println(func.minSetSize(new int[]{3,3,3,3,5,5,5,2,2,7}));
   }
 }
