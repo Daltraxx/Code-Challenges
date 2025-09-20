@@ -19,6 +19,8 @@ const minSetSize = (arr) => {
   return setSize;
 };
 
+// Time Complexity O(nlogn)
+// Space O(n)
 
 const arr = [3, 3, 3, 3, 5, 5, 5, 2, 2, 7];
 console.log(minSetSize(arr));
