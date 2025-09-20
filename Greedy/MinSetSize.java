@@ -27,8 +27,8 @@ public class MinSetSize {
   }
 
   public static void main(String[] args) {
-    MinSetSize func = new MinSetSize();
-    System.out.println(func.minSetSize(new int[] { 3, 3, 3, 3, 5, 5, 5, 2, 2, 7 }));
+    MinSetSize solution = new MinSetSize();
+    System.out.println(solution.minSetSize(new int[] { 3, 3, 3, 3, 5, 5, 5, 2, 2, 7 }));
   }
 }
 
