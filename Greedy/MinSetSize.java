@@ -28,6 +28,9 @@ public class MinSetSize {
 
   public static void main(String[] args) {
     MinSetSize func = new MinSetSize();
-      System.out.println(func.minSetSize(new int[]{3,3,3,3,5,5,5,2,2,7}));
+    System.out.println(func.minSetSize(new int[] { 3, 3, 3, 3, 5, 5, 5, 2, 2, 7 }));
   }
 }
+
+// Time Complexity O(nlogn)
+// Space O(n)
