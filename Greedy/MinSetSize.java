@@ -13,11 +13,12 @@ public class MinSetSize {
 
     List<Integer> sortedFrequencies = new ArrayList<>(frequencies.values());
     Collections.sort(sortedFrequencies, Collections.reverseOrder());
+    System.out.println(sortedFrequencies);
 
     Double arrHalved = (double) (arrSize / 2);
     int setSize = 0;
     for (int frequency : sortedFrequencies) {
-      arrSize = frequency;
+      arrSize -= frequency;
       setSize++;
       if (arrSize <= arrHalved)
         break;
