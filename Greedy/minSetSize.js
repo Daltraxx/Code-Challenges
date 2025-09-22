@@ -19,7 +19,7 @@ const minSetSize = (arr) => {
   return setSize;
 };
 
-// Time Complexity O(nlogn)
+// Time Complexity O(nlogn) for hashmap creation (n), creating (n) and sorting (nlogn) frequencies array, and looping through frequencies (n)
 // Space O(n)
 
 const arr = [3, 3, 3, 3, 5, 5, 5, 2, 2, 7];
