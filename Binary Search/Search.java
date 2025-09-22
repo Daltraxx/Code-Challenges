@@ -17,3 +17,6 @@ public class Search {
     return -1;
   }
 }
+
+// Time O(logn)
+// Space O(1)
