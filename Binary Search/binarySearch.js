@@ -14,3 +14,6 @@ const search = (nums, target) => {
 
   return -1;
 };
+
+// Time O(logn)
+// Space O(1)
