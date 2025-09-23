@@ -13,10 +13,18 @@ const searchMatrix = (matrix, target) => {
       top = mid + 1;
     }
   }
-  const row = matrix[mid];
+
+  let row;
+  if (matrix[mid][m - 1] >= target) {
+    row = matrix[mid];
+  } else {
+    row = matrix[mid + 1];
+  }
+
   let left = 0, right = m - 1;
   while (left <= right) {
     mid = Math.floor((left + right) / 2);
+    console.log(mid);
     if (row[mid] === target) return true;
 
     if (row[mid] > target) {
@@ -32,8 +40,8 @@ const searchMatrix = (matrix, target) => {
 const matrix = [
     [1, 3, 5, 7],
     [10, 11, 16, 20],
-    [23, 30, 34, 60],
+    [23, 30, 34, 50],
   ],
-  target = 3;
+  target = 10;
 
 console.log(searchMatrix(matrix, target));
