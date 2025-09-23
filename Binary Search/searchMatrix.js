@@ -17,14 +17,15 @@ const searchMatrix = (matrix, target) => {
   let row;
   if (matrix[mid][m - 1] >= target) {
     row = matrix[mid];
-  } else {
+  } else if (matrix[mid][m - 1] < n && matrix[mid][m - 1] < target) {
     row = matrix[mid + 1];
+  } else {
+    return false;
   }
 
   let left = 0, right = m - 1;
   while (left <= right) {
     mid = Math.floor((left + right) / 2);
-    console.log(mid);
     if (row[mid] === target) return true;
 
     if (row[mid] > target) {
@@ -37,11 +38,7 @@ const searchMatrix = (matrix, target) => {
   return false;
 };
 
-const matrix = [
-    [1, 3, 5, 7],
-    [10, 11, 16, 20],
-    [23, 30, 34, 50],
-  ],
-  target = 10;
+const matrix = [[1]],
+  target = 2;
 
 console.log(searchMatrix(matrix, target));
