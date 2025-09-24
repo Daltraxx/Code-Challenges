@@ -3,7 +3,7 @@ const searchMatrix = (matrix, target) => {
   let left = 0, right = m * n - 1;
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
-    const row = Math.floor(mid / 2);
+    const row = Math.floor(mid / n);
     const col = mid % m;
     const midElement = matrix[row][col];
     if (midElement === target) return true;
