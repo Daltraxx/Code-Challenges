@@ -9,7 +9,7 @@ public class SearchMatrix {
       int row = mid / n;
       int col = mid % n;
       int midElement = matrix[row][col];
-      
+
       if (midElement == target)
         return true;
       if (midElement > target) {
@@ -22,3 +22,6 @@ public class SearchMatrix {
     return false;
   }
 }
+
+// Time Complexity O(log(mn))
+// Space O(1)
