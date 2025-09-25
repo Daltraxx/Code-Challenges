@@ -19,6 +19,9 @@ const successfulPairs = (spells, potions, success) => {
   return results;
 }
 
+// Time complexity O(mlogm+nlogm) or O((m+n)⋅logm)
+// O(n) space complexity for results array
+
 const spells = [5, 1, 3],
   potions = [1, 2, 3, 4, 5],
   success = 7;
