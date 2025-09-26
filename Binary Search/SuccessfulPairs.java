@@ -28,15 +28,15 @@ public class SuccessfulPairs {
     return left;
   }
 
-  // Time complexity O(mlogm+nlogm) or O((m+n)⋅logm)
-  // O(n) space complexity for pairs array
-  
   public static void main(String[] args) {
     SuccessfulPairs obj = new SuccessfulPairs();
-    int[] spells = {5, 1, 3};
-    int[] potions = {1, 2, 3, 4, 5};
+    int[] spells = { 5, 1, 3 };
+    int[] potions = { 1, 2, 3, 4, 5 };
     long success = 7;
     int[] result = obj.successfulPairs(spells, potions, success);
     System.out.println(Arrays.toString(result));
   }
 }
+
+// Time complexity O(mlogm+nlogm) or O((m+n)⋅logm)
+// O(n) space complexity for pairs array
