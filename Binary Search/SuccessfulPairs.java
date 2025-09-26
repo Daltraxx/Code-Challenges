@@ -27,6 +27,9 @@ public class SuccessfulPairs {
 
     return left;
   }
+
+  // Time complexity O(mlogm+nlogm) or O((m+n)⋅logm)
+  // O(n) space complexity for pairs array
   
   public static void main(String[] args) {
     SuccessfulPairs obj = new SuccessfulPairs();
