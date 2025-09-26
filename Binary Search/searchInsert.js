@@ -13,6 +13,9 @@ const searchInsert = (nums, target) => {
   return left;
 }
 
+// Time complexity O(logn)
+// Space complexity O(1)
+
 const nums = [1, 3, 5, 6],
   target = 2;
 
