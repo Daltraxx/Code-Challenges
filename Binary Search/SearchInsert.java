@@ -16,3 +16,6 @@ public class SearchInsert {
     return left;
   }
 }
+
+// Time complexity O(logn)
+// Space complexity O(1)
