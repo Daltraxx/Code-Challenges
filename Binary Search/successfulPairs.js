@@ -1,6 +1,6 @@
 const successfulPairs = (spells, potions, success) => {
   potions.sort((a, b) => a - b);
-  const results = [];
+  const pairs = [];
   for (let spell of spells) {
     let left = 0, right = potions.length;
     const target = success / spell;
@@ -13,14 +13,14 @@ const successfulPairs = (spells, potions, success) => {
       }
     }
 
-    results.push(potions.length - left);
+    pairs.push(potions.length - left);
   }
 
-  return results;
+  return pairs;
 }
 
 // Time complexity O(mlogm+nlogm) or O((m+n)⋅logm)
-// O(n) space complexity for results array
+// O(n) space complexity for pairs array
 
 const spells = [5, 1, 3],
   potions = [1, 2, 3, 4, 5],
