@@ -37,3 +37,6 @@ public class AnswerQueries {
     return left;
   }
 }
+
+// Time complexity O(nlogn + n + mlogn) or O(nlogn + mlogn) = O((n+m)logn) ... n is dominated by nlogn so not necessary to include
+// Space O(n) for prefix sum array, could be reduced to O(1) if we overwrite input nums array
