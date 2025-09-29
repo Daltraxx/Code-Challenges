@@ -20,3 +20,6 @@ const minEatingSpeed = (piles, h) => {
 
   return left;
 }
+
+// Time complexity O(nlogk)
+// Space O(1)
