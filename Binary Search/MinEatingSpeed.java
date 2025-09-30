@@ -33,3 +33,6 @@ class MinEatingSpeed {
     System.out.println("Minimum eating speed: " + result);
   }
 }
+
+// Time complexity O(nlogk)
+// Space O(1)
