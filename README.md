@@ -24,4 +24,4 @@ This repository contains solutions to various coding algorithm and data structur
 
 ## How to Use
 
-Browse the repository for problems of interest. Solutions are generally organized by their structure or approach. However, this is mostly a personal repository intended to keep a history of all the working solutions to challenges I have implemented.
+Browse the repository for problems of interest. Solutions are generally organized by their structure or approach. However, this is mostly a personal repository intended to keep a history of all the working solutions to challenges that I have implemented.
