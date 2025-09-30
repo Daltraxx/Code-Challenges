@@ -14,8 +14,8 @@ const minimumEffortPath = (heights) => {
     const isAcceptableEffort = (prevNum, nextNum) =>
       Math.abs(prevNum - nextNum) <= effort;
 
-    const seen = new Array(m);
-    for (let row = 0; row < m; row++) seen[row] = new Array(n).fill(false);
+    const seen = [];
+    for (let row = 0; row < m; row++) seen.push(new Array(n).fill(false));
     seen[0][0] = true;
 
     const stack = [[0, 0]];
