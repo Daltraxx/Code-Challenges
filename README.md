@@ -4,7 +4,7 @@ This repository contains solutions to various coding algorithm and data structur
 
 ## Structure
 
-- The repository is generally organized into folders with names refering to the dominant solving pattern or data structure used to solve the challenges within them.
+- The repository is generally organized into folders with names refering to the dominant algorithmic pattern or data structure used to solve the challenges within them.
 
 ## Topics Covered
 
