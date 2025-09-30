@@ -58,6 +58,9 @@ const minimumEffortPath = (heights) => {
   return left;
 };
 
+// Time complexity O(mnlogk)
+// Space O(mn)
+
 const heights = [
   [1, 2, 2],
   [3, 8, 2],
