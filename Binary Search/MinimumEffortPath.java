@@ -1,5 +1,4 @@
 import java.util.ArrayDeque;
-import java.util.Arrays;
 
 public class MinimumEffortPath {
   int[][] heights;
@@ -50,14 +49,15 @@ public class MinimumEffortPath {
 
     while (!stack.isEmpty()) {
       HeightsPosition position = stack.removeLast();
+      if (position.row == m - 1 && position.col == n - 1)
+        return true;
+
       for (int[] direction : directions) {
         int x = direction[0];
         int y = direction[1];
         HeightsPosition newPosition = new HeightsPosition(position.row + y, position.col + x);
         if (isValid(newPosition.row, newPosition.col) && !seen[newPosition.row][newPosition.col]
             && isAcceptableEffort(position, newPosition, effort)) {
-          if (newPosition.row == m - 1 && newPosition.col == n - 1)
-            return true;
           seen[newPosition.row][newPosition.col] = true;
           stack.addLast(newPosition);
         }
