@@ -43,8 +43,6 @@ public class MinimumEffortPath {
   public boolean check(int effort) {
     int[][] directions = new int[][] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
     boolean[][] seen = new boolean[m][n];
-    for (int row = 0; row < m; row++)
-      Arrays.fill(seen[row], false);
     seen[0][0] = true;
 
     ArrayDeque<HeightsPosition> stack = new ArrayDeque<>();
