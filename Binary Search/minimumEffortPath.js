@@ -22,6 +22,7 @@ const minimumEffortPath = (heights) => {
 
     while (stack.length) {
       let [row, col] = stack.pop();
+      if (row === m - 1 && col === n - 1) return true;
       for (let [x, y] of directions) {
         let newRow = row + y;
         let newCol = col + x;
@@ -30,7 +31,6 @@ const minimumEffortPath = (heights) => {
           !seen[newRow][newCol] &&
           isAcceptableEffort(heights[row][col], heights[newRow][newCol])
         ) {
-          if (newRow === m - 1 && newCol === n - 1) return true;
           seen[newRow][newCol] = true;
           stack.push([newRow, newCol]);
         }
