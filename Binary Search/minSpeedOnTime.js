@@ -29,6 +29,9 @@ const minSpeedOnTime = (dist, hour) => {
   return left;
 };
 
+// Time O(nlogk)
+// Space O(1)
+
 const dist = [1, 1, 100000],
   hour = 2.01;
 console.log(minSpeedOnTime(dist, hour));
