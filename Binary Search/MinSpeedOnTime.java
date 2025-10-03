@@ -34,3 +34,7 @@ public class MinSpeedOnTime {
     return timeNeeded <= timeLimit;
   }
 }
+
+
+// Time O(nlogk)
+// Space O(1)
