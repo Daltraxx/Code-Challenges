@@ -8,7 +8,7 @@ const smallestDivisor = (nums, threshold) => {
     return sum <= threshold;
   }
 
-  let left = 1, right = 10 ** 6;
+  let left = 1, right = Math.max(...nums);
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
     if (check(mid)) {
