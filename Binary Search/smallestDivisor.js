@@ -7,6 +7,7 @@ const smallestDivisor = (nums, threshold) => {
 
     return sum <= threshold;
   }
+
   let left = 1, right = 10 ** 6;
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
@@ -20,7 +21,10 @@ const smallestDivisor = (nums, threshold) => {
   return left;
 }
 
-const nums = [1, 2, 5, 9],
-  threshold = 6;
+// Time O(nlogk)
+// Space O(1)
+
+const nums = [44, 22, 33, 11, 1],
+  threshold = 5;
 
 console.log(smallestDivisor(nums, threshold));
