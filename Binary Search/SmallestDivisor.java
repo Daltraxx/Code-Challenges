@@ -26,3 +26,6 @@ public class SmallestDivisor {
     return sum <= threshold;
   }
 }
+
+// Time O(nlogk)
+// Space O(1)
