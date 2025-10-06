@@ -1,4 +1,6 @@
 const maximizeSweetness = (sweetness, k) => {
+  const numberOfPeople = k + 1;
+
   const check = (minSweetness) => {
     let currentSweetness = 0;
     let slices = 0;
@@ -6,11 +8,12 @@ const maximizeSweetness = (sweetness, k) => {
       currentSweetness += chunk;
       if (currentSweetness >= minSweetness) {
         slices++;
+        if (slices === numberOfPeople) return true;
         currentSweetness = 0;
       }
     }
 
-    return slices >= k + 1;
+    return false;
   }
 
   let left = Infinity, right = 0;
@@ -19,12 +22,12 @@ const maximizeSweetness = (sweetness, k) => {
     right += chunk;
   }
 
-  right = Math.ceil(right / k);
+  right = Math.floor(right / numberOfPeople);
 
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
+  while (left < right) {
+    const mid = Math.floor((left + right + 1) / 2);
     if (check(mid)) {
-      left = mid + 1;
+      left = mid;
     } else {
       right = mid - 1;
     }
