@@ -36,6 +36,9 @@ const maximizeSweetness = (sweetness, k) => {
   return right;
 }
 
+// Time O(nlogk)
+// Space O(1)
+
 const sweetness = [1, 2, 2, 1, 2, 2, 1, 2, 2],
   k = 2;
 
