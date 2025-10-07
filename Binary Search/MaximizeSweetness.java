@@ -23,7 +23,7 @@ public class MaximizeSweetness {
     return right;
   }
 
-  public boolean check(int minSweetness, int[]sweetness) {
+  public boolean check(int minSweetness, int[] sweetness) {
     int currentSweetness = 0;
     int slices = 0;
     for (int chunk : sweetness) {
@@ -39,3 +39,6 @@ public class MaximizeSweetness {
     return false;
   }
 }
+
+// Time O(nlogk)
+// Space O(1)
