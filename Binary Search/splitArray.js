@@ -24,16 +24,19 @@ const splitArray = (nums, k) => {
     right += num;
   }
 
+  let minLargestSum = 0;
+
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
     if (check(mid)) {
+      minLargestSum = mid;
       right = mid - 1;
     } else {
       left = mid + 1;
     }
   }
 
-  return left;
+  return minLargestSum; // could omit this variable and just return left if desired
 };
 
 const nums = [1, 2, 3, 4, 5],
