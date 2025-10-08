@@ -22,6 +22,7 @@ const splitArray = (nums, k) => {
     }
     return false;
   }
+  
   let left = -Infinity, right = 0;
   for (let num of nums) {
     left = Math.max(num, left); 
@@ -29,9 +30,7 @@ const splitArray = (nums, k) => {
   }
 
   while (left < right) {
-    console.log(`left: ${left}, right: ${right}`);
     const mid = Math.floor((left + right) / 2);
-    console.log(`mid: ${mid}`);
     if (check(mid)) {
       right = mid;
     } else {
