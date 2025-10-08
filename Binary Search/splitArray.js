@@ -2,7 +2,7 @@ const splitArray = (nums, k) => {
   const check = (minSum) => {
     let currentSum = 0;
     let subArrayCount = 0;
-    
+
     for (let num of nums) {
       if (currentSum + num > minSum) {
         subArrayCount++;
@@ -12,16 +12,15 @@ const splitArray = (nums, k) => {
       currentSum += num;
     }
 
-    if (currentSum > 0) subArrayCount++;
-    if (subArrayCount <= k) {
-      return true;
-    }
-    return false;
-  }
+    if (subArrayCount + 1 <= k) return true;
 
-  let left = -Infinity, right = 0;
+    return false;
+  };
+
+  let left = -Infinity,
+    right = 0;
   for (let num of nums) {
-    left = Math.max(num, left); 
+    left = Math.max(num, left);
     right += num;
   }
 
@@ -35,7 +34,7 @@ const splitArray = (nums, k) => {
   }
 
   return left;
-}
+};
 
 const nums = [1, 2, 3, 4, 5],
   k = 1;
