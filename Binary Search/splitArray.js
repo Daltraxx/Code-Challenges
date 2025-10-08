@@ -12,9 +12,7 @@ const splitArray = (nums, k) => {
       currentSum += num;
     }
 
-    if (subArrayCount + 1 <= k) return true;
-
-    return false;
+    return subArrayCount + 1 <= k;
   };
 
   let left = -Infinity,
