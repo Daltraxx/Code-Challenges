@@ -37,6 +37,9 @@ const splitArray = (nums, k) => {
   return minLargestSum; // could omit this variable and just return left if desired
 };
 
+// Time complexity O(nlogk)
+// Space O(1)
+
 const nums = [1, 2, 3, 4, 5],
   k = 1;
 
