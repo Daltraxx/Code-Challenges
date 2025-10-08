@@ -1,5 +1,4 @@
 const splitArray = (nums, k) => {
-  let minimizedLargestSum = 0;
   const check = (minSum) => {
     let currentSum = 0;
     let subArrayCount = 0;
@@ -17,7 +16,6 @@ const splitArray = (nums, k) => {
     largestSum = Math.max(currentSum, largestSum);
     if (currentSum > 0) subArrayCount++;
     if (subArrayCount <= k) {
-      minimizedLargestSum = largestSum;
       return true;
     }
     return false;
@@ -38,7 +36,7 @@ const splitArray = (nums, k) => {
     }
   }
 
-  return minimizedLargestSum;
+  return left;
 }
 
 const nums = [1, 2, 3, 4, 5],
