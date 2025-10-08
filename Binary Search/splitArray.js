@@ -22,17 +22,17 @@ const splitArray = (nums, k) => {
     }
     return false;
   }
-  
+
   let left = -Infinity, right = 0;
   for (let num of nums) {
     left = Math.max(num, left); 
     right += num;
   }
 
-  while (left < right) {
+  while (left <= right) {
     const mid = Math.floor((left + right) / 2);
     if (check(mid)) {
-      right = mid;
+      right = mid - 1;
     } else {
       left = mid + 1;
     }
@@ -42,6 +42,6 @@ const splitArray = (nums, k) => {
 }
 
 const nums = [1, 2, 3, 4, 5],
-  k = 2;
+  k = 1;
 
 console.log(splitArray(nums, k));
