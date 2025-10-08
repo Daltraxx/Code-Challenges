@@ -1,10 +1,10 @@
 const splitArray = (nums, k) => {
-  const check = (minSum) => {
+  const check = (minLargestSum) => {
     let currentSum = 0;
     let subArrayCount = 0;
 
     for (let num of nums) {
-      if (currentSum + num > minSum) {
+      if (currentSum + num > minLargestSum) {
         subArrayCount++;
         if (subArrayCount > k) return false;
         currentSum = 0;
