@@ -34,6 +34,6 @@ public class SplitArray {
       currentSum += num;
     }
 
-    return subArrayCount + 1 <= k;
+    return subArrayCount + 1 <= k; // could omit this variable and just return left if desired
   }
 }
