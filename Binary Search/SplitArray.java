@@ -37,3 +37,6 @@ public class SplitArray {
     return subArrayCount + 1 <= k; // could omit this variable and just return left if desired
   }
 }
+
+// Time complexity O(nlogk)
+// Space O(1)
