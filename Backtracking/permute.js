@@ -1,20 +1,22 @@
 const permute = (nums) => {
-  const backtrack = (current) => {
+  const backtrack = (current, used) => {
     if (current.length === nums.length) {
       permutations.push([...current]);
       return;
     }
     for (let num of nums) {
-      if (!current.includes(num)) {
+      if (!used.has(num)) {
         current.push(num);
-        backtrack(current);
+        used.add(num);
+        backtrack(current, used);
         current.pop();
+        used.delete(num);
       }
     }
   };
 
   const permutations = [];
-  backtrack([]);
+  backtrack([], new Set());
   return permutations;
 };
 
