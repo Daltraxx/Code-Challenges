@@ -1,21 +1,18 @@
 package Backtracking;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Permute {
   int[] nums;
   List<List<Integer>> permutations;
-  Set<Integer> used;
 
   public List<List<Integer>> permute(int[] nums) {
     this.nums = nums;
     this.permutations = new ArrayList<>();
-    this.used = new HashSet<>();
-
-    backtrack(new ArrayList<>(), used);
+    backtrack(new ArrayList<>(), new HashSet<>());
     return permutations;
   }
 
