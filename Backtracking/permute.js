@@ -20,5 +20,8 @@ const permute = (nums) => {
   return permutations;
 };
 
+// Time O(n⋅n!)
+// Space O(n⋅n!)
+
 const nums = [1, 2, 3];
 console.log(permute(nums));
