@@ -15,4 +15,8 @@ const permute = (nums) => {
 
     const permutations = [];
     backtrack(([]));
+    return permutations;
 }
+
+const nums = [1,2,3];
+console.log(permute(nums));
