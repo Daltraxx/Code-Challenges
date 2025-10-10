@@ -33,3 +33,6 @@ public class Permute {
     }
   }
 }
+
+// Time O(n⋅n!)
+// Space O(n⋅n!)
