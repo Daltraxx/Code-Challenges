@@ -1,7 +1,7 @@
 const permute = (nums) => {
   const backtrack = (current) => {
     if (current.length === nums.length) {
-      permutations.push(current);
+      permutations.push([...current]);
       return;
     }
     for (let num of nums) {
