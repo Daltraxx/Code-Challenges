@@ -13,7 +13,7 @@ public class Subsets {
     backtrack(new ArrayList<>(), 0);
     return subsetsList;
   }
-  
+
   private void backtrack(List<Integer> curr, int i) {
     subsetsList.add(new ArrayList<>(curr));
 
@@ -24,3 +24,6 @@ public class Subsets {
     }
   }
 }
+
+// Time O(n⋅2^n)
+// Space O(n⋅2^n)
