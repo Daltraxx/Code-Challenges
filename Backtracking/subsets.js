@@ -1,13 +1,16 @@
 const subsets = (nums) => {
   const subsetsArr = [];
+  const used = new Set();
 
   const backtrack = (curr, i) => {
     subsetsArr.push([...curr]);
     for (i; i < nums.length; i++) {
       const num = nums[i];
-      if (!curr.includes(num)) {
+      if (!used.has(num)) {
+        used.add(num);
         curr.push(num);
         backtrack(curr, i + 1);
+        used.delete(num);
         curr.pop();
       }
     }
