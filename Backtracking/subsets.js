@@ -1,5 +1,6 @@
 const subsets = (nums) => {
   const subsetsArr = [];
+
   const backtrack = (curr, i) => {
     subsetsArr.push([...curr]);
     for (i; i < nums.length; i++) {
@@ -10,10 +11,11 @@ const subsets = (nums) => {
         curr.pop();
       }
     }
-  }
+  };
+
   backtrack([], 0);
   return subsetsArr;
-}
+};
 
 const nums = [1, 2, 3];
 console.log(subsets(nums));
