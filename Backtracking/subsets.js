@@ -1,7 +1,7 @@
 const subsets = (nums) => {
   const subsetsArr = [];
   const backtrack = (curr, i) => {
-    subsetsArr.push(curr);
+    subsetsArr.push([...curr]);
     for (i; i < nums.length; i++) {
       const num = nums[i];
       if (!curr.includes(num)) {
