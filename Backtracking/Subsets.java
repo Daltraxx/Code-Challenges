@@ -14,7 +14,7 @@ public class Subsets {
     return subsetsList;
   }
   
-  public void backtrack(List<Integer> curr, int i) {
+  private void backtrack(List<Integer> curr, int i) {
     subsetsList.add(new ArrayList<>(curr));
 
     for (int j = i; j < nums.length; j++) {
