@@ -14,8 +14,8 @@ const subsets = (nums) => {
   return subsetsArr;
 };
 
-// Time O(n2^n)
-// Space O(n)
+// Time O(n⋅2^n)
+// Space O(n⋅2^n)
 
 const nums = [1, 2, 3];
 console.log(subsets(nums));
