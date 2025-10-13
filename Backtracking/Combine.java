@@ -14,7 +14,7 @@ public class Combine {
     }
 
     private void backtrack(List<Integer> curr, int i) {
-        if (curr.size() == n) {
+        if (curr.size() == k) {
             combinations.add(new ArrayList<>(curr));
             return;
         }
