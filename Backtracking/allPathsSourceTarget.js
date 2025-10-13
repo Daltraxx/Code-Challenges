@@ -15,11 +15,11 @@ const allPathsSourceTarget = (graph) => {
       backtrack(curr, neighbor);
       curr.pop(neighbor);
     }
-  }
+  };
 
   backtrack([0], 0);
   return paths;
-}
+};
 
 // Time O(2^n⋅n)
 // Space O(n)
