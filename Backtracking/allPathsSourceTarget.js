@@ -1,7 +1,6 @@
 const allPathsSourceTarget = (graph) => {
   const paths = [];
-  const n = graph.length;
-  const target = n - 1;
+  const target = graph.length - 1;
 
   const backtrack = (curr, i) => {
     if (i === target) {
