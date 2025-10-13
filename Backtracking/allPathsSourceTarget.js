@@ -4,24 +4,21 @@ const allPathsSourceTarget = (graph) => {
   const target = n - 1;
 
   const backtrack = (curr, i) => {
-    curr.push(i);
-
     if (i === target) {
       paths.push([...curr]);
-      curr.pop(i);
       return;
     }
 
     const neighbors = graph[i];
 
     for (let neighbor of neighbors) {
+      curr.push(neighbor);
       backtrack(curr, neighbor);
+      curr.pop(neighbor);
     }
-
-    curr.pop(i);
   }
 
-  backtrack([], 0);
+  backtrack([0], 0);
   return paths;
 }
 
