@@ -1,11 +1,12 @@
 const allPathsSourceTarget = (graph) => {
   const paths = [];
   const n = graph.length;
+  const target = n - 1;
 
   const backtrack = (curr, i) => {
     curr.push(i);
 
-    if (i === n - 1) {
+    if (i === target) {
       paths.push([...curr]);
       curr.pop(i);
       return;
