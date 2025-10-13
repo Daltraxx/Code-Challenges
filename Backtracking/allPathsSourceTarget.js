@@ -21,5 +21,8 @@ const allPathsSourceTarget = (graph) => {
   return paths;
 }
 
+// Time O(2^n⋅n)
+// Space O(n)
+
 const graph = [[1, 2], [3], [3], []];
 console.log(allPathsSourceTarget(graph));
