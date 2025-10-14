@@ -15,11 +15,12 @@ const letterCombinations = (digits) => {
   const combinations = [];
 
   const backtrack = (curr, i) => {
-    if (curr === n) {
+    if (curr.length === n) {
       combinations.push(curr);
       return;
     }
 
+    console.log(digits[i]);
     const letters = numToLetterMap.get(digits[i]);
     for (let letter of letters) {
       curr += letter;
@@ -31,3 +32,6 @@ const letterCombinations = (digits) => {
   backtrack('', 0);
   return combinations;
 }
+
+const digits = "23";
+console.log(letterCombinations(digits));
