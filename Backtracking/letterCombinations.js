@@ -20,7 +20,7 @@ const letterCombinations = (digits) => {
       return;
     }
 
-    const letters = numToLetterMap.get(curr[i]);
+    const letters = numToLetterMap.get(digits[i]);
     for (let letter of letters) {
       curr += letter;
       backtrack(curr, i + 1);
