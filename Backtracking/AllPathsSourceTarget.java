@@ -25,7 +25,7 @@ public class AllPathsSourceTarget {
     for (int neighbor : graph[node]) {
       curr.add(neighbor);
       backtrack(curr, neighbor);
-      curr.remove(neighbor);
+      curr.remove(curr.size() - 1);
     }
   }
 }
