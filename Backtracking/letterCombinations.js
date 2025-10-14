@@ -34,6 +34,9 @@ const letterCombinations = (digits) => {
   return combinations;
 };
 
+// Time O(4^n⋅n)
+// Space O(n)
+
 const digits = "123";
 console.log(letterCombinations(digits));
 
