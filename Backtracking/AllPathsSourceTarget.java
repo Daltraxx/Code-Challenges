@@ -29,3 +29,6 @@ public class AllPathsSourceTarget {
     }
   }
 }
+
+// Time O(2^n⋅n)
+// Space O(n)
