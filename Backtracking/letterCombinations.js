@@ -37,6 +37,7 @@ const letterCombinations = (digits) => {
 const digits = "123";
 console.log(letterCombinations(digits));
 
+// Solution for cases where "1" is allowed
 const letterCombinationsIncludingOne = (digits) => {
   let oneCount = 0;
   for (let i = 0; i < digits.length; i++) {
