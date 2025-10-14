@@ -1,5 +1,11 @@
 const letterCombinations = (digits) => {
-  const n = digits.length;
+  let oneCount = 0;
+  for (let i = 0; i < digits.length; i++) {
+    if (digits[i] === '1') oneCount++;
+  }
+
+  const n = digits.length - oneCount;
+
   const numToLetterMap = new Map([
     ['1', []],
     ['2', ['a', 'b', 'c']],
@@ -20,8 +26,13 @@ const letterCombinations = (digits) => {
       return;
     }
 
-    console.log(digits[i]);
-    const letters = numToLetterMap.get(digits[i]);
+    const num = digits[i];
+    if (num === '1') {
+      backtrack(curr, i + 1);
+      return;
+    }
+
+    const letters = numToLetterMap.get(num);
     for (let letter of letters) {
       curr += letter;
       backtrack(curr, i + 1);
@@ -33,5 +44,5 @@ const letterCombinations = (digits) => {
   return combinations;
 }
 
-const digits = "23";
+const digits = "123";
 console.log(letterCombinations(digits));
