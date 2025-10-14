@@ -4,15 +4,14 @@ import java.util.Map;
 
 public class LetterCombinations {
   Map<Character, String> numToLetterMap = Map.of(
-    '2', "abc",
-    '3', "def",
-    '4', "ghi",
-    '5', "jkl",
-    '6', "mno",
-    '7', "pqrs",
-    '8', "tuv",
-    '9', "wxyz"
-  );
+      '2', "abc",
+      '3', "def",
+      '4', "ghi",
+      '5', "jkl",
+      '6', "mno",
+      '7', "pqrs",
+      '8', "tuv",
+      '9', "wxyz");
 
   int n;
   String digits;
@@ -40,3 +39,6 @@ public class LetterCombinations {
     }
   }
 }
+
+// Time O(4^n⋅n)
+// Space O(n)
