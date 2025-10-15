@@ -6,16 +6,13 @@ const combinationSum = (candidates, target) => {
       return;
     }
 
-    if (currSum > target) return;
-
     for (i; i < candidates.length; i++) {
       const num = candidates[i];
-      currCombo.push(num);
-      currSum += num;
-      backtrack(currCombo, currSum, i);
-      currCombo.pop();
-      currSum -= num;
-
+      if (currSum + num <= target) {
+        currCombo.push(num);
+        backtrack(currCombo, currSum + num, i);
+        currCombo.pop();
+      }
     }
   }
 
