@@ -19,7 +19,7 @@ const combinationSum = (candidates, target) => {
     }
   }
 
-  backtrack(0, 0);
+  backtrack([], 0, 0);
   return combinations;
 }
 
