@@ -2,7 +2,7 @@ const combinationSum = (candidates, target) => {
   let combinations = [];
   const backtrack = (currCombo, currSum, i) => {
     if (currSum === target) {
-      combinations.push(...currCombo);
+      combinations.push([...currCombo]);
       return;
     }
 
