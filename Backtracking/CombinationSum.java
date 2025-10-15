@@ -24,7 +24,7 @@ public class CombinationSum {
       int num = candidates[j];
       if (currSum + num <= target) {
         currCombo.add(num);
-        backtrack(currCombo, currSum + num, i);
+        backtrack(currCombo, currSum + num, j);
         currCombo.remove(currCombo.size() - 1);
       }
     }
