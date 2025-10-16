@@ -44,5 +44,8 @@ const totalNQueens = (n) => {
   return solutionCount;
 };
 
+// Time O(n!)
+// Space O(n)
+
 const n = 4;
 console.log(totalNQueens(n));
