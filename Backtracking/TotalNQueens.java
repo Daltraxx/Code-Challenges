@@ -53,3 +53,6 @@ public class TotalNQueens {
     attackedAntiDiagonals.remove(row + col);
   }
 }
+
+// Time O(n!)
+// Space O(n)
