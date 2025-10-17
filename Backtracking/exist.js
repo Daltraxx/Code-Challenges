@@ -2,6 +2,10 @@ const exist = (board, word) => {
   const height = board.length;
   const width = board[0].length;
 
+  const isValid = (row, col) => {
+    return row >= 0 && row < height && col >= 0 && col < width;
+  }
+
   const seen = new Array(height);
   for (let row = 0; row < height; row++)
     seen[row] = new Array(width).fill(false);
@@ -43,3 +47,12 @@ const exist = (board, word) => {
 
   return false;
 };
+
+const board = [
+    ["A", "B", "C", "E"],
+    ["S", "F", "C", "S"],
+    ["A", "D", "E", "E"],
+  ],
+  word = "ABCCED";
+
+console.log(exist(board, word));
