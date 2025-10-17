@@ -51,6 +51,9 @@ const exist = (board, word) => {
   return false;
 };
 
+// Time O(n⋅m⋅3^L)
+// Space O(L)
+
 const board = [["a", "a"]],
   word = "aaa";
 
