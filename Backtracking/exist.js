@@ -40,18 +40,18 @@ const exist = (board, word) => {
 
   for (let row = 0; row < height; row++) {
     for (let col = 0; col < width; col++) {
-      if (board[row][col] === word[0] && backtrack(row, col, 1)) return true;
+      if (board[row][col] === word[0]) {
+        seen[row][col] = true;
+        if (backtrack(row, col, 1)) return true;
+        seen[row][col] = false;
+      }
     }
   }
 
   return false;
 };
 
-const board = [
-    ["A", "B", "C", "E"],
-    ["S", "F", "C", "S"],
-    ["A", "D", "E", "E"],
-  ],
-  word = "ABCB";
+const board = [["a", "a"]],
+  word = "aaa";
 
 console.log(exist(board, word));
