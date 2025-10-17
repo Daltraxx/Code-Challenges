@@ -51,3 +51,6 @@ public class Exist {
     return row >= 0 && row < height && col >= 0 && col < width;
   }
 }
+
+// Time O(n⋅m⋅3^L)
+// Space O(L)
