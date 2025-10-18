@@ -2,14 +2,14 @@ const generateParenthesis = (n) => {
   const combinations = [];
   const comboLength = 2 * n;
   const backtrack = (curr, leftCount, rightCount) => {
-    if (curr.length === comboLength && leftCount === 0) {
+    if (curr.length === comboLength && leftCount === rightCount) {
       combinations.push(curr);
       return;
     }
 
     if (curr.length < comboLength) {
-      if (leftCount < n) backtrack(curr + "(", leftCount + 1);
-      if (leftCount > rightCount) backtrack(curr + ')', leftCount - 1);
+      if (leftCount < n) backtrack(curr + "(", leftCount + 1, rightCount);
+      if (leftCount > rightCount) backtrack(curr + ')', leftCount, rightCount + 1);
     }
     
   }
