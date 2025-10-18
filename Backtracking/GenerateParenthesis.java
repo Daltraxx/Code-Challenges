@@ -20,9 +20,15 @@ public class GenerateParenthesis {
       return;
     }
 
-    if (leftCount < n)
-      backtrack(curr.append('('), leftCount + 1, rightCount);
-    if (rightCount < leftCount)
+    if (leftCount < n) {
+      curr.append('(');
+      backtrack(curr, leftCount + 1, rightCount);
+      curr.deleteCharAt(curr.length() - 1);
+    }
+    if (rightCount < leftCount) {
+      curr.append(')');
       backtrack(curr.append(')'), leftCount, rightCount + 1);
+      curr.deleteCharAt(curr.length() - 1);
+    }
   }
 }
