@@ -27,7 +27,7 @@ public class GenerateParenthesis {
     }
     if (rightCount < leftCount) {
       curr.append(')');
-      backtrack(curr.append(')'), leftCount, rightCount + 1);
+      backtrack(curr, leftCount, rightCount + 1);
       curr.deleteCharAt(curr.length() - 1);
     }
   }
