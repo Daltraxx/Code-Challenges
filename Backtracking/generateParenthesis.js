@@ -17,3 +17,6 @@ const generateParenthesis = (n) => {
   backtrack('(', 1);
   return combinations;
 }
+
+const n = 1;
+console.log(generateParenthesis(n));
