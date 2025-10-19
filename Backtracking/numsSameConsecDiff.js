@@ -7,11 +7,17 @@ const numsSameConsecDiff = (n, k) => {
     }
 
     const lastDigit = Number(curr.at(-1));
+
+    if (k === 0) {
+      backtrack(curr + String(lastDigit), i + 1);
+      return;
+    }
+
     if (lastDigit - k >= 0) {
       const newDigit = String(lastDigit - k);
       backtrack(curr + newDigit, i + 1);
     }
-    
+
     if (lastDigit + k < 10) {
       const newDigit = String(lastDigit + k);
       backtrack(curr + newDigit, i + 1);
@@ -26,6 +32,6 @@ const numsSameConsecDiff = (n, k) => {
 };
 
 const n = 2,
-  k = 1;
+  k = 0;
 
 console.log(numsSameConsecDiff(n, k));
