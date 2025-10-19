@@ -31,6 +31,9 @@ const numsSameConsecDiff = (n, k) => {
   return validIntegers;
 };
 
+// Time O(2^n)
+// Space O(2^n)
+
 const n = 2,
   k = 0;
 
