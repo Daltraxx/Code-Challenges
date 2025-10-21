@@ -34,4 +34,10 @@ public class CombinationSum3 {
       }
     }
   }
+
+  public static void main(String[] args) {
+    CombinationSum3 cs3 = new CombinationSum3();
+    System.out.println(cs3.combinationSum3(3, 7)); // [[1,2,4]]
+    System.out.println(cs3.combinationSum3(9, 45)); // [[1,2,3,4,5,6,7,8,9]]
+  }
 }
