@@ -1,6 +1,6 @@
 const numsSameConsecDiff = (n, k) => {
   const validIntegers = [];
-  const backtrack = (curr, i) => {
+  const backtrack = (curr) => {
     if (curr.length === n) {
       validIntegers.push(Number(curr));
       return;
@@ -9,23 +9,23 @@ const numsSameConsecDiff = (n, k) => {
     const lastDigit = Number(curr.at(-1));
 
     if (k === 0) {
-      backtrack(curr + String(lastDigit), i + 1);
+      backtrack(curr + String(lastDigit));
       return;
     }
 
     if (lastDigit - k >= 0) {
       const newDigit = String(lastDigit - k);
-      backtrack(curr + newDigit, i + 1);
+      backtrack(curr + newDigit);
     }
 
     if (lastDigit + k < 10) {
       const newDigit = String(lastDigit + k);
-      backtrack(curr + newDigit, i + 1);
+      backtrack(curr + newDigit);
     }
   };
 
   for (let int = 1; int < 10; int++) {
-    backtrack(String(int), 1);
+    backtrack(String(int));
   }
 
   return validIntegers;
