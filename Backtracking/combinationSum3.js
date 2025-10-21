@@ -16,11 +16,13 @@ const combinationSum3 = (k, n) => {
     }
   };
 
-  backtrack([], 0, n);
+  const largestPossibleNum = n < 10 ? n : 9;
+
+  backtrack([], 0, largestPossibleNum);
   return combinations;
 };
 
-const k = 3,
-  n = 7;
+const k = 4,
+  n = 1;
 
 console.log(combinationSum3(k, n));
