@@ -22,6 +22,9 @@ const combinationSum3 = (k, n) => {
   return combinations;
 };
 
+// Time O(K×C(9,K))
+// Space O(K)
+
 const k = 3,
   n = 9;
 
