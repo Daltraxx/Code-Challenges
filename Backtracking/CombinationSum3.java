@@ -3,13 +3,13 @@ import java.util.List;
 
 public class CombinationSum3 {
   int target;
-  int n;
+  int k;
   List<List<Integer>> combinations;
   int largestPossibleNum;
 
   public List<List<Integer>> combinationSum3(int k, int n) {
-    target = k;
-    this.n = n;
+    target = n;
+    this.k = k;
     combinations = new ArrayList<>();
     largestPossibleNum = n < 10 ? n : 9;
     backtrack(new ArrayList<>(), 1, 0);
@@ -17,7 +17,7 @@ public class CombinationSum3 {
   }
   
   private void backtrack(List<Integer> curr, int i, int currSum) {
-    if (curr.size() == n) {
+    if (curr.size() == k) {
       if (currSum == target)
         combinations.add(new ArrayList<>(curr));
       return;
@@ -27,7 +27,7 @@ public class CombinationSum3 {
       int newSum = currSum + j;
       if (newSum <= target) {
         curr.add(j);
-        backtrack(curr, j, newSum);
+        backtrack(curr, j + 1, newSum);
         curr.remove(curr.size() - 1);
       } else {
         return;
