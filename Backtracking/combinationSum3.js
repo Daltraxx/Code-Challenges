@@ -2,18 +2,18 @@ const combinationSum3 = (k, n) => {
   const combinations = [];
   const largestPossibleNum = n < 10 ? n : 9;
 
-  const backtrack = (curr, currSum, i) => {
-    if (curr.length === k) {
-      if (currSum === n) combinations.push([...curr]);
+  const backtrack = (currCombo, currSum, i) => {
+    if (currCombo.length === k) {
+      if (currSum === n) combinations.push([...currCombo]);
       return;
     }
 
     for (i; i <= largestPossibleNum; i++) {
       const newSum = currSum + i;
       if (newSum <= n) {
-        curr.push(i);
-        backtrack(curr, newSum, i + 1);
-        curr.pop();
+        currCombo.push(i);
+        backtrack(currCombo, newSum, i + 1);
+        currCombo.pop();
       } else {
         return;
       }

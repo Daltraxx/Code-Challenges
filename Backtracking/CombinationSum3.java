@@ -8,27 +8,27 @@ public class CombinationSum3 {
   int largestPossibleNum;
 
   public List<List<Integer>> combinationSum3(int k, int n) {
-    target = n;
     combinationLength = k;
+    target = n;
     combinations = new ArrayList<>();
     largestPossibleNum = n < 10 ? n : 9;
-    backtrack(new ArrayList<>(), 1, 0);
+    backtrack(new ArrayList<>(), 0, 1);
     return combinations;
   }
   
-  private void backtrack(List<Integer> curr, int i, int currSum) {
-    if (curr.size() == combinationLength) {
+  private void backtrack(List<Integer> currCombo, int currSum, int i) {
+    if (currCombo.size() == combinationLength) {
       if (currSum == target)
-        combinations.add(new ArrayList<>(curr));
+        combinations.add(new ArrayList<>(currCombo));
       return;
     }
 
     for (int j = i; j < largestPossibleNum; j++) {
       int newSum = currSum + j;
       if (newSum <= target) {
-        curr.add(j);
-        backtrack(curr, j + 1, newSum);
-        curr.remove(curr.size() - 1);
+        currCombo.add(j);
+        backtrack(currCombo, j + 1, newSum);
+        currCombo.remove(currCombo.size() - 1);
       } else {
         return;
       }
