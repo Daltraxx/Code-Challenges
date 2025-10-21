@@ -13,6 +13,7 @@ public class CombinationSum3 {
     combinations = new ArrayList<>();
     largestPossibleNum = n < 10 ? n : 9;
     backtrack(new ArrayList<>(), 1, 0);
+    return combinations;
   }
   
   private void backtrack(List<Integer> curr, int i, int currSum) {
