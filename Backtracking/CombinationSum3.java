@@ -23,11 +23,11 @@ public class CombinationSum3 {
       return;
     }
 
-    for (int j = i; j < largestPossibleNum; j++) {
+    for (int j = i; j <= largestPossibleNum; j++) {
       int newSum = currSum + j;
       if (newSum <= target) {
         currCombo.add(j);
-        backtrack(currCombo, j + 1, newSum);
+        backtrack(currCombo, newSum, j + 1);
         currCombo.remove(currCombo.size() - 1);
       } else {
         return;
