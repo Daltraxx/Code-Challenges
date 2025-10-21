@@ -37,3 +37,6 @@ public class NumsSameConsecDiff {
     return ans;
   }
 }
+
+// Time O(2^n)
+// Space O(2^n)
