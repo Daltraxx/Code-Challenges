@@ -27,7 +27,7 @@ const combinationSum3 = (k, n) => {
 // Time O(K×C(9,K))
 // Space O(K)
 
-const k = 3,
-  n = 9;
+const k = 1,
+  n = 100;
 
 console.log(combinationSum3(k, n));
