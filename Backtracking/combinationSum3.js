@@ -14,6 +14,8 @@ const combinationSum3 = (k, n) => {
         curr.push(i);
         backtrack(curr, newSum, i + 1);
         curr.pop();
+      } else {
+        return;
       }
     }
   };
