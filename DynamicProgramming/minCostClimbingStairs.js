@@ -45,4 +45,7 @@ const minCostClimbingStairsBottomUpConstantSpace = (cost) => {
   return downOne;
 };
 
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
 console.log(minCostClimbingStairsBottomUp(cost));
