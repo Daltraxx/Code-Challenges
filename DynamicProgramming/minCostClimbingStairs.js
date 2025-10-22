@@ -1,4 +1,4 @@
-const minCostClimbingStairs = (cost) => {
+const minCostClimbingStairsTopDown = (cost) => {
   const memo = new Map();
   const dp = (i) => {
     if (i <= 1) {
@@ -14,5 +14,8 @@ const minCostClimbingStairs = (cost) => {
   return dp(cost.length);
 };
 
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
 const cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1];
-console.log(minCostClimbingStairs(cost));
+console.log(minCostClimbingStairsTopDown(cost));
