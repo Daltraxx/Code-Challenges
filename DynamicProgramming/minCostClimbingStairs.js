@@ -1,17 +1,14 @@
 const minCostClimbingStairs = (cost) => {
-  const runningCosts = new Array(cost.length + 1);
+  const memo = new Map();
   const dp = (i) => {
-    if (i === 0 || i === 1) {
-      runningCosts[i] = 0;
-      return runningCosts[i];
+    if (i <= 1) {
+      return 0;
     }
 
-    if (!runningCosts[i])
-      runningCosts[i] = Math.min(
-        Math.min(dp(i - 1) + cost[i - 1], dp(i - 2) + cost[i - 2])
-      );
+    if (memo.has(i)) return memo.get(i);
 
-    return runningCosts[i];
+    memo.set(i, Math.min(dp(i - 1) + cost[i - 1], dp(i - 2) + cost[i - 2]));
+    return memo.get(i);
   };
 
   return dp(cost.length);
