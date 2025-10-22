@@ -32,6 +32,9 @@ const minCostClimbingStairsBottomUp = (cost) => {
   return dp.at(-1);
 };
 
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
 const minCostClimbingStairsBottomUpConstantSpace = (cost) => {
   let downOne = 0;
   let downTwo = 0;
