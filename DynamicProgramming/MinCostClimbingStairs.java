@@ -44,3 +44,6 @@ public class MinCostClimbingStairs {
     System.out.println(minCostClimbingStairs.minCostClimbingStairsTopDown(cost)); // Output: 15
   }
 }
+
+// Time Complexity: O(n)
+// Space Complexity: O(n)
