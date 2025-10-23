@@ -41,6 +41,9 @@ const robBottomUp = (nums) => {
   return maxMoney.at(-1);
 }
 
+// Time O(n)
+// Space O(n)
+
 console.log(robBottomUp(nums));
 
 const robBottomUpConstantSpace = (nums) => {
@@ -59,5 +62,8 @@ const robBottomUpConstantSpace = (nums) => {
   
   return current;
 }
+
+// Time O(n)
+// Space O(1)
 
 console.log(robBottomUpConstantSpace(nums));
