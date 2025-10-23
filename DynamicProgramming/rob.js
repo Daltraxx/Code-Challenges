@@ -21,6 +21,9 @@ const rob = (nums) => {
   return maxMoney(nums.length - 1);
 }
 
+// Time O(n)
+// Space O(n)
+
 const nums = [2, 7, 9, 3, 1];
 
 console.log(rob(nums));
