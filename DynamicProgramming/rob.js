@@ -51,13 +51,13 @@ const robBottomUpConstantSpace = (nums) => {
     return nums[0];
   }
 
-  let downTwo = nums[0];
-  let downOne = Math.max(nums[0], nums[1]);
-  let current = downOne;
+  let backTwo = nums[0];
+  let backOne = Math.max(nums[0], nums[1]);
+  let current = backOne;
   for (let i = 2; i < nums.length; i++) {
-    current = Math.max(downTwo + nums[i], downOne);
-    downTwo = downOne;
-    downOne = current;
+    current = Math.max(backTwo + nums[i], backOne);
+    backTwo = backOne;
+    backOne = current;
   }
   
   return current;
