@@ -28,6 +28,9 @@ const nums = [2, 7, 9, 3, 1];
 console.log(robTopDown(nums));
 
 const robBottomUp = (nums) => {
+  if (nums.length === 1) {
+    return nums[0];
+  }
   const maxMoney = new Array(nums.length);
   maxMoney[0] = nums[0];
   maxMoney[1] = Math.max(nums[0], nums[1]);
