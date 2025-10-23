@@ -42,3 +42,22 @@ const robBottomUp = (nums) => {
 }
 
 console.log(robBottomUp(nums));
+
+const robBottomUpConstantSpace = (nums) => {
+  if (nums.length === 1) {
+    return nums[0];
+  }
+
+  let downTwo = nums[0];
+  let downOne = Math.max(nums[0], nums[1]);
+  let current;
+  for (let i = 2; i < nums.length; i++) {
+    current = Math.max(downTwo + nums[i], downOne);
+    downTwo = downOne;
+    downOne = current;
+  }
+  
+  return current;
+}
+
+console.log(robBottomUpConstantSpace(nums));
