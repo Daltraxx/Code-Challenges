@@ -24,14 +24,16 @@ public class Rob {
 
     return memo.get(i);
   }
+  // Time O(n)
+  // Space O(n)
 
   // Bottom up approach
   public int robBottomUp(int[] nums) {
     if (nums.length == 1)
       return nums[0];
-    
+
     int[] maxMoney = new int[nums.length];
-    
+
     maxMoney[0] = nums[0];
     maxMoney[1] = Math.max(nums[0], nums[1]);
 
@@ -41,6 +43,8 @@ public class Rob {
 
     return maxMoney[maxMoney.length - 1];
   }
+  // Time O(n)
+  // Space O(n)
 
   //Bottom up with constant space
   public int robBottomUpConstantSpace(int[] nums) {
@@ -59,6 +63,8 @@ public class Rob {
 
     return currentHouse;
   }
+  // Time O(n)
+  // Space O(1)
 
   
   public static void main(String[] args) {
