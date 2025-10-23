@@ -4,6 +4,7 @@ import java.util.Map;
 public class Rob {
   int[] houses;
   Map<Integer, Integer> memo;
+
   public int rob(int[] nums) {
     houses = nums;
     memo = new HashMap<>();
@@ -24,12 +25,27 @@ public class Rob {
     return memo.get(i);
   }
 
-  // Top-down approach with tabulation
-  
+  // Bottom up approach
+  public int robBottomUp(int[] nums) {
+    int[] maxMoney = new int[nums.length];
+    if (nums.length == 1)
+      return nums[0];
+
+    maxMoney[0] = nums[0];
+    maxMoney[1] = Math.max(nums[0], nums[1]);
+
+    for (int i = 2; i < maxMoney.length; i++) {
+      maxMoney[i] = Math.max(maxMoney[i - 2] + nums[i], maxMoney[i - 1]);
+    }
+
+    return maxMoney[maxMoney.length - 1];
+  }
+
   
   public static void main(String[] args) {
     Rob robber = new Rob();
     int[] houses = {2,7,9,3,1};
     System.out.println(robber.rob(houses)); // Output: 12
+    System.out.println(robber.robBottomUp(houses)); // Output: 12
   }
 }
