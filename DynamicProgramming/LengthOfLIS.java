@@ -51,3 +51,7 @@ public class LengthOfLIS {
     return longest;
   }
 }
+
+// Same Time and Space Complexities
+// Time O(n^2)
+// Space O(n)
