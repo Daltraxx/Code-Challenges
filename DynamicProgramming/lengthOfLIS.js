@@ -41,7 +41,12 @@ const lengthOfLISBottomUp = (nums) => {
       }
     }
   }
+
   return longest;
 }
+
+// Same Time and Space Complexities
+// Time O(n^2)
+// Space O(n)
 
 console.log(lengthOfLISBottomUp(nums));
