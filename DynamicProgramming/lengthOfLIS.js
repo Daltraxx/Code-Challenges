@@ -6,7 +6,8 @@ const lengthOfLIS = (nums) => {
       return memo.get(i);
     }
 
-    let longest = 1;
+    let longest = 1; // base case
+
     for (let j = 0; j < i; j++) {
       if (nums[j] < nums[i]) {
         longest = Math.max(getLongestSubsequence(j) + 1, longest);
