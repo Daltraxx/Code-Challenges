@@ -1,5 +1,10 @@
 const lengthofLIS = (nums) => {
+  const memo = new Map();
+
   const dp = (i) => {
+    if (memo.has(i)) {
+      return memo.get(i);
+    }
 
     let longest = 1;
     for (let j = 0; j < i; j++) {
@@ -8,7 +13,9 @@ const lengthofLIS = (nums) => {
       }
     }
 
-    return longest
+    memo.set(i, longest);
+
+    return longest;
   }
 
   return dp(nums.length - 1);
