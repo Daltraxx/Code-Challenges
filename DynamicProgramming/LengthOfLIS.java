@@ -1,11 +1,13 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LengthOfLIS {
+  // Top Down Approach
   Map<Integer, Integer> memo;
   int[] nums;
 
-  public int lengthofLIS(int[] nums) {
+  public int lengthOfLIS(int[] nums) {
     memo = new HashMap<>();
     this.nums = nums;
 
@@ -29,6 +31,23 @@ public class LengthOfLIS {
     }
 
     memo.put(i, longest);
+    return longest;
+  }
+
+  // Bottom Up Approach
+  public int lengthOfLISBottomUp(int[] nums) {
+    int[] longestSubsequences = new int[nums.length];
+    Arrays.fill(longestSubsequences, 1);
+    int longest = 1;
+    for (int i = 1; i < nums.length; i++) {
+      for (int j = 0; j < i; j++) {
+        if (nums[j] < nums[i]) {
+          longestSubsequences[i] = Math.max(longestSubsequences[j] + 1, longestSubsequences[i]);
+          longest = Math.max(longestSubsequences[i], longest);
+        }
+      }
+    }
+
     return longest;
   }
 }
