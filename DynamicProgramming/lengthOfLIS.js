@@ -1,7 +1,7 @@
-const lengthofLIS = (nums) => {
+const lengthOfLIS = (nums) => {
   const memo = new Map();
 
-  const dp = (i) => {
+  const getLongestSubsequence = (i) => {
     if (memo.has(i)) {
       return memo.get(i);
     }
@@ -9,7 +9,7 @@ const lengthofLIS = (nums) => {
     let longest = 1;
     for (let j = 0; j < i; j++) {
       if (nums[j] < nums[i]) {
-        longest = Math.max(dp(j) + 1, longest);
+        longest = Math.max(getLongestSubsequence(j) + 1, longest);
       }
     }
 
@@ -18,8 +18,13 @@ const lengthofLIS = (nums) => {
     return longest;
   }
 
-  return dp(nums.length - 1);
+  let longest = 0;
+  for (let i = 0; i < nums.length; i++) {
+    longest = Math.max(getLongestSubsequence(i));
+  }
+
+  return longest;
 }
 
 const nums = [10, 9, 2, 5, 3, 7, 101, 18];
-console.log(lengthofLIS(nums));
+console.log(lengthOfLIS(nums));
