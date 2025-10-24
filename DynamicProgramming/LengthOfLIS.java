@@ -50,8 +50,36 @@ public class LengthOfLIS {
 
     return longest;
   }
+
+  // Binary Search Approach - O(n log n)
+  public int lengthOfLISBS(int[] nums) {
+    int[] dp = new int[nums.length];
+    int len = 0;
+    
+    for (int num : nums) {
+      int pos = binarySearch(dp, 0, len, num);
+      dp[pos] = num;
+      if (pos == len) {
+        len++;
+      }
+    }
+    
+    return len;
+  }
+  
+  private int binarySearch(int[] dp, int left, int right, int target) {
+    while (left < right) {
+      int mid = left + (right - left) / 2;
+      if (dp[mid] < target) {
+        left = mid + 1;
+      } else {
+        right = mid;
+      }
+    }
+    return left;
+  }
 }
 
-// Same Time and Space Complexities
+// Same Time and Space Complexities (not including Binary Search solution)
 // Time O(n^2)
 // Space O(n)
