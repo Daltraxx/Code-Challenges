@@ -45,8 +45,38 @@ const lengthOfLISBottomUp = (nums) => {
   return longest;
 }
 
+console.log(lengthOfLISBottomUp(nums));
+
 // Same Time and Space Complexities
 // Time O(n^2)
 // Space O(n)
 
-console.log(lengthOfLISBottomUp(nums));
+const lengthOfLISBinarySearch = (nums) => {
+  const positions = new Array(nums.length).fill(0);
+
+  const binarySearch = (target) => {
+    let left = 0;
+    let right = positions.length;
+    while (left < right) {
+      const mid = Math.floor((left + right) / 2);
+      if (positions(mid) > target) {
+        right = mid;
+      } else {
+        left = mid + 1;
+      }
+    }
+
+    return left;
+  }
+
+  let len = 0;
+  for (let num of nums) {
+    const pos = binarySearch(target);
+    positions[pos] = num;
+    if (pos === len) len++;
+  }
+
+  return len;
+}
+
+console.log(lengthOfLISBinarySearch(nums));
