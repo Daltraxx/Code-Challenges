@@ -71,7 +71,7 @@ const lengthOfLISBinarySearch = (nums) => {
 
   let len = 0;
   for (let num of nums) {
-    const pos = binarySearch(target);
+    const pos = binarySearch(num);
     positions[pos] = num;
     if (pos === len) len++;
   }
