@@ -83,7 +83,7 @@ public class LengthOfLIS {
 
   public static void main(String[] args) {
     LengthOfLIS lis = new LengthOfLIS();
-    int[] nums = {10, 9, 2, 5, 3, 7, 101, 18};
+    int[] nums = {10, 9, 2, 5, 3, 7, 101, 18, 4};
     System.out.println("Length of LIS (Binary Search): " + lis.lengthOfLISBS(nums)); // Output: 4
   }
 }
