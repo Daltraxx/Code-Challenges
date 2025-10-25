@@ -52,30 +52,31 @@ public class LengthOfLIS {
   }
 
   // Binary Search Approach - O(n log n)
+  int[] positions;
   public int lengthOfLISBS(int[] nums) {
-    int[] dp = new int[nums.length];
+    positions = new int[nums.length];
     int len = 0;
     
     for (int num : nums) {
-      int pos = binarySearch(dp, 0, len, num);
-      dp[pos] = num;
+      int pos = binarySearch(num, len);
+      positions[pos] = num;
       if (pos == len) {
         len++;
       }
     }
-
-    System.out.println("DP Array: " + Arrays.toString(dp));
     
     return len;
   }
-  
-  private int binarySearch(int[] dp, int left, int right, int target) {
+
+  private int binarySearch(int target, int range) {
+    int left = 0;
+    int right = range;
     while (left < right) {
       int mid = left + (right - left) / 2;
-      if (target > dp[mid]) {
-        left = mid + 1;
-      } else {
+      if (target <= positions[mid]) {
         right = mid;
+      } else {
+        left = mid + 1;
       }
     }
     return left;
