@@ -54,12 +54,12 @@ console.log(lengthOfLISBottomUp(nums));
 const lengthOfLISBinarySearch = (nums) => {
   const positions = new Array(nums.length).fill(0);
 
-  const binarySearch = (target) => {
+  const binarySearch = (target, range) => {
     let left = 0;
-    let right = positions.length;
+    let right = range;
     while (left < right) {
       const mid = Math.floor((left + right) / 2);
-      if (positions[mid] > target) {
+      if (target <= positions[mid]) {
         right = mid;
       } else {
         left = mid + 1;
@@ -71,11 +71,11 @@ const lengthOfLISBinarySearch = (nums) => {
 
   let len = 0;
   for (let num of nums) {
-    const pos = binarySearch(num);
+    const pos = binarySearch(num, len);
     positions[pos] = num;
     if (pos === len) len++;
   }
-
+  
   return len;
 }
 

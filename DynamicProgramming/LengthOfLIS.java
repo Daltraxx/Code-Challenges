@@ -72,7 +72,7 @@ public class LengthOfLIS {
   private int binarySearch(int[] dp, int left, int right, int target) {
     while (left < right) {
       int mid = left + (right - left) / 2;
-      if (dp[mid] < target) {
+      if (target > dp[mid]) {
         left = mid + 1;
       } else {
         right = mid;
