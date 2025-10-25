@@ -63,6 +63,8 @@ public class LengthOfLIS {
         len++;
       }
     }
+
+    System.out.println("DP Array: " + Arrays.toString(dp));
     
     return len;
   }
@@ -77,6 +79,12 @@ public class LengthOfLIS {
       }
     }
     return left;
+  }
+
+  public static void main(String[] args) {
+    LengthOfLIS lis = new LengthOfLIS();
+    int[] nums = {10, 9, 2, 5, 3, 7, 101, 18};
+    System.out.println("Length of LIS (Binary Search): " + lis.lengthOfLISBS(nums)); // Output: 4
   }
 }
 
