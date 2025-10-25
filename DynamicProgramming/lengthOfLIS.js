@@ -59,7 +59,7 @@ const lengthOfLISBinarySearch = (nums) => {
     let right = positions.length;
     while (left < right) {
       const mid = Math.floor((left + right) / 2);
-      if (positions(mid) > target) {
+      if (positions[mid] > target) {
         right = mid;
       } else {
         left = mid + 1;
