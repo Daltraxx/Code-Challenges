@@ -30,15 +30,13 @@ console.log(mostPoints(questions));
 const mostPointsBottomUp = (questions) => {
   const n = questions.length;
   const dp = new Array(n + 1).fill(0);
-  let maxPointsPossible = 0;
   for (let i = n - 1; i >= 0; i--) {
     const [points, questionsToSkip] = questions[i];
     let nextAnswerableQuestion = i + questionsToSkip + 1;
     dp[i] = Math.max(points + dp[Math.min(nextAnswerableQuestion, n)], dp[i + 1]);
-    maxPointsPossible = Math.max(dp[i], maxPointsPossible);
   }
 
-  return maxPointsPossible;
+  return dp[0];
 }
 
 console.log(mostPointsBottomUp(questions));
