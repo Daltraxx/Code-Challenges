@@ -1,11 +1,17 @@
 const mostPoints = (questions) => {
+  const memo = new Array(questions.length).fill(-1);
   const dp = (i) => {
     if (i >= questions.length) {
       return 0;
     }
 
+    if (memo[i] !== -1) {
+      return memo[i];
+    }
+
     const [points, questionsToSkip] = questions[i];
-    return Math.max(points + dp(i + questionsToSkip + 1), dp(i + 1));
+    memo[i] = Math.max(points + dp(i + questionsToSkip + 1), dp(i + 1));
+    return memo[i];
   }
 
   return dp(0);
