@@ -1,11 +1,11 @@
 const mostPoints = (questions) => {
-  const memo = new Array(questions.length).fill(-1);
+  const memo = new Array(questions.length);
   const dp = (i) => {
     if (i >= questions.length) {
       return 0;
     }
 
-    if (memo[i] !== -1) {
+    if (memo[i] !== undefined) {
       return memo[i];
     }
 
