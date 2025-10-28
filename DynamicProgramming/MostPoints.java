@@ -23,7 +23,8 @@ public class MostPoints {
 
     int points = questions[i][0];
     int questionsToSkip = questions[i][1];
-    memo[i] = Math.max(points + dp(i + questionsToSkip + 1), dp(i + 1));
+    int j = i + questionsToSkip + 1;
+    memo[i] = Math.max(points + dp(j), dp(i + 1));
     return memo[i];
   }
 
