@@ -43,3 +43,6 @@ public class MostPoints {
     return dp[0];
   }
 }
+
+// Time Complexity: O(n) where n is the number of questions
+// Space Complexity: O(n) for memoization array and recursion call stack in top-down approach or dp array in bottom-up approach
