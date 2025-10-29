@@ -19,23 +19,23 @@ const climbStairsBacktracking = (n) => {
 // Time O(2^n)
 // Space O(n)
 
-const n = 3;
+const n = 4;
 console.log(climbStairsBacktracking(n));
 
 // TOP-DOWN
 const climbStairs = (n) => {
   const memo = new Array(n + 1);
-  // 1 way to reach first step, 2 ways to reach second step
-  for (let i = 0; i < 3; i++) memo[i] = i;
 
-  const getWaysToReachStep = (step) => {
-    if (memo[step] !== undefined) return memo[step];
+  const getWaysToReachStep = (i) => {
+    if (i > n) return 0;
+    if (i === n) return 1;
 
-    memo[step] = 2 + getWaysToReachStep(n - 2);
-    return memo[step];
+    if (memo[i] !== undefined) return memo[i];
+    memo[i] = getWaysToReachStep(i + 1) + getWaysToReachStep(i + 2);
+    return memo[i];
   };
 
-  return getWaysToReachStep(n);
+  return getWaysToReachStep(0);
 };
 
 console.log(climbStairs(n));
