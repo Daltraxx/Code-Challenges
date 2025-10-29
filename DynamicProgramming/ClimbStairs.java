@@ -32,4 +32,20 @@ public class ClimbStairs {
     }
     return dp[n];
   }
+
+  // CONSTANT SPACE
+  public int climbStairsConstantSpace(int n) {
+    if (n < 3)
+      return n;
+    int downOne = 2;
+    int downTwo = 1;
+    int currentStep = 3; // only initialized to prevent compile error
+    for (int i = 3; i <= n; i++) {
+      currentStep = downOne + downTwo;
+      downTwo = downOne;
+      downOne = currentStep;
+    }
+
+    return currentStep;
+  }
 }
