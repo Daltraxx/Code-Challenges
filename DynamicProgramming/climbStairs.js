@@ -23,6 +23,7 @@ const n = 4;
 console.log(climbStairsBacktracking(n));
 
 // TOP-DOWN
+// Recurrence relation: dp(i) = dp(i - 1) + dp(i - 2)
 const climbStairs = (n) => {
   const memo = new Array(n + 1);
 
@@ -58,3 +59,18 @@ console.log(climbStairsBottomUp(n));
 
 // Time O(n)
 // Space O(n)
+
+const climbStairsConstantSpace = (n) => {
+  let downTwo = 1;
+  let downOne = 2;
+  let currentStep = n <= 2 ? n : undefined;
+  for (let i = 3; i <= n; i++) {
+    currentStep = downOne + downTwo;
+    downTwo = downOne;
+    downOne = currentStep;
+  }
+
+  return currentStep;
+}
+
+console.log(climbStairsConstantSpace(n));
