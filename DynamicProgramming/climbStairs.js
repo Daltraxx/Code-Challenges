@@ -27,15 +27,15 @@ const climbStairs = (n) => {
   const memo = new Array(n + 1);
 
   const getWaysToReachStep = (i) => {
-    if (i > n) return 0;
-    if (i === n) return 1;
+    if (i === 1) return 1;
+    if (i === 2) return 2;
 
     if (memo[i] !== undefined) return memo[i];
-    memo[i] = getWaysToReachStep(i + 1) + getWaysToReachStep(i + 2);
+    memo[i] = getWaysToReachStep(i - 1) + getWaysToReachStep(i - 2);
     return memo[i];
   };
 
-  return getWaysToReachStep(0);
+  return getWaysToReachStep(n);
 };
 
 console.log(climbStairs(n));
