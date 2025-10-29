@@ -16,5 +16,8 @@ const climbStairs = (n) => {
   return ways;
 }
 
+// Time O(2^n)
+// Space O(n)
+
 const n = 3;
 console.log(climbStairs(n));
