@@ -10,11 +10,11 @@ const climbStairsBacktracking = (n) => {
 
     backtrack(step + 1);
     backtrack(step + 2);
-  }
+  };
 
   backtrack(0);
   return ways;
-}
+};
 
 // Time O(2^n)
 // Space O(n)
@@ -24,17 +24,18 @@ console.log(climbStairsBacktracking(n));
 
 // TOP-DOWN
 const climbStairs = (n) => {
-  const getWaysToReachStep = (step) => {
-    if (step === 2) {
-      return 2;
-    } else if (step == 1) {
-      return 1;
-    }
+  const memo = new Array(n + 1);
+  // 1 way to reach first step, 2 ways to reach second step
+  for (let i = 0; i < 3; i++) memo[i] = i;
 
-    return 2 + getWaysToReachStep(n - 2);
-  }
+  const getWaysToReachStep = (step) => {
+    if (memo[step] !== undefined) return memo[step];
+
+    memo[step] = 2 + getWaysToReachStep(n - 2);
+    return memo[step];
+  };
 
   return getWaysToReachStep(n);
-}
+};
 
 console.log(climbStairs(n));
