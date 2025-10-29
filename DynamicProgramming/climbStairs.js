@@ -38,7 +38,23 @@ const climbStairs = (n) => {
   return getWaysToReachStep(0);
 };
 
+console.log(climbStairs(n));
+
 // Time O(n)
 // Space O(n)
 
-console.log(climbStairs(n));
+// BOTTOM-UP
+const climbStairsBottomUp = (n) => {
+  const dp = new Array(n + 1);
+  dp[1] = 1; // one way to get to step 1
+  dp[2] = 2 // two ways to get to step 2
+  for (let i = 3; i < dp.length; i++) {
+    dp[i] = dp[i - 2] + dp[i - 1];
+  }
+  return dp[n];
+}
+
+console.log(climbStairsBottomUp(n));
+
+// Time O(n)
+// Space O(n)
