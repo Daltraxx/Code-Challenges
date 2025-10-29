@@ -62,7 +62,7 @@ console.log(climbStairsBottomUp(n));
 
 const climbStairsConstantSpace = (n) => {
   let downTwo = 1;
-  let downOne = 2;
+  let downOne = 2; // from perspective of being on third step
   let currentStep = n <= 2 ? n : undefined;
   for (let i = 3; i <= n; i++) {
     currentStep = downOne + downTwo;
