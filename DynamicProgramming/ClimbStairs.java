@@ -12,11 +12,24 @@ public class ClimbStairs {
       return 1;
     if (step == 2)
       return 2;
-    
+
     if (memo[step] != 0)
       return memo[step];
-    
+
     memo[step] = getWaysToReachStep(step - 1) + getWaysToReachStep(step - 2);
     return memo[step];
+  }
+  
+  // BOTTOM-UP
+  public int climbStairsBottomUp(int n) {
+    if (n < 3)
+      return n;
+    int[] dp = new int[n + 1];
+    dp[1] = 1;
+    dp[2] = 2;
+    for (int i = 3; i < dp.length; i++) {
+      dp[i] = dp[i - 1] + dp[i - 2];
+    }
+    return dp[n];
   }
 }
