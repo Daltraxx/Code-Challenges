@@ -38,4 +38,7 @@ const climbStairs = (n) => {
   return getWaysToReachStep(0);
 };
 
+// Time O(n)
+// Space O(n)
+
 console.log(climbStairs(n));
