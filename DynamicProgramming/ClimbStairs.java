@@ -19,6 +19,9 @@ public class ClimbStairs {
     memo[step] = getWaysToReachStep(step - 1) + getWaysToReachStep(step - 2);
     return memo[step];
   }
+
+  // Time O(n)
+  // Space O(n)
   
   // BOTTOM-UP
   public int climbStairsBottomUp(int n) {
@@ -32,6 +35,9 @@ public class ClimbStairs {
     }
     return dp[n];
   }
+
+  // Time O(n)
+  // Space O(n)
 
   // CONSTANT SPACE
   public int climbStairsConstantSpace(int n) {
@@ -48,4 +54,7 @@ public class ClimbStairs {
 
     return currentStep;
   }
+
+  // Time O(n)
+  // Space O(1)
 }
