@@ -74,3 +74,6 @@ const climbStairsConstantSpace = (n) => {
 }
 
 console.log(climbStairsConstantSpace(n));
+
+// Time O(n)
+// Space O(1)
