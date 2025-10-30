@@ -23,6 +23,8 @@ const coins = [1, 2, 5],
 console.log(coinChangeBacktracking(coins, amount));
 
 // TOP-DOWN
+// Recurrence relation: dp(amount) = 1 + min(amount - coin)
+// where we try all possible coins and pick the best option
 const coinChange = (coins, amount) => {
   const memo = new Array(amount + 1).fill(0);
   const getMinCoins = (remaining) => {
