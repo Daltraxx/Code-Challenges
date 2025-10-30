@@ -18,13 +18,13 @@ const coinChangeBacktracking = (coins, amount) => {
   return backtrack(0, 0, 0);
 };
 
-const coins = [2],
-  amount = 3;
+const coins = [1, 2, 5],
+  amount = 11;
 console.log(coinChangeBacktracking(coins, amount));
 
 // TOP-DOWN
 const coinChange = (coins, amount) => {
-  const memo = new Array(amount + 1);
+  const memo = new Array(amount + 1).fill(0);
   const getMinCoins = (remaining) => {
     if (remaining < 0) return -1;
     if (remaining === 0) return 0;
@@ -34,14 +34,16 @@ const coinChange = (coins, amount) => {
     let minCoins = Infinity;
     for (let coin of coins) {
       let result = getMinCoins(remaining - coin);
-      if (result >= 0 && result < min) {
+      if (result >= 0 && result < minCoins) {
         minCoins = 1 + result;
       }
     }
 
-    memo[remaining] = min === Infinity ? -1 : minCoins;
+    memo[remaining] = minCoins === Infinity ? -1 : minCoins;
     return memo[remaining];
   }
 
   return getMinCoins(amount);
 }
+
+console.log(coinChange(coins, amount));
