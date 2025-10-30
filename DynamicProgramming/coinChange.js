@@ -1,8 +1,11 @@
 const coinChange = (coins, amount) => {
   coins.sort((a, b) => b - a);
   const backtrack = (i, sum, coinCount) => {
+    if (sum === amount) {
+      return coinCount;
+    }
     for (i; i < coins.length; i++) {
-      if (sum + coins[i] < amount) {
+      if (sum + coins[i] <= amount) {
         let result = backtrack(i, sum + coins[i], coinCount + 1);
         if (result !== -1) return result;
       }
