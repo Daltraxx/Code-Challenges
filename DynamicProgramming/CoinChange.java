@@ -40,10 +40,12 @@ public class CoinChange {
   public int coinChangeBottomUp(int[] coins, int amount) {
     int[] minCoinsNeededForAmount = new int[amount + 1];
     minCoinsNeededForAmount[0] = 0;
+    
     for (int remainingAmount = 1; remainingAmount < minCoinsNeededForAmount.length; remainingAmount++) {
       int minCoinsNeeded = Integer.MAX_VALUE;
       for (int coin : coins) {
-        int minCoinsNeededForPrevAmount = coin <= remainingAmount ? minCoinsNeededForAmount[remainingAmount - coin]
+        int minCoinsNeededForPrevAmount = coin <= remainingAmount
+            ? minCoinsNeededForAmount[remainingAmount - coin]
             : -1;
         if (minCoinsNeededForPrevAmount >= 0)
           minCoinsNeeded = Math.min(1 + minCoinsNeededForPrevAmount, minCoinsNeeded);
