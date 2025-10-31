@@ -3,6 +3,7 @@ public class CoinChange {
   int[] memo;
 
   public int coinChange(int[] coins, int amount) {
+    // TOP-DOWN
     this.coins = coins;
     memo = new int[amount + 1];
     return dp(amount);
@@ -13,14 +14,14 @@ public class CoinChange {
       return 0;
     if (remaining < 0)
       return -1;
-    
+
     if (memo[remaining] != 0)
       return memo[remaining];
 
     int minCoinsNeeded = Integer.MAX_VALUE;
     for (int coin : coins) {
       int result = dp(remaining - coin);
-      if (result >= 0 && result < minCoinsNeeded) 
+      if (result >= 0 && result < minCoinsNeeded)
         minCoinsNeeded = result + 1;
     }
 
@@ -31,5 +32,24 @@ public class CoinChange {
     }
 
     return memo[remaining];
+  }
+  
+  // BOTTOM-UP
+  public int coinChangeBottomUp(int[] coins, int amount) {
+    int[] minCoinsNeededForAmount = new int[amount + 1];
+    minCoinsNeededForAmount[0] = 0;
+    for (int remainingAmount = 1; remainingAmount < minCoinsNeededForAmount.length; remainingAmount++) {
+      int minCoinsNeeded = Integer.MAX_VALUE;
+      for (int coin : coins) {
+        if (remainingAmount - coin >= 0)
+          minCoinsNeeded = Math.min(1 + minCoinsNeededForAmount[remainingAmount - coin], minCoinsNeeded);
+
+      }
+
+      minCoinsNeededForAmount[remainingAmount] = minCoinsNeeded < Integer.MAX_VALUE ? minCoinsNeeded : -1;
+    }
+    
+
+    return minCoinsNeededForAmount[amount];
   }
 }
