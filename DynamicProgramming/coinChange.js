@@ -43,9 +43,38 @@ const coinChange = (coins, amount) => {
 
     memo[remaining] = minCoinsNeeded === Infinity ? -1 : minCoinsNeeded;
     return memo[remaining];
-  }
+  };
 
   return getMinCoinsNeeded(amount);
-}
+};
 
 console.log(coinChange(coins, amount));
+
+// BOTTOM-UP
+const coinChangeBottomUp = (coins, amount) => {
+  const minCoinsNeededForAmount = new Array(amount + 1);
+  minCoinsNeededForAmount[0] = 0;
+  for (
+    let amountRemaining = 1;
+    amountRemaining < minCoinsNeededForAmount.length;
+    amountRemaining++
+  ) {
+    let minCoinsNeeded = Infinity;
+    for (let coin of coins) {
+      const minCoinsNeededForPrevAmount =
+        amountRemaining - coin >= 0
+          ? minCoinsNeededForPrevAmount[amountRemaining - coin]
+          : -1;
+      if (minCoinsNeededForPrevAmount >= 0)
+        minCoinsNeeded = Math.min(
+          minCoinsNeededForPrevAmount + 1,
+          minCoinsNeeded
+        );
+    }
+
+    minCoinsNeededForAmount[amountRemaining] =
+      minCoinsNeeded < Infinity ? minCoinsNeeded : -1;
+  }
+
+  return minCoinsNeededForAmount[amount];
+};
