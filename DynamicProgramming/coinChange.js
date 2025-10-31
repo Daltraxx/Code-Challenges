@@ -27,25 +27,25 @@ console.log(coinChangeBacktracking(coins, amount));
 // where we try all possible coins and pick the best option
 const coinChange = (coins, amount) => {
   const memo = new Array(amount + 1).fill(0);
-  const getMinCoins = (remaining) => {
+  const getMinCoinsNeeded = (remaining) => {
     if (remaining < 0) return -1;
     if (remaining === 0) return 0;
 
     if (memo[remaining] !== 0) return memo[remaining];
 
-    let minCoins = Infinity;
+    let minCoinsNeeded = Infinity;
     for (let coin of coins) {
-      let result = getMinCoins(remaining - coin);
-      if (result >= 0 && result < minCoins) {
-        minCoins = 1 + result;
+      let result = getMinCoinsNeeded(remaining - coin);
+      if (result >= 0 && result < minCoinsNeeded) {
+        minCoinsNeeded = 1 + result;
       }
     }
 
-    memo[remaining] = minCoins === Infinity ? -1 : minCoins;
+    memo[remaining] = minCoinsNeeded === Infinity ? -1 : minCoinsNeeded;
     return memo[remaining];
   }
 
-  return getMinCoins(amount);
+  return getMinCoinsNeeded(amount);
 }
 
 console.log(coinChange(coins, amount));
