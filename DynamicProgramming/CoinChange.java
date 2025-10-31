@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class CoinChange {
   int[] coins;
   int[] memo;
@@ -41,15 +43,15 @@ public class CoinChange {
     for (int remainingAmount = 1; remainingAmount < minCoinsNeededForAmount.length; remainingAmount++) {
       int minCoinsNeeded = Integer.MAX_VALUE;
       for (int coin : coins) {
-        if (remainingAmount - coin >= 0)
-          minCoinsNeeded = Math.min(1 + minCoinsNeededForAmount[remainingAmount - coin], minCoinsNeeded);
-
+        int minCoinsNeededForPrevAmount = coin <= remainingAmount ? minCoinsNeededForAmount[remainingAmount - coin]
+            : -1;
+        if (minCoinsNeededForPrevAmount >= 0)
+          minCoinsNeeded = Math.min(1 + minCoinsNeededForPrevAmount, minCoinsNeeded);
       }
 
       minCoinsNeededForAmount[remainingAmount] = minCoinsNeeded < Integer.MAX_VALUE ? minCoinsNeeded : -1;
     }
     
-
     return minCoinsNeededForAmount[amount];
   }
 }
