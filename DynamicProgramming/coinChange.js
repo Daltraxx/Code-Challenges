@@ -61,13 +61,13 @@ const coinChangeBottomUp = (coins, amount) => {
   ) {
     let minCoinsNeeded = Infinity;
     for (let coin of coins) {
-      const minCoinsNeededForPrevAmount =
+      const prevMinCoinsNeededForAmount =
         amountRemaining - coin >= 0
-          ? minCoinsNeededForPrevAmount[amountRemaining - coin]
+          ? minCoinsNeededForAmount[amountRemaining - coin]
           : -1;
-      if (minCoinsNeededForPrevAmount >= 0)
+      if (prevMinCoinsNeededForAmount >= 0)
         minCoinsNeeded = Math.min(
-          minCoinsNeededForPrevAmount + 1,
+          prevMinCoinsNeededForAmount + 1,
           minCoinsNeeded
         );
     }
