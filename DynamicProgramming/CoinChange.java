@@ -35,12 +35,15 @@ public class CoinChange {
 
     return memo[remaining];
   }
+
+  // Time: O(S * n) where S is the amount and n is the number of coins
+  // Space: O(S) for the memoization array and the recursion stack
   
   // BOTTOM-UP
   public int coinChangeBottomUp(int[] coins, int amount) {
     int[] minCoinsNeededForAmount = new int[amount + 1];
     minCoinsNeededForAmount[0] = 0;
-    
+
     for (int remainingAmount = 1; remainingAmount < minCoinsNeededForAmount.length; remainingAmount++) {
       int minCoinsNeeded = Integer.MAX_VALUE;
       for (int coin : coins) {
@@ -53,7 +56,10 @@ public class CoinChange {
 
       minCoinsNeededForAmount[remainingAmount] = minCoinsNeeded < Integer.MAX_VALUE ? minCoinsNeeded : -1;
     }
-    
+
     return minCoinsNeededForAmount[amount];
   }
+  
+  // Time: O(S * n) where S is the amount and n is the number of coins
+  // Space: O(S) for the dp array
 }

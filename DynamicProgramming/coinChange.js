@@ -48,6 +48,9 @@ const coinChange = (coins, amount) => {
   return getMinCoinsNeeded(amount);
 };
 
+// Time: O(S * n) where S is the amount and n is the number of coins
+// Space: O(S) for the memoization array and the recursion stack
+
 console.log(coinChange(coins, amount));
 
 // BOTTOM-UP
@@ -78,3 +81,6 @@ const coinChangeBottomUp = (coins, amount) => {
 
   return minCoinsNeededForAmount[amount];
 };
+
+// Time: O(S * n) where S is the amount and n is the number of coins
+// Space: O(S) for the dp array
