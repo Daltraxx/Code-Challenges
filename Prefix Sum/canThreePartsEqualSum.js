@@ -9,11 +9,12 @@ const canThreePartsEqualSum = (arr) => {
     if (currSum === target) {
       partitions++;
       currSum = 0;
+      // If get to three the remaining elements must be zeros
       if (partitions === 3) return true;
     }
   }
-  // If get to three the remaining elements must be zeros
-  return partitions > 2;
+  
+  return false;
 };
 
 // Linear time complexity, constant space
