@@ -4,8 +4,8 @@ const canThreePartsEqualSum = (arr) => {
   const target = totalSum / 3;
   let currSum = 0;
   let partitions = 0;
-  for (let i = 0; i < arr.length; i++) {
-    currSum += arr[i];
+  for (let num of arr) {
+    currSum += num;
     if (currSum === target) {
       partitions++;
       currSum = 0;
