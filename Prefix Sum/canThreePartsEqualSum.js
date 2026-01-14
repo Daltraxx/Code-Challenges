@@ -9,11 +9,12 @@ const canThreePartsEqualSum = (arr) => {
     if (currSum === target) {
       partitions++;
       currSum = 0;
+      if (partitions === 3) return true;
     }
   }
-  // Edge cases like an array full of zeros can create more than 3 partitions even after verifying divisible by 3
+  // If get to three the remaining elements must be zeros
   return partitions > 2;
-}
+};
 
 // Linear time complexity, constant space
 
