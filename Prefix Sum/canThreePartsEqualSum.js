@@ -15,5 +15,7 @@ const canThreePartsEqualSum = (arr) => {
   return partitions > 2;
 }
 
+// Linear time complexity, constant space
+
 const arr = [1, -1, 1, -1];
 console.log(canThreePartsEqualSum(arr));
