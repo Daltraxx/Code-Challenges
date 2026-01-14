@@ -9,7 +9,7 @@ const canThreePartsEqualSum = (arr) => {
     if (currSum === target) {
       partitions++;
       currSum = 0;
-      // If get to three the remaining elements must be zeros
+      // If get to three we must be at end of arr or the remaining elements must be zeros
       if (partitions === 3) return true;
     }
   }

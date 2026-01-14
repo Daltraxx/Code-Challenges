@@ -14,7 +14,7 @@ public class CanThreePartsEqualSum {
         parts++;
         currSum = 0;
         if (parts == 3)
-          // If get to three the remaining elements must be zeros
+          // If get to three we must be at end of arr or the remaining elements must be zeros
           return true;
       }
     }
