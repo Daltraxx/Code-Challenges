@@ -1,7 +1,7 @@
 from functools import lru_cache
 from typing import List
 
-class coin_change(object):
+class coin_change_top_down(object):
   def coinChange(self, coins: List[int], amount: int) -> int:
     @lru_cache(None)
     def get_min_coins(amount):
@@ -19,4 +19,19 @@ class coin_change(object):
 # Time complexity: O(S * n) where S is the amount and n is the number of coin denominations.
 # Space complexity: O(S) for the recursion stack and memoization storage.
 
-print(coin_change().coinChange([1, 2, 5], 11))  # Output: 3
+print(coin_change_top_down().coinChange([1, 2, 5], 11))  # Output: 3
+
+class coin_change_bottom_up(object):
+  def coinChange(self, coins: List[int], amount: int) -> int:
+    min_coins_per_amount = [float("inf")] * (amount + 1)
+    min_coins_per_amount[0] = 0
+    for coin in coins:
+      for amount in range(coin, amount + 1):
+        min_coins_per_amount[amount] = min(min_coins_per_amount[amount], min_coins_per_amount[amount - coin] + 1)
+
+    return min_coins_per_amount[amount] if min_coins_per_amount[amount] != float('inf') else -1
+  
+# Time complexity: O(S * n) where S is the amount and n is the number of coin denominations.
+# Space complexity: O(S) for the min_coins_per_amount array. 
+
+print(coin_change_bottom_up().coinChange([1, 2, 5], 11))  # Output: 3
