@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class CoinChange {
   int[] coins;
   int[] memo;
