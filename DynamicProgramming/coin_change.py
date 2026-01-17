@@ -26,8 +26,8 @@ class coin_change_bottom_up(object):
     min_coins_per_amount = [float("inf")] * (amount + 1)
     min_coins_per_amount[0] = 0
     for coin in coins:
-      for amount in range(coin, amount + 1):
-        min_coins_per_amount[amount] = min(min_coins_per_amount[amount], min_coins_per_amount[amount - coin] + 1)
+      for curr_amount in range(coin, amount + 1):
+        min_coins_per_amount[curr_amount] = min(min_coins_per_amount[curr_amount], min_coins_per_amount[curr_amount - coin] + 1)
 
     return min_coins_per_amount[amount] if min_coins_per_amount[amount] != float('inf') else -1
   
