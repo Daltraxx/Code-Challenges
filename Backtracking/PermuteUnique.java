@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 class PermuteUnique {
-  Map<Integer, Integer> counts;
-  List<List<Integer>> permutations;
-  int n;
+  private Map<Integer, Integer> counts;
+  private List<List<Integer>> permutations;
+  private int n;
 
   public List<List<Integer>> permuteUnique(int[] nums) {
     permutations = new ArrayList<>();
@@ -20,7 +20,7 @@ class PermuteUnique {
     return permutations;
   }
 
-  public void backtrack(List<Integer> current) {
+  private void backtrack(List<Integer> current) {
     if (current.size() == n) {
       permutations.add(new ArrayList<>(current));
       return;
