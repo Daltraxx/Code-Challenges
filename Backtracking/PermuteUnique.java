@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class PermuteUnique {
+  Map<Integer, Integer> counts;
+  List<List<Integer>> permutations;
+  int n;
+
+  public List<List<Integer>> permuteUnique(int[] nums) {
+    permutations = new ArrayList<>();
+    counts = new HashMap<>();
+    n = nums.length;
+    for (int num : nums) {
+      counts.merge(num, 1, Integer::sum);
+    }
+
+    backtrack(new ArrayList<Integer>());
+    return permutations;
+  }
+
+  public void backtrack(List<Integer> current) {
+    if (current.size() == n) {
+      permutations.add(new ArrayList<>(current));
+      return;
+    }
+
+    counts.forEach((num, count) -> {
+      if (count > 0) {
+        counts.merge(num, -1, Integer::sum);
+        current.add(num);
+        backtrack(current);
+        current.remove(current.size() - 1);
+        counts.put(num, count);
+      }
+    });
+  }
+}
