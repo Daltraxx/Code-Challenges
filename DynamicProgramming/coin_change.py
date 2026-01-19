@@ -34,4 +34,4 @@ class CoinChangeBottomUp(object):
 # Time complexity: O(S * n) where S is the amount and n is the number of coin denominations.
 # Space complexity: O(S) for the min_coins_per_amount array. 
 
-print(coin_change_bottom_up().coinChange([1, 2, 5], 11))  # Output: 3
+print(CoinChangeBottomUp().coinChange([1, 2, 5], 11))  # Output: 3
