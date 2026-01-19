@@ -4,9 +4,7 @@ class ReversePrefix:
     right = word.find(ch) # -1 if not found
     wordList = list(word)
     while left < right:
-      temp = wordList[left]
-      wordList[left] = wordList[right]
-      wordList[right] = temp
+      wordList[left], wordList[right] = wordList[right], wordList[left]
       left += 1
       right -= 1
     
