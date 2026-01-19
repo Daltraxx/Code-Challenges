@@ -17,3 +17,6 @@ public class ReversePrefix {
     return word;
   }
 }
+
+// Time complexity: O(n) where n is the length of the word.
+// Space complexity: O(n) for the character array used to store the modified word.
