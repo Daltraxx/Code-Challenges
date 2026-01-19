@@ -37,3 +37,6 @@ class PermuteUnique {
     });
   }
 }
+
+// Time Complexity: O(N * N!), where N is the length of the input array nums.
+// Space Complexity: O(N), the space used by the recursion stack and the current permutation list
