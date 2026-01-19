@@ -9,7 +9,7 @@ public class ReversePrefix {
           wordArr[left] = wordArr[right];
           wordArr[right] = temp;
           left++;
-          right++;
+          right--;
         }
         return new String(wordArr);
       }
