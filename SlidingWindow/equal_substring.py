@@ -15,6 +15,9 @@ class EqualSubstring:
   def getCost(a: str, b: str) -> int:
     return abs(ord(a) - ord(b))
   
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+  
 s = "abcd"
 t = "bcdf"
 maxCost = 3

@@ -23,3 +23,6 @@ public class EqualSubstring {
     return Math.abs(unicodeA - unicodeB);
   }
 }
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
