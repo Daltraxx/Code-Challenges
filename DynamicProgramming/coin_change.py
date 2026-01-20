@@ -1,7 +1,7 @@
 from functools import lru_cache
 from typing import List
 
-class CoinChangeTopDown(object):
+class CoinChangeTopDown:
   def coinChange(self, coins: List[int], amount: int) -> int:
     @lru_cache(None)
     def get_min_coins(amount):
@@ -21,7 +21,7 @@ class CoinChangeTopDown(object):
 
 print(CoinChangeTopDown().coinChange([1, 2, 5], 11))  # Output: 3
 
-class CoinChangeBottomUp(object):
+class CoinChangeBottomUp:
   def coinChange(self, coins: List[int], amount: int) -> int:
     min_coins_per_amount = [float("inf")] * (amount + 1)
     min_coins_per_amount[0] = 0
