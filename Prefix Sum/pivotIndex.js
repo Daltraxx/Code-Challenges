@@ -5,7 +5,7 @@ Return the leftmost pivot index.
 If no such index exists, return -1.*/
 
 const pivotIndex = (nums) => {
-  let totalSum = nums.reduce((acc, curr) => acc + curr);
+  let totalSum = nums.reduce((acc, curr) => acc + curr, 0);
   let leftSum = 0;
 
   for (let i = 0; i < nums.length; i++) {
