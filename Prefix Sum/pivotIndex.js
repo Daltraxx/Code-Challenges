@@ -5,24 +5,19 @@ Return the leftmost pivot index.
 If no such index exists, return -1.*/
 
 const pivotIndex = (nums) => {
-    let totalSum = 0;
-    let leftSum = 0;
+  let totalSum = nums.reduce((acc, curr) => acc + curr);
+  let leftSum = 0;
 
-    for (let num of nums) {
-        totalSum += num;
-    }
+  for (let i = 0; i < nums.length; i++) {
+    const rightSum = totalSum - nums[i] - leftSum;
+    if (leftSum === rightSum) return i;
 
+    leftSum += nums[i];
+  }
 
-    //rightSum would = totalSum - leftSum - nums[i]
-    for (let i = 0; i < nums.length; i++) {
-        if (leftSum === totalSum - leftSum - nums[i]) return i;
+  return -1;
+};
 
-        leftSum += nums[i];
-    }
-
-    return -1;
-}
-
-const nums = [1,7,3,6,5,6];
+const nums = [1, 7, 3, 6, 5, 6];
 
 console.log(pivotIndex(nums));
