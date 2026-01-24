@@ -4,9 +4,9 @@ class EqualSubstring:
         maxLength = 0
         left = 0
         for right in range(len(s)):
-            currentCost += self.getCost(s[right], t[right])
+            currentCost += self.get_cost(s[right], t[right])
             while currentCost > maxCost:
-                currentCost -= self.getCost(s[left], t[left])
+                currentCost -= self.get_cost(s[left], t[left])
                 left += 1
             maxLength = max(right - left + 1, maxLength)
         return maxLength
