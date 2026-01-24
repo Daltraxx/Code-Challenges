@@ -15,3 +15,6 @@ public class NumArray {
     return prefixSumArr[right] - leftSum;
   }
 }
+
+// Time Complexity: O(n) for constructor, O(1) for sumRange
+// Space Complexity: O(n)
