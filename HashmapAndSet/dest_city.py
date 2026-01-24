@@ -12,7 +12,7 @@ class DestCity:
         return None
 
 # Time complexity: O(n) where n is the number of paths.
-# Space complexity: O(n) for the neighbors dictionary.
+# Space complexity: O(n) for the origins set.
 
 paths = [["B", "C"], ["D", "B"], ["C", "A"]]
 print(DestCity().dest_city(paths))
