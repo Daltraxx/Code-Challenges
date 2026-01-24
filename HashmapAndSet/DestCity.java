@@ -14,7 +14,7 @@ public class DestCity {
         return edge.get(1);
     }
     
-    return "";
+    return null;
   }
 }
 

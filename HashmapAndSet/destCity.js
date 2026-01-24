@@ -7,6 +7,8 @@ const destCity = (paths) => {
   for (let [origin, destination] of paths) {
     if (!hasOutgoing.has(destination)) return destination;
   }
+
+  return null; // In case there is no destination city
 };
 
 // Time Complexity: O(n) where n is the number of paths

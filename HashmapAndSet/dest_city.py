@@ -9,7 +9,7 @@ class DestCity:
         for origin, destination in paths:
             if destination not in hasOutgoing:
                 return destination
-
+        return None
 
 # Time complexity: O(n) where n is the number of paths.
 # Space complexity: O(n) for the neighbors dictionary.
