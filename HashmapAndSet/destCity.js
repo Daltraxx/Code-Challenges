@@ -1,11 +1,11 @@
 const destCity = (paths) => {
-  const hasOutgoing = new Set();
-  for (let [origin, destination] of paths) {
-    hasOutgoing.add(origin);
+  const origins = new Set();
+  for (let [origin] of paths) {
+    origins.add(origin);
   }
 
-  for (let [origin, destination] of paths) {
-    if (!hasOutgoing.has(destination)) return destination;
+  for (let [_, destination] of paths) {
+    if (!origins.has(destination)) return destination;
   }
 
   return null; // In case there is no destination city
