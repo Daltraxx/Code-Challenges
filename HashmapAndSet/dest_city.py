@@ -3,9 +3,7 @@ from typing import List, Optional
 
 class DestCity:
     def dest_city(self, paths: List[List[str]]) -> Optional[str]:
-        origins = set()
-        for origin, _ in paths:
-            origins.add(origin)
+        origins = {origin for origin, _ in paths}
         for _, destination in paths:
             if destination not in origins:
                 return destination
