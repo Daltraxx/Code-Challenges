@@ -1,15 +1,16 @@
-from typing import List
+from typing import List, Optional
 
 
 class DestCity:
-    def dest_city(self, paths: List[List[str]]) -> str:
-        hasOutgoing = set()
+    def dest_city(self, paths: List[List[str]]) -> Optional[str]:
+        origins = set()
         for origin, destination in paths:
-            hasOutgoing.add(origin)
+            origins.add(origin)
         for origin, destination in paths:
-            if destination not in hasOutgoing:
+            if destination not in origins:
                 return destination
         return None
+
 
 # Time complexity: O(n) where n is the number of paths.
 # Space complexity: O(n) for the origins set.
