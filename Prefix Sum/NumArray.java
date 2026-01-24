@@ -1,5 +1,5 @@
 public class NumArray {
-  int[] prefixSumArr;
+  private int[] prefixSumArr;
 
   public NumArray(int[] nums) {
     this.prefixSumArr = new int[nums.length];
