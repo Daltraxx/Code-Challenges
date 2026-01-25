@@ -7,27 +7,27 @@ class CheckInclusion:
         chars = Counter(s1)
         left = 0
         for right in range(len(s2)):
-            rightChar = s2[right]
-            if rightChar in chars and chars.get(rightChar) > 0:
-                chars[rightChar] -= 1
+            right_char = s2[right]
+            if right_char in chars and chars.get(right_char) > 0:
+                chars[right_char] -= 1
                 total -= 1
                 if total == 0:
                     return True
-            elif rightChar in chars and chars.get(rightChar) == 0:
-                chars[rightChar] -= 1
+            elif right_char in chars and chars.get(right_char) == 0:
+                chars[right_char] -= 1
                 total -= 1
-                while chars.get(rightChar) < 0:
-                    leftChar = s2[left]
-                    if leftChar in chars:
-                        chars[leftChar] += 1
+                while chars.get(right_char) < 0:
+                    left_char = s2[left]
+                    if left_char in chars:
+                        chars[left_char] += 1
                         total += 1
                     left += 1
             else:
                 total = len(s1)
                 while left <= right:
-                    leftChar = s2[left]
-                    if leftChar in chars:
-                        chars[leftChar] += 1
+                    left_char = s2[left]
+                    if left_char in chars:
+                        chars[left_char] += 1
                     left += 1
         return False
 
