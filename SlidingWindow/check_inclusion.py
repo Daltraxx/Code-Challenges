@@ -63,6 +63,8 @@ class CheckInclusion:
             
         return False
 
+# Time complexity: O(N) where N is the length of s2.
+# Space complexity: O(1) since the character count map has a fixed size of 26 for lowercase letters.
 
 s1 = "adc"
 s2 = "dcda"
