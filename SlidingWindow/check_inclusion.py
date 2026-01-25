@@ -14,7 +14,9 @@ class CheckInclusion:
                 if total == 0:
                     return True
             elif rightChar in chars and chars.get(rightChar) == 0:
-                while chars.get(rightChar) == 0:
+                chars[rightChar] -= 1
+                total -= 1
+                while chars.get(rightChar) < 0:
                     leftChar = s2[left]
                     if leftChar in chars:
                         chars[leftChar] += 1
@@ -25,11 +27,11 @@ class CheckInclusion:
                 while left <= right:
                     leftChar = s2[left]
                     if leftChar in chars:
-                      chars[leftChar] += 1
+                        chars[leftChar] += 1
                     left += 1
         return False
 
 
-s1 = "aba"
-s2 = "abbaoaaboo"
+s1 = "adc"
+s2 = "dcda"
 print(CheckInclusion().check_inclusion(s1, s2))
