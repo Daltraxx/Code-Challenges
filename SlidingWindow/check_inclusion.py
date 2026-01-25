@@ -60,8 +60,9 @@ class CheckInclusion:
 
             if resolved_chars == required_chars:
                 return True
-            
+
         return False
+
 
 # Time complexity: O(N) where N is the length of s2.
 # Space complexity: O(1) since the character count map has a fixed size of 26 for lowercase letters.
