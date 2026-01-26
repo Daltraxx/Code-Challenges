@@ -1,6 +1,5 @@
 const checkInclusion = (s1, s2) => {
   const reqCharCounts = new Map();
-  const reqCharsInWindow = new Map();
   let distinctCharsRemaining = 0;
 
   for (let char of s1) {
@@ -11,18 +10,18 @@ const checkInclusion = (s1, s2) => {
   let left = 0;
   for (let right = 0; right < s2.length; right++) {
     const rightChar = s2[right];
-    if (reqCharCounts.get(rightChar)) {
-      reqCharsInWindow.set(rightChar, (reqCharsInWindow.get(rightChar) || 0) + 1);
-      if (reqCharCounts.get(rightChar) === reqCharsInWindow.get(rightChar))
+    if (reqCharCounts.has(rightChar)) {
+      reqCharCounts.set(rightChar, reqCharCounts.get(rightChar) - 1);
+      if (reqCharCounts.get(rightChar) === 0)
         distinctCharsRemaining--;
     }
 
     // Maintain valid window size
     if (right - left + 1 > s1.length) {
       const leftChar = s2[left];
-      if (reqCharsInWindow.has(leftChar)) {
-        reqCharsInWindow.set(leftChar, reqCharsInWindow.get(leftChar) - 1);
-        if (reqCharsInWindow.get(leftChar) === reqCharCounts.get(leftChar) - 1)
+      if (reqCharCounts.has(leftChar)) {
+        reqCharCounts.set(leftChar, reqCharCounts.get(leftChar) + 1);
+        if (reqCharCounts.get(leftChar) === 1)
           distinctCharsRemaining++;
       }
       left++;
