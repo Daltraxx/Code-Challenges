@@ -2,6 +2,9 @@ package SlidingWindow;
 
 public class CheckInclusion {
   public boolean checkInclusion(String s1, String s2) {
+    if (s1.length() > s2.length())
+      return false;
+    
     int[] reqCharCounts = new int[26];
     int[] windowCharCounts = new int[26];
     int reqCharsRemaining = 0;

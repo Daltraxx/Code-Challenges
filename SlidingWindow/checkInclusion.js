@@ -1,4 +1,6 @@
 const checkInclusion = (s1, s2) => {
+  if (s1.length > s2.length) return false;
+  
   const reqCharCounts = new Map();
   let distinctCharsRemaining = 0;
 
@@ -12,8 +14,7 @@ const checkInclusion = (s1, s2) => {
     const rightChar = s2[right];
     if (reqCharCounts.has(rightChar)) {
       reqCharCounts.set(rightChar, reqCharCounts.get(rightChar) - 1);
-      if (reqCharCounts.get(rightChar) === 0)
-        distinctCharsRemaining--;
+      if (reqCharCounts.get(rightChar) === 0) distinctCharsRemaining--;
     }
 
     // Maintain valid window size
@@ -21,8 +22,7 @@ const checkInclusion = (s1, s2) => {
       const leftChar = s2[left];
       if (reqCharCounts.has(leftChar)) {
         reqCharCounts.set(leftChar, reqCharCounts.get(leftChar) + 1);
-        if (reqCharCounts.get(leftChar) === 1)
-          distinctCharsRemaining++;
+        if (reqCharCounts.get(leftChar) === 1) distinctCharsRemaining++;
       }
       left++;
     }
@@ -34,5 +34,5 @@ const checkInclusion = (s1, s2) => {
 };
 
 // Time Complexity: O(n + m) where n and m are lengths of s1 and s2 respectively
-// Space Complexity: O(1) if we consider the character set size to be fixed (e.g., lowercase English letters), 
+// Space Complexity: O(1) if we consider the character set size to be fixed (e.g., lowercase English letters),
 //                   or O(k) where k is the number of unique characters in s1
