@@ -32,7 +32,7 @@ class CheckInclusion:
 
 
 # Time complexity: O(N + M) where N is the length of s2 and M is the length of s1. M is included due to the initial population of the character count map.
-# Space complexity: O(1) since the character count maps will have at most 26 entries for lowercase English letters.
+# Space complexity: O(1) if limited to lowercase English letters. Otherwise, O(M) for the character count map.
 
 s1 = "adc"
 s2 = "dcda"
