@@ -38,14 +38,13 @@ class CheckInclusion:
         chars_needed = Counter(s1)
         window_chars = Counter()
         required_chars = len(chars_needed)
-        resolved_chars = 0
 
         left = 0
         for right, char in enumerate(s2):
             window_chars[char] += 1
 
             if char in chars_needed and window_chars[char] == chars_needed[char]:
-                resolved_chars += 1
+                required_chars -= 1
 
             # maintain fixed window
             if right - left + 1 > len(s1):
@@ -54,11 +53,11 @@ class CheckInclusion:
                     left_char in chars_needed
                     and window_chars[left_char] == chars_needed[left_char]
                 ):
-                    resolved_chars -= 1
+                    required_chars += 1
                 window_chars[left_char] -= 1
                 left += 1
 
-            if resolved_chars == required_chars:
+            if required_chars == 0:
                 return True
 
         return False
