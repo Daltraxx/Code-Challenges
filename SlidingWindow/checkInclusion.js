@@ -32,3 +32,7 @@ const checkInclusion = (s1, s2) => {
 
   return false;
 };
+
+// Time Complexity: O(n + m) where n and m are lengths of s1 and s2 respectively
+// Space Complexity: O(1) if we consider the character set size to be fixed (e.g., lowercase English letters), 
+//                   or O(k) where k is the number of unique characters in s1
