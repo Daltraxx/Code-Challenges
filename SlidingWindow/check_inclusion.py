@@ -3,35 +3,6 @@ from collections import Counter
 
 class CheckInclusion:
     def check_inclusion(self, s1: str, s2: str) -> bool:
-        total = len(s1)
-        chars = Counter(s1)
-        left = 0
-        for right in range(len(s2)):
-            right_char = s2[right]
-            if right_char in chars and chars.get(right_char) > 0:
-                chars[right_char] -= 1
-                total -= 1
-                if total == 0:
-                    return True
-            elif right_char in chars and chars.get(right_char) == 0:
-                chars[right_char] -= 1
-                total -= 1
-                while chars.get(right_char) < 0:
-                    left_char = s2[left]
-                    if left_char in chars:
-                        chars[left_char] += 1
-                        total += 1
-                    left += 1
-            else:
-                total = len(s1)
-                while left <= right:
-                    left_char = s2[left]
-                    if left_char in chars:
-                        chars[left_char] += 1
-                    left += 1
-        return False
-
-    def check_inclusion_improved(self, s1: str, s2: str) -> bool:
         if len(s1) > len(s2):
             return False
 
