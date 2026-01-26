@@ -15,23 +15,24 @@ public class CheckInclusion {
 
     int left = 0;
     for (int right = 0; right < s2.length(); right++) {
-      int charIndex = getCharIndex(s2.charAt(right));
-      windowCharCounts[charIndex]++;
-      if (windowCharCounts[charIndex] == reqCharCounts[charIndex])
+      int rightCharIndex = getCharIndex(s2.charAt(right));
+      windowCharCounts[rightCharIndex]++;
+      if (windowCharCounts[rightCharIndex] == reqCharCounts[rightCharIndex])
         reqCharsRemaining--;
-
-      if (reqCharsRemaining == 0)
-        return true;
 
       // Maintain window size
       if (right - left + 1 > s1.length()) {
-        charIndex = getCharIndex(s2.charAt(left));
-        windowCharCounts[charIndex]--;
-        if (windowCharCounts[charIndex] == reqCharCounts[charIndex] - 1)
+        int leftCharIndex = getCharIndex(s2.charAt(left));
+        if (reqCharCounts[leftCharIndex] > 0 && windowCharCounts[leftCharIndex] == reqCharCounts[leftCharIndex])
           reqCharsRemaining++;
+        windowCharCounts[leftCharIndex]--;
+        left++;
       }
+
+      if (reqCharsRemaining == 0)
+        return true;
     }
-    
+
     return false;
   }
 
@@ -39,3 +40,6 @@ public class CheckInclusion {
     return letter - 'a';
   }
 }
+
+  // Time complexity: O(N + M) where N is the length of s2 and M is the length of s1. M is included due to the initial population of the character count array.
+  // Space complexity: O(1) since the character count arrays have a fixed size of 26 for lowercase letters.
