@@ -16,7 +16,8 @@ class CloseStrings:
 
         return sorted(charCounts1.values()) == sorted(charCounts2.values())
 
-
+# Time complexity: O(n), where n is the length of the strings. Sorting the frequency counts takes O(1) time since there are at most 26 unique characters.
+# Space complexity: O(1), since the space used for character sets and frequency counts is bounded by the number of unique characters (at most 26 for lowercase English letters).
 word1 = "cabbba"
 word2 = "abcccc"
 print(CloseStrings().close_strings(word1, word2))
