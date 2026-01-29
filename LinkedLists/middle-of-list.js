@@ -1,7 +1,6 @@
 /*Given the head of a singly linked list, return the middle node of the linked list.
 If there are two middle nodes, return the second middle node.*/
 
-
 /**
  * Definition for singly-linked list.
  * function ListNode(val, next) {
@@ -11,15 +10,16 @@ If there are two middle nodes, return the second middle node.*/
  */
 
 const middleNode = (head) => {
-    let fast = head, slow = head;
+    let fast = head;
+    let slow = head;
 
-    while (fast && fast.next) {
-        slow = slow.next;
-        fast = fast.next.next;
-    }
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
 
-    return slow;
-}
+  return slow;
+};
 
-/*Time Complexity: O(N), where N is the number of nodes in the given list.
-Space Complexity: O(1), the space used by slow and fast.*/
+// Time Complexity: O(n) - We traverse the linked list once.
+// Space Complexity: O(1) - We use only a constant amount of extra space.
