@@ -6,6 +6,7 @@ class SwapPairs:
         if not head or not head.next:
             return head
 
+        # The new head will always be the second node
         newHead = head.next
         prev = None
         current = head
