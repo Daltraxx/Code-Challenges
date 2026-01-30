@@ -11,21 +11,18 @@ Return the linked list sorted as well.*/
  */
 
 const deleteDuplicates = (head) => {
-    let current = head;
+  let current = head;
 
-    while (current && current.next) {
-        if (current.val === current.next.val) {
-            current.next = current.next.next;
-        } else {
-            current = current.next;
-        }
+  while (current && current.next) {
+    if (current.val === current.next.val) {
+      current.next = current.next.next;
+    } else {
+      current = current.next;
     }
+  }
 
-    return head;
-}
+  return head;
+};
 
-/*Time complexity : O(n). Because each node in the list is checked exactly once to determine if it is a duplicate or not, 
-the total run time is O(n), 
-where n is the number of nodes in the list.
-
-Space complexity : O(1). No additional space is used.*/
+// Time Complexity: O(n)
+// Space Complexity: O(1)
