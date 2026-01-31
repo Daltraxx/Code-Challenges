@@ -14,18 +14,15 @@ class PairSum:
         # Reverse back half of list
         prev = None
         while slow:
-            next = slow.next
+            next_node = slow.next
             slow.next = prev
             prev = slow
-            # Prevent moving slow to next node if next is None to avoid losing reference
-            if not next:
-                break
-            slow = next
+            slow = next_node
 
         # Find max sum
         node_a = head
-        node_b = slow
-        max_sum = float("-inf")
+        node_b = prev
+        max_sum = 0
 
         while node_b:
             max_sum = max(node_a.val + node_b.val, max_sum)
