@@ -2,6 +2,10 @@ package LinkedLists;
 
 public class ReverseBetween {
   public ListNode reverseBetween(ListNode head, int left, int right) {
+    if (head == null || left == right) {
+      return head;
+    }
+    
     // Find node at left position (1-indexed)
     ListNode current = head;
     ListNode prevLeft = null;

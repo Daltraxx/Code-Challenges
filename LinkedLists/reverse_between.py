@@ -3,6 +3,9 @@ from list_node import ListNode
 
 class ReverseBetween:
     def reverse_between(self, head: ListNode, left: int, right: int) -> ListNode:
+        if not head or left == right:
+            return head
+
         # Find node at left position (1-indexed)
         current = head
         left_prev = None
