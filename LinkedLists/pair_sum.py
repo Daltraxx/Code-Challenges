@@ -20,14 +20,14 @@ class PairSum:
             slow = next_node
 
         # Find max sum
-        node_a = head
-        node_b = prev
+        left_twin = head
+        right_twin = prev
         max_sum = 0
 
-        while node_b:
-            max_sum = max(node_a.val + node_b.val, max_sum)
-            node_a = node_a.next
-            node_b = node_b.next
+        while right_twin:
+            max_sum = max(left_twin.val + right_twin.val, max_sum)
+            left_twin = left_twin.next
+            right_twin = right_twin.next
 
         return max_sum
 
