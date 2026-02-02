@@ -13,7 +13,7 @@ public class ReverseBetween {
     // Perform reversal
     ListNode reversedTail = current;
     ListNode prevNode = null;
-    for (int i = left; i < right + 1; i++) {
+    for (int i = left; i <= right; i++) {
       ListNode nextNode = current.next;
       current.next = prevNode;
       prevNode = current;

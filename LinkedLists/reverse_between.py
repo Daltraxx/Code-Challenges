@@ -13,7 +13,7 @@ class ReverseBetween:
         # Reverse nodes in given range
         prev = None
         new_tail = current
-        for _ in range(right - left + 1):
+        for _ in range(left, right + 1):
             next_node = current.next
             current.next = prev
             prev = current
