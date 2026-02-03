@@ -25,3 +25,6 @@ public class SwapNodes {
     return head;
   }
 }
+
+// Time Complexity: O(N) where N is the number of nodes in the linked list
+// Space Complexity: O(1)
