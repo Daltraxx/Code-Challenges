@@ -8,39 +8,47 @@ class ReverseEvenLengthGroups:
     ) -> Optional[ListNode]:
         nodes_in_current_group = 0
         current_group_length = 1
+        # No need for dummy node since head is never reversed
         fast = head
         slow = head
         while fast:
             nodes_in_current_group += 1
+            # If end of group or end of list
             if nodes_in_current_group == current_group_length or not fast.next:
                 if nodes_in_current_group % 2 == 0:
-                    # Get ready to reverse
+                    # Capture boundaries and prepare for reversal
                     left_connection = slow
                     right_connection = fast.next
-                    slow = slow.next
-                    # Current node is reversed tail
-                    reversed_tail = slow
+                    current = slow.next
+                    reversed_head = fast
+                    reversed_tail = current
+                    # Set prev to right connection since it will be the new next for the tail
                     prev = right_connection
+
                     for _ in range(nodes_in_current_group):
-                        next_node = slow.next
-                        slow.next = prev
-                        prev = slow
-                        slow = next_node
-                    # Prev points to reversed head
-                    left_connection.next = prev
-                    # Set slow pointer to one node back to preserve connection if needed
+                        next_node = current.next
+                        current.next = prev
+                        prev = current
+                        current = next_node
+
+                    # Connect reversed group head back to list (tail connected in first iteration)
+                    left_connection.next = reversed_head
+
+                    # Prepare slow and fast pointers for next group
                     slow = reversed_tail
-                    # Prepare fast pointer to traverse into next group
                     fast = reversed_tail
                 else:
+                    # Move slow pointer to node before next group that could be reversed
                     slow = fast
 
+                # Reset for next group
                 nodes_in_current_group = 0
                 current_group_length += 1
 
             fast = fast.next
 
         return head
+
 
 # Time Complexity: O(N)
 # Space Complexity: O(1)
