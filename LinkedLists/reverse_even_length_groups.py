@@ -14,7 +14,7 @@ class ReverseEvenLengthGroups:
             nodes_in_current_group += 1
             if nodes_in_current_group == current_group_length or not fast.next:
                 if nodes_in_current_group % 2 == 0:
-                    # Perform reversals
+                    # Get ready to reverse
                     left_connection = slow
                     right_connection = fast.next
                     slow = slow.next
@@ -22,10 +22,10 @@ class ReverseEvenLengthGroups:
                     reversed_tail = slow
                     prev = right_connection
                     for _ in range(nodes_in_current_group):
-                        nextNode = slow.next
+                        next_node = slow.next
                         slow.next = prev
                         prev = slow
-                        slow = nextNode
+                        slow = next_node
                     # Prev points to reversed head
                     left_connection.next = prev
                     # Set slow pointer to one node back to preserve connection if needed
@@ -41,3 +41,6 @@ class ReverseEvenLengthGroups:
             fast = fast.next
 
         return head
+
+# Time Complexity: O(N)
+# Space Complexity: O(1)
