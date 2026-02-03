@@ -17,9 +17,13 @@ class SwapNodes:
             right_node = right_node.next
 
         # Swap values
-        kth_from_beginning.val, kth_from_end.val = kth_from_end.val, kth_from_beginning.val
+        kth_from_beginning.val, kth_from_end.val = (
+            kth_from_end.val,
+            kth_from_beginning.val,
+        )
 
         return head
+
 
 # Time Complexity: O(N)
 # Space Complexity: O(1)
