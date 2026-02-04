@@ -2,14 +2,17 @@ package LinkedLists;
 
 public class ReverseEvenLengthGroups {
   public ListNode reverseEvenLengthGroups(ListNode head) {
-    ListNode scout = head.next;
     ListNode leftConnection = head;
+    // Start from second node since head is not null and first group is never reversed
+    ListNode scout = head.next;
     int groupLength = 2;
     int groupCount = 0;
     while (scout != null) {
       groupCount++;
+      // Evaluate need to reverse when we reach the end of the group or the end of the list
       if (groupCount == groupLength || scout.next == null) {
         if (groupCount % 2 == 0) {
+          // Prepare connections and reverse the group
           ListNode current = leftConnection.next;
           ListNode reversedTail = current;
           ListNode reversedHead = scout;
@@ -21,15 +24,19 @@ public class ReverseEvenLengthGroups {
             prev = current;
             current = nextNode;
           }
+          // Update left connection and scout to the new tail of the reversed group
           leftConnection = reversedTail;
           scout = reversedTail;
         } else {
+          // No reversal, just move the left connection to the end of the current group
           leftConnection = scout;
         }
+        // Reset for the next group
         groupCount = 0;
         groupLength++;
       }
 
+      // Move scout to the next node
       scout = scout.next;
     }
 
