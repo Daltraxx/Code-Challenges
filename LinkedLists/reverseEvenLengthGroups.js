@@ -15,7 +15,7 @@ const reverseEvenLengthGroups = (head) => {
         let reversedHead = scout;
         let prev = scout.next;
         leftConnection.next = reversedHead;
-        while (current !== scout.next) {
+        for (let i = 0; i < groupCount; i++) {
           let nextNode = current.next;
           current.next = prev;
           prev = current;
