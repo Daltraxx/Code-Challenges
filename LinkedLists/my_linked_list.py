@@ -29,15 +29,12 @@ class MyLinkedList:
         if index < 0 or index > self.size:
             return
         self.size += 1
-        new_node = ListNode(val)
         sentinel = ListNode(0, self.head)
         prev = sentinel
-        current = self.head
         for _ in range(index):
-            prev = current
-            current = current.next
+            prev = prev.next
+        new_node = ListNode(val, prev.next)
         prev.next = new_node
-        new_node.next = current
         # Update head if necessary
         self.head = sentinel.next
 
