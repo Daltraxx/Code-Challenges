@@ -29,15 +29,15 @@ class MyLinkedList:
         if index < 0 or index > self.size:
             return
         self.size += 1
-        newNode = ListNode(val)
+        new_node = ListNode(val)
         sentinel = ListNode(0, self.head)
         prev = sentinel
         current = self.head
         for _ in range(index):
             prev = current
             current = current.next
-        prev.next = newNode
-        newNode.next = current
+        prev.next = new_node
+        new_node.next = current
         # Update head if necessary
         self.head = sentinel.next
 
@@ -56,12 +56,12 @@ class MyLinkedList:
 
     def printList(self) -> None:
         current = self.head
-        nodeList = []
+        node_list = []
         while current:
-            nodeList.append(f"{current.val} -> ")
+            node_list.append(f"{current.val} -> ")
             current = current.next
-        nodeList.append("None")
-        print("".join(nodeList))
+        node_list.append("None")
+        print("".join(node_list))
 
 
 linkedList = MyLinkedList()
