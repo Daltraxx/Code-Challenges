@@ -47,12 +47,11 @@ class MyLinkedList:
         self.size -= 1
         sentinel = ListNode(0, self.head)
         prev = sentinel
-        current = self.head
         for _ in range(index):
-            prev = current
-            current = current.next
+            prev = prev.next
 
-        prev.next = current.next
+        prev.next = prev.next.next
+        # Update head if necessary
         self.head = sentinel.next
 
     def printList(self) -> None:
@@ -74,4 +73,4 @@ linkedList.addAtIndex(1, 2)  # linked list becomes 1->2->3
 linkedList.printList()  # 1->2->3->None
 print(linkedList.get(1))  # return 2
 linkedList.deleteAtIndex(1)  # now the linked list is 1->3
-print(linkedList.get(1))  # return 
+print(linkedList.get(1))  # return
