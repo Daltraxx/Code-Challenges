@@ -16,5 +16,6 @@ class RemoveElements:
 
         return sentinel.next
 
+
 # Time Complexity: O(N)
 # Space Complexity: O(1)
