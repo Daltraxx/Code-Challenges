@@ -42,7 +42,7 @@ class MyLinkedList:
         self.head = sentinel.next
 
     def deleteAtIndex(self, index: int) -> None:
-        if index >= self.size or index < 0:
+        if index < 0 or index >= self.size:
             return
         self.size -= 1
         sentinel = ListNode(0, self.head)
