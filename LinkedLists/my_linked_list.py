@@ -12,7 +12,7 @@ class MyLinkedList:
                 current = current.next
 
     def get(self, index: int) -> int:
-        if index >= self.size:
+        if index >= self.size or index < 0:
             return -1
         current = self.head
         for _ in range(index):
