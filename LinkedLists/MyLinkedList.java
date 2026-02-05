@@ -49,12 +49,10 @@ public class MyLinkedList {
 
     ListNode sentinel = new ListNode(0, this.head);
     ListNode prev = sentinel;
-    ListNode current = this.head;
     for (int i = 0; i < index; i++) {
-      prev = current;
-      current = current.next;
+      prev = prev.next;
     }
-    ListNode newNode = new ListNode(val, current);
+    ListNode newNode = new ListNode(val, prev.next);
     prev.next = newNode;
     // Update head if necessary
     this.head = sentinel.next;
