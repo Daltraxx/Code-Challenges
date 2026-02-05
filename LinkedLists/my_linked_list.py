@@ -12,7 +12,7 @@ class MyLinkedList:
                 current = current.next
 
     def get(self, index: int) -> int:
-        if index >= self.size or index < 0:
+        if index < 0 or index >= self.size:
             return -1
         current = self.head
         for _ in range(index):
@@ -20,23 +20,13 @@ class MyLinkedList:
         return current.val
 
     def addAtHead(self, val: int) -> None:
-        self.size += 1
-        newHead = ListNode(val, self.head)
-        self.head = newHead
+        self.addAtIndex(0, val)
 
     def addAtTail(self, val: int) -> None:
-        self.size += 1
-        newNode = ListNode(val)
-        sentinel = ListNode(0, self.head)
-        current = sentinel
-        while current.next:
-            current = current.next
-        current.next = newNode
-        # Update head if necessary
-        self.head = sentinel.next
+        self.addAtIndex(self.size, val)
 
     def addAtIndex(self, index: int, val: int) -> None:
-        if index > self.size or index < 0:
+        if index < 0 or index > self.size:
             return
         self.size += 1
         newNode = ListNode(val)
