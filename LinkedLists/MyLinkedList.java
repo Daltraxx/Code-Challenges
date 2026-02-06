@@ -12,12 +12,10 @@ public class MyLinkedList {
   public MyLinkedList(ListNode head) {
     this.head = head;
     size = 0;
-    if (head != null) {
-      ListNode current = head;
-      while (current != null) {
-        size++;
-        current = current.next;
-      }
+    ListNode current = head;
+    while (current != null) {
+      size++;
+      current = current.next;
     }
   }
 
