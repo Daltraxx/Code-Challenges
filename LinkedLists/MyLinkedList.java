@@ -1,17 +1,17 @@
 package LinkedLists;
 
 public class MyLinkedList {
-  ListNode head;
-  int size;
+  private ListNode head;
+  private int size;
 
   public MyLinkedList() {
-    this.head = null;
-    this.size = 0;
+    head = null;
+    size = 0;
   }
 
   public MyLinkedList(ListNode head) {
     this.head = head;
-    this.size = 0;
+    size = 0;
     if (head != null) {
       ListNode current = head;
       while (current != null) {
@@ -22,11 +22,11 @@ public class MyLinkedList {
   }
 
   public int get(int index) {
-    if (index < 0 || index >= this.size) {
+    if (index < 0 || index >= size) {
       return -1;
     }
 
-    ListNode current = this.head;
+    ListNode current = head;
     for (int i = 0; i < index; i++) {
       current = current.next;
     }
@@ -38,16 +38,15 @@ public class MyLinkedList {
   }
 
   public void addAtTail(int val) {
-    addAtIndex(this.size, val);
+    addAtIndex(size, val);
   }
 
   public void addAtIndex(int index, int val) {
-    if (index < 0 || index > this.size) {
+    if (index < 0 || index > size) {
       return;
     }
-    this.size++;
 
-    ListNode sentinel = new ListNode(0, this.head);
+    ListNode sentinel = new ListNode(0, head);
     ListNode prev = sentinel;
     for (int i = 0; i < index; i++) {
       prev = prev.next;
@@ -55,22 +54,23 @@ public class MyLinkedList {
     ListNode newNode = new ListNode(val, prev.next);
     prev.next = newNode;
     // Update head if necessary
-    this.head = sentinel.next;
+    head = sentinel.next;
+    size++;
   }
 
   public void deleteAtIndex(int index) {
-    if (index < 0 || index >= this.size) {
+    if (index < 0 || index >= size) {
       return;
     }
-    this.size--;
 
-    ListNode sentinel = new ListNode(0, this.head);
+    ListNode sentinel = new ListNode(0, head);
     ListNode prev = sentinel;
     for (int i = 0; i < index; i++) {
       prev = prev.next;
     }
     prev.next = prev.next.next;
     // Update head if necessary
-    this.head = sentinel.next;
+    head = sentinel.next;
+    size--;
   }
 }
