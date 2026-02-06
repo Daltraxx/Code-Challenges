@@ -65,7 +65,7 @@ class MyLinkedList {
       nodeReps.push(`${current.val} -> `);
       current = current.next;
     }
-    nodeReps.push("Null");
+    nodeReps.push("null");
     console.log(nodeReps.join(""));
   }
 }
