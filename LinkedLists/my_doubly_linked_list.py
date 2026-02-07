@@ -46,7 +46,7 @@ class MyDoublyLinkedList:
 
         self.size += 1
 
-    def deleteAtIndex(self, index: int):
+    def deleteAtIndex(self, index: int) -> None:
         if index < 0 or index >= self.size:
             return
 
@@ -56,7 +56,7 @@ class MyDoublyLinkedList:
 
         self.size -= 1
 
-    def _getNode(self, index):
+    def _getNode(self, index: int) -> ListNodeDouble:
         if index <= self.size // 2:
             current = self.head.next
             for _ in range(index):
