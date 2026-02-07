@@ -10,6 +10,7 @@ public class MyLinkedList {
   }
 
   public MyLinkedList(ListNode head) {
+    // Note: Allowing user to pass in a head node is not required by problem statement
     this.head = head;
     size = 0;
     ListNode current = head;
@@ -72,3 +73,5 @@ public class MyLinkedList {
     size--;
   }
 }
+
+// Time complexity: O(1) for addAtHead, O(N) for everything else

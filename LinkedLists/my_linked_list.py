@@ -60,6 +60,8 @@ class MyLinkedList:
         node_list.append("None")
         print("".join(node_list))
 
+# Time complexity: O(1) for addAtHead, O(N) for everything else
+
 
 linkedList = MyLinkedList()
 linkedList.addAtHead(1)

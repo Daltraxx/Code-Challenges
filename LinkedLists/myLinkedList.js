@@ -70,6 +70,8 @@ class MyLinkedList {
   }
 }
 
+// Time complexity: O(1) for addAtHead, O(N) for everything else
+
 const obj = new MyLinkedList();
 obj.addAtHead(1);
 obj.addAtTail(3);
