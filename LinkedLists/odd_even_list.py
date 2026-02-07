@@ -32,6 +32,9 @@ class OddEvenList:
         print()
 
 
+# Time complexity: O(n), where n is the number of nodes in the linked list.
+# Space complexity: O(1), since we are rearranging the nodes in place without using any additional data structures.
+
 obj = OddEvenList()
 head = ListNode(1)
 head.next = ListNode(2)
