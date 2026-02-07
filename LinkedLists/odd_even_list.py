@@ -1,8 +1,9 @@
+from typing import Optional
 from list_node import ListNode
 
 
 class OddEvenList:
-    def odd_even_list(self, head: ListNode):
+    def odd_even_list(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head
 
@@ -26,7 +27,7 @@ class OddEvenList:
         return head
 
     # For debugging purposes
-    def print_list(self, head: ListNode):
+    def print_list(self, head: Optional[ListNode]) -> None:
         current = head
         while current:
             print(current.val, end=" -> ")
