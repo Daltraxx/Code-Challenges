@@ -18,6 +18,7 @@ class OddEvenList:
             even.next = odd.next
             even = even.next
 
+        # Connect the end of the odd list to the head of the even list
         odd.next = even_head
 
         return head
