@@ -8,6 +8,7 @@ class ListNode {
 
 class MyDoublyLinkedList {
   constructor() {
+    // Use dummy head and tail nodes to simplify edge cases
     this.head = new ListNode(0);
     this.tail = new ListNode(0, this.head);
     this.size = 0;
@@ -64,3 +65,6 @@ class MyDoublyLinkedList {
     return current;
   }
 }
+
+// Time: O(n) for get, addAtIndex, and deleteAtIndex, O(1) for addAtHead and addAtTail
+// Space: O(n) for the linked list itself
