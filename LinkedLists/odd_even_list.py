@@ -7,23 +7,19 @@ class OddEvenList:
         if not head or not head.next:
             return head
 
-        odd_list_current = head
-        even_list_head = head.next
-        even_list_current = even_list_head
-        current = even_list_head.next
-        isOdd = True
-        while current:
-            if isOdd:
-                odd_list_current.next = current
-                odd_list_current = current
-            else:
-                even_list_current.next = current
-                even_list_current = current
-            current = current.next
-            isOdd = not isOdd
+        odd = head
+        even = head.next
+        even_head = even
 
-        odd_list_current.next = even_list_head
-        even_list_current.next = None # Extremely important to avoid cycles in the list
+        while even and even.next:
+            odd.next = even.next
+            odd = odd.next
+
+            even.next = odd.next
+            even = even.next
+
+        odd.next = even_head
+
         return head
 
     # For debugging purposes
