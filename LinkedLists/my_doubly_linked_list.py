@@ -82,6 +82,18 @@ class MyDoublyLinkedList:
 
 
         self.size -= 1
+    
+    def _getNode(self, index):
+        if index <= self.size // 2:
+            current = self.head.next
+            for _ in range(index):
+                current = current.next
+        else:
+            current = self.tail.prev
+            for _ in range(self.size - 1- index):
+                current = current.prev
+        return current
+            
 
     def printList(self) -> None:
         current = self.head.next
