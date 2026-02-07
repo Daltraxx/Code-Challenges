@@ -9,6 +9,7 @@ class ListNodeDouble:
 
 class MyDoublyLinkedList:
     def __init__(self, head: ListNodeDouble = None):
+        # Note: Allowing user to pass in head node, though not required by problem statement.
         # Use dummy head
         self.head = ListNodeDouble(0, None, head)
         self.size = 0
