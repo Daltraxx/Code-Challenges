@@ -24,7 +24,7 @@ class MyDoublyLinkedList:
         if index < 0 or index >= self.size:
             return -1
 
-        if index < self.size / 2:
+        if index < self.size // 2:
             current = self.head.next
             for _ in range(index):
                 current = current.next
@@ -45,7 +45,7 @@ class MyDoublyLinkedList:
         if index < 0 or index > self.size:
             return
 
-        if index <= self.size / 2:
+        if index <= self.size // 2:
             prev = self.head
             for _ in range(index):
                 prev = prev.next
@@ -67,7 +67,7 @@ class MyDoublyLinkedList:
         if index < 0 or index >= self.size:
             return
 
-        if index <= self.size / 2:
+        if index <= self.size // 2:
             prev = self.head
             for _ in range(index):
                 prev = prev.next
