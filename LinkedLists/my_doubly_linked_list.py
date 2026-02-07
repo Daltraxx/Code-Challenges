@@ -54,10 +54,10 @@ class MyDoublyLinkedList:
             prev.next = newNode
             newNode.next.prev = newNode
         else:
-            next = self.tail
+            next_node = self.tail
             for _ in range(self.size - index):
-                next = next.prev
-            newNode = ListNodeDouble(val, next.prev, next)
+                next_node = next.prev
+            newNode = ListNodeDouble(val, next.prev, next_node)
             newNode.prev.next = newNode
             newNode.next.prev = newNode
 
@@ -74,11 +74,11 @@ class MyDoublyLinkedList:
             prev.next = prev.next.next
             prev.next.prev = prev
         else:
-            next = self.tail
+            next_node = self.tail
             for _ in range(self.size - 1 - index):
-                next = next.prev
-            next.prev = next.prev.prev
-            next.prev.next = next
+                next_node = next_node.prev
+            next_node.prev = next_node.prev.prev
+            next_node.prev.next = next_node
 
 
         self.size -= 1
