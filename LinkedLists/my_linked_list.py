@@ -51,6 +51,7 @@ class MyLinkedList:
         # Update head if necessary
         self.head = sentinel.next
 
+    # Helper function to print the linked list (not required)
     def printList(self) -> None:
         current = self.head
         node_list = []
