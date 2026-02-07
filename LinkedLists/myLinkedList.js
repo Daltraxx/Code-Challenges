@@ -58,6 +58,7 @@ class MyLinkedList {
     this.size--;
   }
 
+  // Not part of the LeetCode problem, just a helper function to visualize the list
   printList() {
     let current = this.head.next;
     const nodeReps = [];

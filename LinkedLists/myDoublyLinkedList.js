@@ -33,7 +33,7 @@ class MyDoublyLinkedList {
     if (index < 0 || index > this.size) return;
     const nodeAtIndex = this.#getNodeByIndex(index);
     const newNode = new ListNode(val, nodeAtIndex.prev, nodeAtIndex);
-    newNode.prev.next = newNode
+    newNode.prev.next = newNode;
     nodeAtIndex.prev = newNode;
     this.size++;
   }
