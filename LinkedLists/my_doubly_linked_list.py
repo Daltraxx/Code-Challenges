@@ -24,16 +24,9 @@ class MyDoublyLinkedList:
         if index < 0 or index >= self.size:
             return -1
 
-        if index < self.size // 2:
-            current = self.head.next
-            for _ in range(index):
-                current = current.next
-            return current.val
-        else:
-            current = self.tail.prev
-            for _ in range(self.size - 1 - index):
-                current = current.prev
-            return current.val
+        current = self._getNode(index)
+
+        return current.val
 
     def addAtHead(self, val: int) -> None:
         self.addAtIndex(0, val)
@@ -45,21 +38,10 @@ class MyDoublyLinkedList:
         if index < 0 or index > self.size:
             return
 
-        if index <= self.size // 2:
-            prev = self.head
-            for _ in range(index):
-                prev = prev.next
-
-            newNode = ListNodeDouble(val, prev, prev.next)
-            prev.next = newNode
-            newNode.next.prev = newNode
-        else:
-            next_node = self.tail
-            for _ in range(self.size - index):
-                next_node = next.prev
-            newNode = ListNodeDouble(val, next.prev, next_node)
-            newNode.prev.next = newNode
-            newNode.next.prev = newNode
+        current = self._getNode(index)
+        new_node = ListNodeDouble(val, current.prev, current)
+        current.prev.next = new_node
+        current.prev = new_node
 
         self.size += 1
 
@@ -67,33 +49,22 @@ class MyDoublyLinkedList:
         if index < 0 or index >= self.size:
             return
 
-        if index <= self.size // 2:
-            prev = self.head
-            for _ in range(index):
-                prev = prev.next
-            prev.next = prev.next.next
-            prev.next.prev = prev
-        else:
-            next_node = self.tail
-            for _ in range(self.size - 1 - index):
-                next_node = next_node.prev
-            next_node.prev = next_node.prev.prev
-            next_node.prev.next = next_node
-
+        current = self._getNode(index)
+        current.prev.next = current.next
+        current.next.prev = current.prev
 
         self.size -= 1
-    
+
     def _getNode(self, index):
         if index <= self.size // 2:
             current = self.head.next
             for _ in range(index):
                 current = current.next
         else:
-            current = self.tail.prev
-            for _ in range(self.size - 1- index):
+            current = self.tail
+            for _ in range(self.size - index):
                 current = current.prev
         return current
-            
 
     def printList(self) -> None:
         current = self.head.next
@@ -112,3 +83,7 @@ obj.addAtTail(3)
 obj.printList()  # Dummy Head <-> 1 <-> 3 <-> Dummy Tail
 obj.addAtIndex(1, 2)  # linked list becomes 1->2->3
 obj.printList()  # Dummy Head <-> 1 <-> 2 <-> 3 <-> Dummy Tail
+obj.get(1)  # return 2
+obj.deleteAtIndex(1)  # now the linked list is 1->3
+obj.printList()  # Dummy Head <-> 1 <-> 3 <-> Dummy Tail
+obj.get(1)  # return 3
