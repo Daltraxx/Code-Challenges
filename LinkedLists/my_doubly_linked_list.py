@@ -22,6 +22,7 @@ class MyDoublyLinkedList:
         current.next = self.tail
 
     def get(self, index: int) -> int:
+        # Time Complexity: O(N), simplified from O(N/2)
         if index < 0 or index >= self.size:
             return -1
 
@@ -30,12 +31,15 @@ class MyDoublyLinkedList:
         return current.val
 
     def addAtHead(self, val: int) -> None:
+        # Time Complexity: O(1) since we are always adding after dummy head
         self.addAtIndex(0, val)
 
     def addAtTail(self, val: int) -> None:
+        # Time Complexity: O(1) since we are always adding before dummy tail
         self.addAtIndex(self.size, val)
 
     def addAtIndex(self, index: int, val: int) -> None:
+        # Time Complexity: O(N)
         if index < 0 or index > self.size:
             return
 
@@ -47,6 +51,7 @@ class MyDoublyLinkedList:
         self.size += 1
 
     def deleteAtIndex(self, index: int) -> None:
+        # Time Complexity: O(N)
         if index < 0 or index >= self.size:
             return
 
@@ -57,6 +62,7 @@ class MyDoublyLinkedList:
         self.size -= 1
 
     def _getNode(self, index: int) -> ListNodeDouble:
+        # Time Complexity: O(N)
         if index <= self.size // 2:
             current = self.head.next
             for _ in range(index):
@@ -68,6 +74,8 @@ class MyDoublyLinkedList:
         return current
 
     def printList(self) -> None:
+        # Note: This method is not required by problem statement, but added for testing purposes.
+        # Time Complexity: O(N), simplified from O(2N)
         current = self.head.next
         node_list = ["Dummy Head <-> "]
         while current.next:
