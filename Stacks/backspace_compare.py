@@ -1,21 +1,17 @@
 class BackspaceCompare:
+
     def backspace_compare(self, s: str, t: str) -> bool:
-        s_stack = []
-        t_stack = []
+        return self.build_stack(s) == self.build_stack(t)
 
-        for char in s:
-            if char == "#":
-                s_stack.pop() if s_stack else None
-            else:
-                s_stack.append(char)
-
-        for char in t:
-            if char == "#":
-                t_stack.pop() if t_stack else None
-            else:
-                t_stack.append(char)
-
-        return s_stack == t_stack
+    @staticmethod
+    def build_stack(string: str) -> list[str]:
+        stack = []
+        for char in string:
+            if char == "#" and stack:
+                stack.pop()
+            elif char != "#":
+                stack.append(char)
+        return stack
 
 
 # Time Complexity: O(n + m) where n and m are the lengths of the input strings s and t respectively
