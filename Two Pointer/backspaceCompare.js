@@ -45,6 +45,9 @@ const backspaceCompare = (s, t) => {
   return true;
 };
 
+// Time complexity: O(n + m), where n and m are the lengths of s and t respectively.
+// Space complexity: O(1), as we are using only a constant amount of extra space.
+
 const s = "ab##",
   t = "c#d#";
 console.log(backspaceCompare(s, t));
