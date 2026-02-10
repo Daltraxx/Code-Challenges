@@ -4,41 +4,40 @@
 Note that after backspacing an empty text, the text will continue empty.*/
 
 const backspaceCompare = (s, t) => {
-  let i = s.length - 1,
-    j = t.length - 1;
-  let skipS = 0,
-    skipT = 0;
+  let i = s.length - 1;
+  let j = t.length - 1;
+  let skipsS = 0;
+  let skipsT = 0;
 
-  //iterate through strings in reverse
   while (i >= 0 || j >= 0) {
-    //find valid character
+    // Find next valid character in s
     while (i >= 0) {
       if (s[i] === "#") {
-        skipS++;
+        skipsS++;
         i--;
-      } else if (skipS > 0) {
-        skipS--;
+      } else if (skipsS > 0) {
+        skipsS--;
         i--;
       } else break;
     }
 
-    //find valid character
+    // Find next valid character in t
     while (j >= 0) {
       if (t[j] === "#") {
-        skipT++;
+        skipsT++;
         j--;
-      } else if (skipT > 0) {
-        skipT--;
+      } else if (skipsT > 0) {
+        skipsT--;
         j--;
       } else break;
     }
 
-    //compare valid characters
+    // Compare next valid characters
+    // (also handles cases where one or both pointers are negative - okay in JS)
     if (s[i] !== t[j]) {
       return false;
     }
 
-    //move on to finding next valid character
     i--;
     j--;
   }
