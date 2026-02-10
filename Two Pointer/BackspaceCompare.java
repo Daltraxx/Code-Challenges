@@ -1,47 +1,18 @@
 public class BackspaceCompare {
   public boolean backspaceCompare(String s, String t) {
-    int sSkips = 0;
-    int tSkips = 0;
-
     int i = s.length() - 1;
     int j = t.length() - 1;
 
     while (i >= 0 || j >= 0) {
-      // Find next valid char in s
-      boolean sValidChar = false;
-      while (!sValidChar && i >= 0) {
-        char sChar = s.charAt(i);
-        if (sChar == '#') {
-          sSkips++;
-          i--;
-        } else if (sSkips > 0) {
-          sSkips--;
-          i--;
-        } else {
-          sValidChar = true;
-        }
-      }
-
-      // Find next valid char in t
-      boolean tValidChar = false;
-      while (!tValidChar && j >= 0) {
-        char tChar = t.charAt(j);
-        if (tChar == '#') {
-          tSkips++;
-          j--;
-        } else if (tSkips > 0) {
-          tSkips--;
-          j--;
-        } else {
-          tValidChar = true;
-        }
-      }
+      // Find next valid index of char in strings
+      i = getNextValidIndex(s, i);
+      j = getNextValidIndex(t, j);
 
       // Compare chars
-      if (sValidChar != tValidChar) {
+      if (i < 0 != j < 0) {
         // If run out of letters on one string but not the other, return false
         return false;
-      } else if (sValidChar && tValidChar && s.charAt(i) != t.charAt(j)) {
+      } else if (i >= 0 && j >= 0 && s.charAt(i) != t.charAt(j)) {
         // If two valid characters found, return false if not the same
         return false;
       }
@@ -51,7 +22,26 @@ public class BackspaceCompare {
 
     return true;
   }
+
+  private int getNextValidIndex(String str, int currIndex) {
+    int skips = 0;
+    while (currIndex >= 0) {
+      if (str.charAt(currIndex) == '#') {
+        skips++;
+        currIndex--;
+      } else if (skips > 0) {
+        skips--;
+        currIndex--;
+      } else {
+        return currIndex;
+      }
+    }
+
+    // String emptied and no valid character found
+    return -1;
+  }
 }
 
-// Time Complexity: O(n + m) where n and m are the lengths of s and t respectively
+// Time Complexity: O(n + m) where n and m are the lengths of s and t
+// respectively
 // Space Complexity: O(1)
