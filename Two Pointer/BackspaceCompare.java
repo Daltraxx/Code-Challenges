@@ -9,10 +9,11 @@ public class BackspaceCompare {
       j = getNextValidIndex(t, j);
 
       // Compare chars
-      if (i < 0 != j < 0) {
-        // If run out of letters on one string but not the other, return false
-        return false;
-      } else if (i >= 0 && j >= 0 && s.charAt(i) != t.charAt(j)) {
+      if (i < 0 || j < 0) {
+        // If run out of letters on at least one string,
+        // answer is result of whether both have run out of characters or just one
+        return i == j;
+      } else if (s.charAt(i) != t.charAt(j)) {
         // If two valid characters found, return false if not the same
         return false;
       }
