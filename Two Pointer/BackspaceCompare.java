@@ -52,3 +52,6 @@ public class BackspaceCompare {
     return true;
   }
 }
+
+// Time Complexity: O(n + m) where n and m are the lengths of s and t respectively
+// Space Complexity: O(1)
