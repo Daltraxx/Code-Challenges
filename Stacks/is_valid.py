@@ -1,12 +1,14 @@
 class IsValid:
-    def is_valid(s: str) -> bool:
+    def is_valid(self, s: str) -> bool:
         char_pairings = {'(': ')', '{': '}', '[': ']'}
         stack = []
         for char in s:
             if char in char_pairings:
+                # Add left parentheses to stack
                 stack.append(char)
             else:
-                if stack and char == char_pairings.get(stack[-1]):
+                # Evaluate right parentheses against stack
+                if stack and char == char_pairings[stack[-1]]:
                     stack.pop()
                 else:
                     return False
