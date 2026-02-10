@@ -14,3 +14,6 @@ class IsValid:
                     return False
 
         return len(stack) == 0
+
+# Time Complexity: O(n) where n is the length of the input string s
+# Space Complexity: O(n) in the worst case when all characters in s are left parentheses
