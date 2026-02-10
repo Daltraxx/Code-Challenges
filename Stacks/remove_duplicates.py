@@ -2,7 +2,7 @@ class RemoveDuplicates:
     def remove_duplicates(self, s: str) -> str:
         stack = []
         for char in s:
-            if len(stack) > 0 and char == stack[-1]:
+            if stack and char == stack[-1]:
                 stack.pop()
             else:
                 stack.append(char)
