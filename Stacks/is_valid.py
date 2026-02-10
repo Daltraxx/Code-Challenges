@@ -1,15 +1,14 @@
 class IsValid:
     def is_valid(s: str) -> bool:
-        char_pairings = {")": "(", "}": "{", "]": "["}
-        left_chars = {"(", "{", "["}
+        char_pairings = {'(': ')', '{': '}', '[': ']'}
         stack = []
         for char in s:
-            if char in left_chars:
+            if char in char_pairings:
                 stack.append(char)
             else:
-                if stack and stack[-1] == char_pairings.get(char):
+                if stack and char == char_pairings.get(stack[-1]):
                     stack.pop()
                 else:
                     return False
 
-        return True if len(stack) == 0 else False
+        return len(stack) == 0
