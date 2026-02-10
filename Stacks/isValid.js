@@ -33,6 +33,6 @@ const isValid = (s) => {
     return !stack.length;
 }
 
-//linear time and space
+// Linear time and space
 const s = "()[]{}";
 console.log(isValid(s));
