@@ -18,7 +18,7 @@ const removeDuplicates = (s) => {
   return stack.join("");
 };
 
-//linear time and space complexity
+// Linear time and space complexity
 
 const s = "abbaca";
 console.log(removeDuplicates(s));
