@@ -9,20 +9,21 @@ Every close bracket has a corresponding open bracket of the same type.
 constraint: s consists of parentheses only '()[]{}'.*/
 
 const isValid = (s) => {
-  const parenthesesMap = {
-    "(": ")",
-    "{": "}",
-    "[": "]",
-  };
+  const parenthesesMap = new Map([
+    ['(', ')'],
+    ['{', '}'],
+    ['[', ']'],
+  ]);
 
   const stack = [];
 
   for (let char of s) {
-    if (char in parenthesesMap) {
+    if (parenthesesMap.has(char)) {
+      // If it's an opening char, push it onto the stack
       stack.push(char);
     } else {
-      //remember that below line will throw error in some languages like Java if stack is empty
-      if (char !== parenthesesMap[stack[stack.length - 1]]) {
+      // If the stack is empty or the current char doesn't match the expected closing char, return false
+      if (char !== parenthesesMap.get(stack[stack.length - 1])) {
         return false;
       } else {
         stack.pop();
