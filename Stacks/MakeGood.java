@@ -20,3 +20,6 @@ public class MakeGood {
     return a != b && Character.toLowerCase(a) == Character.toLowerCase(b);
   }
 }
+
+// Time complexity O(n)
+// Space complexity O(n)
