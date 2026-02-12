@@ -30,7 +30,8 @@ const simplifyPath = (path) => {
   return "/" + stack.join("/");
 };
 
-//Linear time and space (2n)
+// Time Complexity: O(n), where n is the length of the input path string. We iterate through the path once to split it and process each segment.
+// Space Complexity: O(n), in the worst case, if all segments are valid directory names, we could end up storing all of them in the stack.
 
 const path = "/home//user/./Documents/../Pictures";
 console.log(simplifyPath(path));
