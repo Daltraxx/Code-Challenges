@@ -15,21 +15,20 @@ The simplified canonical path should follow these rules:
 Return the simplified canonical path.*/
 
 const simplifyPath = (path) => {
-    const stack = [];
+  const stack = [];
 
-    for (let segment of path.split('/')) {
-        if (segment === '..') {
-            stack.pop();
-        } else if (segment === '.' || !segment.length) {
-            continue;
-        } else {
-            stack.push(segment);
-        }
+  for (let segment of path.split("/")) {
+    if (segment === "..") {
+      stack.pop();
+    } else if (segment === "." || !segment.length) {
+      continue;
+    } else {
+      stack.push(segment);
     }
+  }
 
-
-    return '/' + stack.join('/');
-}
+  return "/" + stack.join("/");
+};
 
 //Linear time and space (2n)
 
