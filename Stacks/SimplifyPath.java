@@ -11,10 +11,11 @@ public class SimplifyPath {
       if (segment.isEmpty() || segment.equals(".")) {
         continue;
       } else if (segment.equals("..")) {
-        if (!stack.isEmpty())
+        if (!stack.isEmpty()) {
           stack.removeLast();
+        }
       } else {
-        stack.add(segment);
+        stack.addLast(segment);
       }
     }
 
