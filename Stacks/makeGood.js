@@ -5,8 +5,7 @@ const makeGood = (s) => {
     const lastChar = stack[stack.length - 1];
     if (
       lastChar &&
-      lastChar !== char &&
-      lastChar.toLowerCase() === char.toLowerCase()
+      Math.abs(char.charCodeAt(0) - lastChar.charCodeAt(0)) === 32
     ) {
       stack.pop();
     } else {
