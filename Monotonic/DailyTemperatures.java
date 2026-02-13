@@ -1,5 +1,4 @@
 
-
 import java.util.Stack;
 
 /*Given an array of integers temperatures represents the daily temperatures, 
@@ -19,7 +18,9 @@ public class DailyTemperatures {
             stack.push(i);
         }
 
-
         return ans;
     }
 }
+
+// Time Complexity: O(n) where n is the length of the input array temperatures. Each element is pushed and popped from the stack at most once.
+// Space Complexity: O(n) in the worst case, when the stack contains all the indices of the input array. The output array ans also takes O(n) space.
