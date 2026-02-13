@@ -6,25 +6,21 @@ class MaxSlidingWindow:
     def max_sliding_window(self, nums: List[int], k: int) -> List[int]:
         windowMaxes = []
         monoDecreasingDeque = deque()
-
-        # Set up first window
-        for i in range(k):
-            while monoDecreasingDeque and nums[i] > nums[monoDecreasingDeque[-1]]:
-                monoDecreasingDeque.pop()
-            monoDecreasingDeque.append(i)
-
-        windowMaxes.append(nums[monoDecreasingDeque[0]])
-
-        # Find maxes for each window
-        for i in range(k, len(nums)):
-            if monoDecreasingDeque[0] < i - k + 1:
+        
+        for i in range(len(nums)):
+            # Remove indices from the front of the deque if they are out of the current window
+            if monoDecreasingDeque and monoDecreasingDeque[0] < i - k + 1:
                 monoDecreasingDeque.popleft()
 
+            # Pop indices from the deque while the current number is greater than the number at those indices
             while monoDecreasingDeque and nums[i] > nums[monoDecreasingDeque[-1]]:
                 monoDecreasingDeque.pop()
 
             monoDecreasingDeque.append(i)
-            windowMaxes.append(nums[monoDecreasingDeque[0]])
+
+            # Only start adding to the output array once we have a valid window of size k
+            if i >= k - 1:
+              windowMaxes.append(nums[monoDecreasingDeque[0]])
 
         return windowMaxes
 
