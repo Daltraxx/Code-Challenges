@@ -11,9 +11,9 @@ class MovingAverage:
     def next(self, val: int) -> float:
         self.queue.append(val)
         self.sum += val
-        while len(self.queue) > self.size:
+        if len(self.queue) > self.size:
             self.sum -= self.queue.popleft()
         return self.sum / len(self.queue)
 
 # Time Complexity: O(1) for each next call, as each element is added and removed at most once.
-# Space Complexity: O(n) in the worst case, where n is the size of the
+# Space Complexity: O(n) in the worst case, where n is the size of the moving average window.
