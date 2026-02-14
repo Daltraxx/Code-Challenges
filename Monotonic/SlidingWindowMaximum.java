@@ -17,21 +17,21 @@ public class SlidingWindowMaximum {
         ArrayDeque<Integer> queue = new ArrayDeque<>();
 
         for (int i = 0; i < nums.length; i++) {
-            //maintain monotonic decreasing deque and
-            //remove all elements in deque smaller than current one (no chance of being maximum)
-            while(!queue.isEmpty() && nums[i] > nums[queue.getLast()]) {
+            // Remove all elements in deque smaller than current one (no chance of being
+            // maximum)
+            while (!queue.isEmpty() && nums[i] > nums[queue.getLast()]) {
                 queue.removeLast();
             }
 
             queue.addLast(i);
 
-            //queue[0] is index of maximum element
-            //check if outside window, and remove if so
+            // Queue[0] is index of maximum element
+            // If outside window, remove it
             if (queue.getFirst() + k == i) {
                 queue.removeFirst();
             }
 
-            //add to answer once window is size k
+            // Add to answer once window is size k
             if (i >= k - 1) {
                 answer[i - k + 1] = nums[queue.getFirst()];
             }
@@ -41,10 +41,9 @@ public class SlidingWindowMaximum {
     }
 
     public static void main(String[] args) {
-        int[] nums = {1, 3, -1, -3, 5, 3, 6, 7}; int k = 3;
+        int[] nums = { 1, 3, -1, -3, 5, 3, 6, 7 };
+        int k = 3;
         System.out.println(Arrays.toString(SlidingWindowMaximum.maxSlidingWindow(nums, k)));
     }
-    
+
 }
-
-
