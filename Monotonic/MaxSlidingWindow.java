@@ -11,7 +11,7 @@ import java.util.Arrays;
 /**
  * SlidingWindowMaximum
  */
-public class SlidingWindowMaximum {
+public class MaxSlidingWindow {
     public static int[] maxSlidingWindow(int[] nums, int k) {
         int[] answer = new int[nums.length - k + 1];
         ArrayDeque<Integer> queue = new ArrayDeque<>();
@@ -43,7 +43,7 @@ public class SlidingWindowMaximum {
     public static void main(String[] args) {
         int[] nums = { 1, 3, -1, -3, 5, 3, 6, 7 };
         int k = 3;
-        System.out.println(Arrays.toString(SlidingWindowMaximum.maxSlidingWindow(nums, k)));
+        System.out.println(Arrays.toString(MaxSlidingWindow.maxSlidingWindow(nums, k)));
     }
 
 }
