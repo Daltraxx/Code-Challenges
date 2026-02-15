@@ -8,7 +8,7 @@ is less than or equal to limit.
 
 import java.util.ArrayDeque;
 
-public class LongestSubarrAbsoluteDiff {
+public class LongestSubarray {
     public static int longestSubarray(int[] nums, int limit) {
         ArrayDeque<Integer> increasing = new ArrayDeque<>();
         ArrayDeque<Integer> decreasing = new ArrayDeque<>();
