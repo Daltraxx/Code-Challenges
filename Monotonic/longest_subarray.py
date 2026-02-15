@@ -3,7 +3,7 @@ from typing import List
 
 
 class LongestSubarray:
-    def longest_subarray(self, nums: List[int], limit: int):
+    def longest_subarray(self, nums: List[int], limit: int) -> int:
         monoDecreasing = deque()
         monoIncreasing = deque()
         max_window = 0
