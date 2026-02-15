@@ -55,3 +55,6 @@ public class LongestSubarray {
     }
     
 }
+
+// Time complexity: O(n)
+// Space complexity: O(n) in the worst case when all elements are the same and both queues grow to the size of the input array.
