@@ -10,40 +10,40 @@ import java.util.ArrayDeque;
 
 public class LongestSubarray {
     public static int longestSubarray(int[] nums, int limit) {
-        ArrayDeque<Integer> increasing = new ArrayDeque<>();
-        ArrayDeque<Integer> decreasing = new ArrayDeque<>();
+        ArrayDeque<Integer> monoIncreasing = new ArrayDeque<>();
+        ArrayDeque<Integer> monoDecreasing = new ArrayDeque<>();
         int left = 0;
-        int ans = 0;
+        int maxSubarray = 0;
 
         for (int right = 0; right < nums.length; right++) {
-            //maintain monotonic queues
-            while (!increasing.isEmpty() && increasing.getLast() > nums[right]) {
-                increasing.removeLast();
+            // Maintain monotonic queues
+            while (!monoIncreasing.isEmpty() && nums[right] < nums[monoIncreasing.getLast()]) {
+                monoIncreasing.removeLast();
             }
-            while (!decreasing.isEmpty() && decreasing.getLast() < nums[right]) {
-                decreasing.removeLast();
+            while (!monoDecreasing.isEmpty() && nums[right] > nums[monoDecreasing.getLast()]) {
+                monoDecreasing.removeLast();
             }
 
-            increasing.addLast(nums[right]);
-            decreasing.addLast(nums[right]);
+            monoIncreasing.addLast(right);
+            monoDecreasing.addLast(right);
 
-            //maintain window property
-            while (decreasing.getFirst() - increasing.getFirst() > limit) {
-                if (nums[left] == decreasing.getFirst()) {
-                    decreasing.removeFirst();
-                }
-                if (nums[left] == increasing.getFirst()) {
-                    increasing.removeFirst();
-                }
+            // Maintain valid window
+            while (nums[monoDecreasing.getFirst()] - nums[monoIncreasing.getFirst()] > limit) {
                 left++;
+                if (monoDecreasing.getFirst() < left) {
+                    monoDecreasing.removeFirst();
+                }
+                if (monoIncreasing.getFirst() < left) {
+                    monoIncreasing.removeFirst();
+                }
             }
 
-            ans = Math.max(ans, right - left + 1);
+            maxSubarray = Math.max(maxSubarray, right - left + 1);
             
         }
 
 
-        return ans;
+        return maxSubarray;
     }
 
     public static void main(String[] args) {
