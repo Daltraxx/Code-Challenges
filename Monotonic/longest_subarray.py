@@ -23,6 +23,7 @@ class LongestSubarray:
             # Maintain valid window
             while nums[monoDecreasing[0]] - nums[monoIncreasing[0]] > limit:
                 left += 1
+                # Note that while monoDecreasing[0] < left (and similarly for monoIncreasing) would work just as well here, and is logically safer though unnecessary
                 if monoDecreasing[0] < left:
                     monoDecreasing.popleft()
                 if monoIncreasing[0] < left:
