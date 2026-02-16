@@ -9,19 +9,19 @@ Return an array ans of length nums1.length such that ans[i] is the next greater 
 const nextGreaterElement = (nums1, nums2) => {
   // Precompute the next greater element for each number in nums2 using a monotonic decreasing stack
   const nextGreaterElementMap = new Map();
-  const stack = [];
+  const monoDecreasingStack = [];
 
   for (let i = 0; i < nums2.length; i++) {
     const num = nums2[i];
-    while (stack.length > 0 && num > stack.at(-1)) {
-      nextGreaterElementMap.set(stack.pop(), num);
+    while (monoDecreasingStack.length > 0 && num > monoDecreasingStack.at(-1)) {
+      nextGreaterElementMap.set(monoDecreasingStack.pop(), num);
     }
 
-    stack.push(num);
+    monoDecreasingStack.push(num);
   }
 
   // For any remaining numbers in the stack, there is no next greater element
-  for (let num of stack) {
+  for (let num of monoDecreasingStack) {
     nextGreaterElementMap.set(num, -1);
   }
 

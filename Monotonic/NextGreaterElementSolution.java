@@ -6,13 +6,13 @@
  * Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.
  */
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Stack;
 
 public class NextGreaterElementSolution {
     public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        Stack<Integer> stack = new Stack<>();
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
         HashMap<Integer, Integer> map = new HashMap<>();
 
         for (int i = 0; i < nums2.length; i++) {
