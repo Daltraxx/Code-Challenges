@@ -8,24 +8,29 @@
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
 
 public class NextGreaterElementSolution {
     public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        // Precompute the next greater element for each number in nums2 using a monotonic decreasing stack
+        Deque<Integer> monoDecreasingStack = new ArrayDeque<>();
         HashMap<Integer, Integer> map = new HashMap<>();
 
         for (int i = 0; i < nums2.length; i++) {
-            while (!stack.isEmpty() && stack.peek() < nums2[i]) {
-                map.put(stack.pop(), nums2[i]);
+            int num = nums2[i];
+            while (!monoDecreasingStack.isEmpty() && num > monoDecreasingStack.getLast()) {
+                map.put(monoDecreasingStack.removeLast(), num);
             }
-            stack.push(nums2[i]);
+            monoDecreasingStack.addLast(num);
         }
 
-        while (!stack.isEmpty()) {
-            map.put(stack.pop(), -1);
+        // For any remaining elements in the stack, there is no next greater element, so we map them to -1
+        while (!monoDecreasingStack.isEmpty()) {
+            map.put(monoDecreasingStack.removeLast(), -1);
         }
         
+        // Build the result for nums1 using the precomputed next greater elements
         int[] ans = new int[nums1.length];
         for (int i = 0; i < nums1.length; i++) {
             ans[i] = map.get(nums1[i]);
