@@ -45,3 +45,6 @@ public class NextGreaterElementSolution {
         System.out.println(Arrays.toString(solution));  
     }
 }
+
+// Time complexity: O(n + m) where n is the length of nums1 and m is the length of nums2
+// Space complexity: O(m) where m is the length of nums2
