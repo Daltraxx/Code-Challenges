@@ -19,6 +19,9 @@ class NextGreaterElement:
             nextGreaterElements.append(nextGreaterElementsMap[num])
         
         return nextGreaterElements
+    
+# Time complexity: O(n + m) where n is the length of nums1 and m is the length of nums2
+# Space complexity: O(m) where m is the length of nums2
 
 nums1 = [4,1,2]
 nums2 = [1,3,4,2]
