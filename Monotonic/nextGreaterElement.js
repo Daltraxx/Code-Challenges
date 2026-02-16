@@ -34,6 +34,9 @@ const nextGreaterElement = (nums1, nums2) => {
   return ans;
 };
 
+// Time complexity: O(n + m) where n is the length of nums1 and m is the length of nums2
+// Space complexity: O(m) where m is the length of nums2
+
 const nums1 = [4, 1, 2],
   nums2 = [1, 3, 4, 2];
 
