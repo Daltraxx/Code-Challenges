@@ -4,6 +4,7 @@ from typing import List
 class NextGreaterElement:
 
     def next_greater_element(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        # Precompute the next greater element for each number in nums2 using a monotonic decreasing stack
         nextGreaterElementsMap = {}
         monoDecreasingStack = []
         for i in range(len(nums2)):
@@ -14,6 +15,7 @@ class NextGreaterElement:
                 monoDecreasingStack.pop()
             monoDecreasingStack.append(num)
         
+        # Build the result for nums1 using the precomputed next greater elements
         nextGreaterElements = []
         for num in nums1:
             nextGreaterElements.append(nextGreaterElementsMap[num])
