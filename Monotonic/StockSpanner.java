@@ -1,26 +1,25 @@
 
-
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class StockSpanner {
-    Stack<int[]> priceStack;
+    Deque<int[]> priceStack;
 
     public StockSpanner() {
-        this.priceStack = new Stack<>();
+        // Monotonic decreasing stack to store price and span days
+        this.priceStack = new ArrayDeque<>();
     }
 
     public int next(int price) {
-        int days = 1;
-        while (!priceStack.isEmpty() && priceStack.peek()[0] <= price) {
-            days += priceStack.pop()[1];
+        int span = 1;
+        while (!priceStack.isEmpty() && priceStack.getLast()[0] <= price) {
+            span += priceStack.removeLast()[1];
         }
 
-        priceStack.push(new int[] {price, days});
+        priceStack.addLast(new int[] { price, span });
 
-        return days;
+        return span;
     }
-
-    //constant time complexity for each next call, linear space
 
     public static void main(String[] args) {
         StockSpanner obj = new StockSpanner();
@@ -34,3 +33,5 @@ public class StockSpanner {
         System.out.println(obj.priceStack);
     }
 }
+
+// Constant time complexity for each next call, linear space complexity for the stack in the worst case (strictly decreasing prices)
