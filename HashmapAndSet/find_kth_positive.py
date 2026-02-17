@@ -9,10 +9,9 @@ class FindKthPositive:
         for included_num in arr:
             if included_num != curr_num:
                 gap = included_num - curr_num
+                if missing_nums + gap >= k:
+                    return curr_num + (k - missing_nums) - 1
                 missing_nums += gap
-                if missing_nums >= k:
-                    # kth missing number = included_num - (missing_nums - k) - 1, which simplifies to included_num + k - missing_nums - 1
-                    return included_num + k - missing_nums - 1
             curr_num = included_num + 1
 
         return arr[-1] + k - missing_nums
