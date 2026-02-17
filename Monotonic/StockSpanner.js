@@ -1,5 +1,6 @@
 class StockSpanner {
   constructor() {
+    // Monotonic decreasing stack to store [price, span] pairs
     this.priceStack = [];
   }
 
