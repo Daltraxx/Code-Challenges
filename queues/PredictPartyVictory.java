@@ -15,7 +15,7 @@ Suppose every senator is smart enough and will play the best strategy for his ow
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Dota2Senate {
+public class PredictPartyVictory {
     public String predictPartyVictoryTwoQueues(String senate) {
         int n = senate.length();
 
@@ -23,9 +23,9 @@ public class Dota2Senate {
         Queue<Integer> direQueue = new LinkedList<>();
 
         char radiant = 'R';
-        //char dire = 'D';
+        // char dire = 'D';
 
-        //fill both queue's with the indices of their respective party members
+        // fill both queue's with the indices of their respective party members
         for (int i = 0; i < n; i++) {
             if (senate.charAt(i) == radiant) {
                 radiantQueue.add(i);
@@ -35,12 +35,14 @@ public class Dota2Senate {
         }
 
         while (!radiantQueue.isEmpty() && !direQueue.isEmpty()) {
-            //remove next members of each party from queues and store their index to determine who will do banning
+            // remove next members of each party from queues and store their index to
+            // determine who will do banning
             int nextRadiant = radiantQueue.poll();
             int nextDire = direQueue.poll();
 
-            //party with smaller indice gets to ban the next member of opposite party
-            //place remaining member back in party's queue with the indice of their next turn
+            // party with smaller indice gets to ban the next member of opposite party
+            // place remaining member back in party's queue with the indice of their next
+            // turn
             if (nextRadiant < nextDire) {
                 radiantQueue.add(nextRadiant + n);
             } else {
@@ -48,9 +50,9 @@ public class Dota2Senate {
             }
         }
 
-        //party with remaining unbanned members is winner
+        // party with remaining unbanned members is winner
         return !radiantQueue.isEmpty() ? "Radiant" : "Dire";
-                
+
     }
 
     public String predictPartyVictoryOneQueue(String senate) {
@@ -59,21 +61,24 @@ public class Dota2Senate {
         int radiantFloatingBan = 0, direFloatingBan = 0;
 
         Queue<Character> queue = new LinkedList<>();
-        //add members to queue in order and track count of each party's members
+        // add members to queue in order and track count of each party's members
         for (char member : senate.toCharArray()) {
             queue.add(member);
 
-            if (member == 'R') radiantCount++;
-            else direCount++;
+            if (member == 'R')
+                radiantCount++;
+            else
+                direCount++;
         }
 
-    
         while (radiantCount > 0 && direCount > 0) {
             char currentMember = queue.poll();
 
-            //if current member is able to vote, will ban next member of opposite party (store vote in floatingBan variable)
-            //before being added back to queue.
-            //if cannot vote (is banned) do not add back to queue and decrease remaining voters for that party
+            // if current member is able to vote, will ban next member of opposite party
+            // (store vote in floatingBan variable)
+            // before being added back to queue.
+            // if cannot vote (is banned) do not add back to queue and decrease remaining
+            // voters for that party
             if (currentMember == 'R') {
                 if (radiantFloatingBan == 0) {
                     direFloatingBan++;
@@ -92,8 +97,8 @@ public class Dota2Senate {
                 }
             }
         }
-        
-        //winning party is one with remaining voters
+
+        // winning party is one with remaining voters
         return radiantCount > 0 ? "Radiant" : "Dire";
     }
 
