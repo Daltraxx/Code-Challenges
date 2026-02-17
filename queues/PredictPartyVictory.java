@@ -60,5 +60,7 @@ public class PredictPartyVictory {
         // Winning party is one with remaining voters
         return radiantCount > 0 ? "Radiant" : "Dire";
     }
-
 }
+
+// Time complexity: O(n) - each senator is processed at most twice (once when added to the queue and once when removed).
+// Space complexity: O(n) - all senators are added to queue.
