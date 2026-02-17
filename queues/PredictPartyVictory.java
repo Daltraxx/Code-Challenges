@@ -12,93 +12,52 @@ The round-based procedure starts from the first senator to the last senator in t
 Suppose every senator is smart enough and will play the best strategy for his own party. Predict which party will finally announce the victory and change the Dota2 game. The output should be "Radiant" or "Dire".
 */
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class PredictPartyVictory {
-    public String predictPartyVictoryTwoQueues(String senate) {
-        int n = senate.length();
+    public String predictPartyVictory(String senate) {
+        int radiantCount = 0;
+        int direCount = 0;
 
-        Queue<Integer> radiantQueue = new LinkedList<>();
-        Queue<Integer> direQueue = new LinkedList<>();
-
-        char radiant = 'R';
-        // char dire = 'D';
-
-        // fill both queue's with the indices of their respective party members
-        for (int i = 0; i < n; i++) {
-            if (senate.charAt(i) == radiant) {
-                radiantQueue.add(i);
-            } else {
-                direQueue.add(i);
-            }
-        }
-
-        while (!radiantQueue.isEmpty() && !direQueue.isEmpty()) {
-            // remove next members of each party from queues and store their index to
-            // determine who will do banning
-            int nextRadiant = radiantQueue.poll();
-            int nextDire = direQueue.poll();
-
-            // party with smaller indice gets to ban the next member of opposite party
-            // place remaining member back in party's queue with the indice of their next
-            // turn
-            if (nextRadiant < nextDire) {
-                radiantQueue.add(nextRadiant + n);
-            } else {
-                direQueue.add(nextDire + n);
-            }
-        }
-
-        // party with remaining unbanned members is winner
-        return !radiantQueue.isEmpty() ? "Radiant" : "Dire";
-
-    }
-
-    public String predictPartyVictoryOneQueue(String senate) {
-        int radiantCount = 0, direCount = 0;
-
-        int radiantFloatingBan = 0, direFloatingBan = 0;
-
-        Queue<Character> queue = new LinkedList<>();
+        Deque<Character> queue = new ArrayDeque<>();
         // add members to queue in order and track count of each party's members
         for (char member : senate.toCharArray()) {
-            queue.add(member);
+            queue.addLast(member);
 
-            if (member == 'R')
+            if (member == 'R') {
                 radiantCount++;
-            else
-                direCount++;
-        }
-
-        while (radiantCount > 0 && direCount > 0) {
-            char currentMember = queue.poll();
-
-            // if current member is able to vote, will ban next member of opposite party
-            // (store vote in floatingBan variable)
-            // before being added back to queue.
-            // if cannot vote (is banned) do not add back to queue and decrease remaining
-            // voters for that party
-            if (currentMember == 'R') {
-                if (radiantFloatingBan == 0) {
-                    direFloatingBan++;
-                    queue.add('R');
-                } else {
-                    radiantFloatingBan--;
-                    radiantCount--;
-                }
             } else {
-                if (direFloatingBan == 0) {
-                    radiantFloatingBan++;
-                    queue.add('D');
-                } else {
-                    direFloatingBan--;
-                    direCount--;
-                }
+                direCount++;
             }
         }
 
-        // winning party is one with remaining voters
+        int radiantPendingBan = 0; // pending bans of Dire members
+        int direPendingBan = 0; // pending bans of Radiant members
+
+        while (radiantCount > 0 && direCount > 0) {
+            char currentMember = queue.removeFirst();
+            if (currentMember == 'R') {
+                if (direPendingBan > 0) {
+                    direPendingBan--;
+                    radiantCount--;
+                } else {
+                    radiantPendingBan++;
+                    queue.addLast(currentMember);
+                }
+            } else {
+                if (radiantPendingBan > 0) {
+                    radiantPendingBan--;
+                    direCount--;
+                } else {
+                    direPendingBan++;
+                    queue.addLast(currentMember);
+                }
+
+            }
+        }
+
+        // Winning party is one with remaining voters
         return radiantCount > 0 ? "Radiant" : "Dire";
     }
 

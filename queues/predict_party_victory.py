@@ -13,8 +13,8 @@ class PredictPartyVictory:
             else:
                 dire_count += 1
 
-        dire_bans = 0
-        radiant_bans = 0
+        dire_bans = 0 # pending bans of Radiant members
+        radiant_bans = 0 # pending bans of Dire members
 
         while radiant_count > 0 and dire_count > 0:
             nextMember = senateQueue.popleft()
