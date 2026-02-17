@@ -1,28 +1,23 @@
 class StockSpanner {
-    constructor() {
-        this.priceStack = [];
-        
+  constructor() {
+    this.priceStack = [];
+  }
+
+  next(price) {
+    // Stock span is always at least 1
+    let stockSpanDays = 1;
+    while (this.priceStack.length && this.priceStack.at(-1)[0] <= price) {
+      let prevSpan = this.priceStack.pop()[1];
+      stockSpanDays += prevSpan;
     }
 
-    next(price) {
-        //stock span is always at least 1
-        let stockSpanDays = 1;
+    this.priceStack.push([price, stockSpanDays]);
 
-        //use monotonically decreasing stack to store price and days that price was less than or equal to that price
-        //adding days to answer when greater price than last day was found
-        //to save iterations
-        while (this.priceStack.length > 0 && this.priceStack[this.priceStack.length - 1][0] <= price) {
-            stockSpanDays += this.priceStack.pop()[1];
-        }
-
-        this.priceStack.push([price, stockSpanDays]);
-
-        return stockSpanDays;
-    }
-    
+    return stockSpanDays;
+  }
 }
 
-//constant time complexity for each next call, linear space
+// Constant time complexity for each next call, linear space
 
 const stockSpanner = new StockSpanner();
 
