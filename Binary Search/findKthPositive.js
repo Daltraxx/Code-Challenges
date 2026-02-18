@@ -14,3 +14,6 @@ const findKthPositive = (arr, k) => {
   }
   return arr.at(-1) + k - missingNums;
 };
+
+// Time Complexity: O(n) where n is the length of arr
+// Space Complexity: O(1)
