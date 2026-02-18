@@ -38,6 +38,7 @@ class MaximumRobots:
                 while mono_decreasing_charges and mono_decreasing_charges[0] < left:
                     mono_decreasing_charges.popleft()
 
+            # Update max_robots after ensuring the current window [left, right] is valid
             max_robots = max(right - left + 1, max_robots)
 
         return max_robots
