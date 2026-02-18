@@ -3,7 +3,7 @@ from typing import List
 
 class FindKthPositive:
 
-    def find_kth_positive(self, arr: List[int], k: int):
+    def find_kth_positive(self, arr: List[int], k: int) -> int:
         curr_num = 1
         missing_nums = 0
         for included_num in arr:
@@ -16,8 +16,23 @@ class FindKthPositive:
             curr_num = included_num + 1
 
         return arr[-1] + k - missing_nums
-    
+
     # Time complexity: O(n) where n is the length of the input array arr. We iterate through the array once.
+    # Space complexity: O(1) since we are using only a constant amount of extra space
+
+    def findKthPositiveBinarySearch(self, arr: List[int], k: int) -> int:
+        left, right = 0, len(arr) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            missing_nums_at_mid = arr[mid] - mid - 1
+            if missing_nums_at_mid < k:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        return left + k
+
+    # Time complexity: O(log n) where n is the length of the input array arr. We are performing a binary search.
     # Space complexity: O(1) since we are using only a constant amount of extra space
 
 
