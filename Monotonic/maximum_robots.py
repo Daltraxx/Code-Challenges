@@ -45,6 +45,9 @@ class MaximumRobots:
     @staticmethod
     def _get_total_cost(max_charge, robot_count, running_cost_sum):
         return max_charge + (robot_count * running_cost_sum)
+    
+# Time complexity: O(n) where n is the length of the input arrays charge_times and running_costs. We iterate through the arrays once and each element is added and removed from the deque at most once.
+# Space complexity: O(n) in the worst case where all charge times are in decreasing order, causing all indices to be stored in the deque.
 
 
 chargeTimes = [11, 12, 19]
