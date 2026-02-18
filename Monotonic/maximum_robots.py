@@ -24,8 +24,7 @@ class MaximumRobots:
 
             # Maintain valid window
             while (
-                mono_decreasing_charges
-                and self._get_total_cost(
+                self._get_total_cost(
                     charge_times[mono_decreasing_charges[0]],
                     right - left + 1,
                     curr_running_cost_sum,
