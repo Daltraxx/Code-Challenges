@@ -20,7 +20,7 @@ class FindKthPositive:
     # Time complexity: O(n) where n is the length of the input array arr. We iterate through the array once.
     # Space complexity: O(1) since we are using only a constant amount of extra space
 
-    def findKthPositiveBinarySearch(self, arr: List[int], k: int) -> int:
+    def find_kth_positive_binary_search(self, arr: List[int], k: int) -> int:
         left = 0
         right = len(arr) - 1
         while left <= right:
@@ -37,8 +37,8 @@ class FindKthPositive:
     # Space complexity: O(1) since we are using only a constant amount of extra space
 
 
-arr = [1, 4, 6]
-k = 3
+arr = [1, 2, 4, 5, 6, 7]
+k = 16
 print(
-    FindKthPositive().find_kth_positive(arr, k)
-)  # returns 5, the missing numbers are [2, 3, 5], the 3rd missing number is 5.
+    FindKthPositive().find_kth_positive_binary_search(arr, k)
+)  # returns 22, the missing numbers are [3, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22], the 16th missing number is 22.
