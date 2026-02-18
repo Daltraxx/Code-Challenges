@@ -13,6 +13,7 @@ class MaximumRobots:
 
         left = 0
         for right in range(n):
+            # Update variables for calculating current total cost
             curr_running_cost_sum += running_costs[right]
 
             while (
