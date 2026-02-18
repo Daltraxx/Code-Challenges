@@ -21,7 +21,8 @@ class FindKthPositive:
     # Space complexity: O(1) since we are using only a constant amount of extra space
 
     def findKthPositiveBinarySearch(self, arr: List[int], k: int) -> int:
-        left, right = 0, len(arr) - 1
+        left = 0
+        right = len(arr) - 1
         while left <= right:
             mid = (left + right) // 2
             missing_nums_at_mid = arr[mid] - mid - 1
