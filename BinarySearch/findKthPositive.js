@@ -17,3 +17,22 @@ const findKthPositive = (arr, k) => {
 
 // Time Complexity: O(n) where n is the length of arr
 // Space Complexity: O(1)
+
+const findKthPositiveBinarySearch = (arr, k) => {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const missingNums = arr[mid] - (mid + 1);
+    if (missingNums < k) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return left + k;
+};
+
+// Time Complexity: O(log n) where n is the length of arr
+// Space Complexity: O(1)
