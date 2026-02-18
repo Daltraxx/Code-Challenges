@@ -9,7 +9,7 @@ class MaximumRobots:
         n = len(charge_times)
         max_robots = 0
         curr_running_cost_sum = 0
-        mono_decreasing_charges = deque()
+        mono_decreasing_charges = deque()  # stores indices
 
         left = 0
         for right in range(n):
@@ -24,7 +24,8 @@ class MaximumRobots:
 
             # Maintain valid window
             while (
-                self._get_total_cost(
+                mono_decreasing_charges
+                and self._get_total_cost(
                     charge_times[mono_decreasing_charges[0]],
                     right - left + 1,
                     curr_running_cost_sum,
