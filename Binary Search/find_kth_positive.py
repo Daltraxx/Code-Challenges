@@ -10,7 +10,8 @@ class FindKthPositive:
             if included_num != curr_num:
                 gap = included_num - curr_num
                 if missing_nums + gap >= k:
-                    return curr_num + (k - missing_nums) - 1
+                    # - 1 to account for curr_num being the first missing number
+                    return curr_num + k - missing_nums - 1
                 missing_nums += gap
             curr_num = included_num + 1
 
