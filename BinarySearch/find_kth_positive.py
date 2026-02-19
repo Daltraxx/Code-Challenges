@@ -25,7 +25,8 @@ class FindKthPositive:
         right = len(arr) - 1
         while left <= right:
             mid = (left + right) // 2
-            missing_nums_at_mid = arr[mid] - mid - 1
+            expected_num = mid + 1
+            missing_nums_at_mid = arr[mid] - expected_num
             if missing_nums_at_mid < k:
                 left = mid + 1
             else:

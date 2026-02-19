@@ -4,7 +4,8 @@ public class FindKthPositive {
     int right = arr.length - 1;
     while (left <= right) {
       int mid = (int) Math.floor((left + right) / 2);
-      int missingNums = arr[mid] - mid - 1;
+      int expectedNum = mid + 1;
+      int missingNums = arr[mid] - expectedNum;
       if (missingNums < k) {
         left = mid + 1;
       } else {
