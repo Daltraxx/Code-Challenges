@@ -5,14 +5,13 @@ from tree_node import TreeNode
 
 class MaxDepth:
     def max_depth(self, root: Optional[TreeNode]) -> int:
-        return self._dfs(root)_
-      
-    def _dfs(self, node: Optional[TreeNode]):
-        if not node:
+        if not root:
             return 0
-        
-        left_depth = 1 + self._dfs(node.left)
-        right_depth = 1 + self._dfs(node.right)
 
-        return max(left_depth, right_depth)
-        
+        return 1 + max(self.max_depth(root.left), self.max_depth(root.right))
+
+
+# Time complexity: O(n) where n is the number of nodes in the binary tree. We visit each node once.
+# Space complexity: O(h) where h is the height of the binary tree. 
+# In the worst case of a completely unbalanced tree, the height could be n, leading to O(n) space complexity. 
+# In the best case of a balanced tree, the height would be log(n), leading to O(log(n)) space complexity.
