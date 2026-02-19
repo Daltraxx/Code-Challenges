@@ -23,7 +23,8 @@ const findKthPositiveBinarySearch = (arr, k) => {
   let right = arr.length - 1;
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
-    const missingNums = arr[mid] - (mid + 1);
+    const expectedNum = mid + 1;
+    const missingNums = arr[mid] - expectedNum;
     if (missingNums < k) {
       left = mid + 1;
     } else {
