@@ -12,35 +12,34 @@ A binary tree's maximum depth is the number of nodes along the longest path from
  */
 
 const maxDepthRecursive = (root) => {
-    if (!root) {
-        return 0;
-    }
+  if (!root) {
+    return 0;
+  }
 
-    const left = maxDepth(root.left);
-    const right = maxDepth(root.right);
+  const left = maxDepth(root.left);
+  const right = maxDepth(root.right);
 
-    return Math.max(left, right) + 1;
-}
+  return Math.max(left, right) + 1;
+};
 
 const maxDepthIterative = (root) => {
-    if (!root) {
-        return 0;
-    }
+  if (!root) {
+    return 0;
+  }
 
-    let maxDepth = 0;
+  let maxDepth = 0;
 
-    const stack = [];
-    stack.push([root, 0]);
+  const stack = [];
+  stack.push([root, 1]);
 
-    while (stack.length) {
-        let [currentNode, currentDepth] = stack.pop();
-        currentDepth++;
+  while (stack.length) {
+    let [currentNode, currentDepth] = stack.pop();
 
-        maxDepth = Math.max(maxDepth, currentDepth);
+    maxDepth = Math.max(maxDepth, currentDepth);
 
-        if (currentNode.left) stack.push([currentNode.left, currentDepth]);
-        if (currentNode.right) stack.push([currentNode.right, currentDepth]);
-    }
+    if (currentNode.left) stack.push([currentNode.left, currentDepth + 1]);
+    if (currentNode.right) stack.push([currentNode.right, currentDepth + 1]);
+  }
 
-    return maxDepth;
-}
+  return maxDepth;
+};
