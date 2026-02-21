@@ -23,7 +23,7 @@ A leaf is a node with no children. */
  * }
  */
 
-public class PathSum {
+public class HasPathSum {
     public boolean hasPathSumRecursive(TreeNode root, int targetSum) {
         //return false if tree/subtree is empty
         if (root == null) {
