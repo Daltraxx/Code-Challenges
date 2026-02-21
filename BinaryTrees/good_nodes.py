@@ -6,14 +6,14 @@ from tree_node import TreeNode
 class GoodNodes:
 
     def goodNodes(self, root: TreeNode):
-        def dfs(node: Optional[TreeNode], prev_max_sum: int):
+        def dfs(node: Optional[TreeNode], prev_max_val: int):
             if not node:
                 return 0
 
-            if node.val >= prev_max_sum:
+            if node.val >= prev_max_val:
                 return 1 + dfs(node.left, node.val) + dfs(node.right, node.val)
             else:
-                return dfs(node.left, prev_max_sum) + dfs(node.right, prev_max_sum)
+                return dfs(node.left, prev_max_val) + dfs(node.right, prev_max_val)
             
         return dfs(root, float('-inf'))
 
