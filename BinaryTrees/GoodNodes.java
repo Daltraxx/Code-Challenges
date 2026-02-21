@@ -23,7 +23,7 @@ Return the number of good nodes in the binary tree. */
  * }
  */
 
- class CountGoodNodes {
+ class GoodNodes {
     public int goodNodes(TreeNode root) {
         return dfs(root, Integer.MIN_VALUE);
     }
