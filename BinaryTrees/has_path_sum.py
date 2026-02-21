@@ -4,7 +4,7 @@ from tree_node import TreeNode
 
 
 class HasPathSum:
-    def has_path_sum(self, root: Optional[TreeNode], target_sum: int) -> int:
+    def has_path_sum(self, root: Optional[TreeNode], target_sum: int) -> bool:
         if not root:
             return False
 
