@@ -10,11 +10,10 @@ class GoodNodes:
             if not node:
                 return 0
 
-            if node.val >= prev_max_val:
-                return 1 + dfs(node.left, node.val) + dfs(node.right, node.val)
-            else:
-                return dfs(node.left, prev_max_val) + dfs(node.right, prev_max_val)
-            
+            good_node_contribution = 1 if node.val >= prev_max_val else 0
+            updated_max_val = max(node.val, prev_max_val)
+            return good_node_contribution + dfs(node.left, updated_max_val) + dfs(node.right, updated_max_val)
+
         return dfs(root, float('-inf'))
 
 # Time complexity: O(n) where n is the number of nodes in the binary tree. We visit each node once.
