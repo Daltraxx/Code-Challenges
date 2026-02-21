@@ -13,44 +13,43 @@ A leaf is a node with no children.*/
  */
 
 const hasPathSumRecursive = (root, targetSum) => {
-    //first base case
-    if (!root) return false;
+  if (!root) return false;
 
-    //if targetSum can be met, subtracting from it will eventually equal 0
-    targetSum -= root.val;
+  targetSum -= root.val;
 
-    //if node is leaf, see if path equals target sum (targetSum has been subtracted down to exactly 0)
-    if (!root.left && !root.right) {
-        return targetSum === 0;
-    }
+  // Check if we are at a leaf node and if the targetSum has been reduced to 0
+  if (!root.left && !root.right) {
+    return targetSum === 0;
+  }
 
-    //recursively follow path to left and right and return true if either ends in targetSum
-    return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum);
-}
+  // If left or right subtree has a path sum that equals the remaining targetSum, return true
+  return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum);
+};
 
 const hasPathSumIterative = (root, targetSum) => {
-    if (!root) {
-        return 0;
-    }
-
-    const stack = [];
-    stack.push([root, 0]);
-
-    while (stack.length) {
-        const nodeAndPrevSum = stack.pop();
-        const currentNode = nodeAndPrevSum[0];
-        const currentSum = currentNode.val + nodeAndPrevSum[1];
-
-        //if leaf, return true if currentSum equals targetSum
-        if (!currentNode.left && !currentNode.right) {
-            if (currentSum === targetSum) return true;
-        }
-
-        //push any children to stack to keep following path
-        if (currentNode.left) stack.push([currentNode.left, currentSum]);
-        if (currentNode.right) stack.push([currentNode.right, currentSum]);
-    }
-
-    //if targetSum is never found in while loop iterations, return false
+  if (!root) {
     return false;
-}
+  }
+
+  const stack = [];
+  stack.push([root, 0]);
+
+  while (stack.length) {
+    let [currentNode, currentSum] = stack.pop();
+    currentSum += currentNode.val;
+
+    // If we are at a leaf node, check if currentSum equals targetSum
+    if (!currentNode.left && !currentNode.right) {
+      if (currentSum === targetSum) return true;
+    }
+
+    // Push any children to the stack to keep following the path
+    if (currentNode.left) stack.push([currentNode.left, currentSum]);
+    if (currentNode.right) stack.push([currentNode.right, currentSum]);
+  }
+
+  return false;
+};
+
+// Time Complexity: O(n) where n is the number of nodes in the tree, as we may have to visit each node once.
+// Space Complexity: O(n) in the worst case of a completely unbalanced tree, and O(log n) in the best case of a balanced tree due to the recursive call stack or the stack used for iteration.
