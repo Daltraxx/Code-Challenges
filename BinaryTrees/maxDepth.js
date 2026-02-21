@@ -12,7 +12,6 @@ A binary tree's maximum depth is the number of nodes along the longest path from
  */
 
 const maxDepthRecursive = (root) => {
-    //base case for empty tree or subtree
     if (!root) {
         return 0;
     }
@@ -20,7 +19,6 @@ const maxDepthRecursive = (root) => {
     const left = maxDepth(root.left);
     const right = maxDepth(root.right);
 
-    //add 1 to take root as part of path into account
     return Math.max(left, right) + 1;
 }
 
