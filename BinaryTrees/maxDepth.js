@@ -43,3 +43,6 @@ const maxDepthIterative = (root) => {
 
   return maxDepth;
 };
+
+// Time: O(n) where n is the number of nodes in the tree
+// Space: O(n) in the worst case of a skewed tree, O(log n) in the best case of a balanced tree
