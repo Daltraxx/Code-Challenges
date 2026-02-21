@@ -9,20 +9,20 @@ A binary tree's maximum depth is the number of nodes along the longest path from
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
  * }
  */
 
- class MaxDepth {
+class MaxDepth {
     public int maxDepthRecursive(TreeNode root) {
         if (root == null) {
             return 0;
@@ -31,7 +31,7 @@ A binary tree's maximum depth is the number of nodes along the longest path from
         int leftDepth = maxDepthRecursive(root.left);
         int rightDepth = maxDepthRecursive(root.right);
 
-        return Math.max(leftDepth, rightDepth) + 1;
+        return 1 + Math.max(leftDepth, rightDepth);
     }
 
     public int maxDepthIterative(TreeNode root) {
@@ -60,14 +60,18 @@ A binary tree's maximum depth is the number of nodes along the longest path from
 
         return ans;
     }
- }
 
- //for iterative solution, used for values stored in stack
- class nodeDepthPair {
-    TreeNode node;
-    int depth;
-    nodeDepthPair(TreeNode node, int depth) {
-        this.node = node;
-        this.depth = depth;
+    // Helper class to store a node and its corresponding depth in the stack
+    private class nodeDepthPair {
+        TreeNode node;
+        int depth;
+
+        nodeDepthPair(TreeNode node, int depth) {
+            this.node = node;
+            this.depth = depth;
+        }
     }
- }
+}
+
+// Time Complexity: O(n) where n is the number of nodes in the binary tree. We visit each node once to calculate the maximum depth.
+// Space Complexity: O(n) in the worst case (when the tree is completely unbalanced, e.g., a linked list), and O(log n) in the best case (when the tree is completely balanced).
