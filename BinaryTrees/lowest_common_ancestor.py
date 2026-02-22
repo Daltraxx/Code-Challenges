@@ -24,8 +24,7 @@ class LowestCommonAncestor:
         return node_in_left if node_in_left else node_in_right
 
     # Time complexity: O(n) where n is the number of nodes in the binary tree. We visit each node once.
-    # Space complexity: O(n) in the worst case of a completely unbalanced tree, where the height of the tree is n.
-
+    # Space complexity: O(h), where h is the tree height (O(n) worst case, O(log n) for balanced tree).
 
     # This is a first attempt that is more complicated than the above solution. It works but is not as clean and concise.
     def lowestCommonAncestorFirstAttempt(
