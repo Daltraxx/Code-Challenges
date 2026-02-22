@@ -10,20 +10,20 @@ Return the number of good nodes in the binary tree. */
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
  * }
  */
 
- class GoodNodes {
+class GoodNodes {
     public int goodNodes(TreeNode root) {
         return dfs(root, Integer.MIN_VALUE);
     }
@@ -38,7 +38,8 @@ Return the number of good nodes in the binary tree. */
 
         int goodNodesCount = left + right;
 
-        if (node.val >= maxSoFar) goodNodesCount++;
+        if (node.val >= maxSoFar)
+            goodNodesCount++;
 
         return goodNodesCount;
     }
@@ -54,28 +55,32 @@ Return the number of good nodes in the binary tree. */
             TreeNode currentNode = nodeAndMaxSoFar.node;
             int maxSoFar = nodeAndMaxSoFar.maxSoFar;
 
-            //add to goodNodesCount if current node is good node
-            if (currentNode.val >= maxSoFar) goodNodesCount++;
+            // Add to goodNodesCount if current node is good node
+            if (currentNode.val >= maxSoFar)
+                goodNodesCount++;
 
-            //update maxSoFar
+            // Update maxSoFar
             maxSoFar = Math.max(maxSoFar, currentNode.val);
 
-            //add children to stack with updated maxSoFar value to continue evaluating
-            if (currentNode.left != null) stack.push(new nodeAndMaxSoFar(currentNode.left, maxSoFar));
-            if (currentNode.right != null) stack.push(new nodeAndMaxSoFar(currentNode.right, maxSoFar));
+            // Add children to stack with updated maxSoFar value to continue evaluating
+            if (currentNode.left != null)
+                stack.push(new nodeAndMaxSoFar(currentNode.left, maxSoFar));
+            if (currentNode.right != null)
+                stack.push(new nodeAndMaxSoFar(currentNode.right, maxSoFar));
         }
 
         return goodNodesCount;
     }
 
+    // Helper class for iterative approach to store node and maxSoFar value together in stack
+    private class nodeAndMaxSoFar {
+        TreeNode node;
+        int maxSoFar;
 
- }
-
- class nodeAndMaxSoFar {
-    TreeNode node;
-    int maxSoFar;
-    nodeAndMaxSoFar(TreeNode node, int maxSoFar) {
-        this.node = node;
-        this.maxSoFar = maxSoFar;
+        nodeAndMaxSoFar(TreeNode node, int maxSoFar) {
+            this.node = node;
+            this.maxSoFar = maxSoFar;
+        }
     }
- }
+
+}
