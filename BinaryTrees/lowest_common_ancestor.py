@@ -26,6 +26,8 @@ class LowestCommonAncestor:
     # Time complexity: O(n) where n is the number of nodes in the binary tree. We visit each node once.
     # Space complexity: O(n) in the worst case of a completely unbalanced tree, where the height of the tree is n.
 
+
+    # This is a first attempt that is more complicated than the above solution. It works but is not as clean and concise.
     def lowestCommonAncestorFirstAttempt(
         self, root: TreeNode, p: TreeNode, q: TreeNode
     ) -> TreeNode:
