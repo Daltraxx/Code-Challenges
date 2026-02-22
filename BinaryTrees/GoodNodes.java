@@ -24,11 +24,12 @@ Return the number of good nodes in the binary tree. */
  */
 
 class GoodNodes {
+    // Recursive approach
     public int goodNodes(TreeNode root) {
         return dfs(root, Integer.MIN_VALUE);
     }
 
-    public int dfs(TreeNode node, int maxSoFar) {
+    private int dfs(TreeNode node, int maxSoFar) {
         if (node == null) {
             return 0;
         }
@@ -44,6 +45,7 @@ class GoodNodes {
         return goodNodesCount;
     }
 
+    // Iterative approach
     public int goodNodesIterative(TreeNode root) {
         int goodNodesCount = 0;
 
@@ -71,8 +73,7 @@ class GoodNodes {
 
         return goodNodesCount;
     }
-
-    // Helper class for iterative approach to store node and maxSoFar value together in stack
+    
     private class nodeAndMaxSoFar {
         TreeNode node;
         int maxSoFar;
@@ -82,5 +83,4 @@ class GoodNodes {
             this.maxSoFar = maxSoFar;
         }
     }
-
 }
