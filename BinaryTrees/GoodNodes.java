@@ -73,7 +73,7 @@ class GoodNodes {
 
         return goodNodesCount;
     }
-    
+
     private class nodeAndMaxSoFar {
         TreeNode node;
         int maxSoFar;
@@ -84,3 +84,6 @@ class GoodNodes {
         }
     }
 }
+
+// Time: O(n) where n is number of nodes in tree, we have to visit each node once
+// Space: O(n) in worst case of skewed tree, O(log n) in best case of balanced tree due to recursive call stack or iterative stack size. Or just O(h) where h is height of tree

@@ -49,3 +49,6 @@ const goodNodesIterative = (root) => {
 
   return goodNodesCount;
 };
+
+// Time: O(n) where n is number of nodes in tree, we have to visit each node once
+// Space: O(n) in worst case of skewed tree, O(log n) in best case of balanced tree due to recursive call stack or iterative stack size
