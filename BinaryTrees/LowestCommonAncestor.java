@@ -41,3 +41,10 @@ class LowestCommonAncestor {
         return searchLeftDescendant != null ? searchLeftDescendant : searchRightDescendant;
     }
 }
+
+// Time Complexity: O(N) where N is the number of nodes in the binary tree. In
+// the worst case, we might have to visit all nodes of the tree.
+// Space Complexity: O(N) in the worst case when the binary tree is skewed. In
+// the best case (balanced tree), the space complexity would be O(log N) due to
+// the recursive call stack. Could simply use O(h) where h is the height of the
+// tree.
