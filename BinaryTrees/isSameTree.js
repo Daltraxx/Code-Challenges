@@ -19,54 +19,54 @@ Two binary trees are considered the same if they are structurally identical, and
  */
 
 const isSameTree = (p, q) => {
-    //if both trees are empty they're identical,
-    //and if a null child is reached, path to that point has been identical
-    if (!p && !q) {
-        return true;
-    }
+  // If both trees are empty they're identical
+  if (!p && !q) {
+    return true;
+  }
 
-    //combined with previous check,
-    //if one node is null and the other isn't,
-    //tree not identical
-    if (!p || !q) {
-        return false;
-    }
+  // If one node is null and the other isn't, tree not identical
+  if (!p || !q) {
+    return false;
+  }
 
-    //values must be equal
-    if (p.val !== q.val) {
-        return false;
-    }
+  // Values must be equal
+  if (p.val !== q.val) {
+    return false;
+  }
 
-    //both paths must be identical
-    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
-}
+  // Both paths must be identical
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+};
 
 const isSameTreeIterative = (p, q) => {
-    const stack = [[p, q]];
+  const stack = [[p, q]];
 
-    while (stack.length) {
-        const [nodeA, nodeB] = stack.pop();
+  while (stack.length) {
+    const [nodeA, nodeB] = stack.pop();
 
-        //if a null node is reached, path to that point has been identical
-        if (!nodeA && !nodeB) {
-            continue;
-        }
-
-        //combined with previous check,
-        //if one node is null and the other isn't,
-        //tree not identical
-        if (!nodeA || !nodeB) {
-            return false;
-        }
-
-        //values must be equal
-        if (nodeA.val !== nodeB.val) {
-            return false;
-        }
-
-        stack.push([nodeA.left, nodeB.left]);
-        stack.push([nodeA.right, nodeB.right]);
+    // If a null node is reached, path to that point has been identical
+    if (!nodeA && !nodeB) {
+      continue;
     }
 
-    return true;
-}
+    // If one node is null and the other isn't, tree not identical
+    if (!nodeA || !nodeB) {
+      return false;
+    }
+
+    // Values must be equal
+    if (nodeA.val !== nodeB.val) {
+      return false;
+    }
+
+    stack.push([nodeA.left, nodeB.left]);
+    stack.push([nodeA.right, nodeB.right]);
+  }
+
+  return true;
+};
+
+// Time Complexity: O(n) where n is the number of nodes in the smaller tree, 
+// since we have to check every node in both trees until we find a mismatch or reach the end of both trees.
+// Space Complexity: O(h) where h is the height of the tree, since in the worst case (a completely unbalanced tree) 
+// the stack could hold all nodes in one path from root to leaf. In a balanced tree, this would be O(log n).
