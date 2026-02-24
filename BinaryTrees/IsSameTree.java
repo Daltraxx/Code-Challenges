@@ -9,16 +9,16 @@ Two binary trees are considered the same if they are structurally identical, and
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
  * }
  */
 
@@ -30,7 +30,8 @@ public class IsSameTree {
             return true;
         }
 
-        // Combined with previous check, if only one of nodes are null then not identical
+        // Combined with previous check, if only one of nodes are null then not
+        // identical
         if (p == null || q == null) {
             return false;
         }
@@ -83,3 +84,10 @@ public class IsSameTree {
         }
     }
 }
+
+// Time Complexity: O(n) where n is the number of nodes in the smaller tree,
+// since we have to check every node in both trees until we find a mismatch or
+// reach the end of both trees.
+// Space Complexity: O(h) where h is the height of the tree, since in the worst
+// case (a completely unbalanced tree) the stack could hold all nodes in one
+// path from root to leaf. In a balanced tree, this would be O(log n).
