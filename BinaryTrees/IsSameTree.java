@@ -23,34 +23,36 @@ Two binary trees are considered the same if they are structurally identical, and
  */
 
 public class IsSameTree {
+    // RECURSIVE SOLUTION
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        //if both null, path to that point is identical
+        // If both null, path to that point is identical
         if (p == null && q == null) {
             return true;
         }
 
-        //combined with previous check, if only one of nodes are null then not identical
+        // Combined with previous check, if only one of nodes are null then not identical
         if (p == null || q == null) {
             return false;
         }
-        
-        //values must match
+
+        // Values must match
         if (p.val != q.val) {
             return false;
         }
 
-        //both left and right paths must be identical
+        // Both left and right paths must be identical
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
+    // ITERATIVE SOLUTION
     public boolean isSameTreeIterative(TreeNode p, TreeNode q) {
-        Stack<nodePair> stack = new Stack<>();
-        stack.push(new nodePair(p, q));
+        Stack<NodePair> stack = new Stack<>();
+        stack.push(new NodePair(p, q));
 
         while (!stack.isEmpty()) {
-            nodePair nodenodePair = stack.pop();
-            TreeNode nodeA = nodenodePair.nodeA;
-            TreeNode nodeB = nodenodePair.nodeB;
+            NodePair nodePair = stack.pop();
+            TreeNode nodeA = nodePair.nodeA;
+            TreeNode nodeB = nodePair.nodeB;
 
             if (nodeA == null && nodeB == null) {
                 continue;
@@ -64,19 +66,20 @@ public class IsSameTree {
                 return false;
             }
 
-            stack.push(new nodePair(nodeA.left, nodeB.left));
-            stack.push(new nodePair(nodeA.right, nodeB.right));
+            stack.push(new NodePair(nodeA.left, nodeB.left));
+            stack.push(new NodePair(nodeA.right, nodeB.right));
         }
 
         return true;
     }
-}
 
-class nodePair { 
-    TreeNode nodeA;
-    TreeNode nodeB;
-    nodePair(TreeNode nodeA, TreeNode nodeB) {
-        this.nodeA = nodeA;
-        this.nodeB = nodeB;
+    private static class NodePair {
+        TreeNode nodeA;
+        TreeNode nodeB;
+
+        NodePair(TreeNode nodeA, TreeNode nodeB) {
+            this.nodeA = nodeA;
+            this.nodeB = nodeB;
+        }
     }
 }
