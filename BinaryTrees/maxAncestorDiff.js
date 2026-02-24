@@ -17,48 +17,56 @@ A node a is an ancestor of b if either: any child of a is equal to b or any chil
  */
 
 const maxAncestorDiff = (root) => {
-    const dfs = (node, minVal, maxVal) => {
-        //if end of path, 
-        //get difference of max and min value on that path and return for comparison
-        if (!node) {
-            return maxVal - minVal;
-        }
+  if (!root) return 0;
 
-        //update min and max values with current node value
-        minVal = Math.min(minVal, node.val);
-        maxVal = Math.max(maxVal, node.val);
-
-        //return max difference of paths
-        const left = dfs(node.left, minVal, maxVal);
-        const right = dfs(node.right, minVal, maxVal);
-        return Math.max(left, right);
+  const dfs = (node, minVal, maxVal) => {
+    // If end of path,
+    // get difference of max and min value on that path and return for comparison
+    if (!node) {
+      return maxVal - minVal;
     }
 
-    //start search with root.val as min and max values
-    return dfs(root, root.val, root.val);
-}
+    // Update min and max values with current node value
+    minVal = Math.min(minVal, node.val);
+    maxVal = Math.max(maxVal, node.val);
+
+    // Return max difference of paths
+    const left = dfs(node.left, minVal, maxVal);
+    const right = dfs(node.right, minVal, maxVal);
+    return Math.max(left, right);
+  };
+
+  // Start search with root.val as min and max values
+  return dfs(root, root.val, root.val);
+};
 
 const maxAncestorDiffIterative = (root) => {
-    if (!root) return 0;
+  if (!root) return 0;
 
-    let maxDiff = 0;
+  let maxDiff = 0;
 
-    const stack = [[root, root.val, root.val]];
+  const stack = [[root, root.val, root.val]];
 
-    while (stack.length) {
-        let [node, minVal, maxVal] = stack.pop();
+  while (stack.length) {
+    let [node, minVal, maxVal] = stack.pop();
 
-        minVal = Math.min(minVal, node.val);
-        maxVal = Math.max(maxVal, node.val);
+    minVal = Math.min(minVal, node.val);
+    maxVal = Math.max(maxVal, node.val);
 
-        if (!node.left && !node.right) {
-            maxDiff = Math.max(maxDiff, maxVal - minVal);
-            continue;
-        }
-
-        if (node.left) stack.push([node.left, minVal, maxVal]);
-        if (node.right) stack.push([node.right, minVal, maxVal]);
+    if (!node.left && !node.right) {
+      maxDiff = Math.max(maxDiff, maxVal - minVal);
+      continue;
     }
 
-    return maxDiff;
-}
+    if (node.left) stack.push([node.left, minVal, maxVal]);
+    if (node.right) stack.push([node.right, minVal, maxVal]);
+  }
+
+  return maxDiff;
+};
+
+// Time Complexity: O(n) where n is the number of nodes in the tree. We visit
+// each node once.
+// Space Complexity: O(h) where h is the height of the tree. In the worst case
+// of a skewed tree, the height can be n, so O(n) in the worst case. In a
+// balanced tree, the height is log(n), so O(log(n)).
