@@ -22,7 +22,7 @@ Two binary trees are considered the same if they are structurally identical, and
  * }
  */
 
-public class SameTree {
+public class IsSameTree {
     public boolean isSameTree(TreeNode p, TreeNode q) {
         //if both null, path to that point is identical
         if (p == null && q == null) {
