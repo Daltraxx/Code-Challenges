@@ -21,7 +21,7 @@ from the root node down to the nearest leaf node.*/
  *     }
  * }
  */
-class MinDepthOfBinaryTree {
+class MinDepth {
     public int minDepth(TreeNode root) {
         //if tree/subtree is empty, min depth is 0
         if (root == null) {
