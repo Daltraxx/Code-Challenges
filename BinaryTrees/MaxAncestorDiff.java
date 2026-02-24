@@ -15,20 +15,26 @@ public class MaxAncestorDiff {
     }
 
     public int dfs(TreeNode node, int minVal, int maxVal) {
-        //if reach end of path, return max difference for that path
+        // If reach end of path, return max difference for that path
         if (node == null) {
             return maxVal - minVal;
         }
 
-        //update min and max values so far
+        // Update min and max values so far
         minVal = Math.min(minVal, node.val);
         maxVal = Math.max(maxVal, node.val);
 
-        //get max difference of left and right paths
-        //and return the larger value
+        // Get max difference of left and right paths
+        // and return the larger value
         int left = dfs(node.left, minVal, maxVal);
         int right = dfs(node.right, minVal, maxVal);
 
         return Math.max(left, right);
     }
 }
+
+// Time Complexity: O(n) where n is the number of nodes in the tree. We visit
+// each node once.
+// Space Complexity: O(h) where h is the height of the tree. In the worst case
+// of a skewed tree, the height can be n, so O(n) in the worst case. In a
+// balanced tree, the height is log(n), so O(log(n)).
