@@ -6,26 +6,24 @@ from tree_node import TreeNode
 
 class RightSideView:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        right_nodes = []
+        right_node_vals = []
 
         if not root:
-            return right_nodes
+            return right_node_vals
 
         queue = deque([root])
 
         while queue:
             level_size = len(queue)
-            for i in range(level_size):
+            right_node_vals.append(queue[-1].val)
+            for _ in range(level_size):
                 node = queue.popleft()
-                if i == level_size - 1:
-                    right_nodes.append(node.val)
-
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
 
-        return right_nodes
+        return right_node_vals
 
 # Time Complexity: O(n) where n is the number of nodes in the tree, as we visit each node once.
 # Space Complexity: O(w) where w is the maximum width of the tree, 
