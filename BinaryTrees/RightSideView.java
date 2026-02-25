@@ -9,7 +9,7 @@ import java.util.Queue;
 imagine yourself standing on the right side of it, 
 return the values of the nodes you can see ordered from top to bottom. */
 
-public class BinaryTreeRightSideView {
+public class RightSideView {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> viewableNodes = new ArrayList<>();
 
