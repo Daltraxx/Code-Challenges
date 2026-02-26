@@ -9,7 +9,7 @@ import java.util.Queue;
 return the zigzag level order traversal of its nodes' values. 
 (i.e., from left to right, then right to left for the next level and alternate between). */
 
-class ZigzagLevelOrderTraversal {
+class ZigzagLevelOrder {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> traversalOrder = new ArrayList<>();
         if (root == null) {
