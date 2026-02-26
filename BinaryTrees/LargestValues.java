@@ -17,20 +17,20 @@ class LargestValues {
         }
 
         Deque<TreeNode> queue = new ArrayDeque<>();
-        queue.add(root);
+        queue.addFirst(root);
 
         while (!queue.isEmpty()) {
             int size = queue.size();
             int maxRowValue = Integer.MIN_VALUE;
 
             for (int i = 0; i < size; i++) {
-                TreeNode currentNode = queue.remove();
+                TreeNode currentNode = queue.removeFirst();
                 maxRowValue = Math.max(maxRowValue, currentNode.val);
 
                 if (currentNode.left != null)
-                    queue.add(currentNode.left);
+                    queue.addLast(currentNode.left);
                 if (currentNode.right != null)
-                    queue.add(currentNode.right);
+                    queue.addLast(currentNode.right);
             }
 
             largestRowValues.add(maxRowValue);
