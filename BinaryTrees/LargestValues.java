@@ -9,7 +9,7 @@ import java.util.Stack;
 /*Given the root of a binary tree, 
 return an array of the largest value in each row of the tree (0-indexed). */
 
-class LargestValueInEachRow {
+class LargestValues {
     public List<Integer> largestValuesBFS(TreeNode root) {
         List<Integer> largestRowValues = new ArrayList<>();
 
