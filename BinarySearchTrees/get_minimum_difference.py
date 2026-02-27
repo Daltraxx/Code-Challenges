@@ -5,9 +5,6 @@ from BinaryTrees.tree_node import TreeNode
 
 class GetMinimumDifference:
     def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
-        if not root:
-            return 0
-
         min_difference = float("inf")
         prev_val = None
 
@@ -17,7 +14,7 @@ class GetMinimumDifference:
 
             dfs(node.left)
             nonlocal min_difference, prev_val
-            if prev_val != None:
+            if prev_val is not None:
                 min_difference = min(abs(node.val - prev_val), min_difference)
             prev_val = node.val
             dfs(node.right)
