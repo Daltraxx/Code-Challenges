@@ -11,30 +11,26 @@ class ZigzagLevelOrder:
         if not root:
             return level_orders
 
-        current_deque = deque([root])
+        queue = deque([root])
         left_to_right = True
 
-        while current_deque:
-            order = []
-            next_deque = deque()
-            level_size = len(current_deque)
+        while queue:
+            order = deque()
+            level_size = len(queue)
             for _ in range(level_size):
-                node = current_deque.popleft() if left_to_right else current_deque.pop()
-                order.append(node.val)
+                node = queue.popleft()
                 if left_to_right:
-                    if node.left:
-                        next_deque.append(node.left)
-                    if node.right:
-                        next_deque.append(node.right)
+                    order.append(node.val)
                 else:
-                    if node.right:
-                        next_deque.appendleft(node.right)
-                    if node.left:
-                        next_deque.appendleft(node.left)
+                    order.appendleft(node.val)
 
-            level_orders.append(order)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+
+            level_orders.append(list(order))
             left_to_right = not left_to_right
-            current_deque = next_deque
 
         return level_orders
 
