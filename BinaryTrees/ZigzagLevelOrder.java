@@ -28,14 +28,16 @@ class ZigzagLevelOrder {
             for (int i = 0; i < levelLength; i++) {
                 TreeNode node = queue.remove();
 
-                if (direction % 2 == 0) { //left to right
+                if (direction % 2 == 0) { // left to right
                     levelOrder.addLast(node.val);
-                } else { //right to left
+                } else { // right to left
                     levelOrder.addFirst(node.val);
                 }
-                
-                if (node.left != null) queue.add(node.left);
-                if (node.right != null) queue.add(node.right);
+
+                if (node.left != null)
+                    queue.add(node.left);
+                if (node.right != null)
+                    queue.add(node.right);
             }
 
             traversalOrder.add(levelOrder);
@@ -45,3 +47,9 @@ class ZigzagLevelOrder {
         return traversalOrder;
     }
 }
+
+// Time Complexity: O(n) where n is the number of nodes in the tree. We visit
+// each node once.
+// Space Complexity: O(n) in the worst case when the tree is completely
+// unbalanced, or O(w) where w is the maximum width of the tree in the best case
+// when the tree is balanced.
