@@ -15,7 +15,7 @@ class GetMinimumDifference:
             dfs(node.left)
             nonlocal min_difference, prev_val
             if prev_val is not None:
-                min_difference = min(abs(node.val - prev_val), min_difference)
+                min_difference = min(node.val - prev_val, min_difference)
             prev_val = node.val
             dfs(node.right)
 
