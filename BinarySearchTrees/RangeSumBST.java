@@ -1,6 +1,7 @@
 package BinarySearchTrees;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /*Given the root node of a binary search tree and two integers low and high, 
 return the sum of values of all nodes with a value in the inclusive range [low, high]. */
@@ -28,7 +29,7 @@ public class RangeSumBST {
         return sum;
     }
 
-    //iterative solution below
+    // ITERATIVE SOLUTION
     public int rangeSumBSTIterative(TreeNode root, int low, int high) {
         int sum = 0;
 
@@ -36,20 +37,28 @@ public class RangeSumBST {
             return sum;
         }
 
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        stack.addLast(root);
 
         while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
+            TreeNode node = stack.removeLast();
             if (node.val >= low && node.val <= high) {
                 sum += node.val;
             }
 
-            if (node.val > low && node.left != null) stack.push(node.left);
-            if (node.val < high && node.right != null) stack.push(node.right);
+            if (node.val > low && node.left != null)
+                stack.addLast(node.left);
+            if (node.val < high && node.right != null)
+                stack.addLast(node.right);
         }
 
         return sum;
     }
-
 }
+
+// Time Complexity: O(n) where n is the number of nodes in the tree. In the
+// worst case (a skewed tree or all nodes within the range), we may have to
+// visit all nodes in the tree.
+// Space Complexity: O(h) where h is the height of the tree, which in the worst
+// case (a skewed tree) is O(n) and in the best case (a balanced tree) is O(log
+// n).
