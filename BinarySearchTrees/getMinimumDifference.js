@@ -29,9 +29,15 @@ const getMinimumDifference = (root) => {
     return minimumDifference;
 }
 
+// Time Complexity: O(n) where n is the number of nodes in the tree, as we visit
+// each node once to get the sorted values, 
+// and then we iterate through the sorted values once to find the minimum difference.
+// Space Complexity: O(n) where n is the number of nodes in the tree, as we
+// store the values of all nodes in an array.
+
 const getMinimumDifferenceOptimized = (root) => {
-    let prevNode;
-    let minimumDifference = Infinity;
+    let prevVal;
+    let minDifference = Infinity;
 
     const dfs = (node) => {
         if (!node) {
@@ -40,13 +46,11 @@ const getMinimumDifferenceOptimized = (root) => {
 
         dfs(node.left);
 
-        //find difference between node and next lesser value, offer as potential solution
-        //(prevNode will initially be null so check first)
-        if (prevNode) {
-            minimumDifference = Math.min(node.val - prevNode.val, minimumDifference);
+        if (prevVal !== undefined) {
+            minDifference = Math.min(node.val - prevVal, minDifference);
         }
         
-        prevNode = node;
+        prevVal = node.val;
 
         dfs(node.right);
 
@@ -55,5 +59,11 @@ const getMinimumDifferenceOptimized = (root) => {
 
     dfs(root);
 
-    return minimumDifference;
+    return minDifference;
 }
+
+// Time Complexity: O(n) where n is the number of nodes in the tree, as we visit
+// each node once.
+// Space Complexity: O(h) where h is the height of the tree, which in the
+// worst case (a skewed tree) is O(n) and in the best case (a balanced tree) is
+// O(log n).
