@@ -14,17 +14,23 @@ public class IsValidBST {
     }
 
     public boolean dfs(TreeNode node, long lowerBound, long higherBound) {
-        //if null node is reached, path to that point has been valid
+        // If null node is reached, path to that point has been valid
         if (node == null) {
             return true;
         }
 
-        //return false if node value does not meet BST requirements
+        // Return false if node value does not meet BST requirements
         if (node.val <= lowerBound || node.val >= higherBound) {
             return false;
         }
 
-        //subtrees to left and right must be valid
+        // Subtrees of left and right children must be valid
         return dfs(node.left, lowerBound, node.val) && dfs(node.right, node.val, higherBound);
     }
 }
+
+// Time Complexity: O(n) where n is the number of nodes in the tree, as we visit
+// each node once.
+// Space Complexity: O(h) where h is the height of the tree, which in the
+// worst case (a skewed tree) is O(n) and in the best case (a balanced tree) is
+// O(log n).
