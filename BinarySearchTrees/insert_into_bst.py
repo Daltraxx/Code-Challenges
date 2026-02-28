@@ -10,7 +10,7 @@ class InsertIntoBST:
 
         if val < root.val:
             root.left = self.insertIntoBST(root.left, val)
-        else: 
+        else:
             root.right = self.insertIntoBST(root.right, val)
 
         return root
@@ -20,12 +20,11 @@ class InsertIntoBST:
     # or O(log n) in the best case of a balanced tree.
     # Space Complexity: O(h) due to the recursive call stack.
 
-    def insertIntoBSTIterative(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
-        if not root:
-            return TreeNode(val)
-        
+    def insertIntoBSTIterative(
+        self, root: Optional[TreeNode], val: int
+    ) -> Optional[TreeNode]:
         current = root
-        while True:
+        while current:
             if val < current.val:
                 if current.left:
                     current = current.left
@@ -38,3 +37,6 @@ class InsertIntoBST:
                 else:
                     current.right = TreeNode(val)
                     return root
+
+        # Empty tree, return new node as root
+        return TreeNode(val)
