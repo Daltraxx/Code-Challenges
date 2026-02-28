@@ -8,6 +8,7 @@ Notice that there may exist multiple valid ways for the insertion,
 as long as the tree remains a BST after insertion. You can return any of them. */
 
 class InsertIntoBST {
+    // ITERATIVE SOLUTION
     public TreeNode insertIntoBST(TreeNode root, int val) {
         if (root == null) {
             return new TreeNode(val);
@@ -21,9 +22,9 @@ class InsertIntoBST {
                     currentNode.left = new TreeNode(val);
                     return root;
                 }
-                    
+
                 currentNode = currentNode.left;
-                
+
             } else {
                 if (currentNode.right == null) {
                     currentNode.right = new TreeNode(val);
@@ -34,8 +35,13 @@ class InsertIntoBST {
             }
         }
     }
+    // Time Complexity: O(h) where h is the height of the tree.
+    // In the worst case of a skewed tree, the height could be O(n),
+    // or O(log n) in the best case of a balanced tree.
+    // Space Complexity: O(1) as we are using an iterative approach without
+    // recursion.
 
-    //recursive solution below
+    // RECURSIVE SOLUTION
     public TreeNode insertIntoBSTRecursive(TreeNode root, int val) {
         if (root == null) {
             return new TreeNode(val);
@@ -49,5 +55,8 @@ class InsertIntoBST {
 
         return root;
     }
+    // Time Complexity: O(h) where h is the height of the tree.
+    // In the worst case of a skewed tree, the height could be O(n),
+    // or O(log n) in the best case of a balanced tree.
+    // Space Complexity: O(h) due to the recursive call stack.
 }
-
