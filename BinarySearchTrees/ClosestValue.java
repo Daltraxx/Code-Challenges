@@ -1,6 +1,6 @@
 package BinarySearchTrees;
 
-class ClosestBSTValue {
+class ClosestValue {
     public int closestValue(TreeNode root, double target) {
       int closestValue = root.val;
       TreeNode currentNode = root;
