@@ -40,3 +40,8 @@ class InsertIntoBST:
 
         # Empty tree, return new node as root
         return TreeNode(val)
+    
+    # Time Complexity: O(h) where h is the height of the tree.
+    # In the worst case of a skewed tree, the height could be O(n),
+    # or O(log n) in the best case of a balanced tree.
+    # Space Complexity: O(1) as we are using an iterative approach without recursion.
