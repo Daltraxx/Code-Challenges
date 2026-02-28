@@ -23,6 +23,9 @@ class InsertIntoBST:
     def insertIntoBSTIterative(
         self, root: Optional[TreeNode], val: int
     ) -> Optional[TreeNode]:
+        if not root:
+            return TreeNode(val)
+        
         current = root
         while current:
             if val < current.val:
@@ -37,9 +40,7 @@ class InsertIntoBST:
                 else:
                     current.right = TreeNode(val)
                     return root
-
-        # Empty tree, return new node as root
-        return TreeNode(val)
+                
     
     # Time Complexity: O(h) where h is the height of the tree.
     # In the worst case of a skewed tree, the height could be O(n),
