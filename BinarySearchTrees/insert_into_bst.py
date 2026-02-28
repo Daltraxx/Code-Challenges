@@ -24,17 +24,17 @@ class InsertIntoBST:
         if not root:
             return TreeNode(val)
         
-        dummy = root
+        current = root
         while True:
-            if val < dummy.val:
-                if dummy.left:
-                    dummy = dummy.left
+            if val < current.val:
+                if current.left:
+                    current = current.left
                 else:
-                    dummy.left = TreeNode(val)
+                    current.left = TreeNode(val)
                     return root
             else:
-                if dummy.right:
-                    dummy = dummy.right
+                if current.right:
+                    current = current.right
                 else:
-                    dummy.right = TreeNode(val)
+                    current.right = TreeNode(val)
                     return root
