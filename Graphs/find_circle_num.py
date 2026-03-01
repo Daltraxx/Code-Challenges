@@ -29,3 +29,10 @@ class FindCircleNum:
                 dfs(city)
 
         return province_count
+    
+    # Time Complexity: O(n^2) where n is the number of cities, 
+    # as we need to iterate through the adjacency matrix to build the graph and in the worst case, 
+    # we may visit all cities during DFS.
+    # Space Complexity: O(n + e) where n is the number of cities and e is the number of connections between cities, 
+    # as we need to store the graph and the seen set. 
+    # In the worst case, e can be O(n^2) if all cities are connected to each other.
