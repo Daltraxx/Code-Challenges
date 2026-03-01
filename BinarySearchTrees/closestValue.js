@@ -28,11 +28,12 @@ const closestValue = (root, target) => {
 
   return closestValue;
 };
+
 // Time complexity: O(h) where h is the height of the tree. 
 // In the worst case (skewed tree), this can be O(n). In a balanced tree, this would be O(log n).
-// Space complexity: O(1) for the iterative solution.
+// Space complexity: O(1).
 
-// Recursive solution below
+// RECURSIVE SOLUTION
 const closestValueRecursive = (root, target) => {
   const findClosestValue = (node, closestVal) => {
     if (!node) {
