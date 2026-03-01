@@ -39,8 +39,7 @@ class FindCircleNum:
     def findCircleNumNoPreProcess(self, isConnected: List[List[int]]) -> int:
         def dfs(city: int):
             seen.add(city)
-            potential_neighbors = len(isConnected[city])
-            for neighbor in range(potential_neighbors):
+            for neighbor in range(n):
                 if isConnected[city][neighbor] == 1 and neighbor not in seen:
                     dfs(neighbor)
 
@@ -51,5 +50,10 @@ class FindCircleNum:
             if city not in seen:
                 province_count += 1
                 dfs(city)
-        
+
         return province_count
+
+    # Time Complexity: O(n^2) where n is the number of cities, 
+    # as we need to iterate through the adjacency matrix during DFS.
+    # Space Complexity: O(n) for the seen set and recursion stack 
+    # in the worst case of a skewed graph where all cities are connected in a single line.
