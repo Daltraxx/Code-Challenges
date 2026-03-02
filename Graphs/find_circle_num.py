@@ -3,6 +3,28 @@ from typing import List
 
 
 class FindCircleNum:
+    def findCircleNumNoPreProcess(self, isConnected: List[List[int]]) -> int:
+        def dfs(city: int):
+            seen.add(city)
+            for neighbor in range(n):
+                if isConnected[city][neighbor] == 1 and neighbor not in seen:
+                    dfs(neighbor)
+
+        n = len(isConnected)
+        province_count = 0
+        seen = set()
+        for city in range(n):
+            if city not in seen:
+                province_count += 1
+                dfs(city)
+
+        return province_count
+
+    # Time Complexity: O(n^2) where n is the number of cities,
+    # as we need to iterate through the adjacency matrix during DFS.
+    # Space Complexity: O(n) for the seen set and recursion stack
+    # in the worst case of a skewed graph where all cities are connected in a single line.
+
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
         def dfs(city: int):
             seen.add(city)
@@ -35,25 +57,3 @@ class FindCircleNum:
     # Space Complexity: O(n + e) where n is the number of cities and e is the number of connections between cities,
     # as we need to store the graph and the seen set.
     # In the worst case, e can be O(n^2) if all cities are connected to each other.
-
-    def findCircleNumNoPreProcess(self, isConnected: List[List[int]]) -> int:
-        def dfs(city: int):
-            seen.add(city)
-            for neighbor in range(n):
-                if isConnected[city][neighbor] == 1 and neighbor not in seen:
-                    dfs(neighbor)
-
-        n = len(isConnected)
-        province_count = 0
-        seen = set()
-        for city in range(n):
-            if city not in seen:
-                province_count += 1
-                dfs(city)
-
-        return province_count
-
-    # Time Complexity: O(n^2) where n is the number of cities, 
-    # as we need to iterate through the adjacency matrix during DFS.
-    # Space Complexity: O(n) for the seen set and recursion stack 
-    # in the worst case of a skewed graph where all cities are connected in a single line.
