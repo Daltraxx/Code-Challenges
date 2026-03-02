@@ -11,76 +11,78 @@ Example input: isConnected = [
 
 Return the total number of provinces. */
 
-const findCircleNumf = (isConnected) => {
-    const graph = new Map();
-    const n = isConnected.length;
-    const seen = new Array(n).fill(false);
-
-    //define depth first search function to take node and
-    //find all the neighbors of that node (making up a single component/province)
-    const dfs = (node) => {
-        for (let neighbor of graph.get(node)) {
-            if (!seen[neighbor]) {
-                seen[neighbor] = true;
-                dfs(neighbor);
-            }
-        }
-    }
-
-    //build graph
-    for (let i = 0; i < n; i++) {
-        graph.set(i, []);
-    }
-    
-    for (let i = 0; i < n; i++) {
-        for (let j = i + 1; j < n; j++) {
-            if (isConnected[i][j] === 1) {
-                graph.get(i).push(j);
-                graph.get(j).push(i);
-            }
-        }
-    }
-
-    //find and count provinces by visiting node and
-    //adding each neighbor of that node (nodes of the same component/province) to seen
-    let provincesCount = 0;
-    for (let node = 0; node < n; node++) {
-        //if node is unvisited, it is part of unaccounted province
-        if (!seen[node]) {
-            seen[node] = true;
-            provincesCount++;
-            dfs(node);
-        }
-    }
-
-    return provincesCount;
-}
-
-
-//solution without pre-processing graph below
-
 const findCircleNum = (isConnected) => {
-    const n = isConnected.length;
-    const seen = new Array(n).fill(false);
+  const graph = new Map();
+  const n = isConnected.length;
+  const seen = new Array(n).fill(false);
 
-    const dfs = (node) => {
-        for (let neighbor = 0; neighbor < n; neighbor++) {
-            if (isConnected[node][neighbor] === 1 && !seen[neighbor]) {
-                seen[neighbor] = true;
-                dfs(neighbor);
-            }
-        }
+  // Define depth first search function to take node and
+  // find all the neighbors of that node (making up a single component/province)
+  const dfs = (node) => {
+    seen[node] = true;
+    for (let neighbor of graph.get(node)) {
+      if (!seen[neighbor]) {
+        dfs(neighbor);
+      }
     }
+  };
 
-    let provincesCount = 0;
+  // Build graph
+  for (let i = 0; i < n; i++) {
+    graph.set(i, []);
+  }
 
-    for (let node = 0; node < n; node++) {
-        if (!seen[node]) {
-            seen[node] = true;
-            provincesCount++;
-            dfs(node);
-        }
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      if (isConnected[i][j] === 1) {
+        graph.get(i).push(j);
+        graph.get(j).push(i);
+      }
     }
+  }
 
-    return provincesCount;
-}
+  // Find and count provinces by visiting node and
+  // adding each neighbor of that node (nodes of the same component/province) to seen
+  let provincesCount = 0;
+  for (let node = 0; node < n; node++) {
+    // If node is unvisited, it is part of unaccounted province
+    if (!seen[node]) {
+      provincesCount++;
+      dfs(node);
+    }
+  }
+
+  return provincesCount;
+};
+
+// Time complexity: O(n^2) to build graph + O(n + e) to visit all nodes and edges in graph,
+// where n is number of cities and e is number of connections between cities. Overall O(n^2).
+// Space complexity: O(n^2) to build graph + O(n) for seen array. Overall O(n^2).
+
+const findCircleNumNoPreProcessing = (isConnected) => {
+  const n = isConnected.length;
+  const seen = new Array(n).fill(false);
+
+  const dfs = (node) => {
+    seen[node] = true;
+    for (let neighbor = 0; neighbor < n; neighbor++) {
+      if (isConnected[node][neighbor] === 1 && !seen[neighbor]) {
+        dfs(neighbor);
+      }
+    }
+  };
+
+  let provincesCount = 0;
+
+  for (let node = 0; node < n; node++) {
+    if (!seen[node]) {
+      provincesCount++;
+      dfs(node);
+    }
+  }
+
+  return provincesCount;
+};
+
+// Time complexity: O(n^2) to visit all nodes and edges in graph, where n is number of cities. Overall O(n^2).
+// Space complexity: O(n) for seen array + O(n) for call stack in worst case. Overall O(n).
