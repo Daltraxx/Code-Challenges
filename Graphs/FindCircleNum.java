@@ -26,13 +26,10 @@ public class FindCircleNum {
         // Build undirected graph with given adjacency matrix
         int n = isConnected.length;
         for (int i = 0; i < n; i++) {
-            if (!graph.containsKey(i))
-                graph.put(i, new ArrayList<>());
+            graph.computeIfAbsent(i, k -> new ArrayList<>());
 
             for (int j = i + 1; j < n; j++) {
-                if (!graph.containsKey(j))
-                    graph.put(j, new ArrayList<>());
-
+                graph.computeIfAbsent(j, k -> new ArrayList<>());
                 if (isConnected[i][j] == 1) {
                     graph.get(i).add(j);
                     graph.get(j).add(i);
@@ -49,7 +46,6 @@ public class FindCircleNum {
                 // Increment provinces and
                 // set all nodes of connected component to true in seen
                 provincesCount++;
-                seen[node] = true;
                 dfs(node);
             }
         }
@@ -59,10 +55,10 @@ public class FindCircleNum {
 
     // RECURSIVE DFS
     public void dfs(int node) {
+        seen[node] = true;
         for (int neighbor : graph.get(node)) {
             // Add all neighbors to seen, completing component (province)
             if (!seen[neighbor]) {
-                seen[neighbor] = true;
                 dfs(neighbor);
             }
         }
@@ -75,10 +71,10 @@ public class FindCircleNum {
 
         while (!stack.isEmpty()) {
             int currentNode = stack.removeLast();
+            seen[currentNode] = true;
 
             for (int neighbor : graph.get(currentNode)) {
                 if (!seen[neighbor]) {
-                    seen[neighbor] = true;
                     stack.addLast(neighbor);
                 }
             }
