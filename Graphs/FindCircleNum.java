@@ -17,7 +17,7 @@ Example input: isConnected = [
 
 Return the total number of provinces. */
 
-public class NumberOfProvinces {
+public class FindCircleNum {
     Map<Integer, List<Integer>> graph = new HashMap<>();
     boolean[] seen;
 
