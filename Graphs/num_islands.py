@@ -21,7 +21,7 @@ class NumIslands:
         height = len(grid)
         width = len(grid[0])
         seen = [[False for _ in range(width)] for _ in range(height)]
-        directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         island_count = 0
         for row in range(height):
             for col in range(width):
@@ -32,8 +32,8 @@ class NumIslands:
         return island_count
 
 
-# Time Complexity: O(m * n) 
+# Time Complexity: O(m * n)
 # where m is the number of rows and n is the number of columns in the grid,
 # as we may need to visit each cell in the grid at most once during DFS.
-# Space Complexity: O(m * n) for the seen matrix and recursion stack 
+# Space Complexity: O(m * n) for the seen matrix and recursion stack
 # in the worst case of a skewed grid where all cells are land.
