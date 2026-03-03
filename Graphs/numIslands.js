@@ -5,51 +5,62 @@ An island is surrounded by water and is formed by connecting adjacent lands hori
 You may assume all four edges of the grid are all surrounded by water.*/
 
 const numIslands = (grid) => {
-    const height = grid.length;
-    const width = grid[0].length;
-    const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+  const height = grid.length;
+  const width = grid[0].length;
+  const directions = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ];
 
-    let seen = [];
-    for (let i = 0; i < height; i++) {
-        seen.push(new Array(width).fill(false));
+  const seen = Array.from({ length: height }, () => Array(width).fill(false));
+
+  const isValid = (row, col) => {
+    return (
+      row >= 0 &&
+      row < height &&
+      col >= 0 &&
+      col < width &&
+      grid[row][col] === "1"
+    );
+  };
+
+  const dfs = (row, col) => {
+    seen[row][col] = true;
+    for (let [x, y] of directions) {
+      const nextRow = row + y;
+      const nextCol = col + x;
+      if (isValid(nextRow, nextCol) && !seen[nextRow][nextCol]) {
+        dfs(nextRow, nextCol);
+      }
     }
+  };
 
-    const isValid = (row, col) => {
-        return row >= 0 && row < height && col >= 0 && col < width && grid[row][col] === '1';
+  let islandCount = 0;
+
+  for (let row = 0; row < height; row++) {
+    for (let col = 0; col < width; col++) {
+      if (grid[row][col] === "1" && !seen[row][col]) {
+        islandCount++;
+        dfs(row, col);
+      }
     }
+  }
 
-    const dfs = (row, col) => {
-        for (let [x, y] of directions) {
-            let nextRow = row + y, nextCol = col + x;
-            if (isValid(nextRow, nextCol) && !seen[nextRow][nextCol]) {
-                seen[nextRow][nextCol] = true;
-                dfs(nextRow, nextCol);
-            }
-        }
-    }
+  return islandCount;
+};
 
-    let islandCount = 0;
-
-    for (let row = 0; row < height; row++) {
-        for (let col = 0; col < width; col++) {
-            if (grid[row][col] === '1' && !seen[row][col]) {
-                islandCount++;
-                seen[row][col] = true;
-                dfs(row, col);
-            }
-        }
-    }
-
-    return islandCount;
-}
-
-
+// Time complexity: O(m * n) where m is the number of rows 
+// and n is the number of columns in the grid.
+// Space complexity: O(m * n) in the worst case when the grid is filled with land, 
+// the seen array will take up O(m * n) space.
 
 const grid = [
-    ["1","1","1","1","0"],
-    ["1","1","0","1","0"],
-    ["1","1","0","0","0"],
-    ["0","0","0","0","0"]
+  ["1", "1", "1", "1", "0"],
+  ["1", "1", "0", "1", "0"],
+  ["1", "1", "0", "0", "0"],
+  ["0", "0", "0", "0", "0"],
 ];
 
 console.log(numIslands(grid));
