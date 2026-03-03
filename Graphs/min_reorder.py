@@ -5,11 +5,11 @@ from typing import List
 class MinReorder:
     def minReorder(self, n: int, connections: List[List[int]]) -> int:
         def dfs(city: int):
+            nonlocal flip_count
             seen[city] = True
             for neighbor, is_original in edges[city]:
                 if not seen[neighbor]:
                     if is_original:
-                        nonlocal flip_count
                         flip_count += 1
                     dfs(neighbor)
 
@@ -24,7 +24,6 @@ class MinReorder:
         flip_count = 0
         dfs(0)
         return flip_count
-        
 
 
 # Time Complexity: O(n + e) where n is the number of cities
