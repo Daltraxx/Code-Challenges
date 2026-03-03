@@ -24,14 +24,8 @@ class MinReorder:
         # Perform flips if not visited
         # and original route leads away from City Zero
         seen = [False] * n
-        seen[0] = True
         flip_count = 0
-        for neighbor in edges[0]:
-            if not seen[neighbor]:
-                if (0, neighbor) in original_routes:
-                    flip_count += 1
-                dfs(neighbor)
-        
+        dfs(0)
         return flip_count
 
 # Time Complexity: O(n + e) where n is the number of cities 
