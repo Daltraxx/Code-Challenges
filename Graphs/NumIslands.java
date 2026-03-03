@@ -38,17 +38,18 @@ public class NumIslands {
     public void dfs(int row, int col) {
 
         Deque<int[]> stack = new ArrayDeque<>();
+        seen[row][col] = true;
         stack.addLast(new int[] { row, col });
 
         while (!stack.isEmpty()) {
             int[] position = stack.removeLast();
-            seen[position[0]][position[1]] = true;
 
             for (int[] direction : directions) {
                 int nextRow = position[0] + direction[0];
                 int nextCol = position[1] + direction[1];
 
                 if (isValid(nextRow, nextCol) && !seen[nextRow][nextCol]) {
+                    seen[nextRow][nextCol] = true;
                     stack.addLast(new int[] { nextRow, nextCol });
                 }
             }
