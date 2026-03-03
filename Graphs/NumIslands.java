@@ -1,4 +1,5 @@
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /*Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), 
 return the number of islands.
@@ -9,11 +10,14 @@ You may assume all four edges of the grid are all surrounded by water.*/
 public class NumIslands {
     int height;
     int width;
+    char[][] grid;
     boolean[][] seen;
+    private static final int[][] directions = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 
     public int numIslands(char[][] grid) {
-        height = grid.length;
-        width = grid[0].length;
+        this.grid = grid;
+        this.height = grid.length;
+        this.width = grid[0].length;
 
         seen = new boolean[height][width];
 
@@ -22,9 +26,8 @@ public class NumIslands {
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 if (grid[row][col] == '1' && !seen[row][col]) {
-                    seen[row][col] = true;
                     islandCount++;
-                    dfs(row, col, grid);
+                    dfs(row, col);
                 }
             }
         }
@@ -32,38 +35,32 @@ public class NumIslands {
         return islandCount;
     }
 
-    class GridPosition {
-        int row;
-        int col;
-    
-        public GridPosition(int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
-    }
+    public void dfs(int row, int col) {
 
-    public void dfs(int row, int col, char[][] grid) {
-        int[][] directions = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-
-        Stack<GridPosition> stack = new Stack<>();
-        stack.push(new GridPosition(row, col));
+        Deque<int[]> stack = new ArrayDeque<>();
+        stack.addLast(new int[] { row, col });
 
         while (!stack.isEmpty()) {
-            GridPosition position = stack.pop();
+            int[] position = stack.removeLast();
+            seen[position[0]][position[1]] = true;
 
             for (int[] direction : directions) {
-                int nextRow = position.row + direction[1];
-                int nextCol = position.col + direction[0];
+                int nextRow = position[0] + direction[0];
+                int nextCol = position[1] + direction[1];
 
-                if (isValid(nextRow, nextCol, grid) && !seen[nextRow][nextCol]) {
-                    seen[nextRow][nextCol] = true;
-                    stack.push(new GridPosition(nextRow, nextCol));
+                if (isValid(nextRow, nextCol) && !seen[nextRow][nextCol]) {
+                    stack.addLast(new int[] { nextRow, nextCol });
                 }
             }
         }
     }
 
-    public boolean isValid(int row, int col, char[][] grid) {
+    public boolean isValid(int row, int col) {
         return row >= 0 && row < height && col >= 0 && col < width && grid[row][col] == '1';
     }
 }
+
+// Time Complexity: O(m*n) where m is the number of rows and n is the number of
+// columns in the grid.
+// Space Complexity: O(m*n) in the worst case when the grid is filled with land
+// and the stack contains all positions.
