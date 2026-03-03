@@ -17,7 +17,7 @@ class IsValidBST:
 
             return left_valid and right_valid
 
-        return dfs(root, float("-inf"), float("inf"))
+        return dfs(root, float("-inf"), float("inf")) # type: ignore
 
 # Time Complexity: O(n) where n is the number of nodes in the tree, as we visit each node once.
 # Space Complexity: O(h) where h is the height of the tree, which in the

@@ -8,7 +8,7 @@ class GetMinimumDifference:
         min_difference = float("inf")
         prev_val = None
 
-        def dfs(node: TreeNode) -> None:
+        def dfs(node: Optional[TreeNode]) -> None:
             if not node:
                 return
 
