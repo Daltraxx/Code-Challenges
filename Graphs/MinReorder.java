@@ -17,7 +17,7 @@ Your task consists of reorienting some roads such that each city can visit the c
 
 It's guaranteed that each city can reach city 0 after reorder. */
 
-public class ReorderRoutes {
+public class MinReorder {
     boolean[] seen;
     Map<Integer, List<Integer>> graph;
     Set<String> originalRoutes;
