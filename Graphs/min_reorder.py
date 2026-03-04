@@ -13,11 +13,13 @@ class MinReorder:
                         flip_count += 1
                     dfs(neighbor)
 
-        # Pre-process graph
+        # Pre-process graph and with each edge store flag if part of original directed edge
         edges = defaultdict(list)
         for origin, dest in connections:
-            edges[origin].append((dest, True))  # True indicates the original direction
-            edges[dest].append((origin, False))  # Artificial edge in the opposite direction
+            edges[origin].append((dest, True))
+            edges[dest].append(
+                (origin, False)
+            )
 
         # Use DFS to count flips needed for routes that lead away from City Zero
         seen = [False] * n
@@ -26,9 +28,6 @@ class MinReorder:
         return flip_count
 
 
-# Time Complexity: O(n + e) where n is the number of cities
-# and e is the number of connections between cities,
-# as we need to build the graph and perform DFS.
-# In the worst case, e can be O(n^2) if all cities are connected to each other.
-# Space Complexity: O(n + e). Same reasoning as time complexity,
-# as we need to store the graph and the seen list.
+# Time Complexity: O(n) where n is the number of cities.
+# We visit each city once and each edge once (we're guaranteed to have n - 1 edges).
+# Space Complexity: O(n) for the graph and the seen array.
