@@ -23,7 +23,7 @@ public class MinReorder {
     public int minReorder(int n, int[][] connections) {
         graph = new HashMap<>();
 
-        // Build graph and with each edge store signifier if part of original directed edge
+        // Build graph and with each edge store flag if part of original directed edge
         for (int[] edge : connections) {
             graph.computeIfAbsent(edge[0], k -> new ArrayList<>()).add(new int[] { edge[1], 1 });
             graph.computeIfAbsent(edge[1], k -> new ArrayList<>()).add(new int[] { edge[0], 0 });
