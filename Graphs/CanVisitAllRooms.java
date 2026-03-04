@@ -13,7 +13,7 @@ Given an array rooms where rooms[i] is the set of keys that you can obtain if yo
 return true if you can visit all the rooms, or false otherwise. */
 
 
-class KeysAndRooms {
+class CanVisitAllRooms {
     Set<Integer> seen = new HashSet<>();
 
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
