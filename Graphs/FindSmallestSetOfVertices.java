@@ -9,7 +9,7 @@ It's guaranteed that a unique solution exists.
 
 Notice that you can return the vertices in any order. */
 
-public class MinimumNumberOfVertices {
+public class FindSmallestSetOfVertices {
     public List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges) {
         //get indegree for each node
         int[] nodeIndegrees = new int[n];
