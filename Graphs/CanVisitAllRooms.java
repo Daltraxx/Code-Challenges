@@ -1,6 +1,4 @@
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /*There are n rooms labeled from 0 to n - 1 and all the rooms are locked except for room 0. 
 Your goal is to visit all the rooms. 
@@ -14,23 +12,31 @@ return true if you can visit all the rooms, or false otherwise. */
 
 
 class CanVisitAllRooms {
-    Set<Integer> seen = new HashSet<>();
+    List<List<Integer>> rooms;
+    boolean[] seen;
 
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        this.rooms = rooms;
         int numberOfRooms = rooms.size();
-        seen.add(0);
+        this.seen = new boolean[numberOfRooms];
 
-        dfs(rooms.get(0), rooms);
-
-        return seen.size() == numberOfRooms;
+        return dfs(0) == numberOfRooms;
     }
 
-    public void dfs(List<Integer> room, List<List<Integer>> rooms) {
-        for (int key : room) {
-            if (!seen.contains(key)) {
-                seen.add(key);
-                dfs(rooms.get(key), rooms);
+    private int dfs(int room) {
+        seen[room] = true;
+        int roomsVisited = 1;
+        List<Integer> keys = rooms.get(room);
+        for (int key : keys) {
+            if (!seen[key]) {
+                roomsVisited += dfs(key);
             }
         }
+
+        return roomsVisited;
     }
 }
+
+// Time complexity: O(n + e) where n is the number of rooms 
+// and e is the total number of keys in all rooms.
+// Space complexity: O(n) for the seen array and the recursion stack.
