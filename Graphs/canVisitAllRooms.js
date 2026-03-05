@@ -8,34 +8,23 @@ Given an array rooms where rooms[i] is the set of keys that you can obtain if yo
 return true if you can visit all the rooms, or false otherwise.*/
 
 const canVisitAllRooms = (rooms) => {
-    const visitedRooms = new Set([0]);
-
-    const visitRooms = (room) => {
-        for (let key of room) {
-            if (!visitedRooms.has(key)) {
-                visitedRooms.add(key);
-                visitRooms(rooms[key]);
+    const totalRooms = rooms.length;
+    const seen = new Array(totalRooms).fill(false);
+    seen[0] = true;
+    const stack = [0];
+    while (stack.length) {
+        const currentRoom = stack.pop();
+        for (const key of rooms[currentRoom]) {
+            if (!seen[key]) {
+                seen[key] = true;
+                stack.push(key);
             }
         }
     }
 
-    const visitRoomsIterative = (room) => {
-        const stack = [room];
-    
-        while (stack.length) {
-            const keys = stack.pop();
-    
-            for (let key of keys) {
-                if (!visitedRooms.has(key)) {
-                    visitedRooms.add(key);
-                    stack.push(rooms[key]);
-                }
-            }
-        }
-    }
-
-    visitRoomsIterative(rooms[0]);
-
-    return rooms.length === visitedRooms.length;
+    return seen.every((room) => room === true);
 }
 
+// Time complexity: O(n + e) where n is the number of rooms 
+// and e is the total number of keys in all rooms.
+// Space complexity: O(n) for the seen array and the stack.
