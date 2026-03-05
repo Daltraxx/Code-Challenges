@@ -6,8 +6,8 @@ class FindSmallestSetOfVertices:
         # Get the indegree of each node.
         # The nodes with indegree 0 are the ones that can only be reached from themselves.
         indegrees = [0] * n
-        for _, y in edges:
-            indegrees[y] += 1
+        for _, dest in edges:
+            indegrees[dest] += 1
 
         # Return list with nodes that have indegree of 0.
         return [node for node in range(n) if indegrees[node] == 0]
