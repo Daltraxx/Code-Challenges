@@ -9,7 +9,7 @@ return true if you can visit all the rooms, or false otherwise.*/
 
 const canVisitAllRooms = (rooms) => {
     const totalRooms = rooms.length;
-    const seen = new Array(totalRooms).fill(false);
+    const seen = Array(totalRooms).fill(false);
     seen[0] = true;
     const stack = [0];
     while (stack.length) {
@@ -22,7 +22,7 @@ const canVisitAllRooms = (rooms) => {
         }
     }
 
-    return seen.every((room) => room === true);
+    return seen.every(Boolean);
 }
 
 // Time complexity: O(n + e) where n is the number of rooms 
