@@ -4,6 +4,8 @@ from typing import List
 
 class CanVisitAllRooms:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        # Edge case: if there are no rooms, we can consider that we have visited all rooms.
+        # Not strictly necessary given the problem constraints, but it's a safe check.
         if not rooms:
             return True
 
@@ -17,13 +19,11 @@ class CanVisitAllRooms:
             room_keys = rooms[room]
             for key in room_keys:
                 if not seen[key]:
-                    rooms_visited += 1
-                    if rooms_visited == total_rooms:
-                        return True
                     seen[key] = True
+                    rooms_visited += 1
                     stack.append(key)
 
-        return False
+        return rooms_visited == total_rooms
 
 
 # Time Complexity: O(n + e) where n is the number of rooms
