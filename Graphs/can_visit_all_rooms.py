@@ -4,30 +4,24 @@ from typing import List
 
 class CanVisitAllRooms:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
-        def dfs(room: int) -> int:
-            seen[room] = True
-            rooms_visited = 1
-            stack = deque([room])
-            while stack:
-                room = stack.pop()
-                room_keys = rooms[room]
-                for key in room_keys:
-                    if not seen[key]:
-                        seen[key] = True
-                        rooms_visited += 1
-                        stack.append(key)
-
-            return rooms_visited
+        if not rooms:
+            return True
 
         total_rooms = len(rooms)
-        rooms_visited = 1
         seen = [False] * total_rooms
+        rooms_visited = 1
         seen[0] = True
-        for key in rooms[0]:
-            if not seen[key]:
-                rooms_visited += dfs(key)
-                if rooms_visited == total_rooms:
-                    return True
+        stack = deque([0])
+        while stack:
+            room = stack.pop()
+            room_keys = rooms[room]
+            for key in room_keys:
+                if not seen[key]:
+                    rooms_visited += 1
+                    if rooms_visited == total_rooms:
+                        return True
+                    seen[key] = True
+                    stack.append(key)
 
         return False
 
