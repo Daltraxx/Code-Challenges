@@ -14,8 +14,8 @@ class CountComponents:
                         seen[neighbor] = True
                         stack.append(neighbor)
 
-        # Process edges into adjacency map
-        graph = defaultdict(list)
+        # Process edges into adjacency list
+        graph = [[] for _ in range(n)]
         for a, b in edges:
             graph[a].append(b)
             graph[b].append(a)
