@@ -8,58 +8,41 @@ Given edges and the integers n, source, and destination,
 return true if there is a valid path from source to destination, or false otherwise. */
 
 const validPath = (n, edges, source, destination) => {
-    const doesPathExist = (currentNode) => {
-        if (currentNode === destination) {
-            return true;
-        }
+  if (source === destination) return true;
 
-        for (let neighbor of graph.get(currentNode)) {
-            if (!seen[neighbor]) {
-                seen[neighbor] = true;
-                if (doesPathExist(neighbor, destination)) {
-                    return true;
-                }
-            }
-        }
+  // Build bi-directional graph
+  const graph = new Map();
+  for (let [nodeA, nodeB] of edges) {
+    graph.has(nodeA) ? graph.get(nodeA).push(nodeB) : graph.set(nodeA, [nodeB]);
+    graph.has(nodeB) ? graph.get(nodeB).push(nodeA) : graph.set(nodeB, [nodeA]);
+  }
 
-        return false;
+  const seen = new Array(n).fill(false);
+  seen[source] = true;
+  const stack = [source];
+
+  while (stack.length) {
+    const current = stack.pop();
+    for (let neighbor of graph.get(current) || []) {
+      if (!seen[neighbor]) {
+        if (neighbor === destination) return true;
+        seen[neighbor] = true;
+        stack.push(neighbor);
+      }
     }
+  }
+  return false;
+};
 
-    const doesPathExistIterative = (currentNode) => {
-        if (currentNode === destination) {
-            return true;
-        }
+// Time Complexity: O(n + e) where n is the number of nodes and e is the number of edges,
+// as we may need to visit each node and edge at most once during DFS.
+// Space Complexity: O(n + e) for the graph representation and the seen array.
 
-        const stack = [currentNode];
-
-        while (stack.length) {
-            const node = stack.pop();
-            for (let neighbor of graph.get(node)) {
-                if (!seen[neighbor]) {
-                    seen[neighbor] = true;
-                    if (neighbor === destination) {
-                        return true;
-                    }
-                    stack.push(neighbor);
-                }
-            }
-        }
-
-        return false;
-    }
-
-    //build bi-directional graph
-    const graph = new Map();
-
-    for (let [nodeA, nodeB] of edges) {
-        graph.get(nodeA) ? graph.get(nodeA).push(nodeB) : graph.set(nodeA, [nodeB]);
-        graph.get(nodeB) ? graph.get(nodeB).push(nodeA) : graph.set(nodeB, [nodeA]);
-    }
-
-    seen = new Array(n).fill(false);
-    seen[source] = true;
-
-    return doesPathExist(source);
-}
-
-const n = 3, edges = [[0,1],[1,2],[2,0]], source = 0, destination = 2;
+const n = 3,
+  edges = [
+    [0, 1],
+    [1, 2],
+    [2, 0],
+  ],
+  source = 0,
+  destination = 2;
