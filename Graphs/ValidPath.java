@@ -16,7 +16,7 @@ public class ValidPath {
     boolean[] seen;
 
     public boolean validPath(int n, int[][] edges, int source, int destination) {
-        //build graph
+        // Build graph
         graph = new HashMap<>();
 
         for (int[] edge : edges) {
@@ -27,7 +27,7 @@ public class ValidPath {
             graph.computeIfAbsent(nodeB, val -> new ArrayList<>()).add(nodeA);
         }
 
-        //return result of dfs function
+        // Return result of DFS function
         seen = new boolean[n];
         seen[source] = true;
 
@@ -38,7 +38,7 @@ public class ValidPath {
         if (source == destination) {
             return true;
         }
-        
+
         for (int neighbor : graph.get(source)) {
             if (!seen[neighbor]) {
                 seen[neighbor] = true;
@@ -47,7 +47,11 @@ public class ValidPath {
                 }
             }
         }
-
         return false;
     }
 }
+
+// Time Complexity: O(n + e) where n is the number of nodes and e is the number
+// of edges,
+// as we may need to visit each node and edge at most once during DFS.
+// Space Complexity: O(n + e) for the graph representation and the seen array.
