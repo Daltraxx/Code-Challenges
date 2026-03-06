@@ -7,19 +7,24 @@ It's guaranteed that a unique solution exists.
 Notice that you can return the vertices in any order. */
 
 const findSmallestSetOfVertices = (n, edges) => {
-    const nodeIndegrees = new Array(n).fill(0);
+  const nodeIndegrees = new Array(n).fill(0);
 
-    for (let edge of edges) {
-        nodeIndegrees[edge[1]]++;
+  for (let edge of edges) {
+    nodeIndegrees[edge[1]]++;
+  }
+
+  const smallestSet = [];
+
+  for (let i = 0; i < n; i++) {
+    if (nodeIndegrees[i] === 0) {
+      smallestSet.push(i);
     }
+  }
 
-    const smallestSet = [];
+  return smallestSet;
+};
 
-    for (let i = 0; i < n; i++) {
-        if (nodeIndegrees[i] === 0) {
-            smallestSet.push(i);
-        }
-    }
-
-    return smallestSet;
-}
+// Time Complexity: O(n + e) where n is the number of nodes and e is the number of edges. 
+// We need to iterate through all edges to calculate indegrees, and
+// then through all nodes to find those with indegree 0.
+// Space Complexity: O(n) for the indegree array and the list of necessary vertices.
