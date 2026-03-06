@@ -28,3 +28,8 @@ class ValidPath:
                     stack.append(neighbor)
 
         return False
+
+
+# Time Complexity: O(n + e) where n is the number of nodes and e is the number of edges,
+# as we may need to visit each node and edge at most once during DFS.
+# Space Complexity: O(n + e) for the graph representation and the seen list.
