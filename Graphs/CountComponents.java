@@ -8,7 +8,7 @@ indicates that there is an edge between ai and bi in the graph.
 
 Return the number of connected components in the graph. */
 
-public class NumberOfConnectedComponents {
+public class CountComponents {
     boolean[] seen;
     HashMap<Integer, List<Integer>> graph;
     public int countComponents (int n, int[][] edges) {
