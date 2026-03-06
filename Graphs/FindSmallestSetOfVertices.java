@@ -11,14 +11,14 @@ Notice that you can return the vertices in any order. */
 
 public class FindSmallestSetOfVertices {
     public List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges) {
-        //get indegree for each node
+        // Get indegree for each node
         int[] nodeIndegrees = new int[n];
         for (List<Integer> edge : edges) {
             nodeIndegrees[edge.get(1)]++;
         }
 
-        //if a node's indegree is 0,
-        //it is unreachable by other nodes and therefore necessary
+        // If a node's indegree is 0,
+        // it is unreachable by other nodes and therefore necessary
         List<Integer> necessaryVertices = new ArrayList<>();
         for (int node = 0; node < n; node++) {
             if (nodeIndegrees[node] == 0) {
@@ -29,3 +29,9 @@ public class FindSmallestSetOfVertices {
         return necessaryVertices;
     }
 }
+
+// Time Complexity: O(n + e) where n is the number of nodes and e is the number
+// of edges. We need to iterate through all edges to calculate indegrees, and
+// then through all nodes to find those with indegree 0.
+// Space Complexity: O(n) for the indegree array and the list of necessary
+// vertices.
