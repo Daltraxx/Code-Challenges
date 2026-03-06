@@ -17,7 +17,7 @@ class ValidPath:
 
         seen = [False] * n
         seen[source] = True
-        stack = deque([source])
+        stack = [source]
         while stack:
             current = stack.pop()
             for neighbor in graph[current]:
