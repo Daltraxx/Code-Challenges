@@ -11,7 +11,7 @@ You want to determine if there is a valid path that exists from vertex source to
 Given edges and the integers n, source, and destination, 
 return true if there is a valid path from source to destination, or false otherwise. */
 
-public class FindIfPathExists {
+public class ValidPath {
     HashMap<Integer, List<Integer>> graph;
     boolean[] seen;
 
