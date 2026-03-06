@@ -10,14 +10,13 @@ Return the number of connected components in the graph. */
 
 public class CountComponents {
     boolean[] seen;
-    HashMap<Integer, List<Integer>> graph;
-    public int countComponents (int n, int[][] edges) {
-        //build graph
-        graph = new HashMap<>();
-        //preemptively place every node in graph..
-        //to take into account node's with no edges
+    List<List<Integer>> graph;
+
+    public int countComponents(int n, int[][] edges) {
+        // Build graph
+        graph = new ArrayList<>();
         for (int node = 0; node < n; node++) {
-            graph.put(node, new ArrayList<>());
+            graph.add(new ArrayList<>());
         }
 
         for (int[] edge : edges) {
@@ -27,26 +26,30 @@ public class CountComponents {
             graph.get(nodeB).add(nodeA);
         }
 
-        //get count of components
+        // Get count of components
         seen = new boolean[n];
         int componentCount = 0;
         for (int node = 0; node < n; node++) {
             if (!seen[node]) {
-                seen[node] = true;
                 componentCount++;
-                completeComponent(node);
+                dfs(node);
             }
         }
 
         return componentCount;
     }
 
-    public void completeComponent(int node) {
+    private void dfs(int node) {
+        seen[node] = true;
         for (int neighbor : graph.get(node)) {
             if (!seen[neighbor]) {
-                seen[neighbor] = true;
-                completeComponent(neighbor);
+                dfs(neighbor);
             }
         }
     }
 }
+
+// Time Complexity: O(n + e) where n is the number of nodes and e is the number
+// of edges,
+// as we may need to visit each node and edge at most once during DFS.
+// Space Complexity: O(n + e) for the graph representation and the seen array.
