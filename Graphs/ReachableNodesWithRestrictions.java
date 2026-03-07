@@ -13,8 +13,6 @@ Return the maximum number of nodes you can reach from node 0 without visiting a 
 
 Note that node 0 will not be a restricted node. */
 
-
-
 public class ReachableNodesWithRestrictions {
     HashMap<Integer, List<Integer>> graph;
     boolean[] seen;
@@ -33,10 +31,10 @@ public class ReachableNodesWithRestrictions {
         }
         seen[0] = true;
 
-        return getReachableNodesCount(0);
+        return dfs(0);
     }
 
-    public int getReachableNodesCount(int startingNode) {
+    public int dfs(int startingNode) {
         Deque<Integer> stack = new ArrayDeque<>();
         stack.add(startingNode);
 
@@ -57,3 +55,9 @@ public class ReachableNodesWithRestrictions {
         return reachableNodesCount;
     }
 }
+
+// Time Complexity: O(n) where n is the number of nodes in the tree. We visit
+// each node at most once.
+// Space Complexity: O(n) where n is the number of nodes in the tree.
+// In the worst case, the stack can hold all nodes in the tree, and we use an
+// array to keep track of visited nodes.
