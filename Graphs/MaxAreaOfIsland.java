@@ -9,7 +9,7 @@ Return the maximum area of an island in grid. If there is no island, return 0. *
 
 public class MaxAreaOfIsland {
     boolean[][] seen;
-    int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    private final int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
     int[][] grid;
     int height;
     int width;
@@ -24,30 +24,27 @@ public class MaxAreaOfIsland {
 
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                if (!seen[row][col]) {
+                if (!seen[row][col] && grid[row][col] == 1) {
                     seen[row][col] = true;
-                    if (grid[row][col] == 1) {
-                        maxArea = Math.max(getIslandArea(row, col), maxArea);
-                    }
+                    maxArea = Math.max(dfs(row, col), maxArea);
                 }
-            } 
+            }
         }
 
         return maxArea;
     }
 
-    public int getIslandArea(int row, int col) {
+    public int dfs(int row, int col) {
         int islandArea = 1;
 
         for (int[] direction : directions) {
             int adjacentCol = col + direction[0];
             int adjacentRow = row + direction[1];
 
-            if (isValid(adjacentRow, adjacentCol) && !seen[adjacentRow][adjacentCol]) {
+            if (isValid(adjacentRow, adjacentCol) && !seen[adjacentRow][adjacentCol]
+                    && grid[adjacentRow][adjacentCol] == 1) {
                 seen[adjacentRow][adjacentCol] = true;
-                if (grid[adjacentRow][adjacentCol] == 1) {
-                    islandArea += getIslandArea(adjacentRow, adjacentCol);
-                }
+                islandArea += dfs(adjacentRow, adjacentCol);
             }
         }
 
@@ -58,3 +55,12 @@ public class MaxAreaOfIsland {
         return row >= 0 && row < height && col >= 0 && col < width;
     }
 }
+
+// Time Complexity: O(m * n) where m is the number of rows and n is the number
+// of columns in the grid. In the worst case, we may have to visit every cell in
+// the grid.
+// Space Complexity: O(m * n) in the worst case, where m is the number of rows
+// and n is the number of columns in the grid. This occurs when the entire grid
+// is land (1's), and we have to store all cells in the call stack due to
+// recursion. Additionally, we use O(m * n) space for the seen array to keep
+// track of visited cells.
