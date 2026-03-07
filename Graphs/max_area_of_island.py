@@ -8,7 +8,12 @@ class MaxAreaOfIsland:
         width = len(grid[0])
 
         def is_valid(row: int, col: int) -> bool:
-            return 0 <= row < height and 0 <= col < width and grid[row][col] == 1
+            return (
+                0 <= row < height
+                and 0 <= col < width
+                and grid[row][col] == 1
+                and not seen[row][col]
+            )
 
         def dfs(row: int, col: int) -> int:
             seen[row][col] = True
@@ -19,7 +24,7 @@ class MaxAreaOfIsland:
                 for dy, dx in directions:
                     new_row = curr_row + dy
                     new_col = curr_col + dx
-                    if is_valid(new_row, new_col) and not seen[new_row][new_col]:
+                    if is_valid(new_row, new_col):
                         seen[new_row][new_col] = True
                         area += 1
                         stack.append((new_row, new_col))
