@@ -13,7 +13,7 @@ Return the maximum number of nodes you can reach from node 0 without visiting a 
 
 Note that node 0 will not be a restricted node. */
 
-public class ReachableNodesWithRestrictions {
+public class ReachableNodes {
     HashMap<Integer, List<Integer>> graph;
     boolean[] seen;
 
