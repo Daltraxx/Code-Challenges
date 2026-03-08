@@ -34,9 +34,10 @@ class DistanceK:
                 if current.right and current.right not in seen:
                     seen.add(current.right)
                     queue.append(current.right)
-                if current in parents and parents[current] not in seen:
-                    seen.add(parents[current])
-                    queue.append(parents[current])
+                parent = parents.get(current)
+                if parent and parent not in seen:
+                    seen.add(parent)
+                    queue.append(parent)
             k -= 1
 
         return [node.val for node in queue]
