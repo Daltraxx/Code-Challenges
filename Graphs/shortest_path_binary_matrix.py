@@ -4,9 +4,9 @@ from typing import List
 
 class ShortestPathBinaryMatrix:
     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
-        if grid[0][0] == 1:
+        if grid[0][0] == 1 or grid[-1][-1] == 1:
             return -1
-        
+
         directions = (
             (1, 0),
             (-1, 0),
@@ -37,21 +37,22 @@ class ShortestPathBinaryMatrix:
         while queue:
             level_size = len(queue)
             for _ in range(level_size):
-              row, col = queue.popleft()
-              if is_end(row, col):
-                  return steps
+                row, col = queue.popleft()
+                if is_end(row, col):
+                    return steps
 
-              for dy, dx in directions:
-                  new_row = row + dy
-                  new_col = col + dx
+                for dy, dx in directions:
+                    new_row = row + dy
+                    new_col = col + dx
 
-                  if is_valid(new_row, new_col):
-                      seen[new_row][new_col] = True
-                      queue.append((new_row, new_col))
+                    if is_valid(new_row, new_col):
+                        seen[new_row][new_col] = True
+                        queue.append((new_row, new_col))
 
             steps += 1
 
         return -1
+
 
 # Time Complexity: O(n^2) where n is the number of rows and columns in the grid,
 # as we may need to visit each cell in the grid at most once during BFS.

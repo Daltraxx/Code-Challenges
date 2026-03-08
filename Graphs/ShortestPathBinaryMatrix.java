@@ -10,7 +10,7 @@ A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) 
 The length of a clear path is the number of visited cells of this path. */
 
 public class ShortestPathBinaryMatrix {
-    int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {-1, -1}, {1, -1}, {-1, 1}, {1, 1}};
+    int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }, { -1, -1 }, { 1, -1 }, { -1, 1 }, { 1, 1 } };
     boolean[][] seen;
     int[][] grid;
     int n;
@@ -30,7 +30,7 @@ public class ShortestPathBinaryMatrix {
         }
 
         Deque<int[]> queue = new ArrayDeque<>();
-        queue.add(new int[]{startingRow, startingCol});
+        queue.add(new int[] { startingRow, startingCol });
 
         int movementCount = 0;
 
@@ -45,14 +45,14 @@ public class ShortestPathBinaryMatrix {
                 if (row == n - 1 && col == n - 1) {
                     return movementCount;
                 }
-                
-                for (int[] direction: directions) {
+
+                for (int[] direction : directions) {
                     int nextRow = row + direction[1];
                     int nextCol = col + direction[0];
 
                     if (isValid(nextRow, nextCol)) {
                         seen[nextRow][nextCol] = true;
-                        queue.add(new int[]{nextRow, nextCol});
+                        queue.add(new int[] { nextRow, nextCol });
                     }
                 }
             }
