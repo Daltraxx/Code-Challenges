@@ -65,3 +65,8 @@ public class ShortestPathBinaryMatrix {
         return row >= 0 && row < n && col >= 0 && col < n && grid[row][col] == 0 && !seen[row][col];
     }
 }
+
+// Time Complexity: O(n^2) where n is the length of the grid. In the worst case,
+// we may have to visit all cells in the grid.
+// Space Complexity: O(n^2) in the worst case, we may have to store all cells in
+// the queue and the seen array.
