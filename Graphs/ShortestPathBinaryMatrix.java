@@ -9,7 +9,7 @@ A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) 
 
 The length of a clear path is the number of visited cells of this path. */
 
-public class ShortestPathInBinaryMatrix {
+public class ShortestPathBinaryMatrix {
     int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {-1, -1}, {1, -1}, {-1, 1}, {1, 1}};
     boolean[][] seen;
     int[][] grid;
