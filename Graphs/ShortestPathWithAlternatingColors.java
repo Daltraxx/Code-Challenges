@@ -19,16 +19,7 @@ where each answer[x] is the length of the shortest path from node 0 to node x
 such that the edge colors alternate along the path, 
 or -1 if such a path does not exist. */
 
-class State {
-    int node;
-    int colorRequired;
-    int steps;
-    public State(int node, int colorRequired, int steps) {
-        this.node = node;
-        this.colorRequired = colorRequired;
-        this.steps = steps;
-    }
-}
+
 
 public class ShortestPathWithAlternatingColors {
     int n;
@@ -79,10 +70,22 @@ public class ShortestPathWithAlternatingColors {
         for (int node = 0; node < n; node++) {
             graph.get(color).put(node, new ArrayList<>());
         }
-        
-        for (int[] edge: edges) {
+
+        for (int[] edge : edges) {
             int nodeA = edge[0], nodeB = edge[1];
             graph.get(color).get(nodeA).add(nodeB);
+        }
+    }
+    
+    private static class State {
+        int node;
+        int colorRequired;
+        int steps;
+
+        public State(int node, int colorRequired, int steps) {
+            this.node = node;
+            this.colorRequired = colorRequired;
+            this.steps = steps;
         }
     }
 }
