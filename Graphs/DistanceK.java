@@ -11,7 +11,7 @@ return an array of the values of all nodes that have a distance k from the targe
 
 You can return the answer in any order. */
 
-class AllNodesKDistanceBinaryTree {
+class DistanceK {
     HashMap<TreeNode, TreeNode> parents;
     Set<TreeNode> seen;
     int k;
