@@ -28,7 +28,8 @@ class DistanceK:
             level_size = len(queue)
             for _ in range(level_size):
                 current = queue.popleft()
-                for neighbor in (current.left, current.right, parents.get(current)):
+                parent = parents.get(current)
+                for neighbor in (current.left, current.right, parent):
                     if neighbor and neighbor not in seen:
                         seen.add(neighbor)
                         queue.append(neighbor)
