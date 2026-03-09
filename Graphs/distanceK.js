@@ -45,3 +45,10 @@ const distanceK = (root, target, k) => {
 
     return getNodesAtKDistance(target);
 }
+
+// Time Complexity: O(n) where n is the number of nodes in the tree. We visit
+// each node at most twice (once to set parents and once to find nodes at
+// distance k).
+// Space Complexity: O(n) for the parents map, seen set, and queue in the worst
+// case when the tree is skewed. In a balanced tree, the space complexity would
+// be O(h) where h is the height of the tree.
