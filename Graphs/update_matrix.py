@@ -10,7 +10,7 @@ class UpdateMatrix:
         directions = ((-1, 0), (1, 0), (0, -1), (0, 1))
         height = len(mat)
         width = len(mat[0])
-        # Distances doubles as seen list
+        # Distances also serves as seen list
         distances = [[-1] * width for _ in range(height)]
         queue = deque()
 
@@ -19,18 +19,18 @@ class UpdateMatrix:
             for col in range(width):
                 if mat[row][col] == 0:
                     distances[row][col] = 0
-                    queue.append((row, col, 0))
+                    queue.append((row, col))
 
         # BFS
         while queue:
-            row, col, steps = queue.popleft()
+            row, col = queue.popleft()
+            new_distance = distances[row][col] + 1
             for dy, dx in directions:
                 new_row = row + dy
                 new_col = col + dx
-                new_steps = steps + 1
                 if is_valid(new_row, new_col):
-                    distances[new_row][new_col] = new_steps
-                    queue.append((new_row, new_col, new_steps))
+                    distances[new_row][new_col] = new_distance
+                    queue.append((new_row, new_col))
 
         return distances
 
