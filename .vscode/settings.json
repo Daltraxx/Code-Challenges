@@ -1,3 +1,17 @@
 {
-  "python.analysis.typeCheckingMode": "off"
+  "python.analysis.typeCheckingMode": "off",
+  "java.project.sourcePaths": [
+    ".",
+    "Backtracking",
+    "BinarySearch",
+    "DynamicProgramming",
+    "Graphs",
+    "Greedy",
+    "HashmapAndSet",
+    "Monotonic",
+    "Prefix Sum",
+    "queues",
+    "Two Pointer"
+  ],
+  "java.project.referencedLibraries": []
 }

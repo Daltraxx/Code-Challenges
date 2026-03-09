@@ -1,18 +1,18 @@
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
- 
+
 /*Given the root of a binary tree, the value of a target node target, and an integer k, 
 return an array of the values of all nodes that have a distance k from the target node.
 
 You can return the answer in any order. */
 
 class DistanceK {
-    HashMap<TreeNode, TreeNode> parents;
+    Map<TreeNode, TreeNode> parents;
     Set<TreeNode> seen;
     int k;
 
@@ -22,12 +22,10 @@ class DistanceK {
         this.k = k;
 
         setParents(root, null);
-
-        seen.add(target);
         return getNodesAtKDistance(target);
     }
 
-    public void setParents(TreeNode node, TreeNode parent) {
+    private void setParents(TreeNode node, TreeNode parent) {
         if (node == null) {
             return;
         }
@@ -38,7 +36,8 @@ class DistanceK {
         setParents(node.right, node);
     }
 
-    public List<Integer> getNodesAtKDistance(TreeNode startingNode) {
+    private List<Integer> getNodesAtKDistance(TreeNode startingNode) {
+        seen.add(startingNode);
         Deque<TreeNode> queue = new ArrayDeque<>();
         queue.add(startingNode);
 
@@ -48,7 +47,8 @@ class DistanceK {
             for (int i = 0; i < levelSize; i++) {
                 TreeNode currentNode = queue.removeFirst();
 
-                for (TreeNode neighbor : new TreeNode[] {currentNode.left, currentNode.right, parents.get(currentNode)}) {
+                for (TreeNode neighbor : new TreeNode[] { currentNode.left, currentNode.right,
+                        parents.get(currentNode) }) {
                     if (neighbor != null && !seen.contains(neighbor)) {
                         seen.add(neighbor);
                         queue.add(neighbor);
@@ -59,11 +59,15 @@ class DistanceK {
             k--;
         }
 
-        List<Integer> kDistanceNodes = new ArrayList<>();
-        for (TreeNode node : queue) {
-            kDistanceNodes.add(node.val);
-        }
+        List<Integer> kDistanceNodes = queue.stream().map(node -> node.val).toList();
 
         return kDistanceNodes;
     }
 }
+
+// Time Complexity: O(n) where n is the number of nodes in the tree. We visit
+// each node at most twice (once to set parents and once to find nodes at
+// distance k).
+// Space Complexity: O(n) for the parents map, seen set, and queue in the worst
+// case when the tree is skewed. In a balanced tree, the space complexity would
+// be O(h) where h is the height of the tree.
