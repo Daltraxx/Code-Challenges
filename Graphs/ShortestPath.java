@@ -23,7 +23,7 @@ class State {
     }
 }
 
-class ShortestPathInGridWithObstaclesElimination {
+class ShortestPath {
     int height;
     int width;
 
