@@ -10,19 +10,6 @@ given that you can eliminate at most k obstacles.
 
 If it is not possible to find such walk return -1.*/
 
-class State {
-    int row;
-    int col;
-    int remainingRemovals;
-    int steps;
-    public State(int row, int col, int remainingRemovals, int steps) {
-        this.row = row;
-        this.col = col;
-        this.remainingRemovals = remainingRemovals;
-        this.steps = steps;
-    }
-}
-
 class ShortestPath {
     int height;
     int width;
@@ -31,42 +18,39 @@ class ShortestPath {
         height = grid.length;
         width = grid[0].length;
 
-        HashMap<String, Integer> seen = new HashMap<>();
+        int[][] seen = new int[height][width];
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                seen.put(convertToString(row, col), -1);
+                seen[row][col] = -1;
             }
         }
 
-        seen.put(convertToString(0, 0), k);
+        // Queue will hold [row, col, remainingRemovals, steps]
+        Deque<Integer[]> queue = new ArrayDeque<>();
+        queue.add(new Integer[] { 0, 0, k, 0 });
+        seen[0][0] = k;
 
-        Deque<State> queue = new ArrayDeque<>();
-        queue.add(new State(0, 0, k, 0));
-
-        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        int[][] directions = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
 
         while (!queue.isEmpty()) {
-            State nodeState = queue.remove();
-            int row = nodeState.row, col = nodeState.col;
-            int remainingRemovals = nodeState.remainingRemovals, steps = nodeState.steps;
+            Integer[] nodeState = queue.remove();
+            int row = nodeState[0];
+            int col = nodeState[1];
+            int remainingRemovals = nodeState[2];
+            int steps = nodeState[3];
 
             if (row == height - 1 && col == width - 1) {
                 return steps;
             }
+            for (int[] direction : directions) {
+                int nextRow = row + direction[0];
+                int nextCol = col + direction[1];
 
-            if (grid[row][col] == 1) {
-                remainingRemovals--;
-            }
-
-            if (remainingRemovals >= 0) {
-                for (int[] direction : directions) {
-                    int nextRow = row + direction[1];
-                    int nextCol = col + direction[0];
-                    String positionKey = convertToString(nextRow, nextCol);
-
-                    if (isValid(nextRow, nextCol) && remainingRemovals > seen.get(positionKey)) {
-                        seen.put(positionKey, remainingRemovals);
-                        queue.add(new State(nextRow, nextCol, remainingRemovals, steps + 1));
+                if (isValid(nextRow, nextCol)) {
+                    int newRemainingRemovals = remainingRemovals - grid[nextRow][nextCol];
+                    if (newRemainingRemovals > seen[nextRow][nextCol]) {
+                        seen[nextRow][nextCol] = newRemainingRemovals;
+                        queue.add(new Integer[] { nextRow, nextCol, newRemainingRemovals, steps + 1 });
                     }
                 }
             }
@@ -75,11 +59,12 @@ class ShortestPath {
         return -1;
     }
 
-    public String convertToString(int row, int col) {
-        return String.format("%s %s", row, col);
-    }
-
     public boolean isValid(int row, int col) {
-        return row >= 0 & row < height && col >= 0 && col < width;
+        return row >= 0 && row < height && col >= 0 && col < width;
     }
 }
+
+// Time Complexity: O(m * n * k) where m and n are the dimensions of the grid,
+// and k is the number of obstacles we can eliminate,
+// as we may need to visit each cell with different remaining obstacle eliminations.
+// Space Complexity: O(m * n * k) for the queue in the worst case.
