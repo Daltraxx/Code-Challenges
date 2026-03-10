@@ -21,7 +21,7 @@ or -1 if such a path does not exist. */
 
 
 
-public class ShortestPathWithAlternatingColors {
+public class ShortestAlternatingPaths {
     int n;
     int RED = 0;
     int BLUE = 1;
