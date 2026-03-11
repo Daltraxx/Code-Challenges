@@ -11,68 +11,70 @@ where each answer[x] is the length of the shortest path from node 0 to node x
 such that the edge colors alternate along the path, 
 or -1 if such a path does not exist. */
 
-class PathState {
-    constructor(node, colorRequired) {
-        this.node = node;
-        this.colorRequired = colorRequired;
-    }
-}
-
 const shortestAlternatingPaths = (n, redEdges, blueEdges) => {
-    const addToGraph = (edges, color) => {
-        const colorGraph = graph.get(color);
-        for (let node = 0; node < n; node++) {
-            colorGraph.set(node, []);
-        }
+  const addToGraph = (edges, color) => {
+    const colorGraph = graph[color];
 
-        for (let [nodeA, nodeB] of edges) {
-            colorGraph.get(nodeA).push(nodeB);
+    for (let [nodeA, nodeB] of edges) {
+      colorGraph[nodeA].push(nodeB);
+    }
+  };
+
+  const RED = 0;
+  const BLUE = 1;
+
+  const graph = Array.from({ length: 2 }, () =>
+    Array.from({ length: n }, () => []),
+  );
+
+  addToGraph(redEdges, RED);
+  addToGraph(blueEdges, BLUE);
+
+  const seen = Array.from({ length: n }, () => [false, false]);
+  seen[0][RED] = seen[0][BLUE] = true;
+
+  const shortestPaths = new Array(n).fill(-1);
+
+  // Queue stores arrays of the form [node, prevColor]
+  let queue = [
+    [0, RED],
+    [0, BLUE],
+  ];
+  let distance = 0;
+
+  while (queue.length) {
+    const nextQueue = [];
+
+    for (let [node, prevColor] of queue) {
+      if (shortestPaths[node] === -1) {
+        shortestPaths[node] = distance;
+      }
+      const currentColor = 1 - prevColor;
+      const neighbors = graph[currentColor][node];
+      for (let neighbor of neighbors) {
+        if (!seen[neighbor][currentColor]) {
+          seen[neighbor][currentColor] = true;
+          nextQueue.push([neighbor, currentColor]);
         }
+      }
     }
 
-    const RED = 0;
-    const BLUE = 1;
+    queue = nextQueue;
+    distance++;
+  }
 
-    const graph = new Map();
-    graph.set(RED, new Map());
-    graph.set(BLUE, new Map());
+  return shortestPaths;
+};
 
-    addToGraph(redEdges, RED);
-    addToGraph(blueEdges, BLUE);
+// Time Complexity: O(n + r + b) where n is the number of nodes,
+// r is the number of red edges,
+// and b is the number of blue edges.
+// Space Complexity: O(n + r + b) for the graph representation and the seen array.
 
-    const seen = new Array(n).fill().map(() => new Array(2).fill(false));
-    seen[0][RED] = seen[0][BLUE] = true;
-    
-    const shortestPaths = new Array(n).fill(-1);
-
-    let queue = [new PathState(0, RED), new PathState(0, BLUE)];
-    let distance = 0;
-
-    while (queue.length) {
-        const nextQueue = [];
-
-        for (let {node, colorRequired} of queue) {
-            if (shortestPaths[node] === -1) {
-                shortestPaths[node] = distance;
-            }
-
-            const neighbors = graph.get(colorRequired).get(node);
-            for (let neighbor of neighbors) {
-                const nextColorRequired = 1 - colorRequired;
-
-                if (!seen[neighbor][nextColorRequired]) {
-                    seen[neighbor][nextColorRequired] = true;
-                    nextQueue.push(new PathState(neighbor, nextColorRequired));
-                }
-            }
-        }
-
-        queue = nextQueue;
-        distance++;
-    }
-
-    return shortestPaths;
-}
-
-const n = 3, redEdges = [[0,1],[1,2]], blueEdges = []
+const n = 3,
+  redEdges = [
+    [0, 1],
+    [1, 2],
+  ],
+  blueEdges = [];
 console.log(shortestAlternatingPaths(n, redEdges, blueEdges));
