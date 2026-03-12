@@ -5,7 +5,9 @@ from typing import List
 
 class SnakesAndLadders:
 
-    def snakesAndLadders(self, board: List[List[int]]) -> int:
+    # This solution computes the position of each square on the board using a helper function.
+    # More difficult to get right, perhaps best avoided in interviews.
+    def snakesAndLaddersWithPositionComputation(self, board: List[List[int]]) -> int:
         def get_position(square: int) -> tuple[int, int]:
             # Get row from bottom of square
             row_from_bottom = (square - 1) // n
