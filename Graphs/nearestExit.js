@@ -12,41 +12,60 @@ Return the number of steps in the shortest path from the entrance to the nearest
 or -1 if no such path exists. */
 
 const nearestExit = (maze, entrance) => {
-    const isExit = (row, col) => {
-        return row === 0 || row === height - 1 || col === 0 || col === width - 1;
-    }
+  const WALL = "+";
 
-    const isValid = (row, col) => {
-        return row >= 0 && row < height && col >= 0 && col < width && maze[row][col] === '.';
-    }
+  const isExit = (row, col) => {
+    return row === 0 || row === height - 1 || col === 0 || col === width - 1;
+  };
 
-    const height = maze.length, width = maze[0].length;
+  const isValid = (row, col) => {
+    return (
+      row >= 0 &&
+      row < height &&
+      col >= 0 &&
+      col < width &&
+      maze[row][col] !== WALL
+    );
+  };
 
-    const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
-    let distance = 0;
-    maze[entrance[0]][entrance[1]] = '+';
-    let queue = [entrance];
+  const height = maze.length;
+  const width = maze[0].length;
 
-    while (queue.length) {
-        const nextQueue = [];
-        distance++;
-        
-        for (let [row, col] of queue) {
-            for (let [dx, dy] of directions) {
-                const nextRow = row + dy;
-                const nextCol = col + dx;
+  const DIRECTIONS = [
+    [-1, 0],
+    [1, 0],
+    [0, -1],
+    [0, 1],
+  ];
 
-                if (isValid(nextRow, nextCol)) {
-                    if (isExit(nextRow, nextCol)) {
-                        return distance;
-                    }
-                    maze[nextRow][nextCol] = '+';
-                    nextQueue.push([nextRow, nextCol]);
-                }
-            }
+  const [entranceRow, entranceCol] = entrance;
+  maze[entranceRow][entranceCol] = WALL;
+  let queue = [[entranceRow, entranceCol]];
+  let distance = 0;
+
+  while (queue.length) {
+    const nextQueue = [];
+    distance++;
+
+    for (let [row, col] of queue) {
+      for (let [dy, dx] of DIRECTIONS) {
+        const nextRow = row + dy;
+        const nextCol = col + dx;
+
+        if (isValid(nextRow, nextCol)) {
+          if (isExit(nextRow, nextCol)) {
+            return distance;
+          }
+          maze[nextRow][nextCol] = WALL;
+          nextQueue.push([nextRow, nextCol]);
         }
-        queue = nextQueue;
+      }
     }
+    queue = nextQueue;
+  }
 
-    return -1;
-}
+  return -1;
+};
+
+// Time Complexity: O(m * n) where m is the number of rows and n is the number of columns in the maze.
+// Space Complexity: O(m * n) for the queue in the worst case when all cells are empty.
