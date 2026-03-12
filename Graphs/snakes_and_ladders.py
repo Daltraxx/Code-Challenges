@@ -14,32 +14,29 @@ class SnakesAndLadders:
         i = 1
         left_to_right = True
         for row in range(n - 1, -1, -1):
-            if left_to_right:
-                for col in range(n):
-                    flattened_board[i] = board[row][col]
-                    i += 1
-            else:
-                for col in range(n - 1, -1, -1):
-                    flattened_board[i] = board[row][col]
-                    i += 1
+            for col in range(n) if left_to_right else range(n - 1, -1, -1):
+                flattened_board[i] = board[row][col]
+                i += 1
             left_to_right = not left_to_right
 
         queue = deque([1])
         rolls = 0
         while queue:
+            rolls += 1
             for _ in range(len(queue)):
                 square = queue.popleft()
-                if square == end:
-                    return rolls
-                for roll in range(1, min(7, end - square + 1)):
+                for roll in range(1, 7):
                     new_square = square + roll
+                    if new_square > end:
+                        break
                     if flattened_board[new_square] != -1:
                         new_square = flattened_board[new_square]
+                    if new_square == end:
+                        return rolls
                     if not seen[new_square]:
                         seen[new_square] = True
                         queue.append(new_square)
-            rolls += 1
-        
+
         return -1
 
     # ALTERNATIVE BUT MORE DIFFICULT SOLUTION
@@ -49,7 +46,7 @@ class SnakesAndLadders:
         def get_position(square: int) -> tuple[int, int]:
             # Get row from bottom of square
             row_from_bottom = (square - 1) // n
-            # Flip position of row since matrices are indexed from stop
+            # Flip position of row since matrices are indexed from top
             row = n - 1 - row_from_bottom
             # Get normal position of square within the row
             col = (square - 1) % n
