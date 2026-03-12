@@ -14,30 +14,33 @@ The entrance does not count as an exit.
 Return the number of steps in the shortest path from the entrance to the nearest exit, 
 or -1 if no such path exists. */
 
-
 class NearestExit {
-    char[][] maze;
-    int height;
-    int width;
+    private char[][] maze;
+    private int height;
+    private int width;
+    private boolean[][] seen;
+    private static final char WALL = '+';
+    private static final int[][] DIRECTIONS = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+
     public int nearestExit(char[][] maze, int[] entrance) {
         this.maze = maze;
         height = maze.length;
         width = maze[0].length;
-        int entranceRow = entrance[0], entranceCol = entrance[1];
+        int entranceRow = entrance[0];
+        int entranceCol = entrance[1];
 
-        boolean[][] seen = new boolean[height][width];
+        seen = new boolean[height][width];
         seen[entranceRow][entranceCol] = true;
 
         Deque<int[]> queue = new ArrayDeque<>();
-        queue.add(new int[] {entranceRow, entranceCol});
+        queue.add(new int[] { entranceRow, entranceCol });
 
-        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         int distance = 0;
 
         while (!queue.isEmpty()) {
             int levelSize = queue.size();
             for (int i = 0; i < levelSize; i++) {
-                int[] position = queue.remove();
+                int[] position = queue.pollFirst();
                 int row = position[0];
                 int col = position[1];
 
@@ -45,13 +48,13 @@ class NearestExit {
                     return distance;
                 }
 
-                for (int[] direction : directions) {
+                for (int[] direction : DIRECTIONS) {
                     int nextRow = row + direction[0];
                     int nextCol = col + direction[1];
 
-                    if (isValid(nextRow, nextCol) && !seen[nextRow][nextCol]) {
+                    if (isValid(nextRow, nextCol)) {
                         seen[nextRow][nextCol] = true;
-                        queue.add(new int[] {nextRow, nextCol});
+                        queue.addLast(new int[] { nextRow, nextCol });
                     }
                 }
             }
@@ -67,6 +70,11 @@ class NearestExit {
     }
 
     public boolean isValid(int row, int col) {
-        return row >= 0 && row < height && col >= 0 && col < width && maze[row][col] == '.';
+        return row >= 0 && row < height && col >= 0 && col < width && !seen[row][col] && maze[row][col] != WALL;
     }
 }
+
+// Time Complexity: O(m * n) where m is the number of rows and n is the number
+// of columns in the maze.
+// Space Complexity: O(m * n) for the seen array and the queue in the worst case
+// when all cells are empty.
