@@ -15,7 +15,7 @@ Return the number of steps in the shortest path from the entrance to the nearest
 or -1 if no such path exists. */
 
 
-class NearestExitFromEntranceInMaze {
+class NearestExit {
     char[][] maze;
     int height;
     int width;
