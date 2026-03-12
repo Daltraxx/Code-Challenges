@@ -4,31 +4,38 @@ from typing import List
 
 class NearestExit:
     def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
-        def is_out(row: int, col: int) -> bool:
-            return row < 0 or row >= height or col < 0 or col >= width
+        def is_valid(row: int, col: int) -> bool:
+            return 0 <= row < height and 0 <= col < width and not seen[row][col] and maze[row][col] != WALL
+        
+        def is_border(row: int, col: int) -> bool:
+            return row == 0 or row == height - 1 or col == 0 or col == width - 1
+        
+        def is_entrance(row: int, col: int) -> bool:
+            return row == entrance_row and col == entrance_col
+        
 
         height = len(maze)
         width = len(maze[0])
         directions = ((-1, 0), (1, 0), (0, -1), (0, 1))
         WALL = "+"
+        entrance_row, entrance_col = entrance
 
         seen = [[False] * width for _ in range(height)]
-        seen[entrance[0]][entrance[1]] = True
-        queue = deque([(entrance[0], entrance[1])])
+        seen[entrance_row][entrance_col] = True
+        queue = deque([(entrance_row, entrance_col)])
         steps = 0
 
         while queue:
             size = len(queue)
             for _ in range(size):
                 row, col = queue.popleft()
+                if is_border(row, col) and not is_entrance(row, col):
+                    return steps
 
                 for dy, dx in directions:
                     new_row = row + dy
                     new_col = col + dx
-                    if is_out(new_row, new_col):
-                        if row != entrance[0] or col != entrance[1]:
-                            return steps
-                    elif not seen[new_row][new_col] and maze[new_row][new_col] != WALL:
+                    if is_valid(new_row, new_col):
                         seen[new_row][new_col] = True
                         queue.append((new_row, new_col))
 
