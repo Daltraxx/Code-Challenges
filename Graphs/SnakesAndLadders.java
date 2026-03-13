@@ -8,18 +8,10 @@ public class SnakesAndLadders {
 
         boolean leftToRight = true;
         int[] flattenedBoard = new int[end + 1];
-        int i = 1;
+        int index = 1;
         for (int row = n - 1; row >= 0; row--) {
-            if (leftToRight) {
-                for (int col = 0; col < n; col++) {
-                    flattenedBoard[i] = board[row][col];
-                    i++;
-                }
-            } else {
-                for (int col = n - 1; col >= 0; col--) {
-                    flattenedBoard[i] = board[row][col];
-                    i++;
-                }
+            for (int col = leftToRight ? 0 : n - 1; leftToRight ? col < n : col >= 0; col += leftToRight ? 1 : -1) {
+                flattenedBoard[index++] = board[row][col];
             }
             leftToRight = !leftToRight;
         }
@@ -33,7 +25,7 @@ public class SnakesAndLadders {
         while (!queue.isEmpty()) {
             rolls++;
             int size = queue.size();
-            for (int node = 0; node < size; node++) {
+            for (int i = 0; i < size; i++) {
                 int square = queue.pollFirst();
                 for (int roll = 1; roll < 7; roll++) {
                     int newSquare = square + roll;
