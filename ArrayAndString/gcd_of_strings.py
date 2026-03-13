@@ -22,13 +22,10 @@ class GcdOfStrings:
         shorter = str2 if longer == str1 else str1
         longer_length = len(longer)
         shorter_length = len(shorter)
-        i = len(shorter)
-        while i >= 1:
+        for i in range(shorter_length, 0, -1):
             candidate = shorter[:i]
             if is_valid(candidate):
                 return candidate
-            else:
-                i -= 1
         return ""
     
     # Time complexity: O(n * m) where n and m are the lengths of str1 and str2 respectively.
