@@ -1,5 +1,5 @@
 class GcdOfStrings:
-    def gcdOfStrings(self, str1: str, str2: str) -> str:
+    def gcdOfStringsBruteForce(self, str1: str, str2: str) -> str:
         def is_valid(candidate: str) -> bool:
             candidate_length = len(candidate)
             if (
@@ -18,9 +18,6 @@ class GcdOfStrings:
 
             return True
 
-        if len(str1) == len(str2):
-            return str1 if str1 == str2 else ""
-
         longer = str1 if len(str1) >= len(str2) else str2
         shorter = str2 if longer == str1 else str1
         longer_length = len(longer)
@@ -33,3 +30,6 @@ class GcdOfStrings:
             else:
                 i -= 1
         return ""
+    
+    # Time complexity: O(n * m) where n and m are the lengths of str1 and str2 respectively.
+    # Space complexity: O(n + m) since we are creating new strings in the is_valid function.
