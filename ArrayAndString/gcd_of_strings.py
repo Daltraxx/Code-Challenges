@@ -1,4 +1,22 @@
 class GcdOfStrings:
+    def gcdOfStrings(self, str1: str, str2) -> str:
+        def get_gcd(str1_length: int, str2_length: int) -> int:
+           if str2_length == 0:
+               return str1_length
+           
+           return get_gcd(str2_length, str1_length % str2_length)
+               
+        if str1 + str2 != str2 + str1:
+            return ""
+        
+        gcd = get_gcd(len(str1), len(str2))
+        return str1[:gcd]
+    
+    # Time complexity: O(n + m) where n and m are the lengths of str1 and str2 respectively.
+    # Space complexity: O(n + m) for the concatenated strings in the check str1 + str2 != str2 + str1, 
+    # due to the temporary strings created during concatenation.
+        
+
     def gcdOfStringsBruteForce(self, str1: str, str2: str) -> str:
         def is_valid(candidate: str) -> bool:
             candidate_length = len(candidate)
