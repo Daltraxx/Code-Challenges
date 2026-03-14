@@ -1,10 +1,10 @@
 class GcdOfStrings:
     def gcdOfStrings(self, str1: str, str2) -> str:
-        def get_gcd(str1_length: int, str2_length: int) -> int:
-           if str2_length == 0:
-               return str1_length
+        def get_gcd(a: int, b: int) -> int:
+           if b == 0:
+               return a
            
-           return get_gcd(str2_length, str1_length % str2_length)
+           return get_gcd(b, a % b)
                
         if str1 + str2 != str2 + str1:
             return ""
