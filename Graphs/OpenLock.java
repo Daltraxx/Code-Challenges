@@ -27,7 +27,7 @@ class CombinationState {
     }
 }
 
-public class OpenTheLock {
+public class OpenLock {
     Set<String> seen;
     public int openLock(String[] deadends, String target) {
         seen = new HashSet<>();
