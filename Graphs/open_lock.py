@@ -5,8 +5,10 @@ from typing import List
 class OpenLock:
     def openLock(self, deadends: List[str], target: str) -> int:
         seen = set(deadends)
+
         if "0000" in seen:
             return -1
+
         seen.add("0000")
         queue = deque(["0000"])
         steps = 0
@@ -15,17 +17,11 @@ class OpenLock:
                 combo = queue.popleft()
                 if combo == target:
                     return steps
-
-                combo_list = list(combo)
                 for i in range(4):
-                    digit = int(combo_list[i])
+                    digit = int(combo[i])
                     for change in [-1, 1]:
-                        new_digit = digit + change
-                        if new_digit == -1:
-                            new_digit = 9
-                        if new_digit == 10:
-                            new_digit = 0
-                        new_combo = combo_list.copy()
+                        new_digit = (digit + change) % 10
+                        new_combo = list(combo)
                         new_combo[i] = str(new_digit)
                         new_combo = "".join(new_combo)
                         if new_combo not in seen:
