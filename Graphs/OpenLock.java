@@ -1,28 +1,14 @@
 import java.util.ArrayDeque;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-class CombinationState {
-    String combination;
-    int steps;
-    public CombinationState(String combination, int steps) {
-        this.combination = combination;
-        this.steps = steps;
-    }
-}
-
 public class OpenLock {
-    Set<String> seen;
     public int openLock(String[] deadends, String target) {
-        seen = new HashSet<>();
-        for (String deadend : deadends) {
-            if (deadend.equals("0000")) {
-                return -1;
-            }
-            seen.add(deadend);
+        Set<String> seen = new HashSet<>(Arrays.asList(deadends));
+        if (seen.contains("0000")) {
+            return -1;
         }
         seen.add("0000");
 
@@ -30,19 +16,27 @@ public class OpenLock {
         queue.add(new CombinationState("0000", 0));
 
         while (!queue.isEmpty()) {
-            CombinationState combinationState = queue.remove();
-            String combination = combinationState.combination;
-            int steps = combinationState.steps;
-            if (combination.equals(target)) {
+            CombinationState comboState = queue.pollFirst();
+            String combo = comboState.combination;
+            int steps = comboState.steps;
+
+            if (combo.equals(target)) {
                 return steps;
             }
 
-            steps++;
-
-            for (String neighborCombination : getNeighborCombinations(combination)) {
-                if (!seen.contains(neighborCombination)) {
-                    seen.add(neighborCombination);
-                    queue.add(new CombinationState(neighborCombination, steps));
+            for (int i = 0; i < 4; i++) {
+                int digit = Character.getNumericValue(combo.charAt(i));
+                for (int change : new int[] { -1, 1 }) {
+                    // Java modulo keeps negative values negative, so we add 10 to ensure it stays
+                    // positive
+                    int newDigit = (digit + change + 10) % 10;
+                    char[] newCombo = combo.toCharArray();
+                    newCombo[i] = Character.forDigit(newDigit, 10);
+                    String newComboStr = new String(newCombo);
+                    if (!seen.contains(newComboStr)) {
+                        seen.add(newComboStr);
+                        queue.addLast(new CombinationState(newComboStr, steps + 1));
+                    }
                 }
             }
         }
@@ -50,17 +44,18 @@ public class OpenLock {
         return -1;
     }
 
-    public List<String> getNeighborCombinations(String combination) {
-        List<String> neighbors = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            int digit = (combination.charAt(i) - '0');
-            for (int change : new int[] {1, -1}) {
-                int newDigit = (10 + digit + change) % 10;
-                String neighborCombination = combination.substring(0, i) + newDigit + combination.substring(i + 1);
-                neighbors.add(neighborCombination);
-            }
-        }
+    private static class CombinationState {
+        String combination;
+        int steps;
 
-        return neighbors;
+        public CombinationState(String combination, int steps) {
+            this.combination = combination;
+            this.steps = steps;
+        }
     }
 }
+
+// Time Complexity: O(10^4) - In the worst case, we may need to explore all
+// possible combinations of the lock (from "0000" to "9999").
+// Space Complexity: O(10^4) - We may need to store all possible combinations in
+// the seen set and the queue in the worst case.
