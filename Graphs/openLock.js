@@ -13,12 +13,12 @@ const openLock = (deadends, target) => {
   while (queue.length) {
     const nextQueue = [];
     for (let combination of queue) {
-      if (combination === target) {
-        return turns;
-      }
+      if (combination === target) return turns;
+
       for (let i = 0; i < 4; i++) {
         const digit = parseInt(combination[i], 10);
-        for (let change of [1, -1]) {
+        const moves = [1, -1];
+        for (let change of moves) {
           // JavaScript modulo can yield negative results, so we add 10 to ensure it stays positive
           const newDigit = (digit + change + 10) % 10;
           const newCombination =
