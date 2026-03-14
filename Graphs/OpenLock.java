@@ -25,13 +25,13 @@ public class OpenLock {
             }
 
             for (int i = 0; i < 4; i++) {
-                int digit = Character.getNumericValue(combo.charAt(i));
+                int digit = combo.charAt(i) - '0';
                 for (int change : new int[] { -1, 1 }) {
                     // Java modulo keeps negative values negative, so we add 10 to ensure it stays
                     // positive
                     int newDigit = (digit + change + 10) % 10;
                     char[] newCombo = combo.toCharArray();
-                    newCombo[i] = Character.forDigit(newDigit, 10);
+                    newCombo[i] = (char) (newDigit + '0');
                     String newComboStr = new String(newCombo);
                     if (!seen.contains(newComboStr)) {
                         seen.add(newComboStr);
