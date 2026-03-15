@@ -6,16 +6,16 @@ class CalcEquation:
     def calcEquation(
         self, equations: List[List[str]], values: List[float], queries: List[List[str]]
     ) -> List[float]:
-        def dfs(node: str, target: str, seen: set[str]) -> float:
-            if node == target:
+        def dfs(variable: str, target: str, seen: set[str]) -> float:
+            if variable == target:
                 return 1
 
-            for neighbor in graph[node]:
+            for neighbor in graph[variable]:
                 if neighbor not in seen:
                     seen.add(neighbor)
                     result = dfs(neighbor, target, seen)
                     if result != -1:
-                        weight = graph[node][neighbor]
+                        weight = graph[variable][neighbor]
                         return result * weight
 
             return -1
