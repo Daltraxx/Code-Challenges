@@ -22,21 +22,24 @@ class CalcEquation:
 
         # Pre-process graph
         graph = defaultdict(dict)
-        for i in range(len(equations)):
-            num, denom = equations[i]
-            graph[num][denom] = values[i]
-            graph[denom][num] = 1 / values[i]
+        for (num, denom), value in zip(equations, values):
+            graph[num][denom] = value
+            graph[denom][num] = 1 / value
 
         answers = []
         for origin, dest in queries:
-            answers.append(
-                -1 if origin not in graph else dfs(origin, dest, set([origin]))
-            )
+            # Note: if origin not in graph (not among the known variables given in the equations),
+            # it is considered undefined by the problem statement and we return -1.
+            if origin not in graph or dest not in graph:
+                answers.append(-1)
+            else:
+                answers.append(dfs(origin, dest, {origin}))
 
         return answers
 
-# Time Complexity: O(q * ( n + e )) where q is the number of queries, 
+
+# Time Complexity: O(q * ( n + e )) where q is the number of queries,
 # n is the number of unique variables/nodes, and e is the number of equations/edges.
 # In the worst case, we may have to visit all variables and equations for each query.
-# Space Complexity: O(n + e) for the graph representation, 
+# Space Complexity: O(n + e) for the graph representation,
 # and O(n) for the seen set in the worst case of a deep recursion.
