@@ -3,15 +3,8 @@ from typing import List
 
 class KidsWithCandies:
     def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
-        max_amount = 0
-        for amount in candies:
-            max_amount = max(amount, max_amount)
-
-        ans = []
-        for amount in candies:
-            ans.append(True if amount + extraCandies >= max_amount else False)
-
-        return ans
+        max_amount = max(candies)
+        return [candy + extraCandies >= max_amount for candy in candies]
 
 # Time complexity: O(n) where n is the number of kids. 
 # We iterate through the list of candies twice, but this is still linear time.
