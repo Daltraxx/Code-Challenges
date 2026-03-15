@@ -1,3 +1,4 @@
+// ITERATIVE DFS SOLUTION
 const calcEquation = (equations, values, queries) => {
   const dfs = (start, end) => {
     if (!graph.has(start) || !graph.has(end)) {
@@ -27,7 +28,7 @@ const calcEquation = (equations, values, queries) => {
     return -1;
   };
 
-  // Build the graph as an adjacency list where 
+  // Build the graph as an adjacency list where
   // each node maps to a map of its neighbors and the corresponding edge weights.
   const graph = new Map();
   for (let i = 0; i < equations.length; i++) {
@@ -48,22 +49,24 @@ const calcEquation = (equations, values, queries) => {
   return answers;
 };
 
-const calcEquationRecursive = (equations, values, queries) => {
-  const dfs = (start, end, ratio) => {
-    if (!graph.has(start)) {
-      return -1;
-    }
+// Time complexity: O(Q * (V + E)) where Q is the number of queries, V is the
+// number of variables and E is the number of equations
+// Space complexity: O(V + E) for the graph and O(V) for the seen set and stack
+// in the worst case.
 
+// RECURSIVE DFS SOLUTION
+const calcEquationRecursiveDFS = (equations, values, queries) => {
+  const dfs = (start, end, seen) => {
     if (start === end) {
-      return ratio;
+      return 1;
     }
 
     for (let [neighbor, weight] of graph.get(start)) {
       if (!seen.has(neighbor)) {
         seen.add(neighbor);
-        const search = dfs(neighbor, end, ratio * weight);
-        if (search !== -1) {
-          return search;
+        const result = dfs(neighbor, end, seen);
+        if (result !== -1) {
+          return result * weight;
         }
       }
     }
@@ -71,8 +74,9 @@ const calcEquationRecursive = (equations, values, queries) => {
     return -1;
   };
 
+  // Build the graph as an adjacency list where
+  // each node maps to a map of its neighbors and the corresponding edge weights.
   const graph = new Map();
-
   for (let i = 0; i < equations.length; i++) {
     let [numerator, denominator] = equations[i];
 
@@ -83,16 +87,19 @@ const calcEquationRecursive = (equations, values, queries) => {
     graph.get(denominator).set(numerator, 1 / values[i]);
   }
 
-  let seen = new Set();
-
-  const answers = new Array(queries.length);
-  for (let i = 0; i < queries.length; i++) {
-    const start = queries[i][0],
-      end = queries[i][1];
-    seen.add(start);
-    answers[i] = dfs(start, end, 1);
-    seen = new Set();
+  const answers = [];
+  for (const [start, end] of queries) {
+    if (!graph.has(start) || !graph.has(end)) {
+      answers.push(-1);
+    } else {
+      answers.push(dfs(start, end, new Set([start])));
+    }
   }
 
   return answers;
 };
+
+// Time complexity: O(Q * (V + E)) where Q is the number of queries, V is the
+// number of variables and E is the number of equations
+// Space complexity: O(V + E) for the graph and O(V) for the seen set and recursion
+// stack in the worst case.
