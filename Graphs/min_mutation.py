@@ -28,5 +28,12 @@ class MinMutation:
                             queue.append(new_gene)
 
             mutations += 1
-        
+
         return -1
+
+
+# Time Complexity: O(n) where n is the number of genes in the bank,
+# since we scan the bank list for each potential mutation and may have to visit each gene at most once.
+# Technically, the BFS runs in constant time since the gene length is fixed at 8 and there are only 4 possible bases.
+# Space Complexity: O(n) for the seen set and the queue in the worst case where we visit all genes in the bank, 
+# though could also be considered O(1) since the gene length is fixed and there are only 4^8 possible genes.
