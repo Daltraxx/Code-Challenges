@@ -1,32 +1,20 @@
-class ReverseVowels:
+class ReverseVowels:    
     def reverseVowels(self, s: str) -> str:
-        vowels = set(["a", "e", "i", "o", "u"])
-        vowels_in_s = []
-        vowel_indices = []
-        for i in range(len(s)):
-            if s[i].lower() in vowels:
-                vowels_in_s.append(s[i])
-                vowel_indices.append(i)
-        s_list = list(s)
-        j = len(vowels_in_s) - 1
-        for index in vowel_indices:
-            s_list[index] = vowels_in_s[j]
-            j -= 1
-
-        return "".join(s_list)
-            
-    def reverseVowelsTwoPointers(self, s: str) -> str:
-        vowels = set(["a", "e", "i", "o", "u"])
+        vowels = set("aeiouAEIOU")
         s_list = list(s)
         left, right = 0, len(s) - 1
         while left < right:
-            while left < right and s[left].lower() not in vowels:
+            while left < right and s_list[left] not in vowels:
                 left += 1
-            while right > left and s[right].lower() not in vowels:
+            while left < right and s_list[right] not in vowels:
                 right -= 1
             if left < right:
-                s_list[right], s_list[left] = s_list[left], s_list[right]
+                s_list[left], s_list[right] = s_list[right], s_list[left]
                 left += 1
                 right -= 1
 
         return "".join(s_list)
+
+# Time Complexity: O(n) where n is the length of the input string,
+#  since we have to scan through the entire string once.
+# Space Complexity: O(n) for the list conversion of the input string.
