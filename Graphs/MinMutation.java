@@ -21,7 +21,7 @@ If there is no such a mutation, return -1.
 
 Note that the starting point is assumed to be valid, so it might not be included in the bank.*/
 
-class MinimumGeneticMutation {
+class MinMutation {
     public int minMutation(String startGene, String endGene, String[] bank) {
         Set<String> seen = new HashSet<>();
         seen.add(startGene);
