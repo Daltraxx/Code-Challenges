@@ -6,14 +6,13 @@ class CanPlaceFlowers:
         if n == 0:
             return True
         m = len(flowerbed)
-        new_flowerbed = flowerbed.copy()
         count = 0
         for i in range(m):
-            if new_flowerbed[i] == 0:
-                left = i == 0 or new_flowerbed[i - 1] == 0
-                right = i == m - 1 or new_flowerbed[i + 1] == 0
+            if flowerbed[i] == 0:
+                left = i == 0 or flowerbed[i - 1] == 0
+                right = i == m - 1 or flowerbed[i + 1] == 0
                 if left and right:
-                    new_flowerbed[i] = 1
+                    flowerbed[i] = 1
                     count += 1
                     if count == n:
                         return True
@@ -22,4 +21,4 @@ class CanPlaceFlowers:
 
 # Time Complexity: O(m) where m is the length of the flowerbed array.
 # We iterate through the flowerbed once to check for available spots and place flowers.
-# Space Complexity: O(m) for the new_flowerbed array, which is a copy of the input flowerbed.
+# Space Complexity: O(1) since we modify the input array in place.
