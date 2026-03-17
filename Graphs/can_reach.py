@@ -12,16 +12,13 @@ class CanReach:
             val = arr[index]
             if val == 0:
                 return True
-            left_jump = index - val
-            if left_jump >= 0 and not seen[left_jump]:
-                seen[left_jump] = True
-                stack.append(left_jump)
-            right_jump = index + val
-            if right_jump < n and not seen[right_jump]:
-                seen[right_jump] = True
-                stack.append(right_jump)
+            for jump_index in (index + val, index - val):
+                if 0 <= jump_index < n and not seen[jump_index]:
+                    seen[jump_index] = True
+                    stack.append(jump_index)
 
         return False
+
 
 # Time complexity: O(n) - we visit each index at most once
 # Space complexity: O(n) - we use a seen array to keep track of visited indices
