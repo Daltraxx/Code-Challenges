@@ -12,7 +12,8 @@ class CanReach:
             val = arr[index]
             if val == 0:
                 return True
-            for jump_index in (index + val, index - val):
+            left_jump, right_jump = index - val, index + val
+            for jump_index in (left_jump, right_jump):
                 if 0 <= jump_index < n and not seen[jump_index]:
                     seen[jump_index] = True
                     stack.append(jump_index)
