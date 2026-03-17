@@ -1,34 +1,28 @@
-/*Given an array of non-negative integers arr, 
-you are initially positioned at start index of the array. 
-When you are at index i, you can jump to i + arr[i] or i - arr[i], 
-check if you can reach any index with value 0.
-
-Notice that you can not jump outside of the array at any time.*/
-
 const canReach = (arr, start) => {
-    const canFindZero = (index) => {
-        const val = arr[index];
-
-        if (val === 0) {
-            return true;
-        }
-
-        let leftSearch = false, rightSearch = false;
-        const leftJumpIndex = index - val, rightJumpIndex = index + val;
-
-        if (leftJumpIndex >= 0 && !seen[leftJumpIndex]) {
-            seen[leftJumpIndex] = true;
-            leftSearch = canFindZero(leftJumpIndex);
-        }
-
-        if (rightJumpIndex < arr.length && !seen[rightJumpIndex]) {
-            seen[rightJumpIndex] = true;
-            rightSearch = canFindZero(index + val);
-        }
-
-        return leftSearch || rightSearch;
+  const dfs = (index) => {
+    const val = arr[index];
+    if (val === 0) {
+      return true;
     }
+    seen[index] = true;
 
-    const seen = new Array(arr.length).fill(false);
-    return canFindZero(start);
-}
+    const leftJumpIndex = index - val;
+    const foundLeft =
+      leftJumpIndex >= 0 && !seen[leftJumpIndex] && dfs(leftJumpIndex);
+    if (foundLeft) return true;
+
+    const rightJumpIndex = index + val;
+    const foundRight =
+      rightJumpIndex < n && !seen[rightJumpIndex] && dfs(rightJumpIndex);
+    if (foundRight) return true;
+
+    return false;
+  };
+
+  const n = arr.length;
+  const seen = new Array(arr.length).fill(false);
+  return dfs(start);
+};
+
+// Time complexity: O(n) - we visit each index at most once
+// Space complexity: O(n) - we use a seen array to keep track of visited indices
