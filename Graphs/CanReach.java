@@ -8,7 +8,7 @@ check if you can reach any index with value 0.
 
 Notice that you can not jump outside of the array at any time.*/
 
-class JumpGameIII {
+class CanReach {
     public boolean canReach(int[] arr, int start) {
         boolean[] seen = new boolean[arr.length];
         seen[start] = true;
