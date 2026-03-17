@@ -1,13 +1,6 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/*Given an array of non-negative integers arr, 
-you are initially positioned at start index of the array. 
-When you are at index i, you can jump to i + arr[i] or i - arr[i], 
-check if you can reach any index with value 0.
-
-Notice that you can not jump outside of the array at any time.*/
-
 class CanReach {
     public boolean canReach(int[] arr, int start) {
         boolean[] seen = new boolean[arr.length];
@@ -24,7 +17,8 @@ class CanReach {
                 return true;
             }
 
-            int leftJumpIndex = index - val, rightJumpIndex = index + val;
+            int leftJumpIndex = index - val;
+            int rightJumpIndex = index + val;
 
             if (leftJumpIndex >= 0 && !seen[leftJumpIndex]) {
                 seen[leftJumpIndex] = true;
@@ -40,3 +34,6 @@ class CanReach {
         return false;
     }
 }
+
+// Time complexity: O(n) - we visit each index at most once
+// Space complexity: O(n) - we use a seen array to keep track of visited indices
