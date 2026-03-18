@@ -1,78 +1,73 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
-
-/*You are given a list of bombs. 
-The range of a bomb is defined as the area where its effect can be felt. 
-This area is in the shape of a circle with the center as the location of the bomb.
-
-The bombs are represented by a 0-indexed 2D integer array bombs where bombs[i] = [xi, yi, ri]. 
-xi and yi denote the X-coordinate and Y-coordinate of the location of the ith bomb, 
-whereas ri denotes the radius of its range.
-
-You may choose to detonate a single bomb. When a bomb is detonated, it will detonate all bombs that lie in its range. 
-These bombs will further detonate the bombs that lie in their ranges.
-
-Given the list of bombs, 
-return the maximum number of bombs that can be detonated if you are allowed to detonate only one bomb.*/
 
 public class MaximumDetonation {
-    HashMap<Integer, List<Integer>> graph;
-    int[][] bombs;
+    private int n;
+    private List<List<Integer>> graph;
+    private int[][] bombs;
 
     public int maximumDetonation(int[][] bombs) {
         this.bombs = bombs;
-        graph = new HashMap<>();
+        this.n = bombs.length;
 
-        for (int bomb = 0; bomb < bombs.length; bomb++) {
-            graph.put(bomb, new ArrayList<>());
+        graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            graph.add(new ArrayList<>());
         }
 
-        for (int bomb1 = 0; bomb1 < bombs.length; bomb1++) {
-            for (int bomb2 = bomb1 + 1; bomb2 < bombs.length; bomb2++) {
+        for (int bomb1 = 0; bomb1 < n; bomb1++) {
+            for (int bomb2 = bomb1 + 1; bomb2 < n; bomb2++) {
                 setEdges(bomb1, bomb2);
             }
         }
 
         int maxDetonations = 0;
 
-        for (int bomb = 0; bomb < bombs.length; bomb++) {
-            maxDetonations = Math.max(getDetonations(bomb), maxDetonations);
+        for (int bomb = 0; bomb < n; bomb++) {
+            maxDetonations = Math.max(dfs(bomb), maxDetonations);
         }
 
         return maxDetonations;
     }
 
-    public void setEdges(int bomb1, int bomb2) {
+    private void setEdges(int bomb1, int bomb2) {
         int[] bomb1Data = bombs[bomb1], bomb2Data = bombs[bomb2];
 
-        int x1 = bomb1Data[0], y1 = bomb1Data[1], radius1 = bomb1Data[2];
-        int x2 = bomb2Data[0], y2 = bomb2Data[1], radius2 = bomb2Data[2];
+        int x1 = bomb1Data[0], y1 = bomb1Data[1], r1 = bomb1Data[2];
+        int x2 = bomb2Data[0], y2 = bomb2Data[1], r2 = bomb2Data[2];
 
-        double distance = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+        long dx = (long) x2 - x1;
+        long dy = (long) y2 - y1;
+        long distanceSquared = dx * dx + dy * dy;
 
-        if (radius1 >= distance) graph.get(bomb1).add(bomb2);
-        if (radius2 >= distance) graph.get(bomb2).add(bomb1);
+        long r1Squared = (long) r1 * r1;
+        long r2Squared = (long) r2 * r2;
+
+        if (r1Squared >= distanceSquared)
+            graph.get(bomb1).add(bomb2);
+        if (r2Squared >= distanceSquared)
+            graph.get(bomb2).add(bomb1);
     }
 
-    public int getDetonations(int bomb) {
-        boolean[] seen = new boolean[bombs.length];
+    private int dfs(int bomb) {
+        boolean[] seen = new boolean[n];
         seen[bomb] = true;
 
-        Stack<Integer> stack = new Stack<>();
-        stack.push(bomb);
+        Deque<Integer> stack = new ArrayDeque<>();
+        stack.addLast(bomb);
 
-        int detonations = 0;
+        int detonations = 1;
 
         while (!stack.isEmpty()) {
-            int currentBomb = stack.pop();
-            detonations++;
+            int currentBomb = stack.pollLast();
 
             for (int neighbor : graph.get(currentBomb)) {
                 if (!seen[neighbor]) {
                     seen[neighbor] = true;
-                    stack.push(neighbor);
+                    detonations++;
+                    stack.addLast(neighbor);
                 }
             }
         }
@@ -80,3 +75,9 @@ public class MaximumDetonation {
         return detonations;
     }
 }
+
+// Time Complexity: O(n^3) - We check each pair of bombs to build the graph,
+// and in the worst case, we may visit all bombs for each bomb during DFS.
+// Space Complexity: O(n^2) - The graph can have up to n^2 edges in the worst
+// case,
+// and we also use O(n) space for the seen array during DFS.
