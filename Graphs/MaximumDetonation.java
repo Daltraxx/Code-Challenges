@@ -17,7 +17,7 @@ These bombs will further detonate the bombs that lie in their ranges.
 Given the list of bombs, 
 return the maximum number of bombs that can be detonated if you are allowed to detonate only one bomb.*/
 
-public class DetonateMaximumBombs {
+public class MaximumDetonation {
     HashMap<Integer, List<Integer>> graph;
     int[][] bombs;
 
