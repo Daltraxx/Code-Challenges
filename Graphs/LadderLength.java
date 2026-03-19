@@ -15,7 +15,7 @@ Given two words, beginWord and endWord, and a dictionary wordList,
 return the number of words in the shortest transformation sequence from beginWord to endWord, 
 or 0 if no such sequence exists.*/
 
-class WordLadder {
+class LadderLength {
     Set<String> wordSet;
 
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
