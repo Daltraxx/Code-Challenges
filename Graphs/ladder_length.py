@@ -8,7 +8,7 @@ class LadderLength:
         allowed_words = set(wordList)
         if endWord not in allowed_words:
             return 0
-        allowed_words.add(beginWord)
+        
         queue = deque([beginWord])
         length = 1
         while queue:
@@ -47,8 +47,10 @@ class LadderLength:
     ) -> int:
         n = len(beginWord)
         allowed_words = set(wordList)
+
         if endWord not in allowed_words:
             return 0
+        
         curr_set = {beginWord}
         other_set = {endWord}
         length = 2

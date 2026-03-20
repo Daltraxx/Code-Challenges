@@ -5,16 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/*A transformation sequence from word beginWord to word endWord using a dictionary wordList 
-is a sequence of words beginWord -> s1 -> s2 -> ... -> sk such that:
-    Every adjacent pair of words differs by a single letter.
-    Every si for 1 <= i <= k is in wordList. Note that beginWord does not need to be in wordList.
-    sk == endWord
-
-Given two words, beginWord and endWord, and a dictionary wordList, 
-return the number of words in the shortest transformation sequence from beginWord to endWord, 
-or 0 if no such sequence exists.*/
-
 class LadderLength {
     Set<String> wordSet;
 
@@ -24,9 +14,6 @@ class LadderLength {
         if (!wordSet.contains(endWord)) {
             return 0;
         }
-
-        //in case wordList contains beginWord
-        wordSet.remove(beginWord);
 
         Deque<String> queue = new ArrayDeque<>();
         queue.add(beginWord);
@@ -44,7 +31,6 @@ class LadderLength {
                 }
 
                 for (String neighbor : getNeighbors(word)) {
-                    wordSet.remove(neighbor);
                     queue.add(neighbor);
                 }
             }
@@ -61,20 +47,30 @@ class LadderLength {
 
         for (int i = 0; i < chars.length; i++) {
             char original = chars[i];
-            
+
             for (char letter = 'a'; letter <= 'z'; letter++) {
+                if (letter == original)
+                    continue;
+
                 chars[i] = letter;
                 String adjacentWord = new String(chars);
 
                 if (wordSet.contains(adjacentWord)) {
+                    wordSet.remove(adjacentWord);
                     neighbors.add(adjacentWord);
                 }
             }
 
-            //keep original word intact for next iterations
+            // Keep original word intact for next iterations
             chars[i] = original;
         }
 
         return neighbors;
     }
 }
+
+// Time Complexity: O(M*N) where M is the length of each word and N is the
+// number of words in the word list. In the worst case, we might have to check
+// all possible transformations for each word in the list.
+// Space Complexity: O(N) for the queue and the word set, where N is the number
+// of words in the word list.
