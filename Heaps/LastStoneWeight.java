@@ -5,19 +5,26 @@ import java.util.PriorityQueue;
 
 class LastStoneWeight {
     public int lastStoneWeight(int[] stones) {
-        PriorityQueue<Integer> heap = new PriorityQueue<>(Comparator.reverseOrder());
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
 
         for (int stone : stones)
-            heap.add(stone);
+            maxHeap.add(stone);
 
-        while (heap.size() > 1) {
-            int remainingStone = heap.remove() - heap.remove();
+        while (maxHeap.size() > 1) {
+            int heaviest = maxHeap.poll();
+            int secondHeaviest = maxHeap.poll();
+            int remainingStone = heaviest - secondHeaviest;
+
             if (remainingStone > 0)
-                heap.add(remainingStone);
+                maxHeap.add(remainingStone);
         }
 
-        return heap.isEmpty() ? 0 : heap.peek();
+        return maxHeap.isEmpty() ? 0 : maxHeap.peek();
     }
 }
 
-// Time O(nlogn) and space of O(n)
+// Time Complexity: O(n log n) - Building the max heap takes O(n) and each of
+// the n-1 iterations involves a poll and possibly an add operation,
+// each of which takes O(log n).
+// Space Complexity: O(n) - In the worst case, all stones could be added to the
+// max heap, resulting in O(n) space usage.
