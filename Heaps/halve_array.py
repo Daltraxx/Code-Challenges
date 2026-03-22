@@ -5,20 +5,20 @@ from typing import List
 class HalveArray:
     def halveArray(self, nums: List[int]) -> int:
         max_heap = []
-        sum = 0
+        total = 0
         for num in nums:
-            sum += num
+            total += num
             max_heap.append(num)
 
         heapify_max(max_heap)
 
         operations = 0
-        target = sum / 2
-        while sum > target:
+        target = total / 2
+        while total > target:
             num = heappop_max(max_heap)
-            num = num / 2
-            sum -= num
-            heappush_max(max_heap, num)
+            reduced_num = num / 2
+            total -= reduced_num
+            heappush_max(max_heap, reduced_num)
             operations += 1
 
         return operations
