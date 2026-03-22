@@ -24,7 +24,8 @@ class LastStoneWeight {
 }
 
 // Time Complexity: O(n log n) - Building the max heap takes O(n) and each of
-// the n-1 iterations involves a poll and possibly an add operation,
+// the n-1 iterations (on each smash, at least one stone is destroyed) 
+// involves a poll and possibly an add operation,
 // each of which takes O(log n).
 // Space Complexity: O(n) - In the worst case, all stones could be added to the
 // max heap, resulting in O(n) space usage.
