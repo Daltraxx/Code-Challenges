@@ -13,7 +13,7 @@ class LastStoneWeight:
                 new_stone = heaviest - second_heaviest
                 heappush_max(max_heap, new_stone)
 
-        return 0 if not max_heap else max_heap[0]
+        return max_heap[0] if max_heap else 0
 
 # Time complexity: O(n log n) where n is the number of stones. 
 # This is because we need to build a max heap from the list of stones, which takes O(n) time, 
