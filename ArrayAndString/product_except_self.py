@@ -11,6 +11,9 @@ class ProductExceptSelf:
 
         right_prod = 1
         for i in range(n - 1, -1, -1):
+            # ans[i] currently holds the product of all elements to the left of index i
+            # Multiply it by the product of all elements to the right of index i
+            # to get the final product of all elements except nums[i]
             ans[i] *= right_prod
             right_prod *= nums[i]
 
