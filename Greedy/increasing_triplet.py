@@ -6,14 +6,14 @@ class IncreasingTriplet:
         if len(nums) < 3:
             return False
 
-        smallest = float("inf")
-        second_smallest = float("inf")
+        first = float("inf")
+        second = float("inf")
 
         for num in nums:
-            if num <= smallest:
-                smallest = num
-            elif num <= second_smallest:
-                second_smallest = num
+            if num <= first:
+                first = num
+            elif num <= second:
+                second = num
             else:
                 return True
 
