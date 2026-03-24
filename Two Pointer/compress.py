@@ -7,6 +7,10 @@ class Compress:
         write = 0
         left = 0
         for right in range(1, n + 1):
+            # When we reach the end of the list or encounter a different character,
+            # we need to write the compressed form of the current character sequence.
+            # Terminating at n + 1 instead of n allows us to handle the last character sequence without
+            # additional logic after the loop.
             if right == n or chars[right] != chars[left]:
                 char = chars[left]
                 char_count = right - left
