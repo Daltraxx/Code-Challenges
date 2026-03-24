@@ -33,3 +33,9 @@ class Compress:
         
         return write
 
+# Time complexity: O(n). We iterate through the input list of characters once, 
+# resulting in O(n) time complexity.
+# Space complexity: O(1). 
+# We use a constant amount of extra space to store the compressed characters, 
+# and we modify the input list in place 
+# without using any additional data structures that grow with the input size.
