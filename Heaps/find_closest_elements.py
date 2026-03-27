@@ -14,3 +14,11 @@ class FindClosestElements:
         k_closest = [num for diff, num in max_heap]
         k_closest.sort()
         return k_closest
+
+# Time complexity: O(n log k) where n is the number of elements in arr 
+# and k is the number of closest elements to return.
+# We iterate through all n elements in arr, and for each element, 
+# we perform a heap operation that takes O(log k) time. 
+# After processing all elements, we sort the k closest elements, 
+# which takes O(k log k) time.
+# Space complexity: O(k) for the max heap that stores the k closest elements.
