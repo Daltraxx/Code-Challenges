@@ -48,9 +48,11 @@ class FindClosestElements:
         left = 0
         right = len(arr) - k
         while left < right:
+            # Look for the best left index using binary search.
             mid = (left + right) // 2
             left_el = arr[mid]
             right_el = arr[mid + k]
+            # Compare the distance of the left and right elements from x to decide which side to move towards.
             if x - left_el <= right_el - x:
                 right = mid
             else:
