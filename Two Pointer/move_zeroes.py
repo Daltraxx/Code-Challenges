@@ -3,18 +3,15 @@ from typing import List
 
 class MoveZeroes:
     def moveZeroes(self, nums: List[int]) -> None:
-        n = len(nums)
         write = 0
-        while write < n and nums[write] != 0:
-            write += 1
-        
-        for read in range(write + 1, n):
+        for read in range(len(nums)):
             if nums[read] != 0:
-                nums[write], nums[read] = nums[read], nums[write]
-                while write < n and nums[write] != 0:
-                    write += 1
+                if read != write:
+                    nums[write], nums[read] = nums[read], nums[write]
+                write += 1
 
-# Time complexity: O(n) where n is the length of the input array, 
+
+# Time complexity: O(n) where n is the length of the input array,
 # as we traverse the array at most twice (once for the write pointer and once for the read pointer).
-# Space complexity: O(1) as we are modifying the input array in place 
+# Space complexity: O(1) as we are modifying the input array in place
 # and using only a constant amount of extra space for the pointers.
