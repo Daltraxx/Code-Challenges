@@ -12,7 +12,6 @@ class MoveZeroes:
                 write += 1
 
 
-# Time complexity: O(n) where n is the length of the input array,
-# as we traverse the array at most twice (once for the write pointer and once for the read pointer).
+# Time complexity: O(n) single pass through the array, where n is the length of the input array.
 # Space complexity: O(1) as we are modifying the input array in place
 # and using only a constant amount of extra space for the pointers.
