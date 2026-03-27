@@ -7,6 +7,7 @@ class MoveZeroes:
         for read in range(len(nums)):
             if nums[read] != 0:
                 if read != write:
+                    # If conditional prevents mostly harmless but unnecessary swap when read and write pointers are the same.
                     nums[write], nums[read] = nums[read], nums[write]
                 write += 1
 
