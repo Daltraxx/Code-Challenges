@@ -8,3 +8,7 @@ class IsSubsequence:
             t_pointer += 1
 
         return s_pointer == len(s)
+
+# Time complexity: O(n) where n is the length of string t. 
+# In the worst case, we may need to traverse the entire string t to find all characters of s.
+# Space complexity: O(1)
