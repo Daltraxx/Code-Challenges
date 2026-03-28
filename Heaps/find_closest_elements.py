@@ -46,13 +46,20 @@ class FindClosestElements:
         self, arr: List[int], k: int, x: int
     ) -> List[int]:
         left = 0
-        right = len(arr) - k
+        right = len(arr) - k # We set right to len(arr) - k because no valid windows can start beyond this point.
         while left < right:
             # Look for the best left index using binary search.
             mid = (left + right) // 2
             left_el = arr[mid]
             right_el = arr[mid + k]
-            # Compare the distance of the left and right elements from x to decide which side to move towards.
+            # Compare the distance of the left and right elements from x to decide which side to move towards
+            # while biasing towards the left in case of a tie.
+            # When x is greater than right_el, we know that the k closest elements must be to the right of mid, so we move up.
+            # Using right_el - x instead of an absolute value preserves this directional bias 
+            # (by giving a negative value when right_el is less than x), 
+            # which is crucial for correctly handling what would otherwise be ties.
+            # An absolute value tie could otherwise erroneously take us left 
+            # if we used abs(x - left_el) <= abs(x - right_el) when x is greater than right_el.
             if x - left_el <= right_el - x:
                 right = mid
             else:
