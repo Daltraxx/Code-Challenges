@@ -43,7 +43,7 @@ public class FindClosestElements {
         int right = arr.length - k;
 
         while (left < right) {
-            int mid = (int) Math.floor((left + right) / 2);
+            int mid = left + (right - left) / 2;
             int leftEl = arr[mid];
             int rightEl = arr[mid + k];
             if (x - leftEl <= rightEl - x) {
