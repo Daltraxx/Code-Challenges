@@ -1,6 +1,7 @@
 package Heaps;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -36,4 +37,30 @@ public class FindClosestElements {
     // Time Complexity: O(n log k) to build the heap and O(k log k) to sort the
     // result, leading to O(n log k + k log k) overall.
     // Space Complexity: O(k) for the heap and O(k) for the result list.
+
+    public List<Integer> findKClosestElementsBinarySearch(int[] arr, int k, int x) {
+        int left = 0;
+        int right = arr.length - k;
+
+        while (left < right) {
+            int mid = (int) Math.floor((left + right) / 2);
+            int leftEl = arr[mid];
+            int rightEl = arr[mid + k];
+            if (x - leftEl <= rightEl - x) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        List<Integer> kClosest = new ArrayList<>();
+        for (int i = left; i < left + k; i++) {
+            kClosest.add(arr[i]);
+        }
+
+        return kClosest;
+    }
+    // Time Complexity: O(log(n - k) + k) due to the binary search and the
+    // subsequent collection of k elements.
+    // Space Complexity: O(k) for the result list.
 }
