@@ -28,12 +28,12 @@ class IsSubsequence:
 
         return char_map
 
-    def isSubsequencePreprocessedT(self, s: str, char_map: defaultdict) -> bool:
+    def isSubsequencePreprocessedT(self, s: str, t_char_map: defaultdict) -> bool:
         prev = -1
         for char in s:
-            if char not in char_map:
+            if char not in t_char_map:
                 return False
-            index_list = char_map[char]
+            index_list = t_char_map[char]
             i = bisect_right(index_list, prev)
             if i == len(index_list):
                 return False
