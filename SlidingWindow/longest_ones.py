@@ -14,3 +14,7 @@ class LongestOnes:
             max_consecutive = max(right - left + 1, max_consecutive)
 
         return max_consecutive
+
+# Time complexity: O(n) where n is the length of the input array nums, 
+# as we traverse the array once with the right pointer.
+# Space complexity: O(1)
