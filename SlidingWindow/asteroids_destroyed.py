@@ -4,11 +4,10 @@ from typing import List
 class AsteroidsDestroyed:
     def asteroidsDestroyed(self, mass: int, asteroids: List[int]) -> bool:
         asteroids.sort()
-        planet = mass
         for asteroid in asteroids:
-            if asteroid > planet:
+            if asteroid > mass:
                 return False
-            planet += asteroid
+            mass += asteroid
 
         return True
 
