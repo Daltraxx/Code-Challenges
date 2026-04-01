@@ -7,9 +7,7 @@ class KthLargest:
         self.scores = []
         self.k = k
         for num in nums:
-            heappush(self.scores, num)
-            if len(self.scores) > k:
-                heappop(self.scores)
+            self.add(num)
 
     # Time complexity for initialization: O(n log k) where n is the length of the input list nums,
     # as we need to insert each element into the heap and maintain its size at most k.
