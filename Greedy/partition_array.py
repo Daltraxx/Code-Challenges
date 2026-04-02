@@ -4,14 +4,14 @@ from typing import List
 class PartitionArray:
     def partitionArray(self, nums: List[int], k: int) -> int:
         nums.sort()
-        count = 0
+        count = 1
         left = 0
         for right in range(len(nums)):
             if nums[right] - nums[left] > k:
                 left = right
                 count += 1
 
-        return count + 1
+        return count
 
     # Time complexity: O(n log n) due to the sorting step,
     # where n is the length of the input array nums.
