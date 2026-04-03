@@ -28,6 +28,9 @@ class LongestSubarray:
         for right in range(len(nums)):
             if nums[right] == 0:
                 deletions += 1
+            # Allow temporarily having more than one zero in the window,
+            # since because window only grows by one with each iteration,
+            # shrinking by one is enough to eventually restore validity.
             if deletions > 1:
                 if nums[left] == 0:
                     deletions -= 1
