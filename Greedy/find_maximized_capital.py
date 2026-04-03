@@ -13,11 +13,15 @@ class FindMaximizedCapital:
         j = 0
         for _ in range(k):
             while j < n and projects[j][0] <= w:
+                # Add all projects we can afford to the max heap.
                 heappush(max_heap, -projects[j][1])
                 j += 1
             if max_heap:
+                # Choose most profitable project we can afford.
                 w += -heappop(max_heap)
             else:
+                # If there are no current projects we can afford,
+                # neither will there be any in the future.
                 break
         
         return w
