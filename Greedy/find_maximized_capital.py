@@ -3,7 +3,6 @@ from typing import List
 
 
 class FindMaximizedCapital:
-
     def findMaximizedCapital(
         self, k: int, w: int, profits: List[int], capital: List[int]
     ) -> int:
@@ -23,14 +22,14 @@ class FindMaximizedCapital:
                 # If there are no current projects we can afford,
                 # neither will there be any in the future.
                 break
-        
+
         return w
-    
-    # Time complexity: O(n log n + k log n) where n is the number of projects 
+
+    # Time complexity: O(n log n + k log n) where n is the number of projects
     # and k is the number of projects we can select.
-    # Sorting the projects takes O(n log n) 
-    # and each project can be added to the max heap at most once, which takes O(log n) time. 
-    # In the worst case, we may add all n projects to the heap, 
+    # Sorting the projects takes O(n log n)
+    # and each project can be added to the max heap at most once, which takes O(log n) time.
+    # In the worst case, we may add all n projects to the heap,
     # and we may pop from the heap k times, leading to O(k log n) time.
-    # Space complexity: O(n) for the sorted projects list and the max heap, 
+    # Space complexity: O(n) for the sorted projects list and the max heap,
     # which in the worst case can contain all n projects.
