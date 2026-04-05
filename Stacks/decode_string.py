@@ -1,38 +1,24 @@
 class DecodeString:
     def decodeStrong(s: str) -> str:
-        brackets = []
-        nums = []
-        strs = []
+        str_stack = []
+        curr_str = ""
         curr_num = ""
-        ans = ""
         for char in s:
-            if char == "[":
-                brackets.append("[")
-                nums.append(int(curr_num))
+            if char.isdigit():
+                curr_num += char
+            elif char == "[":
+                str_stack.append((curr_str, int(curr_num)))
+                curr_str = ""
                 curr_num = ""
             elif char == "]":
-                brackets.pop()
-                k = nums.pop()
-                curr_str = k * strs.pop()
-                if not brackets:
-                    ans += curr_str
-                    curr_str = ""
-                else:
-                    strs[-1] += curr_str
-            elif char.isdigit():
-                curr_num += char
-                if len(curr_num) == 1:
-                    strs.append("")
+                prev_str, num = str_stack.pop()
+                curr_str = prev_str + num * curr_str
             else:
-                if not brackets:
-                    ans += char
-                else:
-                    if strs:
-                        strs[-1] += char
-                    else:
-                        strs.append(char)
+                curr_str += char
 
-        return ans
+        return curr_str
+
 
 # Time Complexity: O(n) where n is the length of the input string s
-# Space Complexity: O(n) where n is the length of the input string s, in the worst case when all characters are digits and brackets, due to the use of stacks.
+# Space Complexity: O(n) where n is the length of the input string s,
+# in the worst case when all characters are digits and brackets, due to the use of stacks.
