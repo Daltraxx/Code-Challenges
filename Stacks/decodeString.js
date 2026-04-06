@@ -9,12 +9,8 @@ const decodeString = (s) => {
       currNum = 0;
     } else if (char === "]") {
       let [str, num] = stack.pop();
-      const original = currStr;
-      for (let i = 1; i < num; i++) {
-        currStr += original
-      }
-      currStr = str + currStr;
-    } else if (Number.isFinite(+char)) {
+      currStr = str + currStr.repeat(num);
+    } else if (!isNaN(char)) {
       currNum = currNum * 10 + +char;
     } else {
       currStr += char;
@@ -23,3 +19,7 @@ const decodeString = (s) => {
 
   return currStr;
 };
+
+// Time Complexity: O(n * k) where n is the length of the string 
+// and k is the maximum number of times a substring can be repeated
+// Space Complexity: O(n) where n is the length of the string
