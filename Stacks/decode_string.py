@@ -1,12 +1,12 @@
 class DecodeString:
-    def decodeStrong(self, s: str) -> str:
+    def decodeString(self, s: str) -> str:
         stack = []
         curr_str = ""
         curr_num = 0
         for char in s:
             if char == "[":
                 # Save the previous context before going into the new one
-                stack.append((curr_str, int(curr_num)))
+                stack.append((curr_str, curr_num))
                 curr_str = ""
                 curr_num = 0
             elif char == "]":
@@ -27,4 +27,33 @@ class DecodeString:
     # we would be repeating "abc" 100 times, leading to O(n * 100) = O(n).
     # Space Complexity: O(n) for stack and current string.
 
-    # Try recursive solution for heck of it
+    def decodeStringRecursive(self, s: str) -> str:
+        i = 0
+
+        def dfs() -> str:
+            nonlocal i
+            curr_str = []
+            curr_num = 0
+            while i < len(s):
+                char = s[i]
+                if char == "[":
+                    i += 1 # Move past the opening bracket
+                    curr_str += curr_num * dfs()
+                    curr_num = 0
+                elif char == "]":
+                    i += 1 # Move past the closing bracket
+                    return "".join(curr_str)
+                elif char.isdigit():
+                    curr_num = curr_num * 10 + int(char)
+                    i += 1
+                else:
+                    curr_str.append(char)
+                    i += 1
+            
+            return "".join(curr_str)
+        
+        return dfs()
+    
+    # Time Complexity: O(n * k) where n is the length of the input string 
+    # and k is the maximum number of repetitions for any substring.
+    # Space Complexity: O(n) for the call stack in the worst case of nested brackets.
