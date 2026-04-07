@@ -1,33 +1,34 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FindLeastNumUniqueInts {
     public int findLeastNumOfUniqueInts(int[] arr, int k) {
         Map<Integer, Integer> counts = new HashMap<>();
-        for (int num: arr) {
+        for (int num : arr) {
             counts.put(num, counts.getOrDefault(num, 0) + 1);
         }
-        
-        List<Integer> ordered = new ArrayList<>();
-        for (int val: counts.values()) {
-            ordered.add(val);
+
+        int[] frequencyVals = new int[counts.size()];
+        int i = 0;
+        for (int frequency : counts.values()) {
+            frequencyVals[i++] = frequency;
         }
-        
-        Collections.sort(ordered, Comparator.reverseOrder());
-        while (k > 0) {
-            int val = ordered.get(ordered.size() - 1);
-            if (val <= k) {
-                k -= val;
-                ordered.remove(ordered.size() - 1);
+        Arrays.sort(frequencyVals);
+        int remaining = frequencyVals.length;
+
+        for (int frequency : frequencyVals) {
+            if (k >= frequency) {
+                k -= frequency;
+                remaining--;
             } else {
                 break;
             }
         }
-        
-        return ordered.size();
+
+        return remaining;
     }
 }
+
+// Time Complexity: O(n log n) due to sorting the frequency values
+// Space Complexity: O(n) for the frequency map and array of frequency values
