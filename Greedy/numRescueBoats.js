@@ -1,30 +1,19 @@
 const numRescueBoats = (people, limit) => {
   const peopleSorted = people.toSorted((a, b) => a - b);
-  let peopleRequired = people.length;
   let boatsNeeded = 0;
-  let i = 0, j = peopleSorted.length - 1;
-  while (peopleRequired > 0) {
-    const heavyPerson = peopleSorted[j];
-    const lightPerson = peopleSorted[i];
-    if (heavyPerson + lightPerson <= limit) {
-      peopleRequired -= 2;
-      i++;
-      j--;
-    } else {
-      peopleRequired--;
-      j--;
-    }
-
+  let left = 0;
+  let right = peopleSorted.length - 1;
+  while (left <= right) {
+    if (peopleSorted[left] + peopleSorted[right] <= limit) left++;
+    // We always take the heaviest person,
+    // so we move the right pointer regardless of whether we can fit the lightest person with them or not.
+    right--;
     boatsNeeded++;
   }
-
   return boatsNeeded;
-}
+};
 
-// time complexity O(nlogn)
-// space O(n) for sorted array, constant if sort in place
-
-const people = [3, 2, 2, 1],
-  limit = 3;
-
-console.log(numUniqueBoats(people, limit));
+// Time complexity: O(n log n) due to the sorting step,
+// where n is the number of people.
+// Space complexity: O(n) for the space used by the sorted array,
+// could be O(1) if we sorted in place.
