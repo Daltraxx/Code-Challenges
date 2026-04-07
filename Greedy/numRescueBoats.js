@@ -1,6 +1,6 @@
 const numRescueBoats = (people, limit) => {
   const peopleSorted = people.toSorted((a, b) => a - b);
-  let boatsNeeded = 0;
+  let boats = 0;
   let left = 0;
   let right = peopleSorted.length - 1;
   while (left <= right) {
@@ -8,9 +8,9 @@ const numRescueBoats = (people, limit) => {
     // We always take the heaviest person,
     // so we move the right pointer regardless of whether we can fit the lightest person with them or not.
     right--;
-    boatsNeeded++;
+    boats++;
   }
-  return boatsNeeded;
+  return boats;
 };
 
 // Time complexity: O(n log n) due to the sorting step,
