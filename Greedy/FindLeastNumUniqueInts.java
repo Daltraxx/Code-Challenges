@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LeastNumberUniqueInts {
+public class FindLeastNumUniqueInts {
     public int findLeastNumOfUniqueInts(int[] arr, int k) {
         Map<Integer, Integer> counts = new HashMap<>();
         for (int num: arr) {
