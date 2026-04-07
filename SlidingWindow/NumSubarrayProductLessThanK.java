@@ -3,7 +3,7 @@ package SlidingWindow;
 /*Given an array of integers nums and an integer k, 
 return the number of contiguous subarrays where the product of all the elements in the subarray is strictly less than k. */
 
-public class SubarrayProductLessThanK {
+public class NumSubarrayProductLessThanK {
     public int numSubarrayProductLessThanK(int[] nums, int k) {
         if (k <= 1) {
             return 0;
