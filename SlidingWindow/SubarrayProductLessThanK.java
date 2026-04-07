@@ -10,8 +10,8 @@ public class SubarrayProductLessThanK {
         }
 
         int subarrayCount = 0;
-        int currentProduct = 1;
-        
+        long currentProduct = 1;
+
         int left = 0;
         for (int right = 0; right < nums.length; right++) {
             currentProduct *= nums[right];
@@ -26,3 +26,9 @@ public class SubarrayProductLessThanK {
         return subarrayCount;
     }
 }
+
+// Time Complexity: O(n) where n is the length of the input array nums.
+// Each element is visited at most twice
+// (once when expanding the right pointer and once when moving the left
+// pointer).
+// Space Complexity: O(1)
