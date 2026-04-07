@@ -4,6 +4,8 @@ from typing import List
 class NumSubarrayProductLessThanK:
     def numSubarrayProductLessThanK(nums: List[int], k: int) -> int:
         if k <= 1:
+            # Problem states that all elements in the input array 
+            # are positive integers greater than 0
             return 0
         
         left = 0
@@ -12,7 +14,8 @@ class NumSubarrayProductLessThanK:
         for right in range(len(nums)):
             product *= nums[right]
             while product >= k:
-                product /= nums[left]
+                # Use // for integer division to avoid floating-point issues
+                product //= nums[left]
                 left += 1
             subarrays += right - left + 1
 
