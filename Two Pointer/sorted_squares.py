@@ -7,17 +7,17 @@ class SortedSquares:
         squares = [0] * n
         left = 0
         right = n - 1
-        i = n - 1
+        write = n - 1
         while left <= right:
             left_squared = nums[left] ** 2
             right_squared = nums[right] ** 2
             if left_squared > right_squared:
-                squares[i] = left_squared
+                squares[write] = left_squared
                 left += 1
             else:
-                squares[i] = right_squared
+                squares[write] = right_squared
                 right -= 1
-            i -= 1
+            write -= 1
 
         return squares
 
