@@ -1,6 +1,3 @@
-/*Given an integer array nums sorted in non-decreasing order, 
-return an array of the squares of each number sorted in non-decreasing order. */
-
 public class SortedSquares {
     public int[] sortedSquares(int[] nums) {
         int[] squaredArray = new int[nums.length];
@@ -9,11 +6,13 @@ public class SortedSquares {
         int right = nums.length - 1;
 
         for (int i = nums.length - 1; i >= 0; i--) {
-            if (Math.abs(nums[left]) > Math.abs(nums[right])) {
-                squaredArray[i] = nums[left] * nums[left];
+            int leftSquare = nums[left] * nums[left];
+            int rightSquare = nums[right] * nums[right];
+            if (leftSquare > rightSquare) {
+                squaredArray[i] = leftSquare;
                 left++;
             } else {
-                squaredArray[i] = nums[right] * nums[right];
+                squaredArray[i] = rightSquare;
                 right--;
             }
         }
@@ -21,3 +20,6 @@ public class SortedSquares {
         return squaredArray;
     }
 }
+
+// Time Complexity: O(n) - We traverse the input array once.
+// Space Complexity: O(n) - We create a new array to store the squared values.
