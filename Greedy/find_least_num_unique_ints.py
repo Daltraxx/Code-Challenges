@@ -7,7 +7,7 @@ class FindLeastNumUniqueInts:
         frequencies = Counter(arr)
         sorted_frequencies = sorted(frequencies, key=frequencies.get)
         for num in sorted_frequencies:
-            if k > frequencies[num]:
+            if k >= frequencies[num]:
                 k -= frequencies[num]
                 del frequencies[num]
             else:
