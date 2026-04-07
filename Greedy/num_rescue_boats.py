@@ -12,9 +12,9 @@ class NumRescueBoats:
             heavy = people[right]
             if light + heavy <= limit:
                 left += 1
-                right -= 1
-            else:
-                right -= 1
+            # Heaviest always gets on a boat, 
+            # whether paired with the lightest or alone.
+            right -= 1
             boats += 1
 
         return boats
