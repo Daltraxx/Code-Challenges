@@ -5,8 +5,8 @@ public class MinStartValue {
         int minPrefixSum = 0;
         int prefixSum = 0;
 
-        for (int i = 0; i < nums.length; i++) {
-            prefixSum += nums[i];
+        for (int num : nums) {
+            prefixSum += num;
             minPrefixSum = Math.min(prefixSum, minPrefixSum);
         }
 
