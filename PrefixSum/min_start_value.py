@@ -25,6 +25,9 @@ class MinStartValue:
             prefix_sum += num
             min_prefix_sum = min(prefix_sum, min_prefix_sum)
 
+        # If the real minimum prefix sum is greater than 0,
+        # min_prefix_sum will be 0 thanks to how it is initialized,
+        # so we can just return 1 - min_prefix_sum in all cases.
         return 1 - min_prefix_sum
     
     # Time complexity: O(n)

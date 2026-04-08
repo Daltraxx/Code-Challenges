@@ -1,17 +1,21 @@
 package PrefixSum;
 
-
-
 public class MinStartValue {
     public int minStartValue(int[] nums) {
-        int minRunningSum = 0;
-        int runningSum = 0;
+        int minPrefixSum = 0;
+        int prefixSum = 0;
 
         for (int i = 0; i < nums.length; i++) {
-            runningSum += nums[i];
-            minRunningSum = Math.min(runningSum, minRunningSum);
+            prefixSum += nums[i];
+            minPrefixSum = Math.min(prefixSum, minPrefixSum);
         }
-        
-        return 1 - minRunningSum;
+
+        // If the real minimum prefix sum is greater than 0,
+        // minPrefixSum will be 0 thanks to how it is initialized,
+        // so we can just return 1 - minPrefixSum in all cases.
+        return 1 - minPrefixSum;
     }
 }
+
+// Time complexity: O(n)
+// Space complexity: O(1)
