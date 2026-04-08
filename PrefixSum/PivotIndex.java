@@ -1,3 +1,5 @@
+package PrefixSum;
+
 import java.util.stream.IntStream;
 
 public class PivotIndex {

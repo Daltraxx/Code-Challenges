@@ -1,3 +1,5 @@
+package PrefixSum;
+
 import java.util.Arrays;
 
 /*You are given a 0-indexed array nums of n integers, and an integer k.

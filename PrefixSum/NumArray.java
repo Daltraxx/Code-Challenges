@@ -1,3 +1,5 @@
+package PrefixSum;
+
 public class NumArray {
   private int[] prefixSumArr;
 
