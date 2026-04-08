@@ -11,6 +11,7 @@ class WaysToSplitArray:
             prefix[i] = nums[i] + prefix[i - 1]
 
         valid_splits = 0
+        # We stop at n - 1 because we cannot split after the last element
         for i in range(n - 1):
             first_sum = prefix[i]
             last_sum = prefix[-1] - prefix[i]
@@ -30,6 +31,7 @@ class WaysToSplitArray:
         valid_splits = 0
         total_sum = sum(nums)
         prefix_sum = 0
+        # We stop at n - 1 because we cannot split after the last element
         for i in range(n - 1):
             prefix_sum += nums[i]
             if prefix_sum * 2 >= total_sum:
