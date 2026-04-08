@@ -1,13 +1,13 @@
 const waysToSplitArray = (nums) => {
   const totalSum = nums.reduce((acc, num) => acc + num, 0);
 
-  let runningSum = 0;
+  let prefixSum = 0;
   let validSplits = 0;
 
   // We can stop at nums.length - 1 because we can't split after the last element
   for (let i = 0; i < nums.length - 1; i++) {
-    runningSum += nums[i];
-    if (runningSum * 2 >= totalSum) validSplits++;
+    prefixSum += nums[i];
+    if (prefixSum * 2 >= totalSum) validSplits++;
   }
 
   return validSplits;

@@ -29,10 +29,10 @@ class WaysToSplitArray:
         n = len(nums)
         valid_splits = 0
         total_sum = sum(nums)
-        running_sum = 0
+        prefix_sum = 0
         for i in range(n - 1):
-            running_sum += nums[i]
-            if running_sum * 2 >= total_sum:
+            prefix_sum += nums[i]
+            if prefix_sum * 2 >= total_sum:
                 valid_splits += 1
 
         return valid_splits
