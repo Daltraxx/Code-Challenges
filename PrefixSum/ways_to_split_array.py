@@ -1,10 +1,12 @@
+from sys import prefix
 from typing import List
 
 
 class WaysToSplitArray:
     def waysToSplitArray(self, nums: List[int]) -> int:
         n = len(nums)
-        prefix = [nums[0]] * n
+        prefix = [0] * n
+        prefix[0] = nums[0]
         for i in range(1, n):
             prefix[i] = nums[i] + prefix[i - 1]
 
@@ -30,7 +32,7 @@ class WaysToSplitArray:
         running_sum = 0
         for i in range(n - 1):
             running_sum += nums[i]
-            if running_sum >= total_sum - running_sum:
+            if running_sum * 2 >= total_sum:
                 valid_splits += 1
 
         return valid_splits
