@@ -9,11 +9,11 @@ class GetAverages:
         for i in range(1, n):
             prefix.append(nums[i] + prefix[i - 1])
 
-        left_sum = 0
         for i in range(k, n - k):
-            curr_sum = prefix[i + k] - left_sum
+            left = i - k
+            right = i + k
+            curr_sum = prefix[right] - (prefix[left - 1] if left > 0 else 0)
             avgs[i] = curr_sum // (k * 2 + 1)
-            left_sum = prefix[i - k]
 
         return avgs
     
@@ -27,14 +27,13 @@ class GetAverages:
         n = len(nums)
         avgs = [-1] * n
         window_size = k * 2 + 1
-        curr_sum = sum(nums[: k * 2])
-        left = 0
-        for right in range(k * 2, n):
-            curr_sum += nums[right]
-            avgs[right - k] = curr_sum // window_size
+        curr_sum = sum(nums[:window_size])
+        for i in range(k, n - k):
+            avgs[i] = curr_sum // window_size
             # Set up for next iteration
-            curr_sum -= nums[left]
-            left += 1
+            if i + k + 1 < n:
+                curr_sum += nums[i + k + 1]
+                curr_sum -= nums[i - k]
 
         return avgs
     
