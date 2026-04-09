@@ -16,6 +16,12 @@ class GetAverages:
             left_sum = prefix[i - k]
 
         return avgs
+    
+    # Time complexity: O(n) where n is the number of elements in the input array. 
+    # We compute the prefix sum in O(n) time 
+    # and then iterate through the array once to calculate the averages, 
+    # which also takes O(n) time.
+    # Space complexity: O(n) for the prefix sum array and the output array of averages.
 
     def getAveragesSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         n = len(nums)
@@ -31,3 +37,7 @@ class GetAverages:
             left += 1
 
         return avgs
+    
+    # Time complexity: O(n) where n is the number of elements in the input array. 
+    # We iterate through the array once to calculate the averages using a sliding window approach.
+    # Space complexity: O(n) for the output array of averages.
