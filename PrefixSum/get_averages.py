@@ -42,4 +42,5 @@ class GetAverages:
     
     # Time complexity: O(n) where n is the number of elements in the input array. 
     # We iterate through the array once to calculate the averages using a sliding window approach.
-    # Space complexity: O(n) for the output array of averages.
+    # Space complexity: O(n) for the output array of averages, 
+    # or O(1) if we don't count the output array.
