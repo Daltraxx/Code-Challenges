@@ -8,7 +8,7 @@ The k-radius average for a subarray of nums centered at some index i with the ra
 Build and return an array avgs of length n where avgs[i] is the k-radius average for the subarray centered at index i.
 The average of x elements is the sum of the x elements divided by x, using integer division. The integer division truncates toward zero, which means losing its fractional part.*/
 
-class KRadiusSubarrayAverages {
+class GetAverages {
     public int[] getAverages(int[] nums, int k) {
         int n = nums.length;
 
