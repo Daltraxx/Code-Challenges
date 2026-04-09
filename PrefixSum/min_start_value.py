@@ -5,10 +5,10 @@ class MinStartValue:
     def minStartValue(self, nums: List[int]) -> int:
         prefix = []
         prefix.append(nums[0])
-        min_val = nums[0]
+        min_prefix_sum = nums[0]
         for i in range(1, len(nums)):
             prefix.append(nums[i] + prefix[i - 1])
-            min_prefix_sum = min(prefix[i], min_val)
+            min_prefix_sum = min(prefix[i], min_prefix_sum)
 
         if min_prefix_sum >= 1:
             return 1
