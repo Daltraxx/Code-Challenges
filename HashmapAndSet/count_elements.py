@@ -17,4 +17,10 @@ class CountElements:
     # We also need to iterate through the input array again to count the elements, 
     # which takes O(n) time.
     # Space complexity: O(n) for the set.
+
+    def countElementsOneLiner(self, arr: List[int]) -> int:
+        num_set = set(arr)
+        return sum(1 for num in arr if num + 1 in num_set)
+    
+    # Same time and space complexity as the previous method
     
