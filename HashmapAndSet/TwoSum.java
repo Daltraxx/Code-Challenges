@@ -12,16 +12,21 @@ class TwoSum {
         Map<Integer, Integer> numToIndexMap = new HashMap<>();
 
         for (int i = 0; i < nums.length; i++) {
-            int complement = target - nums[i];
+            int num = nums[i];
+            int complement = target - num;
 
             if (numToIndexMap.containsKey(complement)) {
-                return new int[] {i, numToIndexMap.get(complement)};
+                return new int[] { numToIndexMap.get(complement), i };
             }
 
-            numToIndexMap.put(nums[i], i);
+            numToIndexMap.put(num, i);
         }
 
-        //return empty array if no answer found
+        // Return empty array if no answer found
         return new int[] {};
     }
 }
+
+// Time Complexity: O(n) - We traverse the array once.
+// Space Complexity: O(n) - In the worst case,
+// we store all n elements in the hashmap.
