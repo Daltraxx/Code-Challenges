@@ -27,3 +27,14 @@ class MissingNumber:
     # We need to iterate through the input array to calculate the actual sum,
     # which takes O(n) time.
     # Space complexity: O(1)
+
+    def missingNumberXOR(self, nums: List[int]) -> int:
+        n = len(nums)
+        missing = n  # Start with n, since we will XOR with indices from 0 to n-1
+        for i in range(n):
+            missing ^= i ^ nums[i]
+        return missing
+    
+    # Time complexity: O(n) where n is the length of the input array.
+    # We need to iterate through the input array once, which takes O(n) time.
+    # Space complexity: O(1)
