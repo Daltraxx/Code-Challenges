@@ -20,3 +20,19 @@ class CheckIfPangram:
 
     # Time complexity: O(n) where n is the length of the input string.
     # Space complexity: O(1) since the size of the set is at most 26.
+
+    def checkIfPangramUsingArray(self, sentence: str) -> bool:
+        seen = [False] * 26
+        count = 0
+        for char in sentence:
+            # char check for english lowercase letter not necessary with current constraints, 
+            # but defensive
+            if 'a' <= char <= 'z':
+                index = ord(char) - ord('a')
+                if not seen[index]:
+                    seen[index] = True
+                    count += 1
+                    if count == 26:
+                        return True
+
+        return False
