@@ -2,18 +2,18 @@ from typing import List
 
 
 class AreOccurrencesEqual:
-    def areOccurrencesEqual(self, s: List[str]) -> bool:
+    def areOccurrencesEqual(self, s: str) -> bool:
         frequencies = [0] * 26
         for char in s:
             frequencies[ord(char) - ord("a")] += 1
 
         prev_count = 0
         for count in frequencies:
-            if count > 0 and prev_count:
-                if count != prev_count:
-                    return False
-            elif count > 0:
-                prev_count = count
+            if count > 0:
+                if prev_count == 0:
+                    prev_count = count
+                elif count != prev_count:
+                     return False
 
         return True
 
