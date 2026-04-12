@@ -4,14 +4,16 @@ from typing import List
 
 class SubarraySum:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        prefixes = defaultdict(int)
-        prefixes[0] = 1
+        prefix_counts = defaultdict(int)
+        # Important: We need to initialize the count of the prefix sum 0 to 1,
+        # because a subarray that starts from the beginning of the array can sum to k.
+        prefix_counts[0] = 1
         curr_sum = 0
         subarrays = 0
         for num in nums:
             curr_sum += num
-            subarrays += prefixes[curr_sum - k]
-            prefixes[curr_sum] += 1
+            subarrays += prefix_counts[curr_sum - k]
+            prefix_counts[curr_sum] += 1
 
         return subarrays
 
