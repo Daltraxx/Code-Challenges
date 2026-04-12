@@ -5,9 +5,7 @@ const subarraySum = (nums, k) => {
   let currSum = 0;
   for (const num of nums) {
     currSum += num;
-    if (prefix_count.has(currSum - k)) {
-      subarrayCount += prefix_count.get(currSum - k);
-    }
+    subarrayCount += prefix_count.get(currSum - k) || 0;
     prefix_count.set(currSum, (prefix_count.get(currSum) || 0) + 1);
   }
 
