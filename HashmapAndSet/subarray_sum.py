@@ -10,8 +10,7 @@ class SubarraySum:
         subarrays = 0
         for num in nums:
             curr_sum += num
-            if curr_sum - k in prefixes:
-                subarrays += prefixes[curr_sum - k]
+            subarrays += prefixes[curr_sum - k]
             prefixes[curr_sum] += 1
 
         return subarrays
@@ -19,5 +18,4 @@ class SubarraySum:
     # Time complexity: O(n) where n is the number of elements in the input array.
     # We iterate through the input array once, 
     # performing constant time operations for each element.
-    # Space complexity: O(n) in the worst case, 
-    # where n is the number of elements in the input array.
+    # Space complexity: O(n) in the worst case where all prefix sums are unique.
