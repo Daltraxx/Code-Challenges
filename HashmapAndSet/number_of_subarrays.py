@@ -5,6 +5,8 @@ from typing import List
 class NumberOfSubarrays:
     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
         odd_count_map = defaultdict(int)
+        # Important: We need to initialize the count of the odd count 0 to 1,
+        # because a subarray that starts from the beginning of the array can have k odd numbers
         odd_count_map[0] = 1
         subarray_count = 0
         curr_odd_count = 0
