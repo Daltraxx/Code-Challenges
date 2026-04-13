@@ -4,16 +4,16 @@ from typing import List
 
 class NumberOfSubarrays:
     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
-        odd_count_map = defaultdict(int)
+        prefix_odd_counts = defaultdict(int)
         # Important: We need to initialize the count of the odd count 0 to 1,
         # because a subarray that starts from the beginning of the array can have k odd numbers
-        odd_count_map[0] = 1
+        prefix_odd_counts[0] = 1
         subarray_count = 0
-        curr_odd_count = 0
+        curr_prefix_count = 0
         for num in nums:
-          curr_odd_count += num % 2
-          subarray_count += odd_count_map[curr_odd_count - k]
-          odd_count_map[curr_odd_count] += 1
+          curr_prefix_count += num % 2
+          subarray_count += prefix_odd_counts[curr_prefix_count - k]
+          prefix_odd_counts[curr_prefix_count] += 1
         return subarray_count
         
     # Time complexity: O(n) where n is the number of elements in the input array.
