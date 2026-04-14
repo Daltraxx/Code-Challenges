@@ -18,3 +18,9 @@ class LargestUniqueNumber:
     # and then we iterate through the unique numbers
     # (O(n) in worst case where all numbers are unique)
     # to find the largest unique number.
+
+    def largestUniqueNumberMostPythonic(self, nums: List[int]) -> int:
+        counts = Counter(nums)
+        return max((num for num, count in counts.items() if count == 1), default=-1)
+    
+    # Same time and space complexity as the previous method, but more concise and Pythonic.
