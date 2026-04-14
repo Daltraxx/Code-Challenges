@@ -10,7 +10,7 @@ public class FindWinners {
     for (int[] match : matches) {
       int winner = match[0];
       int loser = match[1];
-      lossCounts.merge(winner, 0, Integer::sum);
+      lossCounts.putIfAbsent(winner, 0);
       lossCounts.merge(loser, 1, Integer::sum);
     }
 
