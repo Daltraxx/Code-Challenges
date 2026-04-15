@@ -3,10 +3,9 @@ from typing import List
 
 class FindMaxLength:
     def findMaxLength(self, nums: List[int]) -> int:
-        balances = {}
-        # Important: We need to initialize the balance 0 to -1 
+        # Important: We need to initialize the balance 0 to -1
         # to account for subarrays that start at index 0.
-        balances[0] = -1
+        balances = {0: -1}
         curr_balance = 0
         max_subarray = 0
         for i, num in enumerate(nums):
