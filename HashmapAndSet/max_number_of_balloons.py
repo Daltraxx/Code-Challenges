@@ -38,7 +38,6 @@ class MaxNumberOfBalloons:
         )
 
     # Time complexity: O(n) where n is the number of characters in the input string.
-    # We iterate through the input string once to count the characters,
-    # and then we iterate through the characters in the word "balloon" a constant number of times.
+    # We iterate through the input string once to count the characters.
     # Space complexity: O(1) since the character counts are stored in a
     # fixed size hash map with at most 26 entries (assuming only lowercase letters).
