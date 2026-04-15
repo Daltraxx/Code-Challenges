@@ -27,7 +27,7 @@ class MaxNumberOfBalloons:
     # Space complexity: O(1) since the character counts are stored
     # in a fixed size hash map with at most 26 entries (assuming only lowercase letters).
 
-    def maxNumberOfBalloonsMath(self, text: str) -> int:
+    def maxNumberOfBalloonsOptimal(self, text: str) -> int:
         char_counts = Counter(text)
         return min(
             char_counts["b"],
