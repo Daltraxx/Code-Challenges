@@ -8,6 +8,8 @@ class MinimumCardPickup:
         for i, card in enumerate(cards):
             if card in card_map:
                 min_consecutive = min(i - card_map[card] + 1, min_consecutive)
+                if min_consecutive == 2:
+                    return 2
             card_map[card] = i
 
         return min_consecutive if min_consecutive != float("inf") else -1
