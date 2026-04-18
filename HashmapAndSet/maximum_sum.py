@@ -11,7 +11,7 @@ class MaximumSum:
             digit_sum += num % 10
             num //= 10
         return digit_sum
-    
+
     def maximumSumHeaps(self, nums: List[int]) -> int:
         digit_sum_map = defaultdict(list)
         for num in nums:
@@ -27,15 +27,16 @@ class MaximumSum:
                 max_pair_sum = max(sum(heap), max_pair_sum)
 
         return max_pair_sum
-    
-    # Time complexity: O(n * m) where n is the number of elements in the input array 
-    # and m is the number of digits in the largest number.
-    # We iterate through the input array once, and for each number, 
-    # we calculate the digit sum which takes O(m) time. 
-    # Additionally, we perform heap operations which take O(log k) time 
+
+    # Time complexity: O(n) where n is the number of elements in the input array.
+    # It would be O(n * m) if we consider the time taken to calculate the digit sum for each number,
+    # where m is the number of digits in the largest number. However, since m is
+    # limited by the constraints (numbers up to 10^9 have at most 10 digits), we can treat it as O(n).
+    # Additionally, we perform heap operations which take O(log k) time
     # where k is the size of the heap (in this case, k = 2).
-    # Space complexity: O(n) in the worst case where all numbers have unique digit sums 
-    # and we store them in the heaps.
+    # Space complexity: O(1) since we are only storing the top two maximum values for each digit sum,
+    # and the number of unique digit sums is limited by the range of possible digit sums
+    # (which is at most 9 * number of digits in the largest number, or 81 for numbers up to 10^9).
 
     def maximumSumNoHeaps(self, nums: List[int]) -> int:
         # -1 is safe due to the constraint that nums[i] >= 1
@@ -55,9 +56,11 @@ class MaximumSum:
                 max_pair_sum = max(max_pair_sum, max1 + max2)
 
         return max_pair_sum
-    
-    # Time complexity: O(n * m) where n is the number of elements in the input array 
-    # and m is the number of digits in the largest number.
-    # We iterate through the input array once, 
-    # and for each number, we calculate the digit sum which takes O(m) time.
-    # Space complexity: O(n) in the worst case where all numbers have unique digit sums.
+
+    # Time complexity: O(n) where n is the number of elements in the input array.
+    # It would be O(n * m) if we consider the time taken to calculate the
+    # digit sum for each number, where m is the number of digits in the largest number. However, since m is
+    # limited by the constraints (numbers up to 10^9 have at most 10 digits), we can treat it as O(n).
+    # Space complexity: O(1) since we are only storing the top two maximum values for each digit sum,
+    # and the number of unique digit sums is limited by the range of possible digit sums
+    # (which is at most 9 * number of digits in the largest number, or 81 for numbers up to 10^9).
