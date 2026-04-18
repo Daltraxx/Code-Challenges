@@ -1,11 +1,9 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MaximumSum {
   public int maximumsSum(int[] nums) {
-    Map<Integer, int[]> digitSumMap = new HashMap<>();
+    Map<Integer, Integer> digitSumMap = new HashMap<>();
     int maxSum = -1;
     for (int num : nums) {
       int digitSum = 0;
@@ -14,21 +12,12 @@ public class MaximumSum {
         digitSum += temp % 10;
         temp /= 10;
       }
-      if (!digitSumMap.containsKey(digitSum)) {
-        digitSumMap.put(digitSum, new int[] { -1, -1 });
-      }
-      int[] prevPair = digitSumMap.get(digitSum);
-      int max1 = prevPair[0];
-      int max2 = prevPair[1];
-      if (num > max1) {
-        prevPair[0] = num;
-        prevPair[1] = max1;
-      } else if (num > max2) {
-        prevPair[1] = num;
-      }
-
-      if (prevPair[1] != -1) {
-        maxSum = Math.max(prevPair[0] + prevPair[1], maxSum);
+      if (digitSumMap.containsKey(digitSum)) {
+        int currentMax = digitSumMap.get(digitSum);
+        maxSum = Math.max(currentMax + num, maxSum);
+        digitSumMap.put(digitSum, Math.max(currentMax, num));
+      } else {
+        digitSumMap.put(digitSum, num);
       }
     }
 
