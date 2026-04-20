@@ -33,4 +33,4 @@ class LengthOfLongestSubstring:
 
         return longest_substring
     
-    # Same time and space complexity as the previous method, but faster in practice.
+    # Same time and space complexity as the previous method, but strictly fewer operations.
