@@ -1,19 +1,19 @@
 const lengthOfLongestSubstring = (s) => {
-    const currChars = new Set();
-    let longestSubstring = 0;
-    let left = 0;
-    for (let right = 0; right < s.length; right++) {
-        const char = s[right];
-        while (currChars.has(char)) {
-            currChars.delete(s[left]);
-            left++;
-        }
-        currChars.add(char);
-        longestSubstring = Math.max(right - left + 1, longestSubstring);
+  const currChars = new Set();
+  let longestSubstring = 0;
+  let left = 0;
+  for (let right = 0; right < s.length; right++) {
+    const char = s[right];
+    while (currChars.has(char)) {
+      currChars.delete(s[left]);
+      left++;
     }
+    currChars.add(char);
+    longestSubstring = Math.max(right - left + 1, longestSubstring);
+  }
 
-    return longestSubstring;
-}
+  return longestSubstring;
+};
 
 // Time complexity: O(n) where n is the length of the input string.
 // We iterate through the input string once,
@@ -22,20 +22,20 @@ const lengthOfLongestSubstring = (s) => {
 // where all characters are unique.
 
 const lengthOfLongestSubstringOptimized = (s) => {
-    const charToIdx = new Map();
-    let longestSubstring = 0;
-    let left = 0;
-    for (let right = 0; right < s.length; right++) {
-        const char = s[right];
-        const prevIdx = charToIdx.get(char);
-        if (prevIdx !== undefined) {
-            left = Math.max(prevIdx + 1, left)
-        }
-        charToIdx.set(char, right);
-        longestSubstring = Math.max(right - left + 1, longestSubstring);
+  const charToIdx = new Map();
+  let longestSubstring = 0;
+  let left = 0;
+  for (let right = 0; right < s.length; right++) {
+    const char = s[right];
+    const prevIdx = charToIdx.get(char);
+    if (prevIdx !== undefined) {
+      left = Math.max(prevIdx + 1, left);
     }
+    charToIdx.set(char, right);
+    longestSubstring = Math.max(right - left + 1, longestSubstring);
+  }
 
-    return longestSubstring;
-}
+  return longestSubstring;
+};
 
 // Same time and space complexity as the previous solution, but strictly fewer operations.
