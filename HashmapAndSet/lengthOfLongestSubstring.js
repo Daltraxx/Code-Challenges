@@ -28,7 +28,9 @@ const lengthOfLongestSubstringOptimized = (s) => {
   for (let right = 0; right < s.length; right++) {
     const char = s[right];
     const prevIdx = charToIdx.get(char);
-    if (prevIdx !== undefined) {
+      if (prevIdx !== undefined) {
+        // Max is necessary to prevent left from moving backwards 
+        // in the case of a repeated character that is outside the current window.
       left = Math.max(prevIdx + 1, left);
     }
     charToIdx.set(char, right);
