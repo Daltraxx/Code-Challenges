@@ -1,17 +1,22 @@
 const maxNumberOfApples = (weight) => {
-  const WEIGHT_LIMIT = 5000;
-  const sortedAppleWeights = weight.toSorted((a, b) => a - b);
-  let appleCount = 0;
-  let currentWeight = 0;
-  for (let appleWeight of sortedAppleWeights) {
-    if (currentWeight + appleWeight > WEIGHT_LIMIT) return appleCount;
-    currentWeight += appleWeight;
-    appleCount++;
+  let limit = 5000;
+  let maxApples = 0;
+
+  weight.sort((a, b) => a - b);
+  for (const w of weight) {
+    if (w <= limit) {
+      limit -= w;
+      maxApples++;
+    } else {
+      break;
+    }
   }
+  
+  return maxApples;
+};
 
-  return appleCount;
-}
-
-
-// time complexity of O(nlogn)
-// linear space, constant if sorted in place
+// Time complexity: O(n log n) where n is the number of elements in the input list weight.
+// This is because we need to sort the list of weights,
+// which takes O(n log n) time.
+// Space complexity: O(1) since we sort the list in place 
+// and use only a constant amount of extra space for the limit and maxApples variables.
