@@ -4,14 +4,14 @@ from typing import Counter, List
 class MinSetSize:
     def minSetSize(self, arr: List[int]) -> int:
         freqs = Counter(arr)
-        sortedFreqs = sorted(list(freqs.values()), reverse=True)
-        total_integers = len(arr)
-        integers_remaining = total_integers
+        sortedFreqs = sorted(freqs.values(), reverse=True)
+        removed = 0
+        half = len(arr) // 2
         set_size = 0
         for freq in sortedFreqs:
-            integers_remaining -= freq
+            removed += freq
             set_size += 1
-            if integers_remaining <= total_integers // 2:
+            if removed >= half:
                 return set_size
 
     # Time complexity: O(n log n) where n is the number of elements in the input array.
