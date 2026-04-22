@@ -6,9 +6,9 @@ class MaxNumberOfApples:
         limit = 5000
         max_apples = 0
         sorted_weight = sorted(weight)
-        for weight in sorted_weight:
-            if limit >= weight:
-                limit -= weight
+        for w in sorted_weight:
+            if limit >= w:
+                limit -= w
                 max_apples += 1
             else:
                 break
