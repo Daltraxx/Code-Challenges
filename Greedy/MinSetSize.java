@@ -5,7 +5,6 @@ import java.util.List;
 
 public class MinSetSize {
   public int minSetSize(int[] arr) {
-    int arrSize = arr.length;
     HashMap<Integer, Integer> frequencies = new HashMap<>();
     for (int num : arr) {
       frequencies.merge(num, 1, Integer::sum);
@@ -14,23 +13,20 @@ public class MinSetSize {
     List<Integer> sortedFrequencies = new ArrayList<>(frequencies.values());
     Collections.sort(sortedFrequencies, Collections.reverseOrder());
 
-    Double arrHalved = (double) (arrSize / 2);
+    int removed = 0;
+    // Integer division safe because arr.length is guaranteed to be even
+    int arrHalved = arr.length / 2;
     int setSize = 0;
     for (int frequency : sortedFrequencies) {
-      arrSize -= frequency;
+      removed += frequency;
       setSize++;
-      if (arrSize <= arrHalved)
+      if (removed >= arrHalved)
         break;
     }
 
     return setSize;
   }
-
-  public static void main(String[] args) {
-    MinSetSize solution = new MinSetSize();
-    System.out.println(solution.minSetSize(new int[] { 3, 3, 3, 3, 5, 5, 5, 2, 2, 7 }));
-  }
 }
 
-// Time Complexity O(nlogn)
-// Space O(n)
+// Time complexity: O(n log n) due to sorting the frequencies.
+// Space complexity: O(n) for the frequency map and sorted array.
