@@ -10,9 +10,9 @@ public class SearchMatrix {
       int col = mid % n;
       int midElement = matrix[row][col];
 
-      if (midElement == target)
+      if (midElement == target) {
         return true;
-      if (midElement > target) {
+      } else if (midElement > target) {
         right = mid - 1;
       } else {
         left = mid + 1;
@@ -23,5 +23,8 @@ public class SearchMatrix {
   }
 }
 
-// Time Complexity O(log(mn))
-// Space O(1)
+// Time complexity: O(log(m*n)) where m is the number of rows
+// and n is the number of columns in the input matrix.
+// This is because we are halving the search space in each iteration of the
+// loop.
+// Space complexity: O(1) because we are using a constant amount of extra space.
