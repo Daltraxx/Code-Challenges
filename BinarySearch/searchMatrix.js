@@ -1,13 +1,16 @@
 const searchMatrix = (matrix, target) => {
-  const m = matrix.length, n = matrix[0].length;
-  let left = 0, right = m * n - 1;
+  const height = matrix.length;
+  const width = matrix[0].length;
+  let left = 0;
+  let right = height * width - 1;
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
-    const row = Math.floor(mid / n);
-    const col = mid % n;
+    const row = Math.floor(mid / width);
+    const col = mid % width;
     const midElement = matrix[row][col];
-    if (midElement === target) return true;
-    if (midElement > target) {
+    if (midElement === target) {
+      return true;
+    } else if (midElement > target) {
       right = mid - 1;
     } else {
       left = mid + 1;
@@ -17,14 +20,7 @@ const searchMatrix = (matrix, target) => {
   return false;
 };
 
-// Time Complexity O(log(mn))
-// Space O(1)
-
-const matrix = [
-    [1, 3, 5, 7],
-    [10, 11, 16, 20],
-    [23, 30, 34, 60],
-  ],
-  target = 3;
-
-console.log(searchMatrix(matrix, target));
+// Time complexity: O(log(m*n)) where m is the number of rows 
+// and n is the number of columns in the input matrix.
+// This is because we are halving the search space in each iteration of the loop.
+// Space complexity: O(1) because we are using a constant amount of extra space.
