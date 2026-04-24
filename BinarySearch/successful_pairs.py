@@ -22,6 +22,9 @@ class SuccessfulPairs:
                     right = mid
                 else:
                     left = mid + 1
+            # After the binary search, 
+            # left will be the index of the first potion 
+            # that is greater than or equal to the target.
             pairs.append(m - left)
 
         return pairs

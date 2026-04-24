@@ -2,41 +2,42 @@ import java.util.Arrays;
 
 public class SuccessfulPairs {
   public int[] successfulPairs(int[] spells, int[] potions, long success) {
+    int n = spells.length;
+    int m = potions.length;
     Arrays.sort(potions);
-    int[] pairs = new int[spells.length];
+    int[] pairs = new int[n];
     for (int i = 0; i < spells.length; i++) {
-      double target = (double) success / spells[i];
-      int insertionPoint = binarySearch(potions, target);
-      pairs[i] = potions.length - insertionPoint;
-    }
-    return pairs;
-  }
-
-  public int binarySearch(int[] arr, double target) {
-    int n = arr.length;
-    int left = 0;
-    int right = n;
-    while (left < right) {
-      int mid = left + (right - left) / 2;
-      if (arr[mid] >= target) {
-        right = mid;
-      } else {
-        left = mid + 1;
+      int spell = spells[i];
+      long strengthReq = (success + spell - 1) / spell;
+      int left = 0;
+      int right = m;
+      while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (potions[mid] >= strengthReq) {
+          right = mid;
+        } else {
+          left = mid + 1;
+        }
       }
+
+      // left is the index of the first potion
+      // that meets the strength requirement
+      pairs[i] = m - left;
     }
 
-    return left;
-  }
-
-  public static void main(String[] args) {
-    SuccessfulPairs obj = new SuccessfulPairs();
-    int[] spells = { 5, 1, 3 };
-    int[] potions = { 1, 2, 3, 4, 5 };
-    long success = 7;
-    int[] result = obj.successfulPairs(spells, potions, success);
-    System.out.println(Arrays.toString(result));
+    return pairs;
   }
 }
 
-// Time complexity O(mlogm+nlogm) or O((m+n)⋅logm)
-// O(n) space complexity for pairs array
+// Time complexity: O((m + n) log m) where m is the number of elements in the
+// potions array
+// and n is the number of elements in the spells array.
+// This is because we first sort the potions array,
+// which takes O(m log m) time,
+// and then for each spell, we perform a binary search on the sorted potions
+// array,
+// which takes O(log m) time.
+// Since we do this for n spells,
+// the total time complexity is O((m + n) log m).
+// Space complexity: O(1) if we don't count the space used for the output array,
+// or O(n) if we do count the output array.
