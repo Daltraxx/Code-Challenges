@@ -5,22 +5,22 @@ public class AnswerQueries {
     int n = nums.length;
     int m = queries.length;
 
-    Arrays.sort(nums);
-    int[] numsPrefix = new int[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-      sum += nums[i];
-      numsPrefix[i] = sum;
+    int[] sortedPrefix = Arrays.copyOf(nums, n);
+    Arrays.sort(sortedPrefix);
+    for (int i = 1; i < n; i++) {
+      sortedPrefix[i] += sortedPrefix[i - 1];
     }
 
     int[] answer = new int[m];
     for (int i = 0; i < m; i++) {
-      answer[i] = binarySearch(numsPrefix, queries[i]);
+      answer[i] = binarySearch(sortedPrefix, queries[i]);
     }
 
     return answer;
   }
 
+  // Upper bound binary search to find the rightmost insertion point 
+  // for the target in the prefix sums array
   public int binarySearch(int[] arr, int target) {
     int left = 0;
     int right = arr.length;
@@ -34,9 +34,12 @@ public class AnswerQueries {
       }
     }
 
+    // left is the index of the first element greater than target,
+    // and is therefore the count of elements that can be included
     return left;
   }
 }
 
-// Time complexity O(nlogn + n + mlogn) or O(nlogn + mlogn) = O((n+m)logn) ... n is dominated by nlogn so not necessary to include
-// Space O(n) for prefix sum array, could be reduced to O(1) if we overwrite input nums array
+// Time complexity: O(n log n + m log n) 
+// where n is the length of nums and m is the length of queries
+// Space complexity: O(n) for the prefix sums array
