@@ -4,9 +4,9 @@ public class SearchInsert {
     int right = nums.length - 1;
     while (left <= right) {
       int mid = left + (right - left) / 2;
-      if (nums[mid] == target)
+      if (nums[mid] == target) {
         return mid;
-      if (nums[mid] < target) {
+      } else if (nums[mid] < target) {
         left = mid + 1;
       } else {
         right = mid - 1;
@@ -17,5 +17,6 @@ public class SearchInsert {
   }
 }
 
-// Time complexity O(logn)
-// Space complexity O(1)
+// Time Complexity: O(log n) where n is the length of the input array.
+// Space Complexity: O(1) since we are using only a constant amount of extra
+// space.
