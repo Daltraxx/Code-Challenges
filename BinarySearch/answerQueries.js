@@ -1,7 +1,9 @@
 const answerQueries = (nums, queries) => {
+  // Upper bound binary search to find the rightmost 
+  // insertion point for the query in the prefix sums array
   const binarySearch = (arr, target) => {
     let left = 0;
-    right = arr.length;
+    let right = arr.length;
     while (left < right) {
       const mid = Math.floor((left + right) / 2);
       if (arr[mid] > target) {
@@ -11,25 +13,20 @@ const answerQueries = (nums, queries) => {
       }
     }
 
+    // left is the index of the first element greater than target,
+    // and is therefore the count of elements that can be included 
+    // without exceeding the query
     return left;
+  };
+
+  const prefix = nums.toSorted((a, b) => a - b);
+  for (let i = 1; i < prefix.length; i++) {
+    prefix[i] += prefix[i - 1];
   }
 
-  nums.sort((a, b) => a - b);
-
-  const numsPrefix = [];
-  let sum = 0;
-  for (let num of nums) {
-    sum += num;
-    numsPrefix.push(sum);
-  }
-
-  return queries.map((query) => binarySearch(numsPrefix, query));
+  return queries.map((query) => binarySearch(prefix, query));
 };
 
-// Time complexity O(nlogn + n + mlogn) or O(nlogn + mlogn) = O((n+m)logn) ... n is dominated by nlogn so not necessary to include
-// Space O(n) for prefix sum array, could be reduced to O(1) if we overwrite input nums array
-
-const nums = [4, 5, 2, 1],
-  queries = [3, 10, 21];
-
-console.log(answerQueries(nums, queries));
+// Time complexity: O(n log n + m log n) 
+// where n is the length of nums and m is the length of queries
+// Space complexity: O(n) for the prefix sums array
