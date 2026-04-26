@@ -15,24 +15,19 @@ class MinEatingSpeed {
     return left;
   }
 
-  public boolean check(double eatingSpeed, int[] piles, int h) {
-    int totalHoursToEat = 0;
+  private boolean check(double eatingSpeed, int[] piles, int h) {
+    long totalHoursToEat = 0;
     for (int pile : piles) {
-      double hoursToEatPile = Math.ceil(pile / eatingSpeed);
-      totalHoursToEat += hoursToEatPile;
+      totalHoursToEat += (pile + eatingSpeed - 1) / eatingSpeed;
+      if (totalHoursToEat > h) {
+        return false;
+      }
     }
 
     return totalHoursToEat <= h;
   }
-
-  public static void main(String[] args) {
-    MinEatingSpeed solver = new MinEatingSpeed();
-    int[] piles = {3, 6, 7, 11};
-    int h = 8;
-    int result = solver.minEatingSpeed(piles, h);
-    System.out.println("Minimum eating speed: " + result);
-  }
 }
 
-// Time complexity O(nlogk)
-// Space O(1)
+// Time complexity: O(n log m) where n is the number of piles and m is the
+// maximum pile size.
+// Space complexity: O(1)
