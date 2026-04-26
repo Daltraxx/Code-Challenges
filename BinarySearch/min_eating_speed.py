@@ -4,15 +4,13 @@ from typing import List
 class MinEatingSpeed:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         def test_eating_speed(speed: int) -> bool:
-            hours_remaining = h
+            total_hours = 0
             for pile in piles:
-                hours_to_eat = (pile + speed - 1) // speed
-                hours_remaining -= hours_to_eat
-                if hours_remaining < 0:
+                total_hours += (pile + speed - 1) // speed
+                if total_hours > h:
                     return False
             return True
 
-        
         left = 1
         right = max(piles)
         while left < right:
@@ -25,5 +23,8 @@ class MinEatingSpeed:
 
         return left
 
-
-
+    # Time complexity: O(n log m), where n is the number of piles 
+    # and m is the maximum number of bananas in a pile.
+    # The binary search runs in O(log m) time, and for each speed tested, 
+    # we iterate through the piles in O(n) time to calculate the total hours needed.
+    # Space complexity: O(1)
