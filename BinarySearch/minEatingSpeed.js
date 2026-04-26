@@ -1,16 +1,19 @@
 const minEatingSpeed = (piles, h) => {
   const check = k => {
-    let hours = 0;
-    for (let bananas of piles) {
-      hours += Math.ceil(bananas / k);
+    let totalHours = 0;
+    for (const bananas of piles) {
+      totalHours += Math.ceil(bananas / k);
+      if (totalHours > h) {
+        return false;
+      }
     }
-
-    return hours <= h;
+    return true;
   }
 
-  let left = 1, right = Math.max(...piles);
+  let left = 1
+  let right = Math.max(...piles);
   while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
+    const mid = Math.floor((left + right) / 2);
     if (check(mid)) {
       right = mid - 1;
     } else {
@@ -21,5 +24,6 @@ const minEatingSpeed = (piles, h) => {
   return left;
 }
 
-// Time complexity O(nlogk)
-// Space O(1)
+// Time complexity: O(n log m) where n is the number of piles and m is the
+// maximum pile size.
+// Space complexity: O(1)
