@@ -1,35 +1,21 @@
 const minimumEffortPath = (heights) => {
+  const isValid = (row, col, seen) =>
+    row >= 0 && row < m && col >= 0 && col < n && !seen[row][col];
+
   const check = (effort) => {
-    const directions = [
-      [-1, 0],
-      [1, 0],
-      [0, -1],
-      [0, 1],
-    ];
-
-    const m = heights.length;
-    const n = heights[0].length;
-
-    const isValid = (row, col) => row >= 0 && row < m && col >= 0 && col < n;
-    const isAcceptableEffort = (prevNum, nextNum) =>
-      Math.abs(prevNum - nextNum) <= effort;
-
-    const seen = [];
-    for (let row = 0; row < m; row++) seen.push(new Array(n).fill(false));
+    const seen = Array.from({ length: m }, () => new Array(n).fill(false));
     seen[0][0] = true;
 
     const stack = [[0, 0]];
-
     while (stack.length) {
       let [row, col] = stack.pop();
       if (row === m - 1 && col === n - 1) return true;
-      for (let [x, y] of directions) {
-        let newRow = row + y;
-        let newCol = col + x;
+      for (let [dy, dx] of directions) {
+        let newRow = row + dy;
+        let newCol = col + dx;
         if (
-          isValid(newRow, newCol) &&
-          !seen[newRow][newCol] &&
-          isAcceptableEffort(heights[row][col], heights[newRow][newCol])
+          isValid(newRow, newCol, seen) &&
+          Math.abs(heights[newRow][newCol] - heights[row][col]) <= effort
         ) {
           seen[newRow][newCol] = true;
           stack.push([newRow, newCol]);
@@ -40,10 +26,20 @@ const minimumEffortPath = (heights) => {
     return false;
   };
 
-  let left = 0,
-    right = 0;
-  for (let row of heights) {
-    for (let num of row) right = Math.max(right, num);
+  const directions = [
+    [-1, 0],
+    [1, 0],
+    [0, -1],
+    [0, 1],
+  ];
+
+  const m = heights.length;
+  const n = heights[0].length;
+
+  let left = 0;
+  let right = 0;
+  for (const row of heights) {
+    right = Math.max(right, ...row);
   }
 
   while (left <= right) {
@@ -57,14 +53,3 @@ const minimumEffortPath = (heights) => {
 
   return left;
 };
-
-// Time complexity O(mnlogk)
-// Space O(mn)
-
-const heights = [
-  [1, 2, 2],
-  [3, 8, 2],
-  [5, 3, 5],
-];
-
-console.log(minimumEffortPath(heights));
