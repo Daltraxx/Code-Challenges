@@ -1,22 +1,22 @@
 const minSpeedOnTime = (dist, hour) => {
   const check = (speed) => {
     let hoursNeeded = 0;
-    for (let i = 0; i < dist.length; i++) {
-      const kilometers = dist[i];
-      if (i === dist.length - 1) {
-        hoursNeeded += kilometers / speed;
-      } else {
-        hoursNeeded += Math.ceil(kilometers / speed);
+    for (let i = 0; i < n; i++) {
+      const d = dist[i];
+      // For all but the last train, we need to round up the time to the nearest integer
+      hoursNeeded += i === n - 1 ? d / speed : Math.ceil(d / speed);
+      if (hoursNeeded > hour) {
+        return false;
       }
     }
-    
-    return hoursNeeded <= hour;
+
+    return true;
   };
 
-  if (dist.length > Math.ceil(hour)) return -1;
-
-  let left = 1,
-    right = 10 ** 7; // from constraints
+  const n = dist.length;
+  if (n > Math.ceil(hour)) return -1;
+  let left = 1;
+  let right = 10 ** 7;
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
     if (check(mid)) {
@@ -29,9 +29,6 @@ const minSpeedOnTime = (dist, hour) => {
   return left;
 };
 
-// Time O(nlogk)
-// Space O(1)
-
-const dist = [1, 1, 100000],
-  hour = 2.01;
-console.log(minSpeedOnTime(dist, hour));
+// Time complexity: O(n log m) where n is the length of dist 
+// and m is the search space for speed (10^7).
+// Space complexity: O(1).
