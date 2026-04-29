@@ -53,3 +53,8 @@ const minimumEffortPath = (heights) => {
 
   return left;
 };
+
+// Time complexity: O(m*n*log(k)),
+// where k is the maximum possible height in the grid.
+// Space complexity: O(m*n) for the seen array
+// and the stack in the worst case.
