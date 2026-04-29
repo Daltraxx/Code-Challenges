@@ -7,6 +7,7 @@ class MinSpeedOnTime:
         def is_fast_enough(speed: int):
             total_time = 0
             for i, d in enumerate(dist):
+                # For all but the last train, we need to round up the time to the nearest integer
                 total_time += (d + speed - 1) // speed if i < n - 1 else d / speed
                 if total_time > hour:
                     return False
@@ -27,7 +28,8 @@ class MinSpeedOnTime:
         return left
 
     # Time complexity: O(n * log(m)) where n is the number of distances 
-    # and m is the maximum speed (10^7 in this case).
+    # and m is the maximum speed (10^7 in this case). 
+    # Technically, the time complexity could be considered O(n) since our max speed is constant.
     # The log(m) factor comes from the binary search on the speed values, 
     # and the O(n) factor comes from the time calculation for each speed value.
     # Space complexity: O(1)
