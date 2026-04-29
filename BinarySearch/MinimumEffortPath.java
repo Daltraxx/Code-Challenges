@@ -14,12 +14,13 @@ public class MinimumEffortPath {
     n = heights[0].length;
 
     int left = 0;
-    int right = 0;
-    for (int[] row : heights) {
-      for (int col : row) {
-        right = Math.max(col, right);
-      }
-    }
+    // Setting right to 10^6 because the maximum height difference can be 10^6 (0 to
+    // 10^6).
+    // Tradeoff: we could also calculate the maximum height difference in the grid
+    // to set a tighter upper bound,
+    // but this would require precompute of O(m*n) time, while only saving a few
+    // iterations in the binary search.
+    int right = 1_000_000;
 
     while (left <= right) {
       int mid = left + (right - left) / 2;
@@ -63,3 +64,7 @@ public class MinimumEffortPath {
     return row >= 0 && row < m && col >= 0 && col < n && !seen[row][col];
   }
 }
+
+// Time complexity: O(m*n*log(k)), where k is the maximum possible height
+// difference (10^6 in this case).
+// Space complexity: O(m*n) for the seen array and the stack in the worst case.
