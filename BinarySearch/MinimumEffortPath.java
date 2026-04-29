@@ -1,35 +1,29 @@
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class MinimumEffortPath {
   int[][] heights;
   int m;
   int n;
-
-  static class HeightsPosition {
-    int row;
-    int col;
-
-    public HeightsPosition(int row, int col) {
-      this.row = row;
-      this.col = col;
-    }
-  }
+  int[][] directions = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+  boolean[][] seen;
 
   public int minimumEffortPath(int[][] heights) {
     this.heights = heights;
-    this.m = heights.length;
-    this.n = heights[0].length;
+    m = heights.length;
+    n = heights[0].length;
 
     int left = 0;
     int right = 0;
     for (int[] row : heights) {
-      for (int num : row)
-        right = Math.max(right, num);
+      for (int col : row) {
+        right = Math.max(col, right);
+      }
     }
 
     while (left <= right) {
       int mid = left + (right - left) / 2;
-      if (check(mid)) {
+      if (dfs(mid)) {
         right = mid - 1;
       } else {
         left = mid + 1;
@@ -38,40 +32,34 @@ public class MinimumEffortPath {
 
     return left;
   }
-  
-  public boolean check(int effort) {
-    int[][] directions = new int[][] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-    boolean[][] seen = new boolean[m][n];
+
+  private boolean dfs(int effort) {
+    seen = new boolean[m][n];
     seen[0][0] = true;
-
-    ArrayDeque<HeightsPosition> stack = new ArrayDeque<>();
-    stack.push(new HeightsPosition(0, 0));
-
+    Deque<int[]> stack = new ArrayDeque<>();
+    stack.offerLast(new int[] { 0, 0 });
     while (!stack.isEmpty()) {
-      HeightsPosition position = stack.removeLast();
-      if (position.row == m - 1 && position.col == n - 1)
+      int[] position = stack.pollLast();
+      int row = position[0];
+      int col = position[1];
+      if (row == m - 1 && col == n - 1) {
         return true;
+      }
 
       for (int[] direction : directions) {
-        int x = direction[0];
-        int y = direction[1];
-        HeightsPosition newPosition = new HeightsPosition(position.row + y, position.col + x);
-        if (isValid(newPosition.row, newPosition.col) && !seen[newPosition.row][newPosition.col]
-            && isAcceptableEffort(position, newPosition, effort)) {
-          seen[newPosition.row][newPosition.col] = true;
-          stack.addLast(newPosition);
+        int newRow = row + direction[0];
+        int newCol = col + direction[1];
+        if (isValid(newRow, newCol) && Math.abs(heights[row][col] - heights[newRow][newCol]) <= effort) {
+          seen[newRow][newCol] = true;
+          stack.offerLast(new int[] { newRow, newCol });
         }
       }
     }
 
     return false;
   }
-  
-  public boolean isValid(int row, int col) {
-    return row >= 0 && row < m && col >= 0 && col < n;
-  }
 
-  public boolean isAcceptableEffort(HeightsPosition lastPosition, HeightsPosition newPosition, int allowableEffort) {
-    return Math.abs(heights[lastPosition.row][lastPosition.col] - heights[newPosition.row][newPosition.col]) <= allowableEffort;
+  private boolean isValid(int row, int col) {
+    return row >= 0 && row < m && col >= 0 && col < n && !seen[row][col];
   }
 }
