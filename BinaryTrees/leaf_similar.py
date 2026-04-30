@@ -4,7 +4,9 @@ from tree_node import TreeNode
 
 
 class LeafSimilar:
-    def leafSimilarRecursive(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+    def leafSimilarRecursive(
+        self, root1: Optional[TreeNode], root2: Optional[TreeNode]
+    ) -> bool:
         def get_leaf_values(root: Optional[TreeNode], vals: List[int]) -> List[int]:
             if not root:
                 return vals
@@ -22,13 +24,15 @@ class LeafSimilar:
         root2_vals = get_leaf_values(root2, [])
 
         return root1_vals == root2_vals
-    
+
     # Time complexity: O(n + m) where n and m are the number of nodes in root1 and root2 respectively,
     # since we need to traverse both trees to collect the leaf values.
     # Space complexity: O(n + m) in the worst case if both trees are completely unbalanced (like a linked list),
     # since the recursion stack could go as deep as the number of nodes in the tree.
 
-    def leafSimilarIterative(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+    def leafSimilarIterative(
+        self, root1: Optional[TreeNode], root2: Optional[TreeNode]
+    ) -> bool:
         def get_leaf_values(root: Optional[TreeNode]) -> List[int]:
             vals = []
             if not root:
@@ -50,7 +54,7 @@ class LeafSimilar:
         root2_vals = get_leaf_values(root2)
 
         return root1_vals == root2_vals
-    
+
     # Time complexity: O(n + m) where n and m are the number of nodes in root1 and root2 respectively,
     # since we need to traverse both trees to collect the leaf values.
     # Space complexity: O(n + m) in the worst case if both trees are completely unbalanced (like a linked list),
