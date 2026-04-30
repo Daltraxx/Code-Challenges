@@ -6,9 +6,10 @@ const smallestDivisor = (nums, threshold) => {
     }
 
     return sum <= threshold;
-  }
+  };
 
-  let left = 1, right = Math.max(...nums);
+  let left = 1;
+  let right = Math.max(...nums);
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
     if (check(mid)) {
@@ -19,12 +20,11 @@ const smallestDivisor = (nums, threshold) => {
   }
 
   return left;
-}
+};
 
-// Time O(nlogk)
-// Space O(1)
-
-const nums = [44, 22, 33, 11, 1],
-  threshold = 5;
-
-console.log(smallestDivisor(nums, threshold));
+// Time complexity: O(n log m) where n is the length of nums
+// and m is the maximum value in nums.
+// The log(m) factor comes from the binary search on the divisor values,
+// and the O(n) factor comes from the check function
+// that iterates through nums for each divisor value.
+// Space complexity: O(1).
