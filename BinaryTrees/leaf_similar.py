@@ -39,10 +39,10 @@ class LeafSimilar:
                 curr = stack.pop()
                 if not curr.left and not curr.right:
                     vals.append(curr.val)
-                if curr.left:
-                    stack.append(curr.left)
                 if curr.right:
                     stack.append(curr.right)
+                if curr.left:
+                    stack.append(curr.left)
 
             return vals
 
