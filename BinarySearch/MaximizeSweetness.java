@@ -6,10 +6,9 @@ public class MaximizeSweetness {
     this.k = k;
     this.sweetness = sweetness;
 
-    int left = Integer.MAX_VALUE;
+    int left = 1;
     int right = 0;
     for (int chunk : sweetness) {
-      left = Math.min(chunk, left);
       right += chunk;
     }
     right /= k + 1;
@@ -26,7 +25,7 @@ public class MaximizeSweetness {
     return right;
   }
 
-  public boolean check(int minSweetness) {
+  private boolean check(int minSweetness) {
     int currentSweetness = 0;
     int slices = 0;
     for (int chunk : sweetness) {
