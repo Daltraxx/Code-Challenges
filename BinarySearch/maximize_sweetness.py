@@ -5,14 +5,13 @@ class MaximizeSweetness:
     def maximizeSweetness(self, sweetness: List[int], k: int) -> int:
         def check(min_sweetness: int):
             curr_sweetness = 0
-            cuts = 0
-            for i in range(len(sweetness)):
-                piece = sweetness[i]
-                curr_sweetness += piece
+            total_pieces = 0
+            for chunk in sweetness:
+                curr_sweetness += chunk
                 if curr_sweetness >= min_sweetness:
-                    cuts += 1
+                    total_pieces += 1
                     curr_sweetness = 0
-                    if cuts == k + 1:
+                    if total_pieces == k + 1:
                         return True
             return False
 
@@ -27,7 +26,8 @@ class MaximizeSweetness:
 
         return right
 
-    # Time complexity: O(n log k) where n is the length of the sweetness array and k is the number of cuts.
+    # Time complexity: O(n log k) where n is the length of the sweetness array and k is the number of cuts
+    # and k is the sum of the sweetness values divided by the number of pieces.
     # The O(n) factor comes from the check function which iterates through the sweetness array
     # and the O(log k) factor comes from the binary search on the minimum sweetness value.
     # Space complexity: O(1).
