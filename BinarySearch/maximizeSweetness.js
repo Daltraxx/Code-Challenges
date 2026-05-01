@@ -1,33 +1,29 @@
 const maximizeSweetness = (sweetness, k) => {
-  const numberOfPeople = k + 1;
-
   const check = (minSweetness) => {
     let currentSweetness = 0;
     let slices = 0;
-    for (let chunk of sweetness) {
+    for (const chunk of sweetness) {
       currentSweetness += chunk;
       if (currentSweetness >= minSweetness) {
         slices++;
-        if (slices === numberOfPeople) return true;
         currentSweetness = 0;
+        if (slices === targetPieces) return true;
       }
     }
 
     return false;
   }
 
-  let left = Infinity, right = 0;
-  for (let chunk of sweetness) {
-    left = Math.min(chunk, left);
-    right += chunk;
-  }
+  const targetPieces = k + 1;
+  let left = 1;
+  let right = sweetness.reduce((acc, curr) => acc + curr, 0);
 
-  right = Math.floor(right / numberOfPeople);
+  right = Math.floor(right / targetPieces);
 
-  while (left < right) {
-    const mid = Math.floor((left + right + 1) / 2);
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
     if (check(mid)) {
-      left = mid;
+      left = mid + 1;
     } else {
       right = mid - 1;
     }
@@ -36,10 +32,7 @@ const maximizeSweetness = (sweetness, k) => {
   return right;
 }
 
-// Time O(nlogk)
-// Space O(1)
-
-const sweetness = [1, 2, 2, 1, 2, 2, 1, 2, 2],
-  k = 2;
-
-console.log(maximizeSweetness(sweetness, k));
+// Time complexity: O(n log k) where n is the length of the sweetness array and
+// k is the number of cuts
+// and k is the sum of the sweetness values divided by the number of pieces.
+// Space complexity: O(1).

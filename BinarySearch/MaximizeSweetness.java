@@ -1,21 +1,17 @@
 public class MaximizeSweetness {
-  int k;
-  int[] sweetness;
-
   public int maximizeSweetness(int[] sweetness, int k) {
-    this.k = k;
-    this.sweetness = sweetness;
+    int targetPieces = k + 1;
 
     int left = 1;
     int right = 0;
     for (int chunk : sweetness) {
       right += chunk;
     }
-    right /= k + 1;
+    right /= targetPieces;
 
     while (left <= right) {
       int mid = left + (right - left) / 2;
-      if (check(mid)) {
+      if (check(mid, sweetness, targetPieces)) {
         left = mid + 1;
       } else {
         right = mid - 1;
@@ -25,7 +21,7 @@ public class MaximizeSweetness {
     return right;
   }
 
-  private boolean check(int minSweetness) {
+  private boolean check(int minSweetness, int[] sweetness, int targetPieces) {
     int currentSweetness = 0;
     int slices = 0;
     for (int chunk : sweetness) {
@@ -33,7 +29,7 @@ public class MaximizeSweetness {
       if (currentSweetness >= minSweetness) {
         slices++;
         currentSweetness = 0;
-        if (slices == k + 1)
+        if (slices == targetPieces)
           return true;
       }
     }
