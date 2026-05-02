@@ -1,46 +1,37 @@
 const splitArray = (nums, k) => {
-  const check = (minLargestSum) => {
-    let currentSum = 0;
-    let subArrayCount = 0;
-
-    for (let num of nums) {
-      if (currentSum + num > minLargestSum) {
-        subArrayCount++;
-        if (subArrayCount > k) return false;
-        currentSum = 0;
+  const check = (minSum) => {
+    let currSum = 0;
+    let subarrCount = 1;
+    for (const num of nums) {
+      if (currSum + num > minSum) {
+        subarrCount++;
+        currSum = 0;
+        if (subarrCount > k) return false;
       }
-      currentSum += num;
+      currSum += num;
     }
-
-    return subArrayCount + 1 <= k;
+    return true;
   };
 
-  let left = -Infinity,
-    right = 0;
-  for (let num of nums) {
+  let left = -Infinity;
+  let right = 0;
+  for (const num of nums) {
     left = Math.max(num, left);
     right += num;
   }
-
-  let minLargestSum = 0;
-
   while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
+    mid = Math.floor((left + right) / 2);
     if (check(mid)) {
-      minLargestSum = mid;
       right = mid - 1;
     } else {
       left = mid + 1;
     }
   }
 
-  return minLargestSum; // could omit this variable and just return left if desired
+  return left;
 };
 
-// Time complexity O(nlogk)
-// Space O(1)
-
-const nums = [1, 2, 3, 4, 5],
-  k = 1;
-
-console.log(splitArray(nums, k));
+// Time complexity: O(n log m) 
+// where n is the length of the nums array 
+// and m is the sum of the nums array.
+// Space complexity: O(1).
