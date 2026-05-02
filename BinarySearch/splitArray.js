@@ -13,14 +13,14 @@ const splitArray = (nums, k) => {
     return true;
   };
 
-  let left = -Infinity;
+  let left = 0;
   let right = 0;
   for (const num of nums) {
     left = Math.max(num, left);
     right += num;
   }
   while (left <= right) {
-    mid = Math.floor((left + right) / 2);
+    const mid = Math.floor((left + right) / 2);
     if (check(mid)) {
       right = mid - 1;
     } else {
