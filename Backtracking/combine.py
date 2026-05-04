@@ -8,10 +8,11 @@ class Combine:
                 combinations.append(curr[:])
                 return
 
-            # We prune the search space by calculating the upper bound for the next number to add,
-            # preventing unnecessary recursive calls there aren't enough numbers left to complete a valid combination.
-            remaining_needed = k - len(curr)
-            max_num = n - remaining_needed + 1
+            # We prune the search space by calculating the maximum number we can start from,
+            # preventing unnecessary recursive calls 
+            # when there aren't enough numbers left to complete a valid combination.
+            nums_needed = k - len(curr)
+            max_num = n - nums_needed + 1
 
             for num in range(starting_num, max_num + 1):
                 curr.append(num)

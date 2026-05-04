@@ -5,6 +5,9 @@ const combine = (n, k) => {
       return;
     }
 
+    // Prune the search space by calculating the maximum number we can start from,
+    // preventing unnecessary recursive calls 
+    // when there aren't enough numbers left to complete a valid combination.
     const numsNeeded = k - curr.length;
     const maxNum = n - numsNeeded + 1;
     for (let num = startingNum; num <= maxNum; num++) {
