@@ -6,8 +6,6 @@ const pathSum = (root, targetSum) => {
 
     const currSum = prevSum + node.val;
     let count = prefixMap.get(currSum - targetSum) || 0;
-    // Important to set currSum after updating count and not before
-    // due to edge case of targetSum = 0
     prefixMap.set(currSum, (prefixMap.get(currSum) || 0) + 1);
     count += dfs(node.left, currSum) + dfs(node.right, currSum);
 
