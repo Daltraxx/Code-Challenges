@@ -8,7 +8,7 @@ public class Combine {
         return combinations;
     }
 
-    private void backtrack(List<Integer> curr, int i, List<List<Integer>> combinations, int n, int k) {
+    private void backtrack(List<Integer> curr, int start, List<List<Integer>> combinations, int n, int k) {
         if (curr.size() == k) {
             combinations.add(new ArrayList<>(curr));
             return;
@@ -19,10 +19,10 @@ public class Combine {
         int numsNeeded = k - curr.size();
         int maxNum = n - numsNeeded + 1;
 
-        for (int num = i; num <= maxNum; num++) {
-            curr.addLast(num);
+        for (int num = start; num <= maxNum; num++) {
+            curr.add(num);
             backtrack(curr, num + 1, combinations, n, k);
-            curr.removeLast();
+            curr.remove(curr.size() - 1);
         }
     }
 }
