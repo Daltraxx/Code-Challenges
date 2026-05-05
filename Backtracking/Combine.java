@@ -2,27 +2,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Combine {
-    List<List<Integer>> combinations;
-    int n;
-    int k;
     public List<List<Integer>> combine(int n, int k) {
-        combinations = new ArrayList<>();
-        this.n = n;
-        this.k = k;
-        backtrack(new ArrayList<>(), 1);
+        List<List<Integer>> combinations = new ArrayList<>();
+        backtrack(new ArrayList<>(), 1, combinations, n, k);
         return combinations;
     }
 
-    private void backtrack(List<Integer> curr, int i) {
+    private void backtrack(List<Integer> curr, int i, List<List<Integer>> combinations, int n, int k) {
         if (curr.size() == k) {
             combinations.add(new ArrayList<>(curr));
             return;
         }
 
-        for (int j = i; j <= n; j++) {
-            curr.add(j);
-            backtrack(curr, j + 1);
-            curr.remove(curr.size() - 1);
+        int numsNeeded = k - curr.size();
+        int maxNum = n - numsNeeded + 1;
+
+        for (int num = i; num <= maxNum; num++) {
+            curr.addLast(num);
+            backtrack(curr, num + 1, combinations, n, k);
+            curr.removeLast();
         }
     }
 }
+
+// Time complexity: O(k * C(n, k)) where k is the size of each combination
+// and C(n, k) is the binomial coefficient representing the number of
+// combinations.
+// We take O(k) time to create a copy of each valid combination,
+// and there are C(n, k) such combinations in the worst case.
+// Space complexity: O(k) for curr and the recursion stack,
+// not counting the space used for the output list combinations,
+// which can grow to O(k * C(n, k)) in the worst case.
