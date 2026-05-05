@@ -14,6 +14,8 @@ public class Combine {
             return;
         }
 
+        // Pruning to avoid unnecessary iterations where it's impossible to fill the
+        // remaining slots in curr with the remaining numbers.
         int numsNeeded = k - curr.size();
         int maxNum = n - numsNeeded + 1;
 
