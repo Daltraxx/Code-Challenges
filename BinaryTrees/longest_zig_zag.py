@@ -5,16 +5,18 @@ from tree_node import TreeNode
 
 class LongestZigZag:
     def longestZigZag(self, root: Optional[TreeNode]) -> int:
-        def dfs(node: Optional[TreeNode], left_length: int, right_length: int) -> int:
+        def dfs(node: Optional[TreeNode], left: int, right: int) -> int:
             nonlocal max_length
             if not node:
                 return
 
-            max_length = max(max_length, left_length, right_length)
-            # If we came frm the left, we go right and reset left_length as a new path
-            dfs(node.right, right_length + 1, 0)
-            # If we came from the right, we go left and reset right_length as a new path
-            dfs(node.left, 0, left_length + 1)
+            max_length = max(max_length, left, right)
+            # If going right, we extend the path whose last move was left.
+            # 0 starts a new path in the opposite direction.
+            dfs(node.right, 0, left + 1)
+            # If going left, we extend the path whose last move was right.
+            # 0 starts a new path in the opposite direction.
+            dfs(node.left, right + 1, 0)
 
         max_length = 0
         dfs(root, 0, 0)
