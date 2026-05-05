@@ -11,7 +11,9 @@ class LongestZigZag:
                 return
 
             max_length = max(max_length, left_length, right_length)
+            # If we came frm the left, we go right and reset left_length as a new path
             dfs(node.right, right_length + 1, 0)
+            # If we came from the right, we go left and reset right_length as a new path
             dfs(node.left, 0, left_length + 1)
 
         max_length = 0
