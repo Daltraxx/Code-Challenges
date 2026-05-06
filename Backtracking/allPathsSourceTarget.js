@@ -1,28 +1,25 @@
 const allPathsSourceTarget = (graph) => {
-  const paths = [];
-  const target = graph.length - 1;
-
-  const backtrack = (curr, i) => {
-    if (i === target) {
+  const backtrack = (curr) => {
+    const node = curr[curr.length - 1];
+    if (node === target) {
       paths.push([...curr]);
       return;
     }
 
-    const neighbors = graph[i];
-
-    for (let neighbor of neighbors) {
+    for (let neighbor of graph[node]) {
       curr.push(neighbor);
-      backtrack(curr, neighbor);
-      curr.pop(neighbor);
+      backtrack(curr);
+      curr.pop();
     }
   };
 
-  backtrack([0], 0);
+  const paths = [];
+  const target = graph.length - 1;
+  backtrack([0]);
   return paths;
 };
 
-// Time O(2^n⋅n)
-// Space O(n)
-
-const graph = [[1, 2], [3], [3], []];
-console.log(allPathsSourceTarget(graph));
+// Time complexity: O(2^n * n) since there can be up to 2^(n-2) paths in the graph,
+// and each path can take O(n) time to construct.
+// Space complexity: O(n) for the recursion stack and the path storage,
+// not including the output, which can be O(2^n * n).
