@@ -14,8 +14,7 @@ public class LongestZigZag {
       return;
     }
 
-    int currMax = Math.max(left, right);
-    maxLength = Math.max(currMax, maxLength);
+    maxLength = Math.max(Math.max(left, right), maxLength);
     dfs(node.left, right + 1, 0);
     dfs(node.right, 0, left + 1);
   }
