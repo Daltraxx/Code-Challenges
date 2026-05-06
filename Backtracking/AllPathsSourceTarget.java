@@ -2,21 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllPathsSourceTarget {
-  int[][] graph;
-  List<List<Integer>> paths;
-  int target;
-
   public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
-    this.graph = graph;
-    paths = new ArrayList<>();
-    target = graph.length - 1;
     List<Integer> curr = new ArrayList<>();
     curr.add(0);
-    backtrack(curr, 0);
+    List<List<Integer>> paths = new ArrayList<>();
+    backtrack(curr, graph, paths, graph.length - 1);
     return paths;
   }
 
-  private void backtrack(List<Integer> curr, int node) {
+  private void backtrack(List<Integer> curr, int[][] graph, List<List<Integer>> paths, int target) {
+    int node = curr.get(curr.size() - 1);
     if (node == target) {
       paths.add(new ArrayList<>(curr));
       return;
@@ -24,11 +19,14 @@ public class AllPathsSourceTarget {
 
     for (int neighbor : graph[node]) {
       curr.add(neighbor);
-      backtrack(curr, neighbor);
+      backtrack(curr, graph, paths, target);
       curr.remove(curr.size() - 1);
     }
   }
 }
 
-// Time O(2^n⋅n)
-// Space O(n)
+// Time complexity: O(2^n * n) since there can be up to 2^(n-2) paths in the
+// graph,
+// and each path can take O(n) time to construct.
+// Space complexity: O(n) for the recursion stack and the path storage,
+// not including the output, which can be O(2^n * n).
