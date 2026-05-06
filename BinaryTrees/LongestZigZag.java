@@ -1,7 +1,7 @@
 package BinaryTrees;
 
 public class LongestZigZag {
-  int maxLength;
+  private int maxLength;
 
   public int longestZigZag(TreeNode root) {
     maxLength = 0;
@@ -20,6 +20,6 @@ public class LongestZigZag {
   }
 }
 
-// TIme Complexity: O(n) where n is the number of nodes in the tree
+// Time Complexity: O(n) where n is the number of nodes in the tree
 // Space Complexity: O(h) where h is the height of the tree, due to the
 // recursive call stack. In the worst case of a skewed tree, this can be O(n).
