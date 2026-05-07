@@ -20,7 +20,8 @@ class LetterCombinations:
                 return
 
             num = digits[i]
-            for letter in self.letter_map[num]:
+            letters = self.letter_map[num]
+            for letter in letters:
                 curr.append(letter)
                 backtrack(curr, i + 1)
                 curr.pop()

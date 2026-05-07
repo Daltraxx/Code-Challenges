@@ -1,88 +1,41 @@
 const letterCombinations = (digits) => {
   const n = digits.length;
-
-  const numToLetterMap = new Map([
-    ["2", ["a", "b", "c"]],
-    ["3", ["d", "e", "f"]],
-    ["4", ["g", "h", "i"]],
-    ["5", ["j", "k", "l"]],
-    ["6", ["m", "n", "o"]],
-    ["7", ["p", "q", "r", "s"]],
-    ["8", ["t", "u", "v"]],
-    ["9", ["w", "x", "y", "z"]],
-  ]);
-
-  const combinations = [];
+  const numToLetterMap = {
+    2: "abc",
+    3: "def",
+    4: "ghi",
+    5: "jkl",
+    6: "mno",
+    7: "pqrs",
+    8: "tuv",
+    9: "wxyz",
+  };
 
   const backtrack = (curr, i) => {
-    if (curr.length === n) {
-      combinations.push(curr);
+    if (i === n) {
+      combinations.push(curr.join(""));
       return;
     }
 
     const num = digits[i];
 
-    const letters = numToLetterMap.get(num);
-    for (let letter of letters) {
-      curr += letter;
+    const letters = numToLetterMap[num];
+    for (const letter of letters) {
+      curr.push(letter);
       backtrack(curr, i + 1);
-      curr = curr.slice(0, -1);
+      curr.pop();
     }
   };
 
-  backtrack("", 0);
-  return combinations;
-};
-
-// Time O(4^n⋅n)
-// Space O(n)
-
-const digits = "123";
-console.log(letterCombinations(digits));
-
-// Solution for cases where "1" is allowed
-const letterCombinationsIncludingOne = (digits) => {
-  let oneCount = 0;
-  for (let i = 0; i < digits.length; i++) {
-    if (digits[i] === "1") oneCount++;
-  }
-
-  const n = digits.length - oneCount;
-
-  const numToLetterMap = new Map([
-    ["1", []],
-    ["2", ["a", "b", "c"]],
-    ["3", ["d", "e", "f"]],
-    ["4", ["g", "h", "i"]],
-    ["5", ["j", "k", "l"]],
-    ["6", ["m", "n", "o"]],
-    ["7", ["p", "q", "r", "s"]],
-    ["8", ["t", "u", "v"]],
-    ["9", ["w", "x", "y", "z"]],
-  ]);
-
+  if (n === 0) return [];
   const combinations = [];
-
-  const backtrack = (curr, i) => {
-    if (curr.length === n) {
-      combinations.push(curr);
-      return;
-    }
-
-    const num = digits[i];
-    if (num === "1") {
-      backtrack(curr, i + 1);
-      return;
-    }
-
-    const letters = numToLetterMap.get(num);
-    for (let letter of letters) {
-      curr += letter;
-      backtrack(curr, i + 1);
-      curr = curr.slice(0, -1);
-    }
-  };
-
-  backtrack("", 0);
+  backtrack([], 0);
   return combinations;
 };
+
+// Time complexity: O(3^n * 4^m)
+// where n is the number of digits that map to 3 letters (2, 3, 4, 5, 6, 8)
+// and m is the number of digits that map to 4 letters (7, 9).
+// This is because each digit can generate either 3 or 4 combinations.
+// Space complexity: O(n) for the recursion stack and the current combination list,
+// not counting the output list which can grow exponentially in size.
