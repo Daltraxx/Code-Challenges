@@ -15,7 +15,7 @@ class LetterCombinations:
 
     def letterCombinations(self, digits: str) -> List[str]:
         def backtrack(curr: List[str], i: int):
-            if len(curr) == n:
+            if i == n:
                 combinations.append("".join(curr))
                 return
 
@@ -25,6 +25,8 @@ class LetterCombinations:
                 backtrack(curr, i + 1)
                 curr.pop()
 
+        if not digits:
+            return []
         n = len(digits)
         combinations = []
         backtrack([], 0)
