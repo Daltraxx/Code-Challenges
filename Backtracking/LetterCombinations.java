@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LetterCombinations {
-  Map<Character, String> numToLetterMap = Map.of(
+  private static final Map<Character, String> numToLetterMap = Map.of(
       '2', "abc",
       '3', "def",
       '4', "ghi",
@@ -13,11 +13,14 @@ public class LetterCombinations {
       '8', "tuv",
       '9', "wxyz");
 
-  int n;
-  String digits;
-  List<String> combinations;
+  private int n;
+  private String digits;
+  private List<String> combinations;
 
   public List<String> letterCombinations(String digits) {
+    if (digits.isEmpty()) {
+      return new ArrayList<>();
+    }
     n = digits.length();
     this.digits = digits;
     combinations = new ArrayList<>();
@@ -26,7 +29,7 @@ public class LetterCombinations {
   }
 
   private void backtrack(StringBuilder curr, int i) {
-    if (curr.length() == n) {
+    if (i == n) {
       combinations.add(curr.toString());
       return;
     }
@@ -40,5 +43,10 @@ public class LetterCombinations {
   }
 }
 
-// Time O(4^n⋅n)
-// Space O(n)
+// Time complexity: O(3^n * 4^m)
+// where n is the number of digits that map to 3 letters (2, 3, 4, 5, 6, 8)
+// and m is the number of digits that map to 4 letters (7, 9).
+// This is because each digit can generate either 3 or 4 combinations.
+// Space complexity: O(n) for the recursion stack and the current combination
+// StringBuilder,
+// not counting the output list which can grow exponentially in size.
