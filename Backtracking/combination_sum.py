@@ -17,7 +17,7 @@ class CombinationSum:
                 curr_combo.pop()
 
         combinations = []
-        candidates.sort()
+        candidates = sorted(candidates)
         backtrack([], 0, 0)
         return combinations
 
@@ -26,5 +26,7 @@ class CombinationSum:
     # and M is the minimum value in candidates.
     # This is because in the worst case, we can use the smallest candidate T/M times,
     # and for each of those times we have N choices.
-    # Space complexity: O(T/M) for the recursion stack and the current combination list,
+    # For interview purposes, saying “exponential backtracking with pruning” is usually sufficient.
+    # Space complexity: O(T/M ) for the recursion stack and the current combination list,
     # not counting the output list which can grow exponentially in size.
+    # The sorted array takes O(N) space, but it is not the dominant factor in space complexity.
