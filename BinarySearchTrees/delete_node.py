@@ -137,6 +137,7 @@ class DeleteNode:
                 return root.left
             if not root.left:
                 return root.right
+            # In case of two children, find the in-order successor (smallest in the right subtree)
             curr = root.right
             while curr.left:
                 curr = curr.left
