@@ -29,3 +29,9 @@ const totalNQueens = (n: number): number => {
   const unsafeDiags: Set<number> = new Set();
   return backtrack(0);
 };
+
+// Time complexity: O(n!) in the worst case,
+// because in the first row we have n choices for placing a queen,
+// in the second row we have at most n-1 choices
+// (since one column is already occupied by the first queen), and so on.
+// Space complexity: O(n) for the recursion stack and the sets used to track unsafe positions.
