@@ -1,14 +1,4 @@
 const exist = (board, word) => {
-  const height = board.length;
-  const width = board[0].length;
-
-  const isValid = (row, col) =>
-    row >= 0 && row < height && col >= 0 && col < width;
-
-  const seen = new Array(height);
-  for (let row = 0; row < height; row++)
-    seen[row] = new Array(width).fill(false);
-
   const directions = [
     [-1, 0],
     [1, 0],
@@ -16,34 +6,41 @@ const exist = (board, word) => {
     [0, 1],
   ];
 
+  const isValid = (row, col, nextChar) =>
+    row >= 0 &&
+    row < height &&
+    col >= 0 &&
+    col < width &&
+    !seen[row][col] &&
+    board[row][col] === nextChar;
+
   const backtrack = (row, col, i) => {
     if (i === word.length) {
       return true;
     }
+    seen[row][col] = true;
+    const nextChar = word[i];
 
-    for (let [x, y] of directions) {
-      const newRow = row + y;
-      const newCol = col + x;
-      if (
-        isValid(newRow, newCol) &&
-        !seen[newRow][newCol] &&
-        board[newRow][newCol] === word[i]
-      ) {
-        seen[newRow][newCol] = true;
+    for (let [dy, dx] of directions) {
+      const newRow = row + dy;
+      const newCol = col + dx;
+      if (isValid(newRow, newCol, nextChar)) {
         if (backtrack(newRow, newCol, i + 1)) return true;
-        seen[newRow][newCol] = false;
       }
     }
 
+    seen[row][col] = false;
     return false;
   };
+
+  const height = board.length;
+  const width = board[0].length;
+  const seen = Array.from({ length: height }, () => Array(width).fill(false));
 
   for (let row = 0; row < height; row++) {
     for (let col = 0; col < width; col++) {
       if (board[row][col] === word[0]) {
-        seen[row][col] = true;
         if (backtrack(row, col, 1)) return true;
-        seen[row][col] = false;
       }
     }
   }
@@ -51,10 +48,8 @@ const exist = (board, word) => {
   return false;
 };
 
-// Time O(n⋅m⋅3^L)
-// Space O(L)
-
-const board = [["a", "a"]],
-  word = "aaa";
-
-console.log(exist(board, word));
+// Time Complexity: O(M * N * 3^L) where M is the number of rows,
+// N is the number of columns,
+// and L is the length of the word.
+// Space Complexity: O(M * N) for the seen matrix and
+// O(L) for the recursion stack.
