@@ -16,10 +16,8 @@ public class Exist {
     for (int row = 0; row < height; row++) {
       for (int col = 0; col < width; col++) {
         if (board[row][col] == word.charAt(0)) {
-          seen[row][col] = true;
           if (backtrack(row, col, 1))
             return true;
-          seen[row][col] = false;
         }
       }
     }
@@ -32,25 +30,30 @@ public class Exist {
       return true;
     }
 
+    seen[row][col] = true;
+    char nextChar = word.charAt(i);
     for (int[] direction : directions) {
       int newRow = row + direction[1];
       int newCol = col + direction[0];
 
-      if (isValid(newRow, newCol) && !seen[newRow][newCol] && board[newRow][newCol] == word.charAt(i)) {
-        seen[newRow][newCol] = true;
+      if (isValid(newRow, newCol, nextChar)) {
         if (backtrack(newRow, newCol, i + 1))
           return true;
-        seen[newRow][newCol] = false;
       }
     }
 
+    seen[row][col] = false;
     return false;
   }
 
-  private boolean isValid(int row, int col) {
-    return row >= 0 && row < height && col >= 0 && col < width;
+  private boolean isValid(int row, int col, char nextChar) {
+    return row >= 0 && row < height && col >= 0 && col < width && !seen[row][col] && board[row][col] == nextChar;
   }
 }
 
-// Time O(n⋅m⋅3^L)
-// Space O(L)
+// Time complexity: O(N * 3^L) where N is the number of cells in the board and L
+// is the length of the word. In the worst case, we might have to explore all
+// possible paths for each cell in the board.
+// Space complexity: O(L) where L is the length of the word. This is because the
+// maximum depth of the recursion is equal to the length of the word, and we are
+// using a boolean array to keep track of seen cells.
