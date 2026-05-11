@@ -3,56 +3,42 @@ import java.util.Set;
 
 public class TotalNQueens {
   int n;
-  int solutions;
-  Set<Integer> attackedCols;
-  Set<Integer> attackedDiagonals;
-  Set<Integer> attackedAntiDiagonals;
-
+  Set<Integer> unsafeCols;
+  Set<Integer> unsafeAntiDiags;
+  Set<Integer> unsafeDiags;
   public int totalNQueens(int n) {
     this.n = n;
-
-    attackedCols = new HashSet<>();
-    attackedDiagonals = new HashSet<>();
-    attackedAntiDiagonals = new HashSet<>();
-
-    solutions = 0;
-    backtrack(0);
-    return solutions;
+    unsafeCols = new HashSet<>();
+    unsafeAntiDiags = new HashSet<>();
+    unsafeDiags = new HashSet<>();
+    return backtrack(0);
   }
-  
-  private void backtrack(int row) {
+
+  private int backtrack(int row) {
     if (row == n) {
-      solutions++;
-      return;
+      return 1;
     }
+
+    int solutionCount = 0;
 
     for (int col = 0; col < n; col++) {
-      if (isSafe(row, col)) {
-        placeQueen(row, col);
-        backtrack(row + 1);
-        removeQueen(row, col);
+      if (!unsafeCols.contains(col)) {
+        int antiDiag = row + col;
+        int diag = row - col;
+        if (!unsafeAntiDiags.contains(antiDiag) && !unsafeDiags.contains(diag)) {
+          unsafeCols.add(col);
+          unsafeAntiDiags.add(antiDiag);
+          unsafeDiags.add(diag);
+          solutionCount += backtrack(row + 1);
+          unsafeCols.remove(col);
+          unsafeAntiDiags.remove(antiDiag);
+          unsafeDiags.remove(diag);
+        }
       }
     }
-
-  }
-
-  private boolean isSafe(int row, int col) {
-    return !attackedCols.contains(col) && !attackedDiagonals.contains(row - col)
-        && !attackedAntiDiagonals.contains(row + col);
-  }
-
-  private void placeQueen(int row, int col) {
-    attackedCols.add(col);
-    attackedDiagonals.add(row - col);
-    attackedAntiDiagonals.add(row + col);
-  }
-
-  private void removeQueen(int row, int col) {
-    attackedCols.remove(col);
-    attackedDiagonals.remove(row - col);
-    attackedAntiDiagonals.remove(row + col);
+    return solutionCount;
   }
 }
 
-// Time O(n!)
-// Space O(n)
+// Time Complexity: O(N!)
+// Space Complexity: O(N) for the sets used to track unsafe positions.
