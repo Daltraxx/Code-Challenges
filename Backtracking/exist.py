@@ -25,10 +25,8 @@ class Exist:
                 new_row = row + dy
                 new_col = col + dx
                 if is_valid(new_row, new_col, next_letter):
-                    letter_count += 1
-                    if dfs(letter_count, new_row, new_col):
+                    if dfs(letter_count + 1, new_row, new_col):
                         return True
-                    letter_count -= 1
 
             seen[row][col] = False
             return False
@@ -44,8 +42,9 @@ class Exist:
                         return True
         return False
     
-# Time Complexity: O(N * 3^L) where N is the number of cells in the board 
+# Time Complexity: O(M * N * 3^L) where M is the number of rows, 
+# N is the number of columns, 
 # and L is the length of the word.
-# Space Complexity: O(L) where L is the length of the word. 
-# This is the space used by the recursion stack.
+# Space Complexity: O(M * N) for the seen matrix 
+# and O(L) for the recursion stack.
                     
