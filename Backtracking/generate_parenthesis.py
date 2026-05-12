@@ -21,7 +21,7 @@ class GenerateParenthesis:
         backtrack(["("], 1, 0)
         return combinations
 
-    # Time complexity: O(2^n) because we are generating all possible combinations of parentheses, 
-    # which can be represented as a binary tree with 2^n nodes.
+    # Time complexity: Can be approximated as O(2^n) because we are generating all valid combinations of parentheses, 
+    # and all possible combinations of parentheses can be represented as a binary tree with 2^n nodes.
     # Space complexity: O(n) because at most we will have n opening parentheses in the current combination, 
     # which takes O(n) space.
