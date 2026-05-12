@@ -4,10 +4,8 @@ from typing import List
 class GenerateParenthesis:
     def generateParenthesis(self, n: int) -> List[str]:
         def backtrack(curr: List[str], left_count: int, right_count: int):
-            if left_count == n and right_count == n - 1:
-                curr.append(")")
+            if left_count == n and right_count == n:
                 combinations.append("".join(curr))
-                curr.pop()
                 return
 
             if left_count < n:
