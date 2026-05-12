@@ -1,22 +1,31 @@
 const generateParenthesis = (n) => {
-  const combinations = [];
-  const comboLength = 2 * n;
-
   const backtrack = (curr, leftCount, rightCount) => {
-    if (curr.length === comboLength) {
-      combinations.push(curr);
+    if (leftCount === n && rightCount === n) {
+      combinations.push(curr.join(""));
       return;
     }
 
-    if (leftCount < n)
-      backtrack(curr + "(", leftCount + 1, rightCount);
-    if (leftCount > rightCount)
-      backtrack(curr + ")", leftCount, rightCount + 1);
+    if (leftCount < n) {
+      curr.push("(");
+      backtrack(curr, leftCount + 1, rightCount);
+      curr.pop();
+    }
+    if (rightCount < leftCount) {
+      curr.push(")");
+      backtrack(curr, leftCount, rightCount + 1);
+      curr.pop();
+    }
   };
 
-  backtrack("(", 1, 0);
+  const combinations = [];
+  backtrack(["("], 1, 0);
   return combinations;
 };
 
-const n = 1;
-console.log(generateParenthesis(n));
+// Time complexity: Can be approximated as O(2^n) 
+// because we are generating all valid combinations of parentheses,
+// and all possible combinations of parentheses 
+// can be represented as a binary tree with 2^n nodes.
+// Space complexity: O(n) because at most 
+// we will have n opening parentheses in the current combination,
+// which takes O(n) space.
