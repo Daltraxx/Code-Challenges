@@ -15,7 +15,7 @@ public class GenerateParenthesis {
   }
 
   private void backtrack(StringBuilder curr, int leftCount, int rightCount) {
-    if (curr.length() == stringLength) {
+    if (leftCount == n && rightCount == n) {
       combinations.add(curr.toString());
       return;
     }
@@ -32,3 +32,11 @@ public class GenerateParenthesis {
     }
   }
 }
+
+// Time complexity: Can be approximated as O(2^n)
+// because we are generating all valid combinations of parentheses,
+// and all possible combinations of parentheses can be represented as a binary
+// tree with 2^n nodes.
+// Space complexity: O(n) because at most we will have n opening parentheses in
+// the current combination,
+// which takes O(n) space.
