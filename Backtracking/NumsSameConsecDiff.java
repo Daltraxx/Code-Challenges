@@ -1,40 +1,41 @@
 import java.util.ArrayDeque;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 public class NumsSameConsecDiff {
   public int[] numsSameConsecDiff(int n, int k) {
-    Deque<Integer> queue = new ArrayDeque<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    // Stack holds arrays indicating [currNum, lastDigit, digitCount]
+    Deque<int[]> stack = new ArrayDeque<>();
+    for (int firstDigit = 1; firstDigit < 10; firstDigit++) {
+      stack.offerLast(new int[] { firstDigit, firstDigit, 1 });
+    }
+    List<Integer> ans = new ArrayList<>();
 
-    for (int level = 1; level < n; level++) {
-      int size = queue.size();
-      for (int node = 0; node < size; node++) {
-        int num = queue.removeFirst();
-        int lastDigit = num % 10;
+    while (stack.size() != 0) {
+      int[] state = stack.pollLast();
+      int currNum = state[0];
+      int lastDigit = state[1];
+      int digitCount = state[2];
+      if (digitCount == n) {
+        ans.add(currNum);
+        continue;
+      }
 
-        if (k == 0) {
-          int newNum = num * 10 + lastDigit;
-          queue.add(newNum);
-          continue;
-        }
-
-        if (lastDigit + k < 10) {
-          int newNum = num * 10 + lastDigit + k;
-          queue.add(newNum);
-        }
-
-        if (lastDigit - k >= 0) {
-          int newNum = num * 10 + lastDigit - k;
-          queue.add(newNum);
-        }
+      int nextDigit1 = lastDigit + k;
+      int nextDigit2 = lastDigit - k;
+      if (nextDigit1 < 10) {
+        stack.offerLast(new int[] { currNum * 10 + nextDigit1, nextDigit1, digitCount + 1 });
+      }
+      if (k != 0 && nextDigit2 >= 0) {
+        stack.offerLast(new int[] { currNum * 10 + nextDigit2, nextDigit2, digitCount + 1 });
       }
     }
 
-    int[] ans = queue.stream().mapToInt(Integer::intValue).toArray();
-
-    return ans;
+    return ans.stream().mapToInt(Integer::intValue).toArray();
   }
 }
 
-// Time O(2^n)
-// Space O(2^n)
+// Time complexity: O(2^n) in the worst case, as each digit can lead to two
+// possible next digits (lastDigit + k and lastDigit - k).
+// Space complexity: O(n) for the stack, as the maximum depth of the stack is n.
