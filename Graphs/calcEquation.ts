@@ -1,4 +1,4 @@
-const calcEquation = (equations: string[], values: number[], queries: string[][]): number[] => {
+const calcEquation = (equations: string[][], values: number[], queries: string[][]): number[] => {
   const dfs = (num: string, denom: string, res: number, seen: Set<string>): number => {
     if (num === denom) {
       return res;
@@ -21,8 +21,8 @@ const calcEquation = (equations: string[], values: number[], queries: string[][]
     const val = values[i];
     if (!neighbors.get(var1)) neighbors.set(var1, []);
     if (!neighbors.get(var2)) neighbors.set(var2, []);
-    neighbors.get(var1)!.push([var2, 1 / val]);
-    neighbors.get(var2)!.push([var1, val])
+    neighbors.get(var1)!.push([var2, val]);
+    neighbors.get(var2)!.push([var1, 1 / val]);
   }
 
   const solutions = []
@@ -30,7 +30,7 @@ const calcEquation = (equations: string[], values: number[], queries: string[][]
     if (!neighbors.has(num) || !neighbors.has(denom)) {
       solutions.push(-1);
     } else {
-      solutions.push(dfs(num, denom, 1, new Set([num])));
+      solutions.push(dfs(num, denom, 1, new Set()));
     }
   }
 
