@@ -2,32 +2,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CombinationSum3 {
-  int target;
-  int combinationLength;
+  int k;
+  int n;
   List<List<Integer>> combinations;
   int largestPossibleNum;
 
   public List<List<Integer>> combinationSum3(int k, int n) {
-    combinationLength = k;
-    target = n;
+    this.k = k;
+    this.n = n;
     combinations = new ArrayList<>();
-    largestPossibleNum = n < 10 ? n : 9;
+    largestPossibleNum = Math.min(9, n - k + 1);
     backtrack(new ArrayList<>(), 0, 1);
     return combinations;
   }
-  
-  private void backtrack(List<Integer> currCombo, int currSum, int i) {
-    if (currCombo.size() == combinationLength) {
-      if (currSum == target)
+
+  private void backtrack(List<Integer> currCombo, int currSum, int startNum) {
+    if (currCombo.size() == k) {
+      if (currSum == n) {
         combinations.add(new ArrayList<>(currCombo));
+      }
       return;
     }
 
-    for (int j = i; j <= largestPossibleNum; j++) {
-      int newSum = currSum + j;
-      if (newSum <= target) {
-        currCombo.add(j);
-        backtrack(currCombo, newSum, j + 1);
+    for (int num = startNum; num <= largestPossibleNum; num++) {
+      int newSum = currSum + num;
+      if (newSum <= n) {
+        currCombo.add(num);
+        backtrack(currCombo, newSum, num + 1);
         currCombo.remove(currCombo.size() - 1);
       } else {
         return;
@@ -35,9 +36,8 @@ public class CombinationSum3 {
     }
   }
 
-  public static void main(String[] args) {
-    CombinationSum3 cs3 = new CombinationSum3();
-    System.out.println(cs3.combinationSum3(3, 7)); // [[1,2,4]]
-    System.out.println(cs3.combinationSum3(9, 45)); // [[1,2,3,4,5,6,7,8,9]]
-  }
+  // Time complexity: O(k * C(9, k)) where C(9, k)
+  // is the number of combinations of 9 numbers taken k at a time.
+  // Space complexity: O(k) for the recursion stack
+  // and O(C(9, k)) for storing the combinations.
 }
