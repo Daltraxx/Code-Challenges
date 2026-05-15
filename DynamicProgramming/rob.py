@@ -4,16 +4,17 @@ from typing import List
 class Rob:
     def robTopDown(self, nums: List[int]) -> int:
         def get_most_money(i: int) -> int:
-            money = nums[i]
-            if i == 0:
-                return money
             if dp[i] is not None:
+                return dp[i]
+            
+            if i == 0:
+                dp[i] = nums[0]
                 return dp[i]
             if i == 1:
                 dp[i] = max(nums[0], nums[1])
                 return dp[i]
 
-            most_money = max(money + get_most_money(i - 2), get_most_money(i - 1))
+            most_money = max(nums[i] + get_most_money(i - 2), get_most_money(i - 1))
             dp[i] = most_money
             return most_money
 
@@ -46,12 +47,11 @@ class Rob:
         n = len(nums)
         if n == 1:
             return nums[0]
-        if n == 2:
-            return max(nums[0], nums[1])
-        
+
         two_back = nums[0]
         one_back = max(two_back, nums[1])
-        max_money = 0
+        # If n is 2, one_back contains the max and loop won't run
+        max_money = one_back
         for i in range(2, n):
             money = nums[i]
             max_money = max(money + two_back, one_back)
@@ -59,3 +59,7 @@ class Rob:
             one_back = max_money
 
         return max_money
+    
+    # Time complexity: O(n) where n is the number of houses.
+    # Space complexity: O(1) since we are using only a constant amount of space
+    # to store the previous two values.
