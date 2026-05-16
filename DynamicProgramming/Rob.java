@@ -24,8 +24,10 @@ public class Rob {
 
     return memo.get(i);
   }
-  // Time O(n)
-  // Space O(n)
+  // Time complexity O(n) because each house is visited once and results are
+  // stored in the memoization map.
+  // Space complexity O(n) because of the memoization map storing results for each
+  // house and the call stack in the worst case.
 
   // Bottom up approach
   public int robBottomUp(int[] nums) {
@@ -43,10 +45,12 @@ public class Rob {
 
     return maxMoney[maxMoney.length - 1];
   }
-  // Time O(n)
-  // Space O(n)
+  // Time complexity O(n) because each house is visited once and results are
+  // stored in the maxMoney array.
+  // Space complexity O(n) because of the maxMoney array storing results for each
+  // house.
 
-  //Bottom up with constant space
+  // Bottom up with constant space
   public int robBottomUpConstantSpace(int[] nums) {
     if (nums.length == 1)
       return nums[0];
@@ -63,15 +67,7 @@ public class Rob {
 
     return currentHouse;
   }
-  // Time O(n)
-  // Space O(1)
-
-  
-  public static void main(String[] args) {
-    Rob robber = new Rob();
-    int[] houses = {2,7,9,3,1};
-    System.out.println(robber.rob(houses)); // Output: 12
-    System.out.println(robber.robBottomUp(houses)); // Output: 12
-    System.out.println(robber.robBottomUpConstantSpace(houses)); // Output: 12
-  }
+  // Time complexity O(n) because each house is visited once and results are
+  // stored in a few variables.
+  // Space complexity O(1) because only a few variables are used to store results.
 }
