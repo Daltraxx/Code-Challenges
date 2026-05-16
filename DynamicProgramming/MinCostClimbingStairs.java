@@ -34,14 +34,7 @@ public class MinCostClimbingStairs {
 
     return dp[dp.length - 1];
   }
-
-  public static void main(String[] args) {
-    MinCostClimbingStairs minCostClimbingStairs = new MinCostClimbingStairs();
-    int[] cost = { 10, 15, 20 };
-    System.out.println(minCostClimbingStairs.minCostClimbingStairsBottomUp(cost)); // Output: 15
-    System.out.println(minCostClimbingStairs.minCostClimbingStairsTopDown(cost)); // Output: 15
-  }
 }
 
-// Time Complexity: O(n)
-// Space Complexity: O(n)
+// Time complexity: O(n) where n is the number of steps.
+// Space complexity: O(n) for the dp array.
