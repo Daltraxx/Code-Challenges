@@ -1,5 +1,4 @@
 const robTopDown = (nums) => {
-  const memo = new Map();
   const maxMoney = (i) => {
     if (i === 0) {
       return nums[0];
@@ -9,42 +8,43 @@ const robTopDown = (nums) => {
       return Math.max(nums[0], nums[1]);
     }
 
-    if (memo.has(i)) {
-      return memo.get(i);
+    if (memo[i] !== undefined) {
+      return memo[i];
     }
 
-    memo.set(i, Math.max(maxMoney(i - 2) + nums[i], maxMoney(i - 1)));
+    memo[i] = Math.max(maxMoney(i - 2) + nums[i], maxMoney(i - 1));
 
-    return memo.get(i);
-  }
+    return memo[i];
+  };
 
-  return maxMoney(nums.length - 1);
-}
+  const n = nums.length;
+  const memo = new Array(n);
 
-// Time O(n)
-// Space O(n)
+  return maxMoney(n - 1);
+};
 
-const nums = [2, 7, 9, 3, 1];
-console.log(robTopDown(nums));
+// Time complexity: O(n) - the max money for each index
+// is calculated once and stored in the memo
+// Space complexity: O(n) - for the memo array
+// and call stack in the worst case
 
 const robBottomUp = (nums) => {
   if (nums.length === 1) {
     return nums[0];
   }
-  const maxMoney = new Array(nums.length);
+  const n = nums.length;
+  const maxMoney = new Array(n);
   maxMoney[0] = nums[0];
   maxMoney[1] = Math.max(nums[0], nums[1]);
-  for (let i = 2; i < maxMoney.length; i++) {
+  for (let i = 2; i < n; i++) {
     maxMoney[i] = Math.max(maxMoney[i - 2] + nums[i], maxMoney[i - 1]);
   }
 
-  return maxMoney.at(-1);
-}
+  return maxMoney[n - 1];
+};
 
-// Time O(n)
-// Space O(n)
-
-console.log(robBottomUp(nums));
+// Time O(n) - we calculate the max money for each index once
+// Space O(n) - for the maxMoney array
 
 const robBottomUpConstantSpace = (nums) => {
   if (nums.length === 1) {
@@ -53,17 +53,15 @@ const robBottomUpConstantSpace = (nums) => {
 
   let backTwo = nums[0];
   let backOne = Math.max(nums[0], nums[1]);
-  let current = backOne;
+  let maxMoney = backOne;
   for (let i = 2; i < nums.length; i++) {
-    current = Math.max(backTwo + nums[i], backOne);
+    maxMoney = Math.max(backTwo + nums[i], backOne);
     backTwo = backOne;
-    backOne = current;
+    backOne = maxMoney;
   }
-  
-  return current;
-}
 
-// Time O(n)
-// Space O(1)
+  return maxMoney;
+};
 
-console.log(robBottomUpConstantSpace(nums));
+// Time O(n) - we calculate the max money for each index once
+// Space O(1) - we only use a few variables to keep track of the max money at each index
