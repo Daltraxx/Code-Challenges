@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LengthOfLIS {
-  // Top Down Approach
+  // TOP DOWN APPROACH
   Map<Integer, Integer> memo;
   int[] nums;
 
@@ -34,16 +36,16 @@ public class LengthOfLIS {
     return longest;
   }
 
-  // Bottom Up Approach
+  // BOTTOM UP APPROACH
   public int lengthOfLISBottomUp(int[] nums) {
-    int[] longestSubsequences = new int[nums.length];
-    Arrays.fill(longestSubsequences, 1);
+    int[] dp = new int[nums.length];
+    Arrays.fill(dp, 1);
     int longest = 1;
     for (int i = 1; i < nums.length; i++) {
       for (int j = 0; j < i; j++) {
         if (nums[j] < nums[i]) {
-          longestSubsequences[i] = Math.max(longestSubsequences[j] + 1, longestSubsequences[i]);
-          longest = Math.max(longestSubsequences[i], longest);
+          dp[i] = Math.max(dp[j] + 1, dp[i]);
+          longest = Math.max(dp[i], longest);
         }
       }
     }
@@ -51,44 +53,33 @@ public class LengthOfLIS {
     return longest;
   }
 
-  // Binary Search Approach - O(n log n)
-  int[] positions;
+  // BINARY SEARCH APPROACH
   public int lengthOfLISBS(int[] nums) {
-    positions = new int[nums.length];
-    int len = 0;
-    
+    // tails[i] will hold smallest possible tail for
+    // subsequence of length i + 1
+    List<Integer> tails = new ArrayList<>();
     for (int num : nums) {
-      int pos = binarySearch(num, len);
-      positions[pos] = num;
-      if (pos == len) {
-        len++;
+      // Find smallest index where num <= tails[i]
+      int left = 0;
+      int right = tails.size();
+      while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (num <= tails.get(mid)) {
+          right = mid;
+        } else {
+          left = mid + 1;
+        }
+      }
+      if (left == tails.size()) {
+        // We have extended the longest subsequence
+        tails.add(num);
+      } else {
+        // We have found a more optimal tail for
+        // subsequence of length left + 1
+        tails.set(left, num);
       }
     }
     
-    return len;
-  }
-
-  private int binarySearch(int target, int range) {
-    int left = 0;
-    int right = range;
-    while (left < right) {
-      int mid = left + (right - left) / 2;
-      if (target <= positions[mid]) {
-        right = mid;
-      } else {
-        left = mid + 1;
-      }
-    }
-    return left;
-  }
-
-  public static void main(String[] args) {
-    LengthOfLIS lis = new LengthOfLIS();
-    int[] nums = {10, 9, 2, 5, 3, 7, 101, 18, 4};
-    System.out.println("Length of LIS (Binary Search): " + lis.lengthOfLISBS(nums)); // Output: 4
+    return tails.size();
   }
 }
-
-// Same Time and Space Complexities (not including Binary Search solution)
-// Time O(n^2)
-// Space O(n)
