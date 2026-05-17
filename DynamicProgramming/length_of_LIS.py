@@ -1,3 +1,4 @@
+from bisect import bisect_left
 from typing import List
 
 
@@ -35,3 +36,16 @@ class LengthOfLIS:
     
     # Time complexity: O(n^2) due to the nested loops.
     # Space complexity: O(n) for the dp array.
+
+    def lengthOfLISBinarySearch(self, nums: List[int]) -> int:
+        tails = []
+        for num in nums:
+            i = bisect_left(tails, num)
+            if i == len(tails):
+                tails.append(num)
+            else:
+                tails[i] = num
+        return len(tails)
+    
+    # Time complexity: O(n log n) due to the binary search for each element.
+    # Space complexity: O(n) in the worst case when all elements are increasing.
