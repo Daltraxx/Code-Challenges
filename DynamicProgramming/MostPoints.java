@@ -23,8 +23,8 @@ public class MostPoints {
 
     int points = questions[i][0];
     int questionsToSkip = questions[i][1];
-    int j = i + questionsToSkip + 1;
-    memo[i] = Math.max(points + dp(j), dp(i + 1));
+    int nextSolvable = i + questionsToSkip + 1;
+    memo[i] = Math.max(points + dp(nextSolvable), dp(i + 1));
     return memo[i];
   }
 
@@ -36,8 +36,10 @@ public class MostPoints {
     for (int i = n - 1; i >= 0; i--) {
       int points = questions[i][0];
       int questionsToSkip = questions[i][1];
-      int j = Math.min(i + questionsToSkip + 1, n); // n as safeguard to make sure we don't go out of bounds
-      dp[i] = Math.max(points + dp[j], dp[i + 1]);
+      int nextSolvable = i + questionsToSkip + 1;
+      long solve = points + dp[Math.min(nextSolvable, n)]; // Use Math.min to avoid out of bounds
+      long skip = dp[i + 1];
+      dp[i] = Math.max(solve, skip);
     }
 
     return dp[0];
@@ -45,4 +47,5 @@ public class MostPoints {
 }
 
 // Time Complexity: O(n) where n is the number of questions
-// Space Complexity: O(n) for memoization array and recursion call stack in top-down approach or dp array in bottom-up approach
+// Space Complexity: O(n) for memoization array and recursion call stack in
+// top-down approach or dp array in bottom-up approach
