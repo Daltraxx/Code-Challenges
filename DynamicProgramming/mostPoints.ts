@@ -20,7 +20,7 @@ const mostPointsTopDown = (questions: number[][]): number => {
 
 const mostPointsBottomUp = (questions: number[][]): number => {
   const n = questions.length;
-  const dp = new Array(n + 1).fill(0);
+  const dp = new Array(n + 1).fill(0); // dp[n] = 0 for out of bounds
   dp[n - 1] = questions[n - 1][0];
   for (let i = n - 1; i >= 0; i--) {
     const [points, brainPower] = questions[i];
