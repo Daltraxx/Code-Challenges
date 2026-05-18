@@ -26,12 +26,11 @@ class MostPoints:
 
     def mostPointsBottomUp(self, questions: List[List[int]]) -> int:
         n = len(questions)
-        dp = [0] * n
-        dp[-1] = questions[-1][0]
-        for i in range(n - 2, -1, -1):
+        dp = [0] * (n + 1)
+        for i in range(n - 1, -1, -1):
             points, brain_power = questions[i]
             next_solvable = i + brain_power + 1
-            solve = points + dp[next_solvable] if next_solvable < n else points
+            solve = points + dp[min(next_solvable, n)]
             skip = dp[i + 1]
             dp[i] = max(solve, skip)
 
