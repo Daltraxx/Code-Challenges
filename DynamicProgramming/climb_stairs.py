@@ -1,5 +1,5 @@
 class ClimbStairs:
-    def climbStairsTopDDown(self, n: int) -> int:
+    def climbStairsTopDown(self, n: int) -> int:
         def dp(i: int) -> int:
             if i == 1:
                 return 1
@@ -15,10 +15,10 @@ class ClimbStairs:
         memo = [-1] * (n + 1)
         return dp(n)
 
-    # Time complexity: O(n) due to memoization avoiding redundant calculations.
+    # Time complexity: O(n) because each subproblem is solved only once.
     # Space complexity: O(n) for the memoization array and the call stack.
 
-    def climbStairsTopDown(self, n: int) -> int:
+    def climbStairsBottomUp(self, n: int) -> int:
         if n < 3:
             return n
         
