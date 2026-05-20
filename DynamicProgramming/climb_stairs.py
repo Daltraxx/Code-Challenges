@@ -1,4 +1,18 @@
 class ClimbStairs:
+    def climbStairsBacktracking(self, n: int) -> int:
+        def backtrack(i: int) -> int:
+            if i == n:
+                return 1
+            if i > n:
+                return 0
+            
+            return backtrack(i + 1) + backtrack(i + 2)
+        
+        return backtrack(0, 0)
+    
+    # Time complexity: O(2^n) because each step can lead to two further steps.
+    # Space complexity: O(n) for the call stack in the worst case of a linear
+    
     def climbStairsTopDown(self, n: int) -> int:
         def dp(i: int) -> int:
             if i == 1:
